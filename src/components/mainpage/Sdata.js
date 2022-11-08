@@ -13,9 +13,9 @@ const Sdata = [
   },
   {
     id: 3,
-    title: "Disponibili iPhone ricondizionati!",
-    desc: "Affrettati! Abbiamo pochi iPhone in magazzino, non lasciarteli sfuggire!",
-    cover: "./images/SlideCard/slide-2.png",
+    title: "Recupera i dati del tuo smartphone",
+    desc: "Compila il form, spedisci lo smartphone e recupera i tuoi dati!",
+    cover: "./images/SlideCard/slide-3.jpg",
   },
 ]
 export default Sdata
