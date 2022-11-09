@@ -172,7 +172,7 @@ input, button{
   color: #e94560;
 }
 
-.price button{
+.product button{
   background: none;
   color: #e94560;
   font-size: 20px;
@@ -183,7 +183,7 @@ input, button{
   transition: 0.5s;
 }
 
-.price button:hover{
+.product button:hover{
   cursor: pointer;
   background: #e94560;
   color: #fff;

@@ -25,7 +25,7 @@ const PrevArrow = (props) =>{
     )
 }
 
-const FlashCard = ({ productItems , addToCart }) => {
+const FlashCard = ({ productItems, addToCart }) => {
 
 
     const [count, setCount] = useState(0);
@@ -35,11 +35,10 @@ const FlashCard = ({ productItems , addToCart }) => {
 
 
     const settings = {
-        dots: false,
         infinite: true,
         speed: 500,
         slidesToShow: 4,
-        slidesToScroll: 1,
+        slidesToScroll: 4,
         nextArrow: <NextArrow />,
         prevArrow: <PrevArrow />,
     };
