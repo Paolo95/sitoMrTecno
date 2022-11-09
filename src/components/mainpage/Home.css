@@ -4,7 +4,7 @@
 .homeSlide h1 {
     font-size: 45px;
     line-height: 55px;
-    margin: 50px 0 20px 0;
+    margin: 30px 0 20px 0;
 }
 
 .homeSlide p {
@@ -53,5 +53,5 @@
 }
 
 .slick-dots{
-    top: 450px;
+    top: 400px;
 }
