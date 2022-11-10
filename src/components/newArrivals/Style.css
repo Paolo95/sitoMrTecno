@@ -1,0 +1,25 @@
+.heading img{
+    width: 40px;
+    height: 40px;
+    margin-top: 5px;
+}
+
+.newarrivals h4{
+    font-weight: 400;
+}
+
+.newarrivals span{
+    color: #e94560;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.newarrivals .img{
+    width: 200px;
+    height: 200px;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    cursor: pointer;
+}

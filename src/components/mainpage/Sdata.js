@@ -13,7 +13,7 @@ const Sdata = [
   },
   {
     id: 3,
-    title: "Recupera i dati del tuo smartphone",
+    title: "Recupera i dati del tuo smartphone!",
     desc: "Compila il form, spedisci lo smartphone e recupera i tuoi dati!",
     cover: "./images/SlideCard/slide-3.jpg",
   },

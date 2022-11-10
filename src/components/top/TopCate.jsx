@@ -15,7 +15,6 @@ const TopCate = () => {
               <div className="heading-right row">
                 <span>Mostra tutto</span>
                 <i className="fa fa-caret-right"></i>
-
               </div>
             </div>
             <TopCart />
