@@ -1,14 +1,26 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 const Navbar = () => {
 
   const [MobileMenu , setMobileMenu] = useState(false);
+  const location = useLocation();
 
   return (
     <>
-      <header className='header'>
-        <div className="container f_flex">
+      <header className='header'> 
+      
+        <div className="container d_flex"> 
+        { location.pathname === '/shop' ? 
+          <>      
+          <div className= 'categories d_flex'>
+            <span className="fas fa-bars"></span>
+            <h4>Categorie <i className='fa fa-chevron-down'></i></h4>          
+          </div>
+          </>: <div className= 'd_flex'>          
+          </div>
+        }
+               
           <div className="navlink">
             <ul className={MobileMenu ? "nav-links-MobileMenu" : "link f_flex capitalize"} onClick={() => setMobileMenu(false)}>
               <li>

@@ -1,5 +1,4 @@
 import React from 'react'
-import Footer from '../../common/footer/Footer'
 import Catg from './Catg'
 import ShopCart from './ShopCart'
 import "./Style.css"
@@ -7,7 +6,7 @@ import "./Style.css"
 const Shop = ({ shopItems, addToCart }) => {
   return (
     <>
-      <section className="shop background">
+      <section className="shop">
         <div className="container d_flex">
           <Catg />
           <div className="contentWidth">

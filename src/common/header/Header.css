@@ -88,15 +88,35 @@
     justify-content: end;
 }
 
+.categories{
+    background-color: #f6f9fc;
+    padding: 0 30px;
+    border-radius: 5px;
+    height: 6vh;
+    margin-top: 5px;
+}
+
+.categories span{
+    margin-right: 20px;
+    font-size: 25px;
+    margin-top: 10px;
+}
+
+.categories h4{
+    font-weight: 500;
+    margin-top: 12px;
+}
+
+.categories h4 i{
+    margin-left: 10px;
+}
+
+
 /*--------------------------------Search----------------------------------------*/
 
 header{
     height: 8vh;
     box-shadow: -1px 15px 17px -8px rgba(0,0,0,0.1);
-}
-
-header .container{
-    justify-content: right;
 }
 
 header ul{

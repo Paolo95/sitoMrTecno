@@ -1,5 +1,4 @@
 import React from 'react'
-import Footer from '../common/footer/Footer'
 import FlashDeals from '../components/flashDeals/FlashDeals'
 import Home from '../components/mainpage/Home'
 import NewArrivals from '../components/newArrivals/NewArrivals'

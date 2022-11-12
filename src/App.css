@@ -10,7 +10,7 @@ html {
 }
 
 body{
-  background-color: #f6f9fc;
+  background-color: #fff;
   font-family: 'Poppins', sans-serif;
 }
 
@@ -128,7 +128,7 @@ input, button{
 }
 
 .category .box:hover{
-  background-color: #ffe1ef;
+  background-color: #e1e3ff;
   cursor: pointer;
 }
 
