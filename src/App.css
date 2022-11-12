@@ -10,7 +10,7 @@ html {
 }
 
 body{
-  background-color: #ffffff;
+  background-color: #f6f9fc;
   font-family: 'Poppins', sans-serif;
 }
 
@@ -298,6 +298,7 @@ input, button{
 .heading .heading-right i {
   text-align: right;
   color: grey;
+  cursor: pointer;
 }
 /*---------------------------heading--------------------------*/
 

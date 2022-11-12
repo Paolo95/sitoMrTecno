@@ -41,7 +41,6 @@ const Categories = () => {
           }
     ]
 
-
   return (
     <>
         <div className="category">
@@ -59,4 +58,5 @@ const Categories = () => {
     
   )
 }
+
 export default Categories

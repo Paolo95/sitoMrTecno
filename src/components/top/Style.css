@@ -31,10 +31,6 @@
     left: 0;
 }
 
-.topCat .heading-right{
-    cursor: pointer;
-}
-
 .topCat .nametop .tright{
     background-color: aliceblue;
     color: black;

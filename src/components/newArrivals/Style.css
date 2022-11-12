@@ -8,13 +8,6 @@
     font-weight: 400;
 }
 
-.newarrivals span{
-    color: #e94560;
-    font-size: 15px;
-    font-weight: 500;
-    cursor: pointer;
-}
-
 .newarrivals .img{
     width: 200px;
     height: 200px;

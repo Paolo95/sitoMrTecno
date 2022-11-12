@@ -1,0 +1,44 @@
+footer{
+    background-color: #0f3460;
+    padding: 40px 0;
+    color: #fff
+}
+
+footer h1{
+    margin-bottom: 30px;
+    color: #e94560;
+}
+
+footer p{
+    font-size: 14px;
+    font-weight: 300;
+    opacity: 0.5;
+    margin-bottom: 20px;
+}
+
+footer h2{
+    margin-bottom: 20px;
+}
+
+footer li{
+    margin-bottom: 10px;
+    opacity: 0.5;
+}
+
+footer .piva{
+    margin-top: 20px;
+    text-align: center;
+}
+
+footer .madeby{
+    text-align: center;
+}
+
+footer .madeby a{
+    color:darkgrey;
+    cursor: pointer;
+}
+
+footer .rights{
+    text-align: center;
+}

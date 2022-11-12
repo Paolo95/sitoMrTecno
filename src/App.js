@@ -7,6 +7,7 @@ import Sdata from './components/shop/Sdata'
 import { useState } from 'react';
 import Cart from './common/cart/Cart';
 import Shop from './components/shop/Shop';
+import Footer from './common/footer/Footer';
 
 function App() {
 
@@ -50,6 +51,7 @@ function App() {
             <Route exact path="/shop" element={<Shop shopItems={shopItems} addToCart={addToCart} decreaseQty={decreaseQty}/>} >    
             </Route>        
         </Routes>
+        <Footer />
       </Router>
     </>
     );

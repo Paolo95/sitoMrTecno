@@ -1,4 +1,5 @@
 import React from 'react'
+import Footer from '../../common/footer/Footer'
 import Catg from './Catg'
 import ShopCart from './ShopCart'
 import "./Style.css"
@@ -26,6 +27,7 @@ const Shop = ({ shopItems, addToCart }) => {
         </div>
       </section>
     </>
+    
   )
 }
 

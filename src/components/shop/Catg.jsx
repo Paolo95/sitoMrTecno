@@ -32,10 +32,6 @@ const Catg = () => {
   return (
     <>
         <div className="category">
-            <div className="chead d_flex">
-                <h1>Marchi</h1>
-                <h1>Negozi</h1>
-            </div>
             {
                 data.map((value, index) => {
                     return (

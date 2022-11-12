@@ -5,22 +5,22 @@ const Wrapper = () => {
 
     const data = [
         {
-          cover: <i class='fas fa-truck'></i>,
+          cover: <i className='fas fa-truck'></i>,
           title: "Spedizione in tutto il mondo",
           decs: "Offriamo spedizioni in tutto il mondo con costi sostenuti",
         },
         {
-          cover: <i class='fas fa-id-card'></i>,
+          cover: <i className='fas fa-id-card'></i>,
           title: "Pagamento sicuro",
           decs: "Pagamento sicuro con PayPal",
         },
         {
-          cover: <i class='fas fa-user-shield'></i>,
+          cover: <i className='fas fa-user-shield'></i>,
           title: "Shop With Confidence ",
           decs: "Prezzi competitivi",
         },
         {
-          cover: <i class='fas fa-headset'></i>,
+          cover: <i className='fas fa-headset'></i>,
           title: "Supporto 24/7 ",
           decs: "Assitenza tecnica disponibile 24/7",
         },
@@ -34,7 +34,7 @@ const Wrapper = () => {
                 {
                     data.map((value, index) => {
                         return(
-                            <>
+                          
                                 <div className="product" key={index}>
                                     <div className="img icon-circle">
                                         <i>{value.cover}</i>
@@ -42,7 +42,7 @@ const Wrapper = () => {
                                     <h3>{value.title}</h3>
                                     <p>{value.decs}</p>
                                 </div>
-                            </>
+                            
                         )
                     })}
             </div>

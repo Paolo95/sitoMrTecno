@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Head = () => {
 
@@ -8,13 +9,13 @@ const Head = () => {
             <div className="container d_flex">
                 <div className="left row">
                     <i className="fa fa-phone"></i>
-                    <label>338 7576322</label>
+                    <a href="tel:338 7576322">338 7576322</a>
                     <i className="fa fa-envelope"></i>
-                    <label>info@mrtecno.it</label>
+                    <a href="mailto:info@mrtecno.it">info@mrtecno.it</a>
                 </div>
                 <div className="right row RText">
-                    <label>FAQ's</label>
-                    <label>Hai bisogno di aiuto?</label>
+                    <Link to='/faq'>FAQ's</Link>
+                    <Link to='/help'>Hai bisogno di aiuto?</Link>
                     <span>🇮🇹</span>
                     <label htmlFor=''>IT</label>
                     <span>🇬🇧</span>
