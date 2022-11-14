@@ -60,16 +60,12 @@ const Catg = () => {
     <>
         <div className="category">
           <div className='chead'>
-            <div className="container">
-              <button onClick={brandHandleOpen}><h3>Brand</h3></button>
-                {brandOpen ?             
+            <div className='tab'>
+            
+              <button onClick={brandHandleOpen}><h3>Brand</h3>{brandOpen ?             
                 <i className='fa fa-chevron-up'></i>: 
                 <i className='fa fa-chevron-down'></i>
-              }
-              
-            
-            
-            </div> 
+              }</button>            
                                 
                 {
                       data.map((value, index) => {
@@ -77,54 +73,55 @@ const Catg = () => {
                             <div className="dropdown" key={index}>
                             {brandOpen ? (
                               <ul className="menu">
-                                <li className="menu-item">
-                                  <input type="checkbox" id={value.cateName} />
-                                  <label htmlFor={value.cateName}>{value.cateName}</label>
-                                </li>
+                                <div className="container">
+                                <label>                                  
+                                  <input type="checkbox" id={value.cateName}/>
+                                  <span>{value.cateName}</span>
+                                </label>
+                                </div>
                               </ul>
                             ) : null}
                           </div>   
                           )
                       })}
 
-            <div className="container">
-            
-              <button onClick={priceHandleOpen}><h3>Prezzo</h3></button>
-              {priceOpen ?             
+            </div>
+            <div className="tab">
+              <button onClick={priceHandleOpen}><h3>Prezzo</h3>{priceOpen ?             
                 <i className='fa fa-chevron-up'></i>: 
                 <i className='fa fa-chevron-down'></i>
-              }             
-            </div>
+              } </button>          
 
-            <div className="dropdown">
-              {priceOpen ? (
-                <div>
-                  
-                  <RangeSlider 
-                    id={'rangeInput'}
-                    min={0}
-                    max={500}
-                    defaultValue={[0,500]}
-                    onInput={([min, max]) => {
-                      setMin(min);
-                      setMax(max);
-                    }
-                    }
-                    value={[min,max]}
-                  />
-                <div className='range-values'>
-                  <div className="container">
-                    <input id='min_input' type="number" min={0} value={min} onChange={handleChangeMin}/>
-                    <input id='max_input' type="number" min={min+1} value={max} onChange={handleChangeMax}/>
+              <div className="dropdown">
+                {priceOpen ? (
+                  <div>
+                    
+                    <RangeSlider 
+                      id={'rangeInput'}
+                      min={0}
+                      max={500}
+                      defaultValue={[0,500]}
+                      onInput={([min, max]) => {
+                        setMin(min);
+                        setMax(max);
+                      }
+                      }
+                      value={[min,max]}
+                    />
+                  <div className='range-values'>
+                    <div className="container">
+                      <input id='min_input' type="number" min={0} value={min} onChange={handleChangeMin}/>
+                      <input id='max_input' type="number" min={min+1} value={max} onChange={handleChangeMax}/>
+                    </div>
+                    
                   </div>
-                  
-                </div>
-                      
-                   
+                        
                 
+                  
                 </div>
                         
-              ) : null}
+                ) : null}
+              </div>
             </div>                         
           </div>        
         </div>

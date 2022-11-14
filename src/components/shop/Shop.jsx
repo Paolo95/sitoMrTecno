@@ -14,10 +14,13 @@ const Shop = ({ shopItems, addToCart }) => {
               <div className="heading-left row f_flex">
                 <h2>Smartphone</h2>
               </div>
-              <div className="heading-right row">
-                <span>Mostra tutto</span>
-                <i className="fa fa-caret-right"></i>
-              </div>
+              <select id="order-select" name="order">
+                <option value="crescente">Migliori</option>
+                <option value="crescente">Crescente</option>
+                <option value="decrescente">Decrescente</option>
+                <option value="az">A-Z</option>
+                <option value="za">Z-A</option>
+              </select>
             </div>
             <div className="product-content grid1">
               <ShopCart shopItems={shopItems} addToCart={addToCart}/>

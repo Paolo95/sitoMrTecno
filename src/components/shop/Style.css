@@ -1,6 +1,6 @@
 .shop .category{
     padding: 30px;
-    height: 90vh;
+    height: 100%;
 }
 
 .shop{
@@ -70,22 +70,6 @@
     background-color: white;
 }
 
-.menu > li:hover {
-    background-color: lightblue;
-}
-
-.menu label{
-    margin-left: 10px;
-    cursor: pointer;
-}
-
-.menu-item{
-    cursor: pointer;
-}
-
-.menu input{
-    cursor: pointer;
-}
 
 .chead .container{
     display: flex;
@@ -96,13 +80,32 @@
     cursor: pointer;
 }
 
-.chead .container i{
-    display: flex;
-    align-items: center;
+.chead .menu .container label{
+    width: 100%;
+    cursor: pointer;
 }
 
-.chead .container h3{
+.chead  .menu .container input{
+    transform: scale(1.5);
     cursor: pointer;
+}
+
+.chead .menu .container span{
+    margin-left: 10px;
+}
+
+.chead button{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    cursor: pointer;
+}
+
+.chead .tab{
+    padding-bottom: 5px;
+}
+.chead button i{
+    padding-top: 2px;
 }
 
 .dropdown .range-slider {
@@ -125,3 +128,8 @@
     text-align: center;
     border-radius: 3px;
 }
+
+.shop #order-select{
+    height: 30px;
+    width: 110px;
+} 
