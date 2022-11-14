@@ -39,6 +39,12 @@ function App() {
 
   }
 
+  const deleteCartProduct = (product) => {
+    
+    setCartItem(cartItem.filter((item) => item.id !== product.id));
+  
+  }
+
   return (
     <>
       <Router>
@@ -46,9 +52,11 @@ function App() {
         <Routes>
             <Route exact path="/" element={<Pages productItems={productItems} addToCart={addToCart}/>} >    
             </Route>    
-            <Route exact path="/cart" element={<Cart cartItem={cartItem} addToCart={addToCart} decreaseQty={decreaseQty}/>} >    
+            <Route exact path="/cart" element={<Cart cartItem={cartItem} addToCart={addToCart} decreaseQty={decreaseQty} deleteCartProduct={deleteCartProduct}/>} >    
             </Route>
             <Route exact path="/shop" element={<Shop shopItems={shopItems} addToCart={addToCart} decreaseQty={decreaseQty}/>} >    
+            </Route>
+            <Route exact path="/product" element={<Shop shopItems={shopItems} addToCart={addToCart} decreaseQty={decreaseQty}/>} >    
             </Route>        
         </Routes>
         <Footer />

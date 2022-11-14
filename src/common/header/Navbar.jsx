@@ -33,10 +33,10 @@ const Navbar = () => {
                 <Link to='/user'>account</Link>
               </li>
               <li>
-                <Link to='/track'>traccia ordine</Link>
+                <Link to='/trackOrder'>traccia ordine</Link>
               </li>
               <li>
-                <Link to='/track'>contatti</Link>
+                <Link to='/contacts'>contatti</Link>
               </li>
             </ul>
 

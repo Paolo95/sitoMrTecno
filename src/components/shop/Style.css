@@ -3,17 +3,6 @@
     height: 90vh;
 }
 
-.chead h1{
-    font-size: 20px;
-    margin-bottom: 20px;
-}
-
-.chead h2:nth-child(2) {
-    opacity: 0.5;
-    border-left: 3px solid rgba(0, 0, 0, 0.5);
-    padding-left: 70px;
-}
-
 .shop{
     margin-top: 30px;
 }
@@ -33,11 +22,6 @@
 .shop .category .box:hover{
     background-color: #fff;
     box-shadow: rgb(43 52 69 / 10%) 0 4px 16px;
-}
-
-.shop .category .box2{
-    margin-top: 100px;
-    text-align: center;
 }
 
 .shop .category button{
@@ -68,4 +52,76 @@
 
 .shop .product:hover{
     box-shadow: rgb(43 52 69 / 10%) 0 4px 16px;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.menu {
+    list-style-type: none;
+    margin: 5px 0;
+    padding: 0;
+    width: 100%;
+}
+  
+.menu > li {
+    margin: 0;
+    background-color: white;
+}
+
+.menu > li:hover {
+    background-color: lightblue;
+}
+
+.menu label{
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.menu-item{
+    cursor: pointer;
+}
+
+.menu input{
+    cursor: pointer;
+}
+
+.chead .container{
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    cursor: pointer;
+}
+
+.chead .container i{
+    display: flex;
+    align-items: center;
+}
+
+.chead .container h3{
+    cursor: pointer;
+}
+
+.dropdown .range-slider {
+    margin-left: 11px;
+    margin-top: 10px;
+    width: 216px;
+}
+
+.range-slider .range-slider__thumb {
+    width: 20px;
+    height: 20px;
+}
+
+.dropdown .range-values input{
+    margin-top: 20px;
+    border: 1px solid #999;
+    width: 60px;
+    padding-left: 12px;
+    height: 30px;
+    text-align: center;
+    border-radius: 3px;
 }

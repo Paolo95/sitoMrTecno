@@ -62,12 +62,9 @@ const FlashCard = ({ productItems, addToCart }) => {
                         <div className="product-details">
                             <h3>{productItems.name}</h3>
                             <div className="rate">
-                                <i className="fa fa-star"></i>
-                                <i className="fa fa-star"></i>
-                                <i className="fa fa-star"></i>
-                                <i className="fa fa-star"></i>
-                                <i className="fa fa-star"></i>
+                            {Array.from({ length: productItems.stars }, () => <i key={index} className="fa fa-star"></i>)}
                             </div>
+                
                             <div className="price">
                                 <h4>{productItems.price}.00€</h4>
                                 <button onClick={() => addToCart(productItems)}>

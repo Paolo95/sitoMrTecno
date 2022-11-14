@@ -1,7 +1,7 @@
 import React from 'react'
 import './style.css'
 
-const Cart = ({ cartItem, addToCart, decreaseQty }) => {
+const Cart = ({ cartItem, addToCart, decreaseQty, deleteCartProduct }) => {
 
   const totalPrice = cartItem.reduce((price, item) => price + item.qty * item.price, 0);
 
@@ -28,7 +28,7 @@ const Cart = ({ cartItem, addToCart, decreaseQty }) => {
                   </div>
                   <div className="cart-items-function">
                     <div className="removeCart">
-                      <button>
+                      <button className='deleteCartProduct' onClick={() => deleteCartProduct(item)}>
                         <i className="fas fa-times"></i>
                       </button>
                     </div>
