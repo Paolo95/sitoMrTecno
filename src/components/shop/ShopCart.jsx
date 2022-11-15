@@ -15,7 +15,7 @@ const ShopCart = ({ addToCart , orderChoice, checkedList, minPriceRange, maxPric
     <>
     
         {   
-            shopItems.map((shopItems, index) => {
+            shopItems.slice(0, shopItems.length).map((shopItems, index) => {
             return (
                 <div className="box" key={index}>
                     <div className="product mtop">
@@ -30,11 +30,7 @@ const ShopCart = ({ addToCart , orderChoice, checkedList, minPriceRange, maxPric
                         <div className="product-details">
                             <h3>{shopItems.name}</h3>
                             <div className="rate">
-                                <i className="fa fa-star"></i>
-                                <i className="fa fa-star"></i>
-                                <i className="fa fa-star"></i>
-                                <i className="fa fa-star"></i>
-                                <i className="fa fa-star"></i>
+                                {Array.from({ length: shopItems.stars }, () => <i key={index} className="fa fa-star"></i>)}
                             </div>
                             <div className="price">
                                 <h4>{shopItems.price}.00€</h4>

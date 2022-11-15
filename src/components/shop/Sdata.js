@@ -5,6 +5,7 @@ const Sdata = {
         cover: "./images/arrivals/arrivals1.png",
         name: "Mapple Earphones",
         price: 180,
+        stars: 4,
         discount: "25",
       },
       {
@@ -12,6 +13,7 @@ const Sdata = {
         cover: "./images/arrivals/arrivals1.png",
         name: "Mapple Earphones",
         price: 180,
+        stars: 3,
         discount: "25",
       },
       {
@@ -19,6 +21,7 @@ const Sdata = {
         cover: "./images/arrivals/arrivals2.png",
         name: "Vivo android one",
         price: 120,
+        stars: 1,
         discount: "10",
       },
       {
@@ -26,6 +29,7 @@ const Sdata = {
         cover: "./images/arrivals/arrivals1.png",
         name: "Mapple Earphones",
         price: 180,
+        stars: 5,
         discount: "25",
       },
       {
@@ -33,6 +37,7 @@ const Sdata = {
         cover: "./images/arrivals/arrivals2.png",
         name: "Vivo android one",
         price: 120,
+        stars: 3,
         discount: "10",
       },
       {
@@ -40,6 +45,7 @@ const Sdata = {
         cover: "./images/arrivals/arrivals3.png",
         name: "Sony Light",
         price: 20,
+        stars: 4,
         discount: "50 ",
       },
       {
@@ -47,6 +53,7 @@ const Sdata = {
         cover: "./images/arrivals/arrivals1.png",
         name: "Iphone",
         price: 999,
+        stars: 4,
         discount: "10 ",
       },
       {
@@ -54,6 +61,7 @@ const Sdata = {
         cover: "./images/arrivals/arrivals2.png",
         name: "Ceats wireless earphone",
         price: 80,
+        stars: 4,
         discount: "20 ",
       },
       {
@@ -61,6 +69,7 @@ const Sdata = {
         cover: "./images/arrivals/arrivals3.png",
         name: "Redimi Phone",
         price: 400,
+        stars: 4,
         discount: "20 ",
       },
       {
@@ -68,6 +77,7 @@ const Sdata = {
         cover: "./images/arrivals/arrivals3.png",
         name: "Xeats Bluetooth earphones",
         price: 60,
+        stars: 4,
         discount: "5 ",
       },
       {
@@ -75,6 +85,7 @@ const Sdata = {
         cover: "./images/arrivals/arrivals2.png",
         name: "Airpod",
         price: 120,
+        stars: 3,
         discount: "10",
       },
       {
@@ -82,6 +93,7 @@ const Sdata = {
         cover: "./images/arrivals/arrivals1.png",
         name: "Silver Cap",
         price: 5,
+        stars: 5,
         discount: "2",
       },
     ],
