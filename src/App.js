@@ -3,7 +3,6 @@ import Header from './common/header/Header';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Pages from './pages/Pages';
 import Data from './components/flashDeals/Data'
-import Sdata from './components/shop/Sdata'
 import { useState } from 'react';
 import Cart from './common/cart/Cart';
 import Shop from './components/shop/Shop';
@@ -13,8 +12,7 @@ function App() {
 
   //step 1: fetch data from database
   const { productItems } = Data;
-  const { shopItems } = Sdata;
-
+  
   const [cartItem, setCartItem] = useState([]);
 
   const addToCart = (product) => {
@@ -54,10 +52,8 @@ function App() {
             </Route>    
             <Route exact path="/cart" element={<Cart cartItem={cartItem} addToCart={addToCart} decreaseQty={decreaseQty} deleteCartProduct={deleteCartProduct}/>} >    
             </Route>
-            <Route exact path="/shop" element={<Shop shopItems={shopItems} addToCart={addToCart} decreaseQty={decreaseQty}/>} >    
-            </Route>
-            <Route exact path="/product" element={<Shop shopItems={shopItems} addToCart={addToCart} decreaseQty={decreaseQty}/>} >    
-            </Route>        
+            <Route exact path="/shop" element={<Shop addToCart={addToCart}/>} >    
+            </Route>      
         </Routes>
         <Footer />
       </Router>

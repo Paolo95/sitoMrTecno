@@ -1,16 +1,21 @@
 import React, { useState } from 'react'
+import Sdata from '../../components/shop/Sdata'
 
-const ShopCart = ({ shopItems, addToCart }) => {
+const ShopCart = ({ addToCart , orderChoice, checkedList, minPriceRange, maxPriceRange}) => {
 
+    const { shopItems } = Sdata;
 
     const [count, setCount] = useState(0);
+
     const increment = () => {
         setCount(count + 1);
     }
 
   return (
     <>
-        {shopItems.map((shopItems, index) => {
+    
+        {   
+            shopItems.map((shopItems, index) => {
             return (
                 <div className="box" key={index}>
                     <div className="product mtop">

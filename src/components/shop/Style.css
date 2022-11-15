@@ -44,6 +44,7 @@
 
 .shop .product img{
     width: 100%;
+    cursor: pointer;
 }
 
 .shop .product {
@@ -132,4 +133,5 @@
 .shop #order-select{
     height: 30px;
     width: 110px;
+    cursor: pointer;
 } 
