@@ -55,3 +55,35 @@
 .slick-dots{
     top: 400px;
 }
+
+@media only screen and (max-width: 390px)  {
+    .homeSlide h1 {
+        font-size: 40px;
+        line-height: 55px;
+        margin: 0px 0 20px 0;
+    }
+
+    .top{
+        margin-top: 30px;
+    }
+
+    .homeSlide .box .left{
+        width: 100%;
+    }
+    .homeSlide .box .left button{
+        margin-left: 1px;
+    }
+    
+    .homeSlide .box .right{
+        display: none;
+        width: 0%;
+    }
+
+    .contentWidth{
+        width: 100%;
+    }
+
+    .slick-dots{
+        display: none;
+    }
+}

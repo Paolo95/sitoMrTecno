@@ -21,7 +21,7 @@ const Contact = () => {
     <section className='contact'>
       <div className="content">
         <h2>Contattaci!</h2>
-        <p>Hai dubbi? Compila il form!</p>
+        <p>Se non hai trovato le riposte alle tue domande nella sezione <a href='/faqs'>FAQ's</a>, compila il form!</p>
       </div>
       <div className="container" id='contact-container'>
         <div className="contactInfo">
@@ -68,11 +68,13 @@ const Contact = () => {
               <textarea type="text" name='' required='required'/>
               <span>Scrivi il messaggio...</span>
             </div>
-            <ReCAPTCHA 
-              ref={recaptchaRef}
-              sitekey={recaptchaKey}
-              onChange={onChange}
-            />
+            <div className="recaptchaContainer">
+              <ReCAPTCHA 
+                ref={recaptchaRef}
+                sitekey={recaptchaKey}
+                onChange={onChange}
+              />
+            </div>            
             <div className="inputBox">
               <input type="submit" name='' value="Invia"/>
             </div>           

@@ -52,3 +52,16 @@
     max-height: 100%;
     object-fit: contain;
 }
+
+/*---------------------iPhone 12 styling-------------------------------------*/
+@media only screen and (max-width: 390px) {
+    
+    .topCat .nametop .tright{
+        display: none;
+        }
+        
+    .topCat .box{
+    margin: 0 0px;
+    }
+
+}

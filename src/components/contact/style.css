@@ -26,6 +26,11 @@
     font-weight: 300;
 }
 
+.contact .content a{
+    font-weight: 600;
+    text-decoration: underline;
+}
+
 
 #contact-container{
     width: 100%;
@@ -152,5 +157,18 @@
     #contact-container .contactInfo, 
     .contactForm{
         width: 100%;
+    }
+}
+
+@media (max-width: 390px){
+    .contactForm .recaptchaContainer{
+        transform: translateX(-60px);
+        transform-origin: 0 0;
+        
+    }
+
+    .contactForm .inputBox{
+        display: flex;
+        justify-content: center;
     }
 }

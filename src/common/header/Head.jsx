@@ -15,7 +15,6 @@ const Head = () => {
                 </div>
                 <div className="right row RText">
                     <Link to='/faq'>FAQ's</Link>
-                    <Link to='/help'>Hai bisogno di aiuto?</Link>
                     <span>🇮🇹</span>
                     <label htmlFor=''>IT</label>
                     <span>🇬🇧</span>

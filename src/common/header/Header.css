@@ -232,6 +232,8 @@ header ul li a:hover{
         padding: 20px 0;
     }
 
+
+
     .search .logo img {
         width: 75%;
         height: 75%;
@@ -245,7 +247,7 @@ header ul li a:hover{
         position: absolute;
         top: 35px;
         right: 20px;
-        color: #ff014f;
+        color: #0f3460;
         display: block;
         font-size: 25px;
         z-index: 999;
@@ -267,5 +269,11 @@ header ul li a:hover{
         width: 60px;
         height: 60px;
         line-height: 60px;
+    }
+}
+
+@media only screen and (max-width: 390px) {
+    .search{
+        margin-top: -2px;
     }
 }
