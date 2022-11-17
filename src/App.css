@@ -363,4 +363,11 @@ input, button{
   .category{
     display: none;
   }
+
+  .cart-items .container{
+    display: flex;
+    
+    flex-direction: column;
+  }
+
 }
