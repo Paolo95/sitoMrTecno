@@ -7,6 +7,7 @@ import { useState } from 'react';
 import Cart from './common/cart/Cart';
 import Shop from './components/shop/Shop';
 import Footer from './common/footer/Footer';
+import Contact from './components/contact/Contact';
 
 function App() {
 
@@ -53,7 +54,9 @@ function App() {
             <Route exact path="/cart" element={<Cart cartItem={cartItem} addToCart={addToCart} decreaseQty={decreaseQty} deleteCartProduct={deleteCartProduct}/>} >    
             </Route>
             <Route exact path="/shop" element={<Shop addToCart={addToCart}/>} >    
-            </Route>      
+            </Route>  
+            <Route exact path="/contact" element={<Contact />} >    
+            </Route>    
         </Routes>
         <Footer />
       </Router>
