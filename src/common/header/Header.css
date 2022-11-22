@@ -24,12 +24,14 @@
 
 .search{
     padding-top: 20px;
+    background-color: #0f3460;
 }
 
 .search .logo img {
     width: 50%;
     height: 50%;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 .search .width {
@@ -40,6 +42,7 @@
     width: 80%;
     border: 2px solid rgba(0, 0, 0, 0.1);
     border-radius: 50px;
+    background-color: #fff;
 }
 
 .search-box i {
@@ -52,8 +55,18 @@
 }
 
 .search-box input{
-    width: 100%;
+    width: 90%;
     padding: 10px;
+    font-weight: 600;
+}
+
+.search-box input:focus::placeholder{
+  color: transparent;
+}
+
+.search-box input:focus{
+    font-weight: 600;
+    opacity: 0.5;
 }
 
 ::placeholder{
@@ -65,6 +78,7 @@
     opacity: 0.5;
     border-left: 2px solid rgba(0, 0, 0, 0.1);
     padding: 10px;
+    font-weight: 600;
 }
 
 .cart{
@@ -117,6 +131,7 @@
 header{
     height: 8vh;
     box-shadow: -1px 15px 17px -8px rgba(0,0,0,0.1);
+    background-color: #0f3460;
 }
 
 header ul{
@@ -131,10 +146,12 @@ header ul li a{
     transition: 0.5s;
     font-size: 15px;
     font-weight: 400;
+    color:#e2e8ec;
 }
 
 header ul li a:hover{
-    color:#ff014f;
+    color:#e9e716;
+    font-weight: 400;
 }
 
 .open{

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import logo from '../assets/images/logo.svg'
+import logo from '../assets/images/logo.jpg'
 
 const Search = ({ cartItem }) => {
 
@@ -22,7 +22,7 @@ const Search = ({ cartItem }) => {
 
             <div className="search-box f_flex">
               <i className='fa fa-search'></i>
-              <input type='text' placeholder='Cerca e premi Invio ...'/>
+              <input type='text' placeholder='Digita il prodotto che desideri e premi Invio ...'/>
               <span>Tutte le categorie</span>
             </div>
 

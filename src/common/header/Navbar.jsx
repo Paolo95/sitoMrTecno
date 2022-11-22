@@ -25,15 +25,30 @@ const Navbar = () => {
             <ul className={MobileMenu ? "nav-links-MobileMenu" : "link f_flex capitalize"} onClick={() => setMobileMenu(false)}>
               <li>
                 <Link to='/'>home</Link>
+              </li>              
+              <li>
+                <Link to='/permuta'>permuta</Link>
               </li>
               <li>
-                <Link to='/shop'>shop</Link>
+                <Link to='/ricondizionati'>ricondizionati</Link>
+              </li>              
+              <li>
+                <Link to='/nuovo'>nuovo</Link>
               </li>
               <li>
-                <Link to='/user'>account</Link>
+                <Link to='/riparazioni'>riparazioni</Link>
               </li>
               <li>
-                <Link to='/trackOrder'>traccia ordine</Link>
+                <Link to='/prodotti'>i nostri prodotti</Link>
+              </li>
+              <li>
+                <Link to='/assistenza'>assistenza remota</Link>
+              </li>
+              <li>
+                <Link to='/recupero'>recupero dati</Link>
+              </li>
+              <li>
+                <Link to='/servizi'>servizi</Link>
               </li>
               <li>
                 <Link to='/contact'>contatti</Link>

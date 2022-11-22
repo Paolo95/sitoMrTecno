@@ -1,6 +1,15 @@
 .home{
     margin-top: 30px;
 }
+
+.home .container{
+    margin-bottom: 40px;
+}
+
+.homeSlide{
+    padding-top: 30px
+}
+
 .homeSlide h1 {
     font-size: 45px;
     line-height: 55px;
@@ -53,7 +62,7 @@
 }
 
 .slick-dots{
-    top: 400px;
+    top: 310px;
 }
 
 @media only screen and (max-width: 390px)  {

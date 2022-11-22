@@ -30,7 +30,7 @@ const Contact = () => {
               <div className="icon"><i className="fas fa-map-marker-alt"></i></div>
               <div className="text">
                 <h3>Indirizzo</h3>
-                <p>Viale Roma 104,<br/>Nereto (TE)<br/>64013</p>
+                <p>Viale Roma 104,<br/>Nereto (TE)<br/>64015</p>
               </div>
             </div>
           </a>

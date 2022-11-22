@@ -1,6 +1,8 @@
 const Sdata = [
   {
     id: 1,
+    section: "Permuta",
+    sequence: "1",
     title: "Scopri i nuovi PC Desktop gaming!",
     desc: "Costruisci il tuo nuovo PC Desktop passo passo con componenti a tua scelta. Per l'assemblaggio ci pensiamo noi!",
     cover: "./images/SlideCard/slide-1.png",

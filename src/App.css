@@ -24,6 +24,10 @@ body{
   margin: auto;
 }
 
+.tab{
+  padding-bottom: 40px;
+}
+
 .d_flex{
   display: flex;
   justify-content: space-between;
@@ -101,6 +105,59 @@ input, button{
   width: 77%;
 }
 
+.category-tab {
+  width: 23%;
+  text-align: center;
+  box-shadow: rgb(43 52 69 / 10%) 0 4px 16px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.category-tab .dot{
+  height: 180px;
+  width: 180px;
+  background-color: rgb(132, 185, 255);
+  border-radius: 50%;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-bottom: 14px;
+}
+
+.category-tab .dot i:hover{
+  transition: 0.4s;
+  color:#0f3460;
+}
+
+.category-tab .dot i{
+  font-size: 100px;
+}
+
+.category-tab button{
+  width: 180px;
+  height: 60px;
+  background: none;
+  color: black ;
+  font-weight: bold;
+  border-radius: 5px;
+  border: 1px solid;
+  cursor: pointer;
+}
+
+.category-tab button:hover{
+  background-color: #0f3460;
+  color: #fff;
+  transition: 0.5s;
+}
+
+.tab-container{
+  width: 100%;
+}
+
 .category{
   width: 23%;
   box-shadow: rgb(43 52 69 / 10%) 0 4px 16px;
@@ -136,16 +193,12 @@ input, button{
 /*---------------------------Category------------------------------------*/
 
 .btn-primary{
-  background-color: #e94560;
+  background-color: #0f3460;
   padding: 13px 40px;
   font-weight: bold;
   color: #fff;
   border-radius: 5px;
   cursor: pointer;
-}
-
-.top{
-  margin-top: 80px;
 }
 
 .mtop{

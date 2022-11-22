@@ -6,18 +6,18 @@ const Wrapper = () => {
     const data = [
         {
           cover: <i className='fas fa-truck'></i>,
-          title: "Spedizione in tutto il mondo",
-          decs: "Offriamo spedizioni in tutto il mondo con costi sostenuti",
+          title: "Spedizione in tutta Italia",
+          decs: "Spedizioni a 9,90€ con corriere GLS",
         },
         {
           cover: <i className='fas fa-id-card'></i>,
           title: "Pagamento sicuro",
-          decs: "Pagamento sicuro con PayPal",
+          decs: "Ogni pagameto è gestito tramite PayPal",
         },
         {
           cover: <i className='fas fa-user-shield'></i>,
-          title: "Shop With Confidence ",
-          decs: "Prezzi competitivi",
+          title: "Acquista in sicurezza",
+          decs: "Tutti i nostri prodotti sono testati con garanzia fornita da MrTecno",
         },
         {
           cover: <i className='fas fa-headset'></i>,
