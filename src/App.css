@@ -377,13 +377,31 @@ input, button{
     display: none;
   }
 
+  .home .homeSlide{
+    display: none;
+  }
+
+  .home .category-tab{
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 5%;
+    padding-bottom: 5%;
+  }
+
   .search-box {
     display: none;
   }
 
-
   .navlink .open{
-    top: 12%;
+    top: 16%;
+    color: rgb(132, 185, 255);
+  }
+
+  .nav-links-MobileMenu li a{
+    color:rgb(132, 185, 255);
+    font-weight: 700;
+    font-size: 18px;
   }
 
   .grid2{
@@ -418,8 +436,7 @@ input, button{
   }
 
   .cart-items .container{
-    display: flex;
-    
+    display: flex;    
     flex-direction: column;
   }
 
