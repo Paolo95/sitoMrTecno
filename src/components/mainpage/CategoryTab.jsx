@@ -1,11 +1,12 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 
 const CategoryTab = ( { tab } ) => {
     const data = [
         {
             tab: "Permuta",
-            testo: "Scopri come permutare un oggetto!",
+            testo: "Permuta un oggetto!",
             button_text: "Permuta ora!",
         },
         {
@@ -25,11 +26,15 @@ const CategoryTab = ( { tab } ) => {
                 data.filter(item => item.tab === tab).map((value, index) =>{
                     return(
                         <div className='tab-container' key={index}>
+                            <Link to={tab==='Permuta' ? '/permuta': 
+                                        (tab==='Ricondizionati' ? '/ricondizionati' :
+                                            (tab==='Nuovo' ? '/nuovo' : ''))}>  
                             <span className="dot"><i className={tab==='Permuta' ? 'far fa-handshake': 
                                                                 (tab==='Ricondizionati' ? 'fas fa-laptop-medical' :
                                                                  (tab==='Nuovo' ? 'fas fa-store' : ''))}></i></span> 
-                                                                
-                            <button>{value.testo}</button>
+                                                            
+                                <button>{value.testo}</button>
+                            </Link>  
                         </div>
                     )
                 })}

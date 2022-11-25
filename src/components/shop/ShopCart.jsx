@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import Sdata from '../../components/shop/Sdata'
+import uuid from 'react-uuid'
 
-const ShopCart = ({ addToCart , orderChoice, checkedList, minPriceRange, maxPriceRange}) => {
+const ShopCart = ({ addToCart , orderChoice, brandCheckedList, categoryChecked, minPriceRange, maxPriceRange}) => {
 
     const { shopItems } = Sdata;
 
@@ -12,10 +13,12 @@ const ShopCart = ({ addToCart , orderChoice, checkedList, minPriceRange, maxPric
     }
 
   return (
-    <>
-    
+    <> 
         {   
-            shopItems.slice(0, shopItems.length).map((shopItems, index) => {
+            shopItems.slice(0, shopItems.length)
+                     .filter(item => item.category === categoryChecked)
+                     .filter(brandCheckedList.filter(n => n).length !== 0 ? (item => brandCheckedList.filter(n => n).includes(item.brandName)) : item => item)
+                     .map((shopItems, index) => {
             return (
                 <div className="box" key={index}>
                     <div className="product mtop">
@@ -30,7 +33,7 @@ const ShopCart = ({ addToCart , orderChoice, checkedList, minPriceRange, maxPric
                         <div className="product-details">
                             <h3>{shopItems.name}</h3>
                             <div className="rate">
-                                {Array.from({ length: shopItems.stars }, () => <i key={index} className="fa fa-star"></i>)}
+                                {Array.from({ length: shopItems.stars }, () => <i key={uuid()} className="fa fa-star"></i>)}
                             </div>
                             <div className="price">
                                 <h4>{shopItems.price}.00€</h4>
