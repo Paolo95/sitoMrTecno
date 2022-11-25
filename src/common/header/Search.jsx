@@ -16,7 +16,7 @@ const Search = ({ cartItem }) => {
           <div className="container c_flex">
             <div className="logo width">
               <Link to='/'>
-                <img src={logo} alt=''/>
+                <img src={logo} alt='MrTecno Logo'/>
               </Link>
             </div>
 
