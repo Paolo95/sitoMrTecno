@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import "/node_modules/flag-icons/css/flag-icons.min.css";
 
 const Head = () => {
 
@@ -15,9 +16,9 @@ const Head = () => {
                 </div>
                 <div className="right row RText">
                     <Link to='/faq'>FAQ's</Link>
-                    <span>🇮🇹</span>
+                    <span class="fi fi-it"></span>
                     <label htmlFor=''>IT</label>
-                    <span>🇬🇧</span>
+                    <span class="fi fi-gb"></span>
                     <label htmlFor=''>EN</label>
                 </div>
             </div>
