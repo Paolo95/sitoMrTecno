@@ -132,6 +132,17 @@ const Sdata = {
         discount: "2",
         pieces: 10,
       },
+      {
+        id: 13,
+        cover: "./images/arrivals/arrivals1.png",
+        name: "Silver Cap",
+        category: "Smartphone",
+        brandName: "Xiaomi",
+        price: 5,
+        stars: 5,
+        discount: "2",
+        pieces: 10,
+      },
     ],
 }
 export default Sdata
