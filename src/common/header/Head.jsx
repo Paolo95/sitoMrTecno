@@ -17,9 +17,9 @@ const Head = () => {
                 <div className="right row RText">
                     <Link to='/faq'>FAQ's</Link>
                     <span className="fi fi-it"></span>
-                    <label htmlFor=''>IT</label>
+                    <label htmlFor=''> IT</label>
                     <span className="fi fi-gb"></span>
-                    <label htmlFor=''>EN</label>
+                    <label htmlFor=''> EN</label>
                 </div>
             </div>
         </section>  
