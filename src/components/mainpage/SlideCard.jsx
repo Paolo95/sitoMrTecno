@@ -4,7 +4,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 
-const SlideCard = () => {
+const SlideCard = ({ tab }) => {
   
   const settings = {
     dots: true,
@@ -20,16 +20,15 @@ const SlideCard = () => {
   return (
     <>
     <Slider {...settings}>
-      {Sdata.map((value, index) => {
+      {Sdata.filter(item => item.section === tab ).map((value, index) => {
         return (
             <div className="box d_flex top" key={index}>
               <div className="left">
-                <h1>{value.title}</h1>
-                <p>{value.desc}</p>
-                <button className='btn-primary'>Scopri i dettagli</button>
+                <img src={value.cover} alt="" />
               </div>
               <div className="right">
-                <img src={value.cover} alt="" />
+                <h1>{value.title}</h1>
+                <p>{value.desc}</p>                
               </div>
             </div>
         )

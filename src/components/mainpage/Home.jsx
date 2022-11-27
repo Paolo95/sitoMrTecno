@@ -9,15 +9,15 @@ const Home = () => {
         <section className='home'>
             <div className="container d_flex">
                 <CategoryTab tab={'Permuta'}/>
-                <SliderHome />
+                <SliderHome tab={'Permuta'}/>
             </div>
             <div className="container d_flex">
                 <CategoryTab tab={'Ricondizionati'}/>
-                <SliderHome />
+                <SliderHome tab={'Ricondizionati'}/>
             </div>
             <div className="container d_flex">
                 <CategoryTab tab={'Nuovo'}/>
-                <SliderHome />
+                <SliderHome tab={'Nuovo'}/>
             </div>
         </section>
     </>

@@ -1,12 +1,12 @@
 import React from 'react'
 import SlideCard from './SlideCard'
 
-const SliderHome = () => {
+const SliderHome = ({ tab }) => {
   return (
     <>
         <section className='homeSlide contentWidth'>
             <div className="container">
-                <SlideCard />
+                <SlideCard tab={tab}/>
             </div>
         </section>
     </>

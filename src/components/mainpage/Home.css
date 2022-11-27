@@ -17,7 +17,7 @@
 }
 
 .homeSlide p {
-    margin: 20px 0;
+    margin: 30px 0;
 }
 
 .homeSlide ul {
@@ -49,11 +49,12 @@
     display: flex !important;
 }
 .homeSlide .box .left{
-    width: 70%;
+    width: 40%;
 }
 
 .homeSlide .box .right{
-    width: 30%;
+    padding-left: 40px;
+    width: 60%;
 }
 
 .homeSlide .box img {
@@ -62,7 +63,7 @@
 }
 
 .slick-dots{
-    top: 310px;
+    top: 340px;
 }
 
 @media only screen and (max-width: 390px)  {
