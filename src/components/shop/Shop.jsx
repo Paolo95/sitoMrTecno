@@ -42,17 +42,33 @@ export const Shop = ({ addToCart }) => {
   }
 
   const handleChangeMin = event => {
+    if(catMobileMenu){
+      setCatMobileMenu(true);
+    }else{
+      setCatMobileMenu(false);
+    }
     setMin(event.target.value);
     
   };
 
   const handleChangeMax = event => {
+    if(catMobileMenu){
+      setCatMobileMenu(true);
+    }else{
+      setCatMobileMenu(false);
+    }
     setMax(event.target.value);
     
   };
 
   const handleOnBrandCheckBoxChange = (position) => {
     
+    if(catMobileMenu){
+      setCatMobileMenu(true);
+    }else{
+      setCatMobileMenu(false);
+    }
+
     setNumProdListed(6);
     const updatedBrandCheckedState = brandCheckedState.map((item, index) =>
       index === position ? !item : item
@@ -75,6 +91,11 @@ export const Shop = ({ addToCart }) => {
   }
 
   const handleOnCategoryRadioChange = e => {
+    if(catMobileMenu){
+      setCatMobileMenu(true);
+    }else{
+      setCatMobileMenu(false);
+    }
     setNumProdListed(6);
     setCategoryChecked(e.target.value);   
   }
@@ -94,12 +115,15 @@ export const Shop = ({ addToCart }) => {
  
   }
 
+  const [catMobileMenu , setCatMobileMenu] = React.useState(false);
+
   return (
     <>
       <section className="shop">
         <div className="container d_flex">
         <>
-        <div className="category">
+        <div className={catMobileMenu ? "categoryMobile" : "category"} onClick={() => setCatMobileMenu(false)}>
+          {catMobileMenu ? <i className='fas fa-times cat_close home-bth'></i> : null}
           <div className='chead'>
             <div className='tab'>
             
@@ -193,14 +217,9 @@ export const Shop = ({ addToCart }) => {
                     <div className="container">
                       <input id='min_input' type="number" min={0} value={min} onChange={handleChangeMin}/>
                       <input id='max_input' type="number" min={min+1} value={max} onChange={handleChangeMax}/>
-                    </div>
-                    
-                  </div>
-                        
-                
-                  
-                </div>
-                        
+                    </div>                    
+                  </div>                
+                </div>                       
                 ) : null}
               </div>
             </div>                         
@@ -210,7 +229,10 @@ export const Shop = ({ addToCart }) => {
           <div className="contentWidth">
             <div className="heading d_flex">
               <div className="heading-left row f_flex">
-                <h2>Tutte le categorie</h2>
+                <button className='toggle' onClick={() => setCatMobileMenu(!catMobileMenu)}>
+                    <h3>Filtri<i className='fa fa-chevron-down'></i></h3>
+                </button>
+                
               </div>
               <select id="order-select" name="order" onChange={(choice) => userOrderChoiceHandler(choice)}>
                 <option value="0">Migliori</option>

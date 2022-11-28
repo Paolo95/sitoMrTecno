@@ -3,8 +3,6 @@ import uuid from 'react-uuid'
 
 const ShopCart = ({ addToCart, shopItems}) => {
 
-    //const { shopItems } = Sdata;
-
     const [count, setCount] = useState(0);
 
     const increment = () => {

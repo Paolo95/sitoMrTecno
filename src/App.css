@@ -517,8 +517,61 @@ input, button{
     justify-content: center;
   }
 
+  .heading .heading-left i{
+    font-size: 15px;
+    color: #0f3460;
+  }
+
   .category{
     display: none;
+  }
+
+  .categoryMobile{
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    box-shadow: rgb(43 52 69 / 10%) 0 4px 16px;
+    height: 450px;
+    padding: 50px 0;
+    background-color: #fff;
+    z-index: 1000;
+  }
+  
+  .categoryMobile img{
+    width: 30px;
+    height: 30px;
+    margin-top: 10px;
+    object-fit: contain;
+  }
+  
+  .categoryMobile span{
+    margin: 10px 20px;
+    text-transform: capitalize;
+  }
+  
+  .categoryMobile .box{
+    transition: 0.5s;
+    padding: 0 20px;
+  }
+  
+  .categoryMobile .box:hover{
+    background-color: #e1e3ff;
+    cursor: pointer;
+  }
+
+  .categoryMobile .chead button{
+    background-color: transparent;
+  }
+
+  .categoryMobile .chead button h3{
+    font-size: 20px;
+  }
+
+  .categoryMobile .chead{
+    padding-top: 20px;
+    padding-right: 20px;
+    padding-left: 20px;
   }
 
   .cart-items .container{
