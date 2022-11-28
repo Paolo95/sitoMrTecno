@@ -11,6 +11,7 @@ export const Shop = ({ addToCart }) => {
   /*Fare chiamata al db per questa sezione*/
 
   const { shopItems } = Sdata;
+  const shopItems2 = JSON.parse(JSON.stringify(shopItems));
   const uniqueBrands = shopItems.filter((elem, index) => shopItems.findIndex(obj => obj.brandName === elem.brandName) === index);
   const uniqueCategories = shopItems.filter((elem, index) => shopItems.findIndex(obj => obj.category === elem.category) === index);
   
@@ -221,7 +222,7 @@ export const Shop = ({ addToCart }) => {
             </div>
             <div className="product-content grid1">
               <ShopCart addToCart={addToCart} 
-                        shopItems={ shopItems.sort(orderChoice === 0 ? (a,b) => b.stars-a.stars : (a,b) => b.price-a.price )
+                        shopItems={shopItems2.sort(orderChoice === 0 ? (a,b) => b.stars-a.stars : (a,b) => b.price-a.price )
                                              .filter(item => item.category === categoryChecked)
                                              .filter(item => item.price >= min)
                                              .filter(item => item.price<= max)
