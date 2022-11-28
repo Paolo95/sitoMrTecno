@@ -38,7 +38,7 @@ const Footer = () => {
                 </div>
             </div>
             <div className='piva'>P.IVA 01940620675</div>
-            <div className='madeby'>Sito web creato da <a href="https://www.paolocompagnoni.it" target="_blank" rel="noopener noreferrer">Paolo Compagnoni</a></div>       
+            <div className='madeby'>Sito web creato da <a href="https://paolocompagnoni.netlify.app/" target="_blank" rel="noopener noreferrer">Paolo Compagnoni</a></div>       
             <div className='rights'>All rights reserved</div>
         </footer>
     </>

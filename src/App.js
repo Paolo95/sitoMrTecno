@@ -8,6 +8,10 @@ import Cart from './common/cart/Cart';
 import Shop from './components/shop/Shop';
 import Footer from './common/footer/Footer';
 import Contact from './components/contact/Contact';
+import Repair from './components/repair/Repair';
+import Products from './components/products/Products';
+import Assistance from './components/assistance/Assistance';
+import DataRescue from './components/dataRescue/DataRescue';
 
 function App() {
 
@@ -56,6 +60,14 @@ function App() {
             <Route exact path="/contact" element={<Contact />} >    
             </Route>
             <Route exact path="/nuovo" element={<Shop addToCart={addToCart}/>} >    
+            </Route>      
+            <Route exact path="/riparazioni" element={<Repair/>} >    
+            </Route>
+            <Route exact path="/prodotti" element={<Products/>} >    
+            </Route>  
+            <Route exact path="/assistenza" element={<Assistance/>} >    
+            </Route>   
+            <Route exact path="/recupero" element={<DataRescue/>} >    
             </Route>        
         </Routes>
         <Footer />

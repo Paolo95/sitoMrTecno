@@ -15,7 +15,7 @@ export const Shop = ({ addToCart }) => {
   const uniqueCategories = shopItems.filter((elem, index) => shopItems.findIndex(obj => obj.category === elem.category) === index);
   
   const [min, setMin] = React.useState(0);
-  const [max, setMax] = React.useState(500);
+  const [max, setMax] = React.useState(1000);
 
   const [categoryOpen, setCategoryOpen] = React.useState(true);
   const [brandOpen, setBrandOpen] = React.useState(true);
@@ -52,6 +52,7 @@ export const Shop = ({ addToCart }) => {
 
   const handleOnBrandCheckBoxChange = (position) => {
     
+    setNumProdListed(6);
     const updatedBrandCheckedState = brandCheckedState.map((item, index) =>
       index === position ? !item : item
     );
@@ -73,13 +74,23 @@ export const Shop = ({ addToCart }) => {
   }
 
   const handleOnCategoryRadioChange = e => {
+    setNumProdListed(6);
     setCategoryChecked(e.target.value);   
   }
 
   const [orderChoice, setUserOrderChoice] = React.useState(0);
     
   const userOrderChoiceHandler = (e) => {
+    setNumProdListed(6);
     setUserOrderChoice(e.target.value);
+  }
+
+  const [numProdListed, setNumProdListed] = React.useState(6);
+
+  const handleMoreProdListed = () => {
+   
+    setNumProdListed(numProdListed + 6);
+ 
   }
 
   return (
@@ -168,8 +179,8 @@ export const Shop = ({ addToCart }) => {
                     <RangeSlider 
                       id={'rangeInput'}
                       min={0}
-                      max={500}
-                      defaultValue={[0,500]}
+                      max={1000}
+                      defaultValue={[0,1000]}
                       onInput={([min, max]) => {
                         setMin(min);
                         setMax(max);
@@ -210,13 +221,29 @@ export const Shop = ({ addToCart }) => {
             </div>
             <div className="product-content grid1">
               <ShopCart addToCart={addToCart} 
-                        orderChoice={orderChoice} 
-                        brandCheckedList={brandCheckedList} 
-                        categoryChecked={categoryChecked} 
-                        minPriceRange={min} 
-                        maxPriceRange={max}
+                        shopItems={ shopItems.sort(orderChoice === 0 ? (a,b) => b.stars-a.stars : (a,b) => b.price-a.price )
+                                             .filter(item => item.category === categoryChecked)
+                                             .filter(item => item.price >= min)
+                                             .filter(item => item.price<= max)
+                                             .filter(brandCheckedList.filter(n => n).length !== 0 ? (item => brandCheckedList.filter(n => n).includes(item.brandName)) : item => item)
+                                             .slice(0, numProdListed)}
               />
             </div>
+            <div className="container f_flex">
+              <button 
+                      id='btn-moreProd'
+                      className='btn-moreProd'
+                      onClick={handleMoreProdListed}
+                      style={{
+                        display: numProdListed <= shopItems.filter(item => item.category === categoryChecked)
+                        .filter(item => item.price >= min)
+                        .filter(item => item.price<= max)
+                        .filter(brandCheckedList.filter(n => n).length !== 0 ? (item => brandCheckedList.filter(n => n).includes(item.brandName)) : item => item)
+                        .slice(0, numProdListed).length ? 'inline' : 'none'
+                      }}
+                      >Mostra altro</button>
+            </div>
+            
           </div>
         </div>
       </section>

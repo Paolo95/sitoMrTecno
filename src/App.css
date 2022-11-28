@@ -246,7 +246,7 @@ input, button{
 
 .product button{
   background: none;
-  color: #e94560;
+  color: #0f3460;
   font-size: 20px;
   border: 1px solid rgb(3 0 71 /9%);
   width: 35px;
@@ -257,7 +257,7 @@ input, button{
 
 .product button:hover{
   cursor: pointer;
-  background: #e94560;
+  background: #0f3460;
   color: #fff;
 }
 
@@ -285,6 +285,20 @@ input, button{
 
 .product:hover .product-like{
   opacity: 1;
+  cursor: pointer;
+}
+
+.btn-moreProd{
+  background-color: #0f3460;
+  color: #fff;
+  height: 50px;
+  width: 120px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 15px;
+  margin: 20px;
+  margin-left: auto;
+  margin-right: auto;
   cursor: pointer;
 }
 

@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
-import Sdata from '../../components/shop/Sdata'
 import uuid from 'react-uuid'
 
-const ShopCart = ({ addToCart , orderChoice, brandCheckedList, categoryChecked, minPriceRange, maxPriceRange}) => {
+const ShopCart = ({ addToCart, shopItems}) => {
 
-    const { shopItems } = Sdata;
+    //const { shopItems } = Sdata;
 
     const [count, setCount] = useState(0);
 
@@ -15,10 +14,7 @@ const ShopCart = ({ addToCart , orderChoice, brandCheckedList, categoryChecked, 
   return (
     <> 
         {   
-            shopItems.slice(0, shopItems.length)
-                     .filter(item => item.category === categoryChecked)
-                     .filter(brandCheckedList.filter(n => n).length !== 0 ? (item => brandCheckedList.filter(n => n).includes(item.brandName)) : item => item)
-                     .map((shopItems, index) => {
+            shopItems.map((shopItems, index) => {
             return (
                 <div className="box" key={index}>
                     <div className="product mtop">
