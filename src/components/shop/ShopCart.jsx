@@ -32,7 +32,8 @@ const ShopCart = ({ addToCart, shopItems}) => {
                             <div className="price">
                                 <h4>{shopItems.price}.00€</h4>
                                 <button onClick={() => addToCart(shopItems)}>
-                                    <i className="fa fa-plus"></i>
+                                    <i className="fa fa-plus"></i> 
+                                    <span>Aggiungi al carrello</span>
                                 </button>
                             </div>
                         </div>

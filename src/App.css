@@ -242,22 +242,35 @@ input, button{
   display: flex;
   justify-content: space-between;
   color: #e94560;
+  align-items: center;
 }
 
-.product button{
+.product .price h4{
+  
+  padding-top: 5px;
+}
+
+.product .price button{
   background: none;
   color: #0f3460;
   font-size: 20px;
   border: 1px solid rgb(3 0 71 /9%);
-  width: 35px;
-  height: 35px;
+  width: 170px;
+  height: 30px;
   border-radius: 5px;
   transition: 0.5s;
+  text-align: left;
+  font-size: 15px;
+  padding: 0px 8px;
+}
+
+.product .price button span{
+  margin-left: 5px;
 }
 
 .product button:hover{
   cursor: pointer;
-  background: #0f3460;
+  background-color: #0f3460;
   color: #fff;
 }
 
