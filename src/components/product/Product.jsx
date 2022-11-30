@@ -45,10 +45,12 @@ const Product = ({ addToCartProduct }) => {
     control: (styles) => ({
       ...styles,
       cursor: 'pointer',
+      textAlign: 'center'
     }),
     option: (styles) => ({
       ...styles,
       cursor: 'pointer',
+      textAlign: 'center',
     })
   }
 
@@ -60,6 +62,7 @@ const Product = ({ addToCartProduct }) => {
     <section className='single-product'>
       <div className="card-wrapper">
         <div className="card">
+        <h2 className="product-title-mobile">{product.name}</h2>
           <div className="product-imgs">
             <div className="img-display">
               <div className="img-showcase">

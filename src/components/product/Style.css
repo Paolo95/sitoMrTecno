@@ -56,6 +56,10 @@
     margin: 1rem 0;
 }
 
+.card .product-title-mobile{
+    display: none;
+}
+
 .card .product-title::after{
     content: "";
     position: absolute;
@@ -324,4 +328,22 @@
         padding-top: 0;
     }
     
+}
+
+@media screen and (max-width:428px) and (max-height:926px) {
+    
+    .product-content .product-title{
+        display: none;
+    }
+
+    .card .product-title-mobile{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 5%;
+    }
+
+    .review{
+        display: block;
+    }
 }

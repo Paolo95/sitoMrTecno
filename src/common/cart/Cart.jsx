@@ -21,8 +21,9 @@ const Cart = ({ cartItem, addToCart, decreaseQty, deleteCartProduct }) => {
                   </div>
                   <div className="cart-details">
                     <h3>{item.name}</h3>
-                    <h4>
-                      €{item.price}.00 * {item.qty}
+                    <h4>Prezzo unitario: €{item.price}.00 
+                            <br/>Quantità: {item.qty} <br/>
+                            Prezzo Totale:
                       <span>€{productQty}.00</span>
                     </h4>
                   </div>
@@ -47,9 +48,13 @@ const Cart = ({ cartItem, addToCart, decreaseQty, deleteCartProduct }) => {
           </div>
           <div className="cart-total product">
             <h2>Riassunto ordine</h2>
+            <div className="shipping d_flex">
+              <h4>Spedizione : </h4>            
+              <h3>€{totalPrice === 0 ? 0 : 20}.00</h3>
+            </div>   
             <div className="d_flex">
               <h4>Prezzo totale : </h4>            
-              <h3>€{totalPrice}.00</h3>
+              <h3>€{totalPrice === 0 ? 0 : totalPrice + 20}.00</h3>
             </div>          
           </div>
         </div>

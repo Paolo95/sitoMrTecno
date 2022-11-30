@@ -12,7 +12,7 @@
     width: 30%;
     margin-top: 30px;
     margin-left: 30px;
-    height: 130px;
+    height: 150px;
 }
 
 .cart-list{
@@ -40,13 +40,13 @@
 .cart-items .cart-details h4{
     font-size: 15px;
     font-weight: 400;
-    margin-top: 50px;
+    margin-top: 10px;
     color: gray;
 }
 
 .cart-items h4 span{
     color: #e94560;
-    margin-left: 20px;
+    margin-left: 4px;
     font-weight: 500;
 }
 
@@ -55,6 +55,14 @@
     font-size: 25px;
     text-align: right;
     margin-right: 10px;
+}
+
+.cart-items .deleteCartProduct{
+    background-color: #ff7575;
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 20px;
 }
 
 .cartControl{
@@ -69,12 +77,12 @@
     font-size: 20px;
 }
 
-.incCart{
-    background-color: none;
+.cartControl .incCart{
+    background-color: #75baff;
 }
 
 .decCart{
-    background-color: #f6f9fc;
+    background-color: #ff7575;
 }
 
 .cart-total h4{
@@ -82,10 +90,16 @@
     font-weight: 400;
 }
 
+.cart-total .shipping h3{
+    color: black;
+    font-size: 15px;
+    font-weight: 400;
+}
+
 .cart-total h3{
     font-size: 20px;
     font-weight: 500;
-    color:#e94560;
+    color: #e94560;
 }
 
 .cart-total h2{
