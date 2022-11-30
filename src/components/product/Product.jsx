@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom'
 import { FacebookIcon, FacebookShareButton, TelegramIcon, TelegramShareButton, WhatsappIcon, WhatsappShareButton } from 'react-share'
 import uuid from 'react-uuid'
 import Sdata from '../shop/Sdata'
+import Reviews from './reviews'
+import Select from 'react-select'
 
 import './Style.css'
 
@@ -10,8 +12,11 @@ const Product = ({ addToCartProduct }) => {
   
   const params = useParams(); 
   const { shopItems } = Sdata;
+  const { reviews } = Reviews;
   const product = shopItems.find(item => item.id === parseInt(params.id));
   const [numItems, setNumItems] = React.useState(1);
+  const [orderRevChoice, setRevOrderChoice] = React.useState(0);
+  const [numRevs, setNumRevs] = React.useState(6);
 
   const handleImgClick = (imgId) => {
     const imgs = document.querySelectorAll('.img-select img');
@@ -22,8 +27,33 @@ const Product = ({ addToCartProduct }) => {
       })
   }  
 
-  const handleNumItems = (event) =>{
+  const handleNumItems = (event) => {
     setNumItems(event.target.value);
+  }
+
+  const handleOrderRev = (options) => {
+    setRevOrderChoice(options.value);
+    setNumRevs(6);
+  }
+
+  const revOptions = [
+    { value: 0, label: 'Migliori' },
+    { value: 1, label: 'Peggiori' },
+  ];
+
+  const styles = {
+    control: (styles) => ({
+      ...styles,
+      cursor: 'pointer',
+    }),
+    option: (styles) => ({
+      ...styles,
+      cursor: 'pointer',
+    })
+  }
+
+  const handleMoreRev = () => {
+    setNumRevs(numRevs + 6);
   }
 
   return (
@@ -100,7 +130,60 @@ const Product = ({ addToCartProduct }) => {
           </div>
         </div>
       </div>
+
+      <div className="review">
+        <div className="review-heading">
+          <h1>Recensioni</h1>
+        </div>
+        <Select 
+            options={revOptions}
+            onChange={handleOrderRev}
+            styles={styles}
+            isClearable={false}
+            isSearchable={false}
+            defaultValue={revOptions[0]}
+            />
+      </div>
       
+          
+      <div className="review-box-container">
+        {
+          reviews.filter(item => item.product_id === parseInt(params.id))
+                 .slice(0, numRevs)
+                 .sort(orderRevChoice === 0 ? (a,b) => b.stars-a.stars : (a,b) => a.stars-b.stars)
+                 .map((review, index) => {
+          return (
+            
+                <div className="review-box" key={index}>
+                  <div className="review-box-top">
+                    <div className="review-profile">
+                      <div className="review-profileImg">
+                        <img src={review.user_image} alt="" />
+                      </div>
+                      <div className="review-user-name">
+                        <strong>{review.username}</strong>
+                      </div>
+                    </div>
+                    <div className="reviews">
+                      {Array.from({ length: review.stars }, () => <i key={uuid()} className="fa fa-star"></i>)}
+                    </div>
+                  </div>
+        
+                  <div className="client-comments">
+                    <p>{review.review_text}</p>
+                  </div>
+                </div>
+          )
+          })
+        }
+      </div> 
+
+      <div className="btnMoreRev">
+        <button onClick={handleMoreRev}
+                style={{
+                  display: numRevs <= reviews.filter(item => item.product_id === parseInt(params.id)).length ? 'inline' : 'none'
+                }}>Mostra altre recensioni</button>
+      </div>     
     </section>
   )
 }

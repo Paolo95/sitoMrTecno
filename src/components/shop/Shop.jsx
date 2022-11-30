@@ -3,8 +3,8 @@ import ShopCart from './ShopCart'
 import RangeSlider from 'react-range-slider-input';
 import Sdata from './Sdata';
 import 'react-range-slider-input/dist/style.css';
-
-import "./Style.css"
+import Select from 'react-select';
+import "./Style.css";
 
 export const Shop = ({ addToCart }) => {
 
@@ -102,9 +102,9 @@ export const Shop = ({ addToCart }) => {
 
   const [orderChoice, setUserOrderChoice] = React.useState(0);
     
-  const userOrderChoiceHandler = (e) => {
+  const userOrderChoiceHandler = (options) => {
     setNumProdListed(6);
-    setUserOrderChoice(e.target.value);
+    setUserOrderChoice(options.value);
   }
 
   const [numProdListed, setNumProdListed] = React.useState(6);
@@ -116,6 +116,25 @@ export const Shop = ({ addToCart }) => {
   }
 
   const [catMobileMenu , setCatMobileMenu] = React.useState(false);
+
+  const shopOptions = [
+    { value: 0, label: 'Migliori' },
+    { value: 1, label: 'Crescente' },
+    { value: 2, label: 'Decrescente' },
+    { value: 3, label: 'A-Z' },
+    { value: 4, label: 'Z-A' },
+  ];
+
+  const styles = {
+    control: (styles) => ({
+      ...styles,
+      cursor: 'pointer',
+    }),
+    option: (styles) => ({
+      ...styles,
+      cursor: 'pointer',
+    })
+  }
 
   return (
     <>
@@ -234,13 +253,14 @@ export const Shop = ({ addToCart }) => {
                 </button>
                 
               </div>
-              <select id="order-select" name="order" onChange={(choice) => userOrderChoiceHandler(choice)}>
-                <option value="0">Migliori</option>
-                <option value="1">Crescente</option>
-                <option value="2">Decrescente</option>
-                <option value="3">A-Z</option>
-                <option value="4">Z-A</option>
-              </select>
+
+              <Select 
+                options={shopOptions}
+                onChange={userOrderChoiceHandler}
+                styles={styles}
+                isClearable={false}
+                isSearchable={false}
+                defaultValue={shopOptions[0]}/>
             </div>
             <div className="product-content grid1">
               <ShopCart addToCart={addToCart} 
