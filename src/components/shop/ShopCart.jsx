@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom';
 import uuid from 'react-uuid'
 
 const ShopCart = ({ addToCart, shopItems}) => {
@@ -17,12 +18,16 @@ const ShopCart = ({ addToCart, shopItems}) => {
                 <div className="box" key={index}>
                     <div className="product mtop">
                         <div className="img">
-                            <span className="discount">{shopItems.discount}% di sconto</span>
-                            <img src={shopItems.cover} alt="" />
-                            <div className="product-like">
-                                <label>0</label> <br />
-                                <i className="far fa-heart" onClick={increment}></i>
-                            </div>
+                            <Link to={{
+                                pathname: `/product/${shopItems.id}`,
+                            }}>
+                                <span className="discount">{shopItems.discount}% di sconto</span>
+                                <img src={shopItems.cover} alt="" />
+                                <div className="product-like">
+                                    <label>0</label> <br />
+                                    <i className="far fa-heart" onClick={increment}></i>
+                                </div>
+                            </Link>
                         </div>
                         <div className="product-details">
                             <h3>{shopItems.name}</h3>

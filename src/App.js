@@ -9,9 +9,10 @@ import Shop from './components/shop/Shop';
 import Footer from './common/footer/Footer';
 import Contact from './components/contact/Contact';
 import Repair from './components/repair/Repair';
-import Products from './components/products/Products';
 import Assistance from './components/assistance/Assistance';
 import DataRescue from './components/dataRescue/DataRescue';
+import OurProducts from './components/ourProducts/OurProducts';
+import Product from './components/product/Product';
 
 function App() {
 
@@ -28,6 +29,17 @@ function App() {
       (item.id === product.id? { ...productExit, qty: productExit.qty +1 } : item)))
     }else{
       setCartItem([...cartItem,{...product, qty : 1 }])
+    }
+  }
+
+  const addToCartProduct = (product, qty) => {
+    const productExit = cartItem.find((item) => item.id === product.id);
+
+    if(productExit){
+      setCartItem(cartItem.map((item) => 
+      (item.id === product.id? { ...productExit, qty: productExit.qty + qty } : item)))
+    }else{
+      setCartItem([...cartItem,{...product, qty : qty }])
     }
   }
 
@@ -63,12 +75,14 @@ function App() {
             </Route>      
             <Route exact path="/riparazioni" element={<Repair/>} >    
             </Route>
-            <Route exact path="/prodotti" element={<Products/>} >    
+            <Route exact path="/inostriprodotti" element={<OurProducts/>} >    
             </Route>  
             <Route exact path="/assistenza" element={<Assistance/>} >    
             </Route>   
             <Route exact path="/recupero" element={<DataRescue/>} >    
             </Route>        
+            <Route exact path="/product/:id" element={<Product addToCartProduct={addToCartProduct}/>} >    
+            </Route>  
         </Routes>
         <Footer />
       </Router>

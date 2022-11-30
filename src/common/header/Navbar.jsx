@@ -39,7 +39,7 @@ const Navbar = () => {
                 <Link to='/riparazioni'>riparazioni</Link>
               </li>
               <li>
-                <Link to='/prodotti'>i nostri prodotti</Link>
+                <Link to='/inostriprodotti'>i nostri prodotti</Link>
               </li>
               <li>
                 <Link to='/assistenza'>assistenza remota</Link>
