@@ -13,6 +13,8 @@ import Assistance from './components/assistance/Assistance';
 import DataRescue from './components/dataRescue/DataRescue';
 import OurProducts from './components/ourProducts/OurProducts';
 import Product from './components/product/Product';
+import Login from './components/login/Login';
+import Register from './components/register/Register';
 
 function App() {
 
@@ -83,6 +85,10 @@ function App() {
             </Route>        
             <Route exact path="/product/:id" element={<Product addToCartProduct={addToCartProduct}/>} >    
             </Route>  
+            <Route exact path="/login" element={<Login />} >    
+            </Route>
+            <Route exact path="/register" element={<Register />} >    
+            </Route>   
         </Routes>
         <Footer />
       </Router>

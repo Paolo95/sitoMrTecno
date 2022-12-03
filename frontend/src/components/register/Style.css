@@ -1,0 +1,196 @@
+.register .register-div{
+    display: flex;
+    flex-direction: column;
+    margin: 30px auto 30px auto;
+    width: 400px;
+    box-shadow: rgb(43 52 69 / 10%) 0 4px 16px;
+    border-radius: 5px;
+}
+
+.register .register-div h1{
+    text-align: center;
+    padding: 20px 0 20px 0;
+    border-bottom: 1px solid silver;
+}
+
+.register .register-div form{
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+.register .register-div form .txt_field{
+    position: relative;
+    border-bottom: 2px solid #adadad;
+    margin: 30px 0;
+}
+
+.register .register-div form .txt_field input{
+    width: 100%;
+    padding: 0 5px;
+    height: 40px;
+    font-size: 16px;
+}
+
+.register .register-div form .txt_field label{
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    color: #adadad;
+    transform: translateY(-50%);
+    font-size: 16px;
+    pointer-events: none;
+    transition: 0.5s;
+}
+
+.register .register-div form .txt_field .hide{
+   display: none;
+}
+
+.register .register-div form .txt_field .valid{
+    position: relative;
+    top: 50%;
+    left: 5px;
+    color: green;
+    transform: translateY(-50%);
+    font-size: 16px;
+    pointer-events: none;
+    transition: 0.5s;
+}
+
+.register .register-div form .txt_field .invalid{
+    position: relative;
+    top: 50%;
+    left: 5px;
+    color: red;
+    transform: translateY(-50%);
+    font-size: 16px;
+    pointer-events: none;
+    transition: 0.5s;
+}
+
+.register .register-div form .offscreen{
+    display: none;
+}
+
+.register .register-div form .instructions{
+    display: flex;
+    background-color: #0f3460;
+    font-size: 12px;
+    border-radius: 5px;
+    color: #e9f4fb;
+    padding: 10px 80px 10px 10px;
+    margin-bottom: 20px;
+}
+
+.register .register-div form .instructions i{
+   padding-right: 20px;
+}
+
+
+.register .register-div form .txt_field span::before{
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: #2691d9;
+    transition: 0.5s;
+}
+
+.register .register-div form .txt_field input:focus ~ label,
+.register .register-div form .txt_field input:valid ~ label {
+    top: -5px;
+    color: #2691d9;
+    font-size: 12px;
+}
+
+.register .register-div form .txt_field input:focus ~ span::before,
+.register .register-div form .txt_field input:valid ~ span::before {
+    width: 100%;
+}
+
+.register .register-div button{
+    width: 100%;
+    height: 50px;
+    border: 1px solid;
+    margin-bottom: 20px;
+    background: #2691d9;
+    border-radius: 25px;
+    font-size: 18px;
+    color: #e9f4fb;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+}
+
+.register .register-div button:hover{
+    border-color: #2691d9;
+    transition: 0.5s;
+}
+
+.register .register-div button:disabled,
+.register .register-div button:disabled:hover,
+.register .register-div button[disabled]{
+  background-color: #cccccc;
+  border-color: black;
+  color: #666666;
+}
+
+.register .register-div .already-login{
+    font-size: 15px;
+    color: #666666;
+    text-align: center;
+    padding: 0 40px;
+    margin-bottom: 20px;
+}
+
+.register .register-div p .login-line a{
+    padding-left: 5px;
+    color: #2691d9;
+}
+
+.register .register-div p .login-line a:hover{
+    text-decoration: underline;
+}
+
+.register .register-div .success-p{
+    text-align: center;
+    margin: 20px 0 20px 0;
+}
+
+.register .register-div .success-login-btn{
+    width: 60%;
+    height: 50px;
+    border: 1px solid;
+    margin-top: 20px;
+    background: #2691d9;
+    border-radius: 25px;
+    font-size: 18px;
+    color: #e9f4fb;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+}
+
+.register .register-div .success-login-btn:hover{
+    border-color: #2691d9;
+    transition: 0.5s;
+}
+
+@media screen and (max-width: 428px) and (max-height: 926px){
+    
+    .register .register-div{
+        margin: 30px auto 30px auto;
+        width: 100%;
+        box-shadow: rgb(43 52 69 / 10%) 0 4px 16px;
+        height: 100%;
+        flex-direction: column;
+    }
+
+    .register .register-div .success-p{
+        text-align: center;
+        margin: 20px 10px 20px 10px;
+    }
+
+}
