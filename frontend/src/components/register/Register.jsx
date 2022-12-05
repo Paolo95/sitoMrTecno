@@ -3,8 +3,11 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import './Style.css'
 import { Link } from 'react-router-dom'
+import axios from '../../api/axios'
 
 const Register = () => {
+
+    const REGISTER_URL = '/api/user/register';
 
     const userRef = useRef();
     const errRef = useRef();
@@ -88,20 +91,51 @@ const Register = () => {
 
         const LASTNAME_REGEX = new RegExp(/^([a-zA-Z]+[,.]?[ ]?|[a-z]+['-]?)+$/);
         const NAME_REGEX = new RegExp(/^([a-zA-Z]+[,.]?[ ]?|[a-z]+['-]?)+$/);
+        const EMAIL_REGEX = new RegExp(/^[a-z0-9][-a-z0-9._]+@([-a-z0-9]+\.)+[a-z]{2,5}$/);
         const USER_REGEX = new RegExp('^[a-zA-Z0-9._-]{4,24}$');
         const PWD_REGEX = new RegExp('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$&*]).{8,24}$');
 
         const v1 = LASTNAME_REGEX.test(lastName);
         const v2 = NAME_REGEX.test(name);
-        const v3 = USER_REGEX.test(user);
-        const v4 = PWD_REGEX.test(pwd);
+        const v3 = EMAIL_REGEX.test(email);
+        const v4 = USER_REGEX.test(user);
+        const v5 = PWD_REGEX.test(pwd);
 
-        if (!v1 || !v2 || !v3 || !v4){
+        if (!v1 || !v2 || !v3 || !v4 || !v5){
             setErrMsg("Registrazione non valida");
             return;
         }
 
-        setSuccess(true);
+        try {
+            const response = await axios.post(REGISTER_URL,
+                { 
+                    lastName: lastName,
+                    name: name,
+                    email: email,
+                    username: user, 
+                    password: pwd 
+                },
+                {
+                    headers: { 'Content-Type': 'application/json'},
+                    withCredentials: true
+                }
+            );
+            console.log(response.data);
+            console.log(response.accessToken);
+            console.log(JSON.stringify(response))
+            setSuccess(true);
+
+        } catch (err) {
+            if (!err?.response) {
+                setErrMsg('No server response');
+            } else if (err.response?.status === 409){
+                setErrMsg(err.response?.status);
+                console.log(err.response.data)
+            } else {
+                setErrMsg('Registation failed')
+            }
+            errRef.current.focus();
+        }
     }
 
   return (
