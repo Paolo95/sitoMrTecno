@@ -42,6 +42,8 @@ const Register = () => {
     
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
+
+    const [response, setResponse] = useState(''); 
     
     useEffect(() => {
         userRef.current.focus();
@@ -109,30 +111,29 @@ const Register = () => {
         try {
             const response = await axios.post(REGISTER_URL,
                 { 
-                    lastName: lastName,
+                    lastname: lastName,
                     name: name,
                     email: email,
                     username: user, 
-                    password: pwd 
+                    password: pwd,
+                    role: 'customer'
                 },
                 {
                     headers: { 'Content-Type': 'application/json'},
                     withCredentials: true
                 }
             );
-            console.log(response.data);
-            console.log(response.accessToken);
-            console.log(JSON.stringify(response))
+
             setSuccess(true);
+            setResponse(response);
 
         } catch (err) {
             if (!err?.response) {
-                setErrMsg('No server response');
+                setErrMsg('Server non attivo');
             } else if (err.response?.status === 409){
-                setErrMsg(err.response?.status);
-                console.log(err.response.data)
+                setErrMsg(err.response.data);
             } else {
-                setErrMsg('Registation failed')
+                setErrMsg('Registatione fallita!')
             }
             errRef.current.focus();
         }
@@ -148,14 +149,7 @@ const Register = () => {
                     <section>
                         <h1>Registrato con successo!</h1>
                         <p className='success-p'>
-                            La registrazione è avvenuta con successo! <br/>
-                            Effettua il tuo primo ordine!
-                            <span className='success-login-link'>
-                                <Link to='/login'>
-                                    <button className='success-login-btn'>Login</button>
-                                </Link>
-                            </span>
-                            
+                            {response.data}<br/>                            
                         </p>
                     </section>
                 ) : (

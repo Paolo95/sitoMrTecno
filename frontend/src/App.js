@@ -15,6 +15,7 @@ import OurProducts from './components/ourProducts/OurProducts';
 import Product from './components/product/Product';
 import Login from './components/login/Login';
 import Register from './components/register/Register';
+import LogSuccess from './components/logsuccess/LogSuccess';
 
 function App() {
 
@@ -88,7 +89,9 @@ function App() {
             <Route exact path="/login" element={<Login />} >    
             </Route>
             <Route exact path="/register" element={<Register />} >    
-            </Route>   
+            </Route>
+            <Route exact path="/logsuccess" element={<LogSuccess />} >    
+            </Route>     
         </Routes>
         <Footer />
       </Router>
