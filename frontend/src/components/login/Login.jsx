@@ -52,11 +52,11 @@ const Login = () => {
 
     } catch (err) {
         if(!err?.response){
-            setErrMsg('No server response');
+            setErrMsg('server non attivo!');
         }else if(err.response?.status === 400){
-          setErrMsg('Username o password mancanti!');
+          setErrMsg(err.response?.data);
         }else if(err.response?.status === 401){
-          setErrMsg('Username o password errati, riprova');
+          setErrMsg(err.response?.data);
         }else{
           setErrMsg('Login fallito!');
         }
