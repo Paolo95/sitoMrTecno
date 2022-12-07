@@ -6,6 +6,17 @@
     border-radius: 5px;
 }
 
+.login .login-div .offscreen{
+    display: none;
+}
+
+.login .login-div .errMsg{
+    display: flex;
+    background-color: lightcoral;
+    text-align: center;
+    justify-content: center;
+}
+
 .login .login-div h1{
     text-align: center;
     padding: 15px 0 20px 0;
