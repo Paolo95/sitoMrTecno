@@ -17,6 +17,7 @@ import Login from './components/login/Login';
 import Register from './components/register/Register';
 import RegSuccess from './components/regsuccess/RegSuccess';
 import RequireAuth from './components/requireAuth/RequireAuth';
+import Unauthorized from './components/unauthorized/Unauthorized';
 
 function App() {
 
@@ -92,6 +93,8 @@ function App() {
             <Route exact path="/register" element={<Register />} >    
             </Route>
             <Route exact path="/regsuccess" element={<RegSuccess />} >    
+            </Route> 
+            <Route exact path="/unauthorized" element={<Unauthorized />} >    
             </Route> 
 
             <Route element={<RequireAuth allowedRole={'admin'}/>}>
