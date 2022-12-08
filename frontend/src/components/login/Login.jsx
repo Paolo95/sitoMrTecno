@@ -1,14 +1,17 @@
-import React , {useRef, useContext, useState, useEffect} from 'react'
+import React , {useRef, useState, useEffect} from 'react'
 import './Style.css'
-import { Link } from 'react-router-dom'
-import AuthContext from '../../context/AuthProvider'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import axios from '../../api/axios'
+import useAuth from '../../hooks/useAuth'
 
 const LOGIN_URL = '/api/user/auth';
 
 const Login = () => {
 
-  const { setAuth } = useContext(AuthContext);
+  const { setAuth } = useAuth();
+
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const userRef = useRef();
   const errRef = useRef();
@@ -48,7 +51,14 @@ const Login = () => {
       setUser('');
       setPwd(''); 
 
-      window.location = "/dashboard";
+      if (role === 'admin'){
+        const from = location.state?.from?.pathname || "/adminDashboard";
+        navigate(from, { replace: true });
+      }else{
+        const from = location.state?.from?.pathname || "/userDashboard";
+        navigate(from, { replace: true });
+      }
+      
 
     } catch (err) {
         if(!err?.response){

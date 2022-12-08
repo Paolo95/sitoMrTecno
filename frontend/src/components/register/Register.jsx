@@ -129,7 +129,7 @@ const Register = () => {
 
         } catch (err) {
             if (!err?.response) {
-                setErrMsg('Server non attivo');
+                setErrMsg(err.response.data);
             } else if (err.response?.status === 409){
                 setErrMsg(err.response.data);
             } else {
@@ -147,7 +147,7 @@ const Register = () => {
                 {
                 success ? (
                     <section>
-                        <h1>Registrato con successo!</h1>
+                        <h1>Conferma la tua email!</h1>
                         <p className='success-p'>
                             {response.data}<br/>                            
                         </p>

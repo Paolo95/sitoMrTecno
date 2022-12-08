@@ -15,7 +15,8 @@ import OurProducts from './components/ourProducts/OurProducts';
 import Product from './components/product/Product';
 import Login from './components/login/Login';
 import Register from './components/register/Register';
-import LogSuccess from './components/logsuccess/LogSuccess';
+import RegSuccess from './components/regsuccess/RegSuccess';
+import RequireAuth from './components/requireAuth/RequireAuth';
 
 function App() {
 
@@ -90,8 +91,18 @@ function App() {
             </Route>
             <Route exact path="/register" element={<Register />} >    
             </Route>
-            <Route exact path="/logsuccess" element={<LogSuccess />} >    
-            </Route>     
+            <Route exact path="/regsuccess" element={<RegSuccess />} >    
+            </Route> 
+
+            <Route element={<RequireAuth allowedRole={'admin'}/>}>
+              <Route exact path="/adminDashboard" element={<RegSuccess />} >    
+              </Route>
+            </Route>
+            <Route element={<RequireAuth allowedRole={'customer'}/>}>
+              <Route exact path="/userDashboard" element={<RegSuccess />} >    
+              </Route>
+            </Route>
+                  
         </Routes>
         <Footer />
       </Router>

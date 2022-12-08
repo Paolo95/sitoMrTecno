@@ -2,24 +2,24 @@ import React from 'react'
 import './Style.css'
 import { Link } from 'react-router-dom'
 
-const LogSuccess = () => {    
+const RegSuccess = () => {    
     
       return (
-        <section className='logSuccess'>
+        <section className='regSuccess'>
         <div className='container'>
-            <div className="logSuccess-div">                
+            <div className="regSuccess-div">                
                 <section>
                     <h1>Registrato con successo!</h1>
                     <div>
                         <i className="fas fa-check-circle"></i> 
                     </div>
                     
-                    <p className='logSuccess-p'>
+                    <p className='regSuccess-p'>
                         Il tuo account è stato creato correttamente!<br/>
                         Effettua il primo ordine!<br/>                    
-                        <span className='logSuccess-login-link'>
+                        <span className='regSuccess-login-link'>
                             <Link to='/login'>
-                                <button className='logSuccess-login-btn'>Login</button>
+                                <button className='regSuccess-login-btn'>Login</button>
                             </Link>
                         </span>
                         
@@ -33,4 +33,4 @@ const LogSuccess = () => {
   )
 }
 
-export default LogSuccess
+export default RegSuccess
