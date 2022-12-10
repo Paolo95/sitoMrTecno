@@ -18,6 +18,7 @@ import Register from './components/register/Register';
 import RegSuccess from './components/regsuccess/RegSuccess';
 import RequireAuth from './components/requireAuth/RequireAuth';
 import Unauthorized from './components/unauthorized/Unauthorized';
+import AdminDashboard from './components/adminDashboard/AdminDashboard';
 
 function App() {
 
@@ -98,11 +99,11 @@ function App() {
             </Route> 
 
             <Route element={<RequireAuth allowedRole={'admin'}/>}>
-              <Route exact path="/adminDashboard" element={<RegSuccess />} >    
+              <Route exact path="/adminDashboard" element={<AdminDashboard />} >    
               </Route>
             </Route>
             <Route element={<RequireAuth allowedRole={'customer'}/>}>
-              <Route exact path="/userDashboard" element={<RegSuccess />} >    
+              <Route exact path="/userDashboard" element={<AdminDashboard />} >    
               </Route>
             </Route>
                   

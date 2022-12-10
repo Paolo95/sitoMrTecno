@@ -46,7 +46,7 @@ const Login = () => {
       
       const accessToken = response?.data?.accessToken;
       const role = response?.data.role;
-
+      
       setAuth({user, pwd, role, accessToken});
       setUser('');
       setPwd(''); 
@@ -62,7 +62,7 @@ const Login = () => {
 
     } catch (err) {
         if(!err?.response){
-            setErrMsg('server non attivo!');
+            setErrMsg('Server non attivo!');
         }else if(err.response?.status === 400){
           setErrMsg(err.response?.data);
         }else if(err.response?.status === 401){
