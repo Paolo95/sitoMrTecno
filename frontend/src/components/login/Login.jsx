@@ -3,6 +3,7 @@ import './Style.css'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import axios from '../../api/axios'
 import useAuth from '../../hooks/useAuth'
+import jwt_decode from 'jwt-decode';
 
 const LOGIN_URL = '/api/user/auth';
 
@@ -45,9 +46,11 @@ const Login = () => {
       );
       
       const accessToken = response?.data?.accessToken;
-      const role = response?.data.role;
-      
-      setAuth({user, pwd, role, accessToken});
+
+      const decoded = jwt_decode(accessToken);
+      const role = decoded.UserInfo.role; 
+        
+      setAuth({user, role, accessToken});
       setUser('');
       setPwd(''); 
 

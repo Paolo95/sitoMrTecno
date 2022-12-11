@@ -48,7 +48,7 @@ const AdminDashboard = () => {
       {
         <>
           <button onClick={signOut}>Log out</button>
-          <span>users</span>
+          <span>{users}</span>
         </>
     
       }
