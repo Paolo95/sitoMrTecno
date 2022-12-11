@@ -19,6 +19,8 @@ import RegSuccess from './components/regsuccess/RegSuccess';
 import RequireAuth from './components/requireAuth/RequireAuth';
 import Unauthorized from './components/unauthorized/Unauthorized';
 import AdminDashboard from './components/adminDashboard/AdminDashboard';
+import PersistLogin from './components/persistLogin/PersistLogin';
+import LoginRequireAuth from './components/requireAuth/LoginRequireAuth';
 
 function App() {
 
@@ -89,8 +91,7 @@ function App() {
             </Route>        
             <Route exact path="/product/:id" element={<Product addToCartProduct={addToCartProduct}/>} >    
             </Route>  
-            <Route exact path="/login" element={<Login />} >    
-            </Route>
+            
             <Route exact path="/register" element={<Register />} >    
             </Route>
             <Route exact path="/regsuccess" element={<RegSuccess />} >    
@@ -98,6 +99,13 @@ function App() {
             <Route exact path="/unauthorized" element={<Unauthorized />} >    
             </Route> 
 
+        
+            <Route element={<LoginRequireAuth />}>
+              <Route exact path="/login" element={<Login />} >    
+              </Route>
+            </Route>
+                   
+          <Route element={<PersistLogin />}>          
             <Route element={<RequireAuth allowedRole={'admin'}/>}>
               <Route exact path="/adminDashboard" element={<AdminDashboard />} >    
               </Route>
@@ -106,7 +114,7 @@ function App() {
               <Route exact path="/userDashboard" element={<AdminDashboard />} >    
               </Route>
             </Route>
-                  
+          </Route>                  
         </Routes>
         <Footer />
       </Router>

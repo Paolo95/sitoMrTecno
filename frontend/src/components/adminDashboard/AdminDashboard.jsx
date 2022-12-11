@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useNavigate, useLocation } from 'react-router-dom';
+import useLogout from "../../hooks/useLogout";
 
 const AdminDashboard = () => {
   
@@ -8,6 +9,12 @@ const AdminDashboard = () => {
   const navigate = useNavigate();
   const axiosPrivate = useAxiosPrivate();
   const location = useLocation();
+  const logout = useLogout();
+
+  const signOut = async () => {
+    await logout();
+    navigate('/login');
+  }
 
   useEffect(() => {
     //const controller = new AbortController();
@@ -19,7 +26,6 @@ const AdminDashboard = () => {
             const response = await axiosPrivate.get('/api/user/getUser', {
                 //signal: controller.signal
             });
-            console.log(response.data)
             setUsers(response.data);
 
         } catch (err) {
@@ -31,8 +37,8 @@ const AdminDashboard = () => {
       getUsers();
 
       return () => {
-          //isMounted = false;
-          //controller.abort();
+        //isMounted = false;
+        // controller.abort();
       }    
   })
 
@@ -40,7 +46,11 @@ const AdminDashboard = () => {
   return (
     <div>
       {
-        users
+        <>
+          <button onClick={signOut}>Log out</button>
+          <span>users</span>
+        </>
+    
       }
     </div>
   )
