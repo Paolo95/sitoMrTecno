@@ -1,4 +1,4 @@
-.regSuccess .regSuccess-div{
+.passRecSuccess .passRecSuccess-div{
     display: flex;
     flex-direction: column;
     margin: 30px auto 30px auto;
@@ -7,26 +7,26 @@
     border-radius: 5px;
 }
 
-.regSuccess .regSuccess-div h1{
+.passRecSuccess .passRecSuccess-div h1{
     text-align: center;
     padding: 20px 0 20px 0;
     border-bottom: 1px solid silver;
 }
 
-.regSuccess .regSuccess-div i{
+.passRecSuccess .passRecSuccess-div i{
     color: green;
     font-size: 100px;
     margin-left: auto;
     margin-right: auto;
 }
 
-.regSuccess .regSuccess-div div{
+.passRecSuccess .passRecSuccess-div div{
     display: flex;
     padding: 4%;
 }
 
 
-.regSuccess .regSuccess-div button{
+.passRecSuccess .passRecSuccess-div button{
     width: 100%;
     height: 50px;
     border: 1px solid;
@@ -40,25 +40,25 @@
     outline: none;
 }
 
-.regSuccess .regSuccess-div button:hover{
+.passRecSuccess .passRecSuccess-div button:hover{
     border-color: #2691d9;
     transition: 0.5s;
 }
 
-.regSuccess .regSuccess-div button:disabled,
-.regSuccess .regSuccess-div button:disabled:hover,
-.regSuccess .regSuccess-div button[disabled]{
+.passRecSuccess .passRecSuccess-div button:disabled,
+.passRecSuccess .passRecSuccess-div button:disabled:hover,
+.passRecSuccess .passRecSuccess-div button[disabled]{
   background-color: #cccccc;
   border-color: black;
   color: #666666;
 }
 
-.regSuccess .regSuccess-div .regSuccess-p{
+.passRecSuccess .passRecSuccess-div .passRecSuccess-p{
     text-align: center;
     margin: 20px;
 }
 
-.regSuccess .regSuccess-div .regSuccess-login-btn{
+.passRecSuccess .passRecSuccess-div .passRecSuccess-login-btn{
     width: 60%;
     height: 50px;
     border: 1px solid;
@@ -72,14 +72,14 @@
     outline: none;
 }
 
-.regSuccess .regSuccess-div .regSuccess-login-btn:hover{
+.passRecSuccess .passRecSuccess-div .passRecSuccess-login-btn:hover{
     border-color: #2691d9;
     transition: 0.5s;
 }
 
 @media screen and (max-width: 428px) and (max-height: 926px){
     
-    .regSuccess .regSuccess-div{
+    .passRecSuccess .passRecSuccess-div{
         margin: 30px auto 30px auto;
         width: 100%;
         box-shadow: rgb(43 52 69 / 10%) 0 4px 16px;
@@ -87,7 +87,7 @@
         flex-direction: column;
     }
 
-    .regSuccess .regSuccess-div .regSuccess-p{
+    .passRecSuccess .passRecSuccess-div .passRecSuccess-p{
         text-align: center;
         margin: 20px 10px 20px 10px;
     }

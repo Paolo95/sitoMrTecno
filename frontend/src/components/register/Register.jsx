@@ -132,6 +132,8 @@ const Register = () => {
                 setErrMsg(err.response.data);
             } else if (err.response?.status === 409){
                 setErrMsg(err.response.data);
+            } else if (err.response?.status === 500){
+                setErrMsg(err.response.data);
             } else {
                 setErrMsg('Registatione fallita!')
             }

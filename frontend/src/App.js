@@ -15,12 +15,14 @@ import OurProducts from './components/ourProducts/OurProducts';
 import Product from './components/product/Product';
 import Login from './components/login/Login';
 import Register from './components/register/Register';
-import RegSuccess from './components/regsuccess/RegSuccess';
+import RegSuccess from './components/regSuccess/RegSuccess';
 import RequireAuth from './components/requireAuth/RequireAuth';
 import Unauthorized from './components/unauthorized/Unauthorized';
 import AdminDashboard from './components/adminDashboard/AdminDashboard';
 import PersistLogin from './components/persistLogin/PersistLogin';
 import LoginRequireAuth from './components/requireAuth/LoginRequireAuth';
+import PassRecovery from './components/passRecovery/PassRecovery';
+import PassRecSuccess from './components/passRecSuccess/PassRecSuccess';
 
 function App() {
 
@@ -91,13 +93,16 @@ function App() {
             </Route>        
             <Route exact path="/product/:id" element={<Product addToCartProduct={addToCartProduct}/>} >    
             </Route>  
-            
+            <Route exact path="/passRecovery" element={<PassRecovery />} >    
+            </Route>            
             <Route exact path="/register" element={<Register />} >    
             </Route>
-            <Route exact path="/regsuccess" element={<RegSuccess />} >    
+            <Route exact path="/regsuccess/:code" element={<RegSuccess />} >    
             </Route> 
             <Route exact path="/unauthorized" element={<Unauthorized />} >    
             </Route> 
+            <Route exact path="/pwdUpdSuccess/:code" element={<PassRecSuccess />} >
+            </Route>
 
         
             <Route element={<LoginRequireAuth />}>

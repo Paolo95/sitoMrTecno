@@ -1,0 +1,102 @@
+.regSuccess .regSuccess-div{
+    display: flex;
+    flex-direction: column;
+    margin: 30px auto 30px auto;
+    width: 400px;
+    box-shadow: rgb(43 52 69 / 10%) 0 4px 16px;
+    border-radius: 5px;
+}
+
+.regSuccess .regSuccess-div h1{
+    text-align: center;
+    padding: 20px 0 20px 0;
+    border-bottom: 1px solid silver;
+}
+
+.regSuccess .regSuccess-div i{
+    color: green;
+    font-size: 100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.regSuccess .regSuccess-div .regFailed i{
+    color: #e94560;
+    font-size: 100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.regSuccess .regSuccess-div div{
+    display: flex;
+    padding: 4%;
+}
+
+
+.regSuccess .regSuccess-div button{
+    width: 100%;
+    height: 50px;
+    border: 1px solid;
+    margin-bottom: 20px;
+    background: #2691d9;
+    border-radius: 25px;
+    font-size: 18px;
+    color: #e9f4fb;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+}
+
+.regSuccess .regSuccess-div button:hover{
+    border-color: #2691d9;
+    transition: 0.5s;
+}
+
+.regSuccess .regSuccess-div button:disabled,
+.regSuccess .regSuccess-div button:disabled:hover,
+.regSuccess .regSuccess-div button[disabled]{
+  background-color: #cccccc;
+  border-color: black;
+  color: #666666;
+}
+
+.regSuccess .regSuccess-div .regSuccess-p{
+    text-align: center;
+    margin: 20px;
+}
+
+.regSuccess .regSuccess-div .regSuccess-login-btn{
+    width: 60%;
+    height: 50px;
+    border: 1px solid;
+    margin-top: 20px;
+    background: #2691d9;
+    border-radius: 25px;
+    font-size: 18px;
+    color: #e9f4fb;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+}
+
+.regSuccess .regSuccess-div .regSuccess-login-btn:hover{
+    border-color: #2691d9;
+    transition: 0.5s;
+}
+
+@media screen and (max-width: 428px) and (max-height: 926px){
+    
+    .regSuccess .regSuccess-div{
+        margin: 30px auto 30px auto;
+        width: 100%;
+        box-shadow: rgb(43 52 69 / 10%) 0 4px 16px;
+        height: 100%;
+        flex-direction: column;
+    }
+
+    .regSuccess .regSuccess-div .regSuccess-p{
+        text-align: center;
+        margin: 20px 10px 20px 10px;
+    }
+
+}
