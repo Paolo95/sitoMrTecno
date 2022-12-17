@@ -3,7 +3,7 @@ import Header from './common/header/Header';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Pages from './pages/Pages';
 //import Data from './components/flashDeals/Data'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Cart from './common/cart/Cart';
 import Shop from './components/shop/Shop';
 import Footer from './common/footer/Footer';
@@ -23,15 +23,18 @@ import PersistLogin from './components/persistLogin/PersistLogin';
 import LoginRequireAuth from './components/requireAuth/LoginRequireAuth';
 import PassRecovery from './components/passRecovery/PassRecovery';
 import PassRecSuccess from './components/passRecSuccess/PassRecSuccess';
+import Checkout from './components/checkout/Checkout';
 
 function App() {
 
   //step 1: fetch data from database
   //const { productItems } = Data;
   
-  const [cartItem, setCartItem] = useState([]);
+  const cartFromLocalStorage = JSON.parse(localStorage.getItem('cartItem') || '[]');
+  const [cartItem, setCartItem] = useState(cartFromLocalStorage);
 
   const addToCart = (product) => {
+
     const productExit = cartItem.find((item) => item.id === product.id);
 
     if(productExit){
@@ -39,8 +42,15 @@ function App() {
       (item.id === product.id? { ...productExit, qty: productExit.qty +1 } : item)))
     }else{
       setCartItem([...cartItem,{...product, qty : 1 }])
-    }
+    }  
+
   }
+
+  useEffect (() => {
+
+    localStorage.setItem('cartItem', JSON.stringify(cartItem));
+    
+  }, [cartItem]);
 
   const addToCartProduct = (product, qty) => {
     const productExit = cartItem.find((item) => item.id === product.id);
@@ -117,6 +127,10 @@ function App() {
             </Route>
             <Route element={<RequireAuth allowedRole={'customer'}/>}>
               <Route exact path="/userDashboard" element={<AdminDashboard />} >    
+              </Route>
+            </Route>
+            <Route element={<RequireAuth allowedRole={'customer'}/>}>
+              <Route exact path="/checkout" element={<Checkout cartItem={cartItem}/>} >    
               </Route>
             </Route>
           </Route>                  

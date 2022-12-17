@@ -1,9 +1,10 @@
 import React from 'react'
 import './style.css'
+import { Link } from 'react-router-dom';
 
 const Cart = ({ cartItem, addToCart, decreaseQty, deleteCartProduct }) => {
 
-  const totalPrice = cartItem.reduce((price, item) => price + item.qty * item.price, 0);
+  const totalPrice = cartItem.reduce((price, item) => price + item.qty * item.price, 20);
 
   return (
     <>  
@@ -50,12 +51,21 @@ const Cart = ({ cartItem, addToCart, decreaseQty, deleteCartProduct }) => {
             <h2>Riassunto ordine</h2>
             <div className="shipping d_flex">
               <h4>Spedizione : </h4>            
-              <h3>€{totalPrice === 0 ? 0 : 20}.00</h3>
+              <h3>€{totalPrice === 20 ? 0 : 20}.00</h3>
             </div>   
             <div className="d_flex">
               <h4>Prezzo totale : </h4>            
-              <h3>€{totalPrice === 0 ? 0 : totalPrice + 20}.00</h3>
-            </div>          
+              <h3>€{totalPrice === 20 ? 0 : totalPrice}.00</h3>
+            </div> 
+            {
+              totalPrice === 20 ? null : (  
+              <>                
+                <Link to='/checkout'>
+                  <button className='btn-checkout'>Procedi al pagamento</button>      
+                </Link>
+              </>
+              )
+            }                 
           </div>
         </div>
       </section>

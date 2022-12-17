@@ -10,8 +10,7 @@ const LoginRequireAuth = () => {
         ? jwt_decode(auth.accessToken)
         : undefined
   
-    const role = decoded?.role || undefined
-
+    const role = decoded?.UserInfo.role || undefined
 
     return(
         role === 'admin'

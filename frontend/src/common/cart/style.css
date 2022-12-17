@@ -12,7 +12,7 @@
     width: 30%;
     margin-top: 30px;
     margin-left: 30px;
-    height: 150px;
+    height: 100%;
 }
 
 .cart-list{
@@ -107,6 +107,21 @@
     margin-bottom: 20px;
     border-bottom: 1px solid rgb(3 0 71 / 9%);
     padding-bottom: 10px;
+    text-align: center;
+}
+
+.cart-total .btn-checkout{
+    display: flex;
+    margin: 20px auto 0 auto;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    height: 40px;
+    background-color: #0f3460;
+    color: #f6f9fc;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: bold;
 }
 
 .no-items{
@@ -117,6 +132,10 @@
     text-align: center;
     justify-content: center;
     padding-top: 45px;
+}
+
+.paypal-button-container{
+    margin: 20px;
 }
 
 @media only screen and (max-width: 390px) {
