@@ -9,7 +9,7 @@ const ShopCart = ({ addToCart, shopItems}) => {
     const increment = () => {
         setCount(count + 1);
     }
-
+    
   return (
     <> 
         {   
@@ -30,7 +30,7 @@ const ShopCart = ({ addToCart, shopItems}) => {
                             </Link>
                         </div>
                         <div className="product-details">
-                            <h3>{shopItems.name}</h3>
+                            <h3>{shopItems.product_name}</h3>
                             <div className="rate">
                                 {Array.from({ length: shopItems.stars }, () => <i key={uuid()} className="fa fa-star"></i>)}
                             </div>

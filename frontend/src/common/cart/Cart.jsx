@@ -21,7 +21,7 @@ const Cart = ({ cartItem, addToCart, decreaseQty, deleteCartProduct }) => {
                     <img src={item.cover} alt="" />
                   </div>
                   <div className="cart-details">
-                    <h3>{item.name}</h3>
+                    <h3>{item.product_name}</h3>
                     <h4>Prezzo unitario: €{item.price}.00 
                             <br/>Quantità: {item.qty} <br/>
                             Prezzo Totale:

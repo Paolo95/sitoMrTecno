@@ -1,20 +1,23 @@
 import React from 'react'
 import ShopCart from './ShopCart'
 import RangeSlider from 'react-range-slider-input';
-import Sdata from './Sdata';
 import 'react-range-slider-input/dist/style.css';
 import Select from 'react-select';
+import axios from '../../api/axios'
 import "./Style.css";
+import { useEffect } from 'react';
 
 export const Shop = ({ addToCart }) => {
 
   /*Fare chiamata al db per questa sezione*/
+  const CATEGORY_URL = '/api/product/categories';
+  const BRANDS_URL = '/api/product/brands';
+  const FILTERED_ITEMS_URL = '/api/product/filteredItems';
 
-  const { shopItems } = Sdata;
-  const shopItems2 = JSON.parse(JSON.stringify(shopItems));
-  const uniqueBrands = shopItems.filter((elem, index) => shopItems.findIndex(obj => obj.brandName === elem.brandName) === index);
-  const uniqueCategories = shopItems.filter((elem, index) => shopItems.findIndex(obj => obj.category === elem.category) === index);
-  
+  const [uniqueCategories, setCategories] = React.useState([]);
+  const [uniqueBrands, setBrands] = React.useState([]);
+  const [shopItems, setShopItems] = React.useState([]);
+
   const [min, setMin] = React.useState(0);
   const [max, setMax] = React.useState(1000);
 
@@ -25,6 +28,11 @@ export const Shop = ({ addToCart }) => {
   const [brandCheckedState, setBrandCheckedState] = React.useState(
     new Array(uniqueBrands.length).fill(false)
   );
+
+  useEffect(() =>{
+
+    setBrandCheckedState(new Array(uniqueBrands.length).fill(false))
+  },[uniqueBrands])
 
   const [brandCheckedList, setBrandCheckedList] = React.useState([]);
   const [categoryChecked, setCategoryChecked] = React.useState('Smartphone');
@@ -70,6 +78,7 @@ export const Shop = ({ addToCart }) => {
     }
 
     setNumProdListed(6);
+
     const updatedBrandCheckedState = brandCheckedState.map((item, index) =>
       index === position ? !item : item
     );
@@ -84,8 +93,7 @@ export const Shop = ({ addToCart }) => {
           return '';
         }
       }
-    );
-    
+    )
 
     setBrandCheckedList(brandCheckedList);
   }
@@ -136,6 +144,116 @@ export const Shop = ({ addToCart }) => {
     })
   }
 
+  const getCategories = async () => {
+
+    try {
+     
+      const response = await axios.get(CATEGORY_URL, 
+        { 
+          
+          
+        },
+        {
+            headers: { 'Content-Type': 'application/json'},
+            withCredentials: true
+        }
+        );
+
+        setCategories(response.data);
+           
+
+    } catch (err) {
+      if(!err?.response){
+        console.error('Server non attivo!');
+      }else if(err.response?.status === 500){
+        console.error(err.response?.data);
+      }else{
+        console.error('Recupero categorie fallito!');
+      }
+    }    
+
+  }
+
+  if (uniqueCategories.length === 0){
+    getCategories();
+  }
+
+  const getBrands = async () => {
+
+    try {
+     
+      const response = await axios.post(BRANDS_URL, 
+        { 
+          categoryChecked: categoryChecked
+        },
+        {
+            headers: { 'Content-Type': 'application/json'},
+            withCredentials: true
+        }
+        );
+
+        setBrands(response.data);
+           
+
+    } catch (err) {
+      if(!err?.response){
+        console.error('Server non attivo!');
+      }else if(err.response?.status === 500){
+        console.error(err.response?.data);
+      }else{
+        console.error('Recupero brand fallito!');
+      }
+    }    
+
+  }
+
+  useEffect(() => {
+
+    getBrands();
+
+    // eslint-disable-next-line
+  }, [categoryChecked]);
+
+
+  const getFilteredItems = async () => {
+
+    try {
+
+      const response = await axios.post(FILTERED_ITEMS_URL, 
+        { 
+          categoryChecked: categoryChecked,
+          brandCheckedList: brandCheckedList,
+          min: min,
+          max: max,
+          orderChoice: orderChoice,
+        },
+        {
+            headers: { 'Content-Type': 'application/json'},
+            withCredentials: true
+        }
+        );
+
+        setShopItems(response.data);           
+
+    } catch (err) {
+      if(!err?.response){
+        console.error('Server non attivo!');
+      }else if(err.response?.status === 500){
+        console.error(err.response?.data);
+      }else{
+        console.error('Recupero elementi fallito!');
+      }
+    }    
+
+  }
+
+  useEffect(() => {
+
+    getFilteredItems();
+
+    // eslint-disable-next-line
+  }, [categoryChecked, brandCheckedList, min, max, orderChoice]);
+
   return (
     <>
       <section className="shop">
@@ -161,10 +279,10 @@ export const Shop = ({ addToCart }) => {
                                   <label>                                  
                                     <input 
                                       type="radio" 
-                                      id={`custom-radio-${index}`}
-                                      name={value}
-                                      value={value.category}
-                                      defaultChecked={index === 0}
+                                      id={`custom-radio-${index || ''}`}
+                                      name={value || ''}
+                                      value={value.category || ''}
+                                      defaultChecked={index === 0 || ''}
                                       onChange={handleOnCategoryRadioChange}
                                       />
                                     <span>{value.category}</span>
@@ -185,7 +303,7 @@ export const Shop = ({ addToCart }) => {
               }</button>            
                                 
                 {
-                      uniqueBrands.filter(item => item.category === categoryChecked).map((value, index) => {
+                      uniqueBrands.map((value, index) => {
                           return (
                             <div className="dropdown" key={index}>
                               {brandOpen ? (
@@ -194,13 +312,13 @@ export const Shop = ({ addToCart }) => {
                                   <label>                                  
                                     <input 
                                       type="checkbox" 
-                                      id={`custom-checkbox-${index}`}
-                                      name={value}
-                                      value={value}
-                                      checked={brandCheckedState[index]}
-                                      onChange={() => handleOnBrandCheckBoxChange(index)}
+                                      id={`custom-checkbox-${index || ''}`}
+                                      name={value || ''}
+                                      value={value || ''}
+                                      checked={brandCheckedState[index] || ''}
+                                      onChange={() => handleOnBrandCheckBoxChange(index) || ''}
                                       />
-                                    <span>{value.brandName}</span>
+                                    <span>{value.brandName || ''}</span>
                                   </label>
                                   </div>
                                 </ul>
@@ -264,12 +382,7 @@ export const Shop = ({ addToCart }) => {
             </div>
             <div className="product-content grid1">
               <ShopCart addToCart={addToCart} 
-                        shopItems={shopItems2.sort(orderChoice === 0 ? (a,b) => b.stars-a.stars : (a,b) => b.price-a.price )
-                                             .filter(item => item.category === categoryChecked)
-                                             .filter(item => item.price >= min)
-                                             .filter(item => item.price<= max)
-                                             .filter(brandCheckedList.filter(n => n).length !== 0 ? (item => brandCheckedList.filter(n => n).includes(item.brandName)) : item => item)
-                                             .slice(0, numProdListed)}
+                        shopItems={shopItems.slice(0, numProdListed)}
               />
             </div>
             <div className="container f_flex">
