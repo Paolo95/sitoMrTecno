@@ -58,7 +58,7 @@
     margin: 20px;
 }
 
-.unauthorized .unauthorized-div .unauthorized-login-btn{
+.unauthorized .unauthorized-div .unauthorized-goBack-btn{
     width: 60%;
     height: 50px;
     border: 1px solid;
@@ -72,7 +72,7 @@
     outline: none;
 }
 
-.unauthorized .unauthorized-div .unauthorized-login-btn:hover{
+.unauthorized .unauthorized-div .unauthorized-goBack-btn:hover{
     border-color: #2691d9;
     transition: 0.5s;
 }

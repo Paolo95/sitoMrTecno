@@ -20,7 +20,7 @@ const Unauthorized = () => {
                     <p className='unauthorized-p'>
                         Non hai l'autorizzazione per accedere a questa pagina!<br/>                   
                         <span className='unauthorized-login-link'>                            
-                            <button className='unauthorized-login-btn' onClick={goBack}>Torna indietro</button>                            
+                            <button className='unauthorized-goBack-btn' onClick={goBack}>Torna indietro</button>                            
                         </span>
                         
                     </p>

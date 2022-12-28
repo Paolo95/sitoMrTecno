@@ -33,6 +33,10 @@ function App() {
   const cartFromLocalStorage = JSON.parse(localStorage.getItem('cartItem') || '[]');
   const [cartItem, setCartItem] = useState(cartFromLocalStorage);
 
+  const cleanCart = () => {
+    setCartItem([])
+  }
+
   const addToCart = (product) => {
 
     const productExit = cartItem.find((item) => item.id === product.id);
@@ -130,7 +134,7 @@ function App() {
               </Route>
             </Route>
             <Route element={<RequireAuth allowedRole={'customer'}/>}>
-              <Route exact path="/checkout" element={<Checkout cartItem={cartItem}/>} >    
+              <Route exact path="/checkout" element={<Checkout cleanCart={cleanCart} cartItem={cartItem}/>} >    
               </Route>
             </Route>
           </Route>                  
