@@ -4,11 +4,13 @@ import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 import axios from '../../api/axios'
 import useAuth from "../../hooks/useAuth";
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom';
+
 
 const Checkout = ({ cleanCart, cartItem }) => {
 
     const navigate = useNavigate();
+    const location = useLocation();
     const goBack = () => navigate(-1);
     const totalPrice = cartItem.reduce((price, item) => price + item.qty * item.price, 20);
     const ORDER_URL = '/api/order/newOrder';
@@ -150,6 +152,29 @@ const Checkout = ({ cleanCart, cartItem }) => {
                             cleanCart();
                             navigate('/orderSuccess', { replace: true });
                         })
+                    }}
+
+                    onClick={async () => {
+
+                        const response = await axios.post(PRODUCT_URL, 
+                            { 
+                                cart: JSON.parse(localStorage.getItem('cartItem') || '[]'),
+                            
+                            },
+                            {
+                                headers: {
+                                    'Authorization': `Bearer ${auth?.accessToken}`
+                                },
+                                withCredentials: true
+                            }
+                        );
+
+                        if (!response.data) { 
+                            const from = location.state?.from?.pathname || "/cart";
+                            navigate(from, { replace: true }); 
+                            alert("Un prodotto non è più disponibile")
+                        }
+                        
                     }}
 
                 />

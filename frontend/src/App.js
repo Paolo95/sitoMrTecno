@@ -24,6 +24,7 @@ import LoginRequireAuth from './components/requireAuth/LoginRequireAuth';
 import PassRecovery from './components/passRecovery/PassRecovery';
 import PassRecSuccess from './components/passRecSuccess/PassRecSuccess';
 import Checkout from './components/checkout/Checkout';
+import OrderSuccess from './components/orderSuccess/OrderSuccess';
 
 function App() {
 
@@ -135,6 +136,10 @@ function App() {
             </Route>
             <Route element={<RequireAuth allowedRole={'customer'}/>}>
               <Route exact path="/checkout" element={<Checkout cleanCart={cleanCart} cartItem={cartItem}/>} >    
+              </Route>
+            </Route>
+            <Route element={<RequireAuth allowedRole={'customer'}/>}>
+              <Route exact path="/orderSuccess" element={<OrderSuccess />} >    
               </Route>
             </Route>
           </Route>                  
