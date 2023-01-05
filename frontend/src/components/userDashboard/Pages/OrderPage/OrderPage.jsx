@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
-import axios from '../../../api/axios'
-import useAuth from "../../../hooks/useAuth";
+import axios from '../../../../api/axios'
+import useAuth from "../../../../hooks/useAuth";
 import './orderPageStyle.css'
 import { useState } from 'react';
 import Moment from 'react-moment';

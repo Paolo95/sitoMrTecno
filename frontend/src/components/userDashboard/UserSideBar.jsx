@@ -1,17 +1,20 @@
 import React from 'react'
 import { NavLink, useNavigate } from 'react-router-dom';
 import useLogout from "../../hooks/useLogout";
-
 import "./userSideBarStyle.css"
+import useAuth from '../../hooks/useAuth';
+import jwt_decode from 'jwt-decode';
 
 const UserSideBar = () => {
 
+    const { auth } = useAuth();
+    const username = jwt_decode(auth?.accessToken);
     const navigate = useNavigate();
     const logout = useLogout();
 
     const signOut = async () => {
         await logout();
-        navigate('/login');
+        navigate('/');
     }
 
   return (
@@ -20,8 +23,7 @@ const UserSideBar = () => {
             <aside>
                 <div className="top">
                     <div className="userDashboardLogo">
-                        <img src="" alt="" />
-                        <h2>Dashboard utente</h2>
+                        <h2>{`Bentornato ${username.UserInfo.username}!`}</h2>
                     </div>
                     <div className="close" id="close-btn">
                         <i className="fas fa-times"></i>

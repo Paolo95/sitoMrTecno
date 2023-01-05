@@ -14,9 +14,9 @@ const LoginRequireAuth = () => {
 
     return(
         role === 'admin'
-            ? <Navigate to='/adminDashboard' state ={{ from: location }} replace />
+            ? <Navigate to='/adminDashboard/home' state ={{ from: location }} replace />
             : role === 'customer'
-                ? <Navigate to='/userDashboard' state ={{ from: location }} replace />
+                ? <Navigate to='/userDashboard/home' state ={{ from: location }} replace />
                 : <Outlet />
     );
 }

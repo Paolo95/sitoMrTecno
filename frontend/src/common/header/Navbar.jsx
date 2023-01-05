@@ -36,10 +36,10 @@ const Navbar = () => {
                 <Link to='/nuovo'>nuovo</Link>
               </li>
               <li>
-                <Link to='/adminDashboard'>riparazioni</Link>
+                <Link to='/adminDashboard/home'>riparazioni</Link>
               </li>
               <li>
-                <Link to='/userDashboard'>i nostri prodotti</Link>
+                <Link to='/userDashboard/home'>i nostri prodotti</Link>
               </li>
               <li>
                 <Link to='/assistenza'>assistenza remota</Link>

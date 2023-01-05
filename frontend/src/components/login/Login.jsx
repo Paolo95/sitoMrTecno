@@ -55,10 +55,10 @@ const Login = () => {
       setPwd(''); 
 
       if (role === 'admin'){
-        const from = location.state?.from?.pathname || "/adminDashboard";
+        const from = location.state?.from?.pathname || "/adminDashboard/home";
         navigate(from, { replace: true });
       }else{
-        const from = location.state?.from?.pathname || "/userDashboard";
+        const from = location.state?.from?.pathname || "/userDashboard/home";
         navigate(from, { replace: true });
       }
       

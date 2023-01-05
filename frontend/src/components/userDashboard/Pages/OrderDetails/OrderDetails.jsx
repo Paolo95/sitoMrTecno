@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
-import axios from '../../../api/axios';
-import useAuth from '../../../hooks/useAuth';
+import axios from '../../../../api/axios';
+import useAuth from '../../../../hooks/useAuth';
 import Moment from 'react-moment';
 import './orderDetailsStyle.css';
 
