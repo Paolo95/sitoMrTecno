@@ -25,6 +25,7 @@ import PassRecovery from './components/passRecovery/PassRecovery';
 import PassRecSuccess from './components/passRecSuccess/PassRecSuccess';
 import Checkout from './components/checkout/Checkout';
 import OrderSuccess from './components/orderSuccess/OrderSuccess';
+import UserDashboard from './components/userDashboard/UserDashboard';
 
 function App() {
 
@@ -119,11 +120,12 @@ function App() {
             <Route exact path="/pwdUpdSuccess/:code" element={<PassRecSuccess />} >
             </Route>
 
-        
+          <Route element={<PersistLogin />}>     
             <Route element={<LoginRequireAuth />}>
               <Route exact path="/login" element={<Login />} >    
               </Route>
             </Route>
+          </Route>   
                    
           <Route element={<PersistLogin />}>          
             <Route element={<RequireAuth allowedRole={'admin'}/>}>
@@ -131,7 +133,7 @@ function App() {
               </Route>
             </Route>
             <Route element={<RequireAuth allowedRole={'customer'}/>}>
-              <Route exact path="/userDashboard" element={<AdminDashboard />} >    
+              <Route exact path="/userDashboard/*" element={<UserDashboard />} >    
               </Route>
             </Route>
             <Route element={<RequireAuth allowedRole={'customer'}/>}>

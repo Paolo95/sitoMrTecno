@@ -14,17 +14,17 @@ const OrderSuccess = () => {
                 {
                 (parseInt(params.code) === 500) ? (
                    <section>
-                        <h1>Registrazione fallita!</h1>
+                        <h1>Ordine fallito!</h1>
                         <div className='regFailed'>
                             <i className="fas fa-times-circle"></i> 
                         </div>
 
                         <p className='orderSuccess-p'>
-                        La registrazione dell'account è fallita!<br/>
+                        La registrazione dell'ordine è fallita!<br/>
                         Riprova!<br/>                    
-                        <span className='orderSuccess-login-link'>
-                            <Link to='/register'>
-                                <button className='orderSuccess-login-btn'>Riprova</button>
+                        <span className='orderSuccess-goDashboard-link'>
+                            <Link to='/userDashboard'>
+                                <button className='orderSuccess-goDashboard-btn'>Riprova</button>
                             </Link>
                         </span>
                         

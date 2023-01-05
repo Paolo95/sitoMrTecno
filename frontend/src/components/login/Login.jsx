@@ -65,7 +65,7 @@ const Login = () => {
 
     } catch (err) {
         if(!err?.response){
-            setErrMsg('Server non attivo!');
+          setErrMsg('Server non attivo!');
         }else if(err.response?.status === 400){
           setErrMsg(err.response?.data);
         }else if(err.response?.status === 401){
