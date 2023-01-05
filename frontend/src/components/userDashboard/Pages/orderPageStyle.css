@@ -1,0 +1,62 @@
+.orderPage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.orderPage .table-container{
+    margin: 50px auto 0;
+}
+
+.orderPage .heading{
+    font-size: 40px;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.orderPage .table{
+    white-space: nowrap;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.orderPage .table thead{
+    background-color: lightblue;
+}
+
+.orderPage .table thead th{
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0.35px;
+    opacity: 1;
+    padding: 12px;
+    vertical-align: top;
+}
+
+.orderPage .table tbody tr td{
+    font-size: 15px;
+    letter-spacing: 0.35px;
+    font-weight: normal;
+    background-color: lightcyan;
+    padding: 8px;
+    text-align: center;
+}
+
+.orderPage .table tbody tr td button{
+    width: 100px;
+    text-decoration: none;
+    line-height: 35px;
+    display: inline-block;
+    font-weight: 800;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    cursor: pointer;
+    background-color: #0f3460;
+    border-radius: 5px;
+    font-size: 14px;
+    opacity: 1;
+    color: aliceblue;
+}
+
+

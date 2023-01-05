@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
 import axios from '../../../api/axios'
 import useAuth from "../../../hooks/useAuth";
-import './pageStyle.css'
+import './orderPageStyle.css'
 import { useState } from 'react';
 import Moment from 'react-moment';
+import { NavLink } from 'react-router-dom';
 
 const OrderPage = () => {
 
@@ -53,7 +54,7 @@ const OrderPage = () => {
   }, [])
   
  return (
-    <section className='dashboardPage'>
+    <section className='orderPage'>
         <div className='order-div'>
           <div className="table-container">
             <h1 className="heading">Riepilogo ordini</h1>
@@ -77,7 +78,11 @@ const OrderPage = () => {
                           <td><Moment format='DD/MM/YYYY'>{value['order.order_date']}</Moment></td>
                           <td>{value['order_total']}€</td>
                           <td>{value['order.order_status']}</td>
-                          <td><button>Prova</button></td>
+                          <td>
+                            <NavLink to={`/userDashboard/orderDetails/${value['order.id']}`}>                              
+                              <button>Dettaglio</button>                      
+                            </NavLink>
+                          </td>
                         </tr>
                       </>                     
                     );

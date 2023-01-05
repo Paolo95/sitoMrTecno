@@ -36,11 +36,6 @@ const UserSideBar = () => {
                         <h3>Ordini</h3>                       
                     </NavLink>
                     
-                    <a href="/userDashboard/messages">
-                        <i className="far fa-envelope"></i>
-                        <h3>Messaggi</h3>
-                        <span className="message-count">10</span>
-                    </a>
                     <a href="/userDashboard/settings">
                         <i className="fas fa-cog"></i>
                         <h3>Impostazioni</h3>
