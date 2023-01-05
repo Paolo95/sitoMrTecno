@@ -28,18 +28,18 @@ const UserSideBar = () => {
                     </div>
                 </div>
 
-                <div className="userSidebar" >
-                    <NavLink to={"/userDashboard"} 
-                             className="active"
-                             >                        
+                <div className="userSidebar">
+                    <NavLink to={'/userDashboard/home'}>
+                                            
                         <i className="fas fa-receipt"></i>                        
                         <h3>Ordini</h3>                       
                     </NavLink>
                     
-                    <a href="/userDashboard/settings">
+                    <NavLink to={'/userDashboard/settings'}>
+                              
                         <i className="fas fa-cog"></i>
                         <h3>Impostazioni</h3>
-                    </a>
+                    </NavLink>
                     <a href="/" onClick={() => signOut()}>
                         <i className="fas fa-sign-out-alt" ></i>
                         <h3>Logout</h3>

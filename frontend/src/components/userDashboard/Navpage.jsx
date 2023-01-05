@@ -7,7 +7,7 @@ const Navpage = () => {
   return (
     <section>
         <Routes>
-            <Route path='/' element={<OrderPage />}/>
+            <Route path='/home' element={<OrderPage />}/>
             <Route path='/orderDetails/:orderId' element={<OrderDetails />}/>
         </Routes>
     </section>
