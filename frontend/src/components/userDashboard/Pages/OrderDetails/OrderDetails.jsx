@@ -113,7 +113,7 @@ const OrderDetails = () => {
                         <b>Data ordine: </b>{<Moment format='DD/MM/YYYY'>{orderDetails[0]?.['order.order_date']}</Moment> }
                     </li>
                     <li>
-                        <b>Totale ordine: </b>{orderDetails[0]?.['order_total']} €
+                        <b>Totale ordine: </b>{parseFloat(orderDetails[0]?.['order_total']).toFixed(2)} €
                     </li>
                     <li>
                         <b>Corriere: </b>GLS
@@ -128,13 +128,13 @@ const OrderDetails = () => {
                             <>
                                 
                                 <li className='product-item' key={index}>
-                                    {value['qty']} x {value['product.product_name']} - {value['product.price']} €                               </li>
+                                    {value['qty']} x {value['product.product_name']} - {parseFloat(value['product.price']).toFixed(2)} €                               </li>
                                 
                             </>
                         )
                     })
                 }
-                <li><b>Spese di spedizione: </b>20€</li>
+                <li><b>Spese di spedizione: </b>20.00€</li>
                 </ul>
 
                 <div className="button-div">

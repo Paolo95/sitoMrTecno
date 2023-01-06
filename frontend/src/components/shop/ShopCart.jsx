@@ -35,7 +35,7 @@ const ShopCart = ({ addToCart, shopItems}) => {
                                 {Array.from({ length: shopItems.stars }, () => <i key={uuid()} className="fa fa-star"></i>)}
                             </div>
                             <div className="price">
-                                <h4>{shopItems.price}.00€</h4>
+                                <h4>{parseFloat(shopItems.price).toFixed(2)}€</h4>
                                 <button onClick={() => addToCart(shopItems)}>
                                     <i className="fa fa-plus"></i> 
                                     <span>Aggiungi al carrello</span>
