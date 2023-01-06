@@ -1,0 +1,9 @@
+.userSettings-chgPwdBtns input{
+    position: relative;
+    border: 2px solid #adadad;
+}
+
+.userSettings-delAccount input{
+    position: relative;
+    border: 2px solid #adadad;
+}
