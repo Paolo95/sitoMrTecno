@@ -1,9 +1,160 @@
-.userSettings-chgPwdBtns input{
+.userSettings{
+    margin-left: 2%;
+}
+
+.userSettings .userSettings-div .userSettings-container{
+    margin: 5% 0 1% 0;
+}
+
+.userSettings .userSettings-div .userSettings-container .heading{
+    font-size: 30px;
+}
+
+.userSettings .userSettings-div .userSettings-chgPwdBtns input{
     position: relative;
     border: 2px solid #adadad;
 }
 
-.userSettings-delAccount input{
+.userSettings .userSettings-div .userSettings-delAccount input{
     position: relative;
     border: 2px solid #adadad;
+}
+
+.userSettings .userSettings-div .userSettings-chgPwdBtns button{
+    height: 40px;
+    width: 140px;
+    border-radius: 5px;
+    background-color: #0f3460;
+    color: aliceblue;
+    font-weight: 600;
+    margin: 1% 0 2% 0;
+    cursor: pointer;
+}
+
+.userSettings .userSettings-div .userSettings-delAccount{
+    color: #e94560;
+    margin-top: 1%;
+}
+
+.userSettings .userSettings-div .userSettings-delAccount .userSettings-delBtns button{
+    height: 40px;
+    width: 140px;
+    border-radius: 5px;
+    background-color: #e94560;
+    color: aliceblue;
+    font-weight: 600;
+    margin: 1% 0 2% 0;
+    cursor: pointer;
+}
+
+.userSettings .userSettings-div .userSettings-chgPwd .userSettings-chgPwdBtns #submit{
+    height: 40px;
+    width: 140px;
+    border-radius: 5px;
+    background-color: #0f3460;
+    color: aliceblue;
+    font-weight: 600;
+    margin: 1% 0 2% 0;
+    cursor: pointer;
+    border: none;
+}
+
+.userSettings .userSettings-div .userSettings-chgPwd .userSettings-chgPwdBtns form{
+    display: table;
+}
+
+.userSettings .userSettings-div .userSettings-chgPwd .userSettings-chgPwdBtns form .txt_field{
+    display: table-row;
+}
+
+.userSettings .userSettings-div .userSettings-chgPwd .userSettings-chgPwdBtns form label{
+    display: table-cell;
+}
+
+.userSettings .userSettings-div .userSettings-chgPwd .userSettings-chgPwdBtns form input{
+    display: table-cell;
+    margin: 10px;
+    padding: 5px;
+}
+
+.userSettings .userSettings-div .userSettings-delAccount .userSettings-delBtns form{
+    display: table;
+}
+
+.userSettings .userSettings-div .userSettings-delAccount .userSettings-delBtns form .txt_field{
+    display: table-row;
+}
+
+.userSettings .userSettings-div .userSettings-delAccount .userSettings-delBtns form label{
+    display: table-cell;
+}
+
+.userSettings .userSettings-div .userSettings-delAccount .userSettings-delBtns form input{
+    display: table-cell;
+    margin: 10px;
+    padding: 5px;
+}
+
+.userSettings .userSettings-div .userSettings-delAccount .userSettings-delBtns #submit{
+    height: 40px;
+    width: 140px;
+    border-radius: 5px;
+    background-color: #e94560;
+    color: aliceblue;
+    font-weight: 600;
+    margin: 1% 0 2% 0;
+    cursor: pointer;
+    border: none;
+}
+
+@media screen and (max-width: 390px) and (max-height: 844px){
+    
+    .userSettings .userSettings-div .userSettings-container{
+        margin: 10% 0 1% 0;
+    }
+
+    .userSettings .userSettings-div .userSettings-delAccount{
+        margin-top: 6%;
+    }
+
+    .userSettings .userSettings-div .userSettings-container .heading{
+        font-size: 25px;
+        margin-bottom: 4%;
+    }
+
+    .userSettings .userSettings-div .userSettings-chgPwdBtns button{
+        margin: 5% 0 2% 0;
+    }
+
+    .userSettings .userSettings-div .userSettings-delAccount{
+        margin-top: 6%;
+    }
+
+    .userSettings .userSettings-div .userSettings-delAccount h2{
+        margin-bottom: 4%;
+    }
+    
+    .userSettings .userSettings-div .userSettings-delAccount .userSettings-delBtns button{
+        margin: 5% 0 2% 0;
+    }
+    
+    .userSettings .userSettings-div .userSettings-chgPwd .userSettings-chgPwdBtns form label{
+        font-size: 14px;
+    }
+
+    .userSettings .userSettings-div .userSettings-chgPwd .userSettings-chgPwdBtns form input{
+        width: 150px;
+    }
+
+    .userSettings .userSettings-div .userSettings-chgPwd .userSettings-chgPwdBtns #submit{
+        margin: 12% 0 2% 0;        
+    }
+
+    .userSettings .userSettings-div .userSettings-delAccount .userSettings-delBtns #submit{
+        margin: 12% 0 2% 0;
+    }
+
+    .userSettings .userSettings-div .userSettings-delAccount .userSettings-delBtns form input{
+        width: 150px;
+    }
 }

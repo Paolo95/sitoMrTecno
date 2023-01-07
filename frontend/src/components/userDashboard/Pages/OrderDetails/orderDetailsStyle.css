@@ -139,3 +139,29 @@
     font-weight: 700;
     cursor: pointer;
 }
+
+@media screen and (max-width: 390px) and (max-height: 844px){
+    
+    .orderDetailsPage .orderDetails-container .orderDetails-track{
+        display: none;
+    }
+    
+    .orderDetailsPage .orderDetails-container .orderDetails-lists{
+        display: none;
+    }
+
+    .orderDetailsPage .orderDetails-container{
+        width: 100%;
+        padding: 40px 5px 40px 5px;
+        margin: 0;
+        position: relative;
+    }
+
+    .orderDetailsPage .orderDetails-container .orderDetails-details{
+        display: flex;
+        gap: 1em;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding-right: 2%;
+    }
+}

@@ -180,5 +180,12 @@
         margin-left: calc(1rem - 10px);
     }
 
+    .userDashboard aside{
+        height: 85vh;
+    }
+
+    .userDashboard aside .userSidebar{
+        height: 70vh;
+     }
     
 }

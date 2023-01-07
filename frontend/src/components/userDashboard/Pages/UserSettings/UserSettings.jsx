@@ -138,6 +138,7 @@ const UserSettings = () => {
       <div className='userSettings-div'>
           <div className="userSettings-container">
             <h1 className="heading">Impostazioni utente</h1>
+            <h5>Clicca sul bottone per modificare la tua password!</h5>
           </div>
           <div className="userSettings-chgPwd">
             <div className="userSettings-chgPwdBtns">
@@ -165,7 +166,7 @@ const UserSettings = () => {
                             <span></span>
                             
                         </div>
-                        <input type="submit" value='Modifica password'/>
+                        <input id='submit' type="submit" value='Modifica password'/>
                     </form>
                   </> :
                   <>
@@ -177,6 +178,7 @@ const UserSettings = () => {
           </div>
           <div className="userSettings-delAccount">
             <h2>Zona pericolosa</h2>
+            <h5>Attenzione! L'azione rimuoverà il suo account!</h5>
               <div className="userSettings-delBtns">
                 {
                   isDelBtn ? 
@@ -193,7 +195,7 @@ const UserSettings = () => {
                               <span></span>
                               
                           </div>
-                          <input type="submit" value='Elimina account'/>
+                          <input id='submit' type="submit" value='Elimina account'/>
                       </form>
                     </> :
                     <>
