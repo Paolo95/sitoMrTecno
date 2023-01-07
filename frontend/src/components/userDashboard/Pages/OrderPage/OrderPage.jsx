@@ -61,7 +61,7 @@ const OrderPage = () => {
             <table className="table">
               <thead>
                 <tr>
-                  <th>ID</th>
+                  <th id='id'>ID</th>
                   <th>Data</th>
                   <th>Importo</th>
                   <th>Stato</th>
@@ -74,10 +74,10 @@ const OrderPage = () => {
                     return (
                       <>
                         <tr key={index}>
-                          <td>{value['order.id']}</td>
+                          <td id='id'>{value['order.id']}</td>
                           <td><Moment format='DD/MM/YYYY'>{value['order.order_date']}</Moment></td>
                           <td>{parseFloat(value['order_total']).toFixed(2)}€</td>
-                          <td>{value['order.order_status']}</td>
+                          <td id='status'>{value['order.order_status']}</td>
                           <td>
                             <NavLink to={`/userDashboard/orderDetails/${value['order.id']}`}>                              
                               <button>Dettaglio</button>                      

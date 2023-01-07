@@ -7,13 +7,9 @@ const UserDashboard = () => {
 
     <section className="userDashboard">
         <div className="container" id="userDashboardContainer">
-            <div>
-                <UserSideBar />
-            </div>
-
-            <div>
-                <Navpage />
-            </div>
+            
+          <UserSideBar />          
+          <Navpage />            
         
         </div>
     </section>
