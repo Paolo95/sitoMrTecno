@@ -1,26 +1,61 @@
 .orderPage{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.orderPage .table-container{
-    margin: 50px auto 0;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 30px 3%;
+    height: 100vh;
 }
 
 .orderPage .heading{
-    font-size: 40px;
-    text-align: center;
-    margin-bottom: 40px;
+    font-size: 30px;
+    text-align: left;
+    font-weight: 500;
+}
+
+.orderPage .orderPage-card{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0.25rem;
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
+    margin-top: 20px;
+}
+
+.orderPage .order-div{
+    flex: 1 1 auto;
+    padding: 1rem 1rem;
+    word-wrap: break-word;
 }
 
 .orderPage .table{
     width: 100%;
+    color: #212529;
+    vertical-align: top;
+    border-color: #dee2e6;
+    overflow-x: auto;
+    caption-side: bottom;
     border-collapse: collapse;
 }
 
-.orderPage .table thead{
+.orderPage .table > thead{
+    vertical-align: bottom;
+    border-color: inherit;
+    border-style: solid;
+    border-width: 0;
+    display: table-header-group;
     background-color: lightblue;
+}
+
+.orderPage .table tr{
+    border-color: inherit;
+    border-style: solid;
+    border-width: 0;
+    display: table-row;
+    vertical-align: inherit;
 }
 
 .orderPage .table thead th{
@@ -44,7 +79,7 @@
 .orderPage .table tbody tr td button{
     width: 100px;
     text-decoration: none;
-    line-height: 35px;
+    height: 35px;
     display: inline-block;
     font-weight: 800;
     text-align: center;
@@ -61,16 +96,12 @@
 
 @media screen and (max-width: 390px) and (max-height: 844px){
     
-    .orderPage .order-div .table-container .heading{
-        font-size: 30px;
-    }
-
-    .orderPage .order-div .table-container{
-        width: 110%;
+    .orderPage .order-div{
+        padding: 1rem 0.5rem 1rem 0.5rem;
     }
 
     .orderPage .order-div .table-container .table thead #id{
-        font-size: 10px;
+        font-size: 8px;
         font-weight: 600;
         letter-spacing: 0.35px;
         opacity: 1;
@@ -80,7 +111,6 @@
     }
 
     .orderPage .order-div .table-container .table tbody td #status{
-        font-size: 10px;
         letter-spacing: 0.35px;
         font-weight: normal;
         background-color: lightcyan;
@@ -100,7 +130,7 @@
     }
 
     .orderPage .table thead th{
-        font-size: 10px;
+        font-size: 8px;
         font-weight: 600;
         letter-spacing: 0.35px;
         opacity: 1;
@@ -109,7 +139,7 @@
     }
     
     .orderPage .table tbody tr td{
-        font-size: 10px;
+        font-size: 8px;
         letter-spacing: 0.35px;
         font-weight: normal;
         background-color: lightcyan;
@@ -119,7 +149,8 @@
     
     .orderPage .table tbody tr td button{
         width: 50px;
-        font-size: 10px;
+        font-size: 8px;
+        height: 25px;
     }
     
 }

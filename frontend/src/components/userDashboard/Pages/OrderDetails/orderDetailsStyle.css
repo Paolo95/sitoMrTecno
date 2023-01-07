@@ -1,31 +1,50 @@
-.orderDetailsPage .orderDetails-container{
-    width: 1100px;
-    max-width: 100%;
-    padding: 40px;
-    margin: 0 30px;
-    position: relative;
+.orderDetailsPage{
+    padding: 30px 3%;
+    margin-left: auto;
+    margin-right: auto; 
 }
 
-.orderDetailsPage .orderDetails-container .orderDetails-details{
+.orderDetailsPage .orderDetails-heading{
     display: flex;
-    gap: 1em;
-    flex-wrap: wrap;
+    align-items: center;
     justify-content: space-between;
+    margin-bottom: 25px;
 }
 
-.orderDetailsPage .orderDetails-container .orderDetails-details .orderDetails-heading h1{
+.orderDetailsPage .orderDetails-heading button{
+    background-color: #0f3460;
+    color: aliceblue;
+    width: 120px;
+    height: 35px;
+    border-radius: 5px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.orderDetailsPage .orderDetails-card{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0.25rem;
+}
+
+.orderDetailsPage .orderDetails-card .orderDetails-heading h1{
     font-size: 25px;
+    font-weight: 500;
+    margin-left: 15px;
+    margin-top: 10px;
 }
 
-.orderDetailsPage .orderDetails-container .orderDetails-details .orderDetails-shippingCode p{
-    font-size: 1.1rem;
+.orderDetailsPage .orderDetails-card .orderDetails-track{
+    margin: 0 0 5rem 8.5rem;
 }
 
-.orderDetailsPage .orderDetails-container .orderDetails-track{
-    margin: 1.5em 0 5rem 3.5rem;
-}
-
-.orderDetailsPage .orderDetails-container .orderDetails-track #progress{
+.orderDetailsPage .orderDetails-card .orderDetails-track #progress{
     list-style: none;
     display: flex;
     flex-wrap: wrap;
@@ -36,12 +55,12 @@
     text-align: center;
 }
 
-.orderDetailsPage .orderDetails-container .orderDetails-track #progress li{
+.orderDetailsPage .orderDetails-card .orderDetails-track #progress li{
     width: 20%;
     position: relative;
 }
 
-.orderDetailsPage .orderDetails-container .orderDetails-track ::before{
+.orderDetailsPage .orderDetails-card .orderDetails-track ::before{
     content: '\2713';
     position: absolute;
     display: flex;
@@ -57,13 +76,13 @@
 }
 
 
-.orderDetailsPage .orderDetails-container .orderDetails-track .disabled::before{
+.orderDetailsPage .orderDetails-card .orderDetails-track .disabled::before{
     content: '\2713';
     font-weight: bold;
     background: lightgray;
 }
 
-.orderDetailsPage .orderDetails-container .orderDetails-track #progress::before{
+.orderDetailsPage .orderDetails-card .orderDetails-track #progress::before{
     content: '';
     position: absolute;
     top: 20px;
@@ -74,7 +93,7 @@
     z-index: 111;
 }
 
-.orderDetailsPage .orderDetails-container .orderDetails-track #progress::after{
+.orderDetailsPage .orderDetails-card .orderDetails-track #progress::after{
     content: '';
     position: absolute;
     top: 20px;
@@ -83,85 +102,66 @@
     background: lightgray;
 }
 
-.orderDetailsPage .orderDetails-container .orderDetails-lists{
+
+.orderDetailsPage .orderDetails-card .orderDetails-lists{
     display: flex;
     gap: 10rem;
     flex-wrap: wrap;
     align-items: center;
-    margin-left: 1%;
+    margin-left: 7%;
 }
 
-.orderDetailsPage .orderDetails-container .orderDetails-lists .orderDetails-list{
+.orderDetailsPage .orderDetails-card .orderDetails-lists .orderDetails-list{
     display: flex;
     gap: 1em;
-    flex: 1 1 60px;
+    flex: 1 1 50px;
 }
 
-.orderDetailsPage .orderDetails-container .orderDetails-lists .orderDetails-list p{
+.orderDetailsPage .orderDetails-card .orderDetails-lists .orderDetails-list p{
     font-size: 1.1rem;
 }
 
-.orderDetailsPage .orderDetails-container .orderDetails-lists .orderDetails-list i{
+.orderDetailsPage .orderDetails-card .orderDetails-lists .orderDetails-list i{
     font-size: 35px;
     color: #0f3460;
 }
 
-.orderDetailsPage .orderDetails-container .orderDetails-info{
+.orderDetailsPage .orderDetails-card .orderDetails-body{
     margin: 25px;
     padding: 10px 25px;
     border: solid 1px;
 }
 
-.orderDetailsPage .orderDetails-container .orderDetails-info ul{
+.orderDetailsPage .orderDetails-card .orderDetails-body ul{
     margin-bottom: 40px;
 }
 
-.orderDetailsPage .orderDetails-container .orderDetails-info li{
+.orderDetailsPage .orderDetails-card .orderDetails-body li{
     margin-top: 20px;
 }
 
-.orderDetailsPage .orderDetails-container .orderDetails-info .product-item{
+.orderDetailsPage .orderDetails-card .orderDetails-body .product-item{
     margin-left: 15px;
-}
-
-.orderDetailsPage .orderDetails-container .orderDetails-info .button-div{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.orderDetailsPage .orderDetails-container .orderDetails-info .button-div button{
-    background-color: #0f3460;
-    color: aliceblue;
-    width: 120px;
-    height: 40px;
-    border-radius: 5px;
-    font-weight: 700;
-    cursor: pointer;
 }
 
 @media screen and (max-width: 390px) and (max-height: 844px){
     
-    .orderDetailsPage .orderDetails-container .orderDetails-track{
+    .orderDetailsPage .orderDetails-card .orderDetails-track{
         display: none;
     }
     
-    .orderDetailsPage .orderDetails-container .orderDetails-lists{
+    .orderDetailsPage .orderDetails-card .orderDetails-lists{
         display: none;
     }
 
-    .orderDetailsPage .orderDetails-container{
+    .orderDetailsPage .orderDetails-card{
         width: 100%;
-        padding: 40px 5px 40px 5px;
+        padding-top: 10px;
         margin: 0;
         position: relative;
     }
 
-    .orderDetailsPage .orderDetails-container .orderDetails-details{
-        display: flex;
-        gap: 1em;
-        flex-wrap: wrap;
-        justify-content: center;
-        padding-right: 2%;
+    .orderDetailsPage .orderDetails-card .orderDetails-body{
+        margin: 0 25px 25px 25px;
     }
 }

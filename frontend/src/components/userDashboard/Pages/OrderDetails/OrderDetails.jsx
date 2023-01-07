@@ -57,12 +57,13 @@ const OrderDetails = () => {
 
   return (
     <section className='orderDetailsPage'>
-        <div className='orderDetails-container'>
-            <div className="orderDetails-details">
-                <div className="orderDetails-heading">
-                    <h1 className="heading">{`Ordine n. ${params.orderId}`}</h1>
-                </div>
-            </div>               
+        <div className="orderDetails-heading">
+            <button className='goBack' onClick={goBack}>Torna indietro</button>
+        </div>
+        <div className='orderDetails-card'>         
+            <div className="orderDetails-heading">
+                <h1 className="heading">{`Ordine n. ${params.orderId}`}</h1>
+            </div>                   
                 
             <div className="orderDetails-track">
                 <ul id='progress' className='text-center'>
@@ -107,7 +108,7 @@ const OrderDetails = () => {
                 </div>
             </div>
 
-            <div className="orderDetails-info">
+            <div className="orderDetails-body">
                 <ul>
                     <li>
                         <b>Data ordine: </b>{<Moment format='DD/MM/YYYY'>{orderDetails[0]?.['order.order_date']}</Moment> }
@@ -137,9 +138,7 @@ const OrderDetails = () => {
                 <li><b>Spese di spedizione: </b>20.00€</li>
                 </ul>
 
-                <div className="button-div">
-                    <button className='goBack' onClick={goBack}>Torna indietro</button>
-                </div>
+                
                 
             </div>
         </div>

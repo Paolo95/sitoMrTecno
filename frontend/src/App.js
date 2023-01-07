@@ -129,7 +129,7 @@ function App() {
                    
           <Route element={<PersistLogin />}>          
             <Route element={<RequireAuth allowedRole={'admin'}/>}>
-              <Route exact path="/adminDashboard" element={<AdminDashboard />} >    
+              <Route exact path="/adminDashboard/*" element={<AdminDashboard />} >    
               </Route>
             </Route>
             <Route element={<RequireAuth allowedRole={'customer'}/>}>

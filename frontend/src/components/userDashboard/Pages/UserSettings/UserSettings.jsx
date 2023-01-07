@@ -135,75 +135,75 @@ const UserSettings = () => {
 
   return (
     <section className='userSettings'>
-      <div className='userSettings-div'>
-          <div className="userSettings-container">
-            <h1 className="heading">Impostazioni utente</h1>
-            <h5>Clicca sul bottone per modificare la tua password!</h5>
-          </div>
-          <div className="userSettings-chgPwd">
-            <div className="userSettings-chgPwdBtns">
+      <div className="userSettings-heading">
+          <h1 className="heading">Impostazioni utente</h1>
+      </div>
+      <div className='userSettings-card'>
+        <h5>Clicca sul bottone per modificare la tua password!</h5>          
+        <div className="userSettings-chgPwd">
+          <div className="userSettings-chgPwdBtns">
+            {
+              isChgBtn ? 
+                <>
+                    <form onSubmit={chgPwdHandleSubmit}>
+                      <div className="txt_field">
+                        <label htmlFor='oldPassword'>Vecchia Password</label>
+                          <input type="password" 
+                                id='oldPassword'
+                                onChange={(e) => setOldPwd(e.target.value)}
+                                value={oldPwd}
+                                required/>
+                          <span></span>
+                          
+                      </div>
+                      <div className="txt_field">
+                        <label htmlFor='newPassword'>Nuova password</label>
+                          <input type="password" 
+                                id='newPassword'
+                                onChange={(e) => setNewPwd(e.target.value)}
+                                value={newPwd}
+                                required/>
+                          <span></span>
+                          
+                      </div>
+                      <input id='submit' type="submit" value='Modifica password'/>
+                  </form>
+                </> :
+                <>
+                  <button className='pwdRec-btn' onClick={showChgPwdFields}>Modifica password</button> 
+                </>               
+            }
+            </div>
+            
+        </div>
+        <div className="userSettings-delAccount">
+          <h2>Zona pericolosa</h2>
+          <h5>Attenzione! L'azione rimuoverà il suo account!</h5>
+            <div className="userSettings-delBtns">
               {
-                isChgBtn ? 
+                isDelBtn ? 
                   <>
-                      <form onSubmit={chgPwdHandleSubmit}>
+                      <form onSubmit={delAccHandleSubmit}>
+                        
                         <div className="txt_field">
-                          <label htmlFor='oldPassword'>Vecchia Password</label>
+                          <label htmlFor='newPassword'>Password</label>
                             <input type="password" 
-                                  id='oldPassword'
-                                  onChange={(e) => setOldPwd(e.target.value)}
-                                  value={oldPwd}
+                                  id='password'
+                                  onChange={(e) => setPwd(e.target.value)}
+                                  value={pwd}
                                   required/>
                             <span></span>
                             
                         </div>
-                        <div className="txt_field">
-                          <label htmlFor='newPassword'>Nuova password</label>
-                            <input type="password" 
-                                  id='newPassword'
-                                  onChange={(e) => setNewPwd(e.target.value)}
-                                  value={newPwd}
-                                  required/>
-                            <span></span>
-                            
-                        </div>
-                        <input id='submit' type="submit" value='Modifica password'/>
+                        <input id='submit' type="submit" value='Elimina account'/>
                     </form>
                   </> :
                   <>
-                    <button className='pwdRec-btn' onClick={showChgPwdFields}>Modifica password</button> 
+                    <button className='pwdRec-btn' onClick={showDelAccFields}>Elimina account</button> 
                   </>               
               }
-              </div>
-              
-          </div>
-          <div className="userSettings-delAccount">
-            <h2>Zona pericolosa</h2>
-            <h5>Attenzione! L'azione rimuoverà il suo account!</h5>
-              <div className="userSettings-delBtns">
-                {
-                  isDelBtn ? 
-                    <>
-                        <form onSubmit={delAccHandleSubmit}>
-                          
-                          <div className="txt_field">
-                            <label htmlFor='newPassword'>Password</label>
-                              <input type="password" 
-                                    id='password'
-                                    onChange={(e) => setPwd(e.target.value)}
-                                    value={pwd}
-                                    required/>
-                              <span></span>
-                              
-                          </div>
-                          <input id='submit' type="submit" value='Elimina account'/>
-                      </form>
-                    </> :
-                    <>
-                      <button className='pwdRec-btn' onClick={showDelAccFields}>Elimina account</button> 
-                    </>               
-                }
-                </div>        
-          </div>           
+            </div>        
+        </div>           
       </div>
     </section>
   )

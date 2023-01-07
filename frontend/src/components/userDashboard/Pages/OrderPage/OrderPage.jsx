@@ -55,43 +55,48 @@ const OrderPage = () => {
   
  return (
     <section className='orderPage'>
+      <div className="orderPage-heading">
+        <h1 className="heading">Riepilogo ordini</h1>
+      </div>
+      <div className="orderPage-card">
         <div className='order-div'>
-          <div className="table-container">
-            <h1 className="heading">Riepilogo ordini</h1>
-            <table className="table">
-              <thead>
-                <tr>
-                  <th id='id'>ID</th>
-                  <th>Data</th>
-                  <th>Importo</th>
-                  <th>Stato</th>
-                  <th>Dettaglio</th>
-                </tr>
-              </thead>
-              <tbody>
-                {
-                  orderList.map((value, index) => {
-                    return (
-                      <>
-                        <tr key={index}>
-                          <td id='id'>{value['order.id']}</td>
-                          <td><Moment format='DD/MM/YYYY'>{value['order.order_date']}</Moment></td>
-                          <td>{parseFloat(value['order_total']).toFixed(2)}€</td>
-                          <td id='status'>{value['order.order_status']}</td>
-                          <td>
-                            <NavLink to={`/userDashboard/orderDetails/${value['order.id']}`}>                              
-                              <button>Dettaglio</button>                      
-                            </NavLink>
-                          </td>
-                        </tr>
-                      </>                     
-                    );
-                  })
-                }
-              </tbody>
-            </table>
-          </div>
+            <div className="table-container">
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th id='id'>ID</th>
+                    <th>Data</th>
+                    <th>Importo</th>
+                    <th>Stato</th>
+                    <th>Dettaglio</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {
+                    orderList.map((value, index) => {
+                      return (
+                        <>
+                          <tr key={index}>
+                            <td id='id'>{value['order.id']}</td>
+                            <td><Moment format='DD/MM/YYYY'>{value['order.order_date']}</Moment></td>
+                            <td>{parseFloat(value['order_total']).toFixed(2)}€</td>
+                            <td id='status'>{value['order.order_status']}</td>
+                            <td>
+                              <NavLink to={`/userDashboard/orderDetails/${value['order.id']}`}>                              
+                                <button>Dettaglio</button>                      
+                              </NavLink>
+                            </td>
+                          </tr>
+                        </>                     
+                      );
+                    })
+                  }
+                </tbody>
+              </table>
+            </div>
         </div>
+      </div>
+        
     </section>
   )
 }
