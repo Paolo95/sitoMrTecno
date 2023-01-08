@@ -22,10 +22,10 @@ const Cart = ({ cartItem, addToCart, decreaseQty, deleteCartProduct }) => {
                   </div>
                   <div className="cart-details">
                     <h3>{item.product_name}</h3>
-                    <h4>Prezzo unitario: €{item.price}.00 
+                    <h4>Prezzo unitario: €{parseFloat(item.price).toFixed(2)} 
                             <br/>Quantità: {item.qty} <br/>
                             Prezzo Totale:
-                      <span>€{productQty}.00</span>
+                      <span>€{parseFloat(productQty).toFixed(2)}</span>
                     </h4>
                   </div>
                   <div className="cart-items-function">
@@ -55,7 +55,7 @@ const Cart = ({ cartItem, addToCart, decreaseQty, deleteCartProduct }) => {
             </div>   
             <div className="d_flex">
               <h4>Prezzo totale : </h4>            
-              <h3>€{totalPrice === 20 ? 0 : totalPrice}.00</h3>
+              <h3>€{totalPrice === 20 ? 0 : parseFloat(totalPrice).toFixed(2)}</h3>
             </div> 
             {
               totalPrice === 20 ? null : (  
