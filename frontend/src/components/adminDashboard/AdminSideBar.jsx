@@ -22,7 +22,7 @@ const AdminSideBar = () => {
     
             <aside>
                 <div className="top">
-                    <div className="userDashboardLogo">
+                    <div className="adminDashboardLogo">
                         <h2>{`Bentornato ${username.UserInfo.username}!`}</h2>
                     </div>
                     <div className="close" id="close-btn">
@@ -30,18 +30,31 @@ const AdminSideBar = () => {
                     </div>
                 </div>
 
-                <div className="userSidebar">
-                    <NavLink to={'/userDashboard/home'}>
+                <div className="adminSidebar">
+                    <NavLink to={'/adminDashboard/home'}>
                                             
                         <i className="fas fa-receipt"></i>                        
-                        <h3>Ordini</h3>                       
+                        <h3>Dashboard</h3>                       
                     </NavLink>
                     
-                    <NavLink to={'/userDashboard/settings'}>
+                    <NavLink to={'/adminDashboard/products'}>
                               
-                        <i className="fas fa-cog"></i>
-                        <h3>Impostazioni</h3>
+                        <i className="fas fa-shopping-bag"></i>
+                        <h3>Prodotti</h3>
                     </NavLink>
+
+                    <NavLink to={'/adminDashboard/newProduct'}>
+                              
+                        <i className="fas fa-cart-plus"></i>
+                        <h3>Aggiungi prodotti</h3>
+                    </NavLink>
+
+                    <NavLink to={'/adminDashboard/orders'}>
+                              
+                        <i className="fas fa-tags"></i>
+                        <h3>Ordini</h3>
+                    </NavLink>
+
                     <a href="/" onClick={() => signOut()}>
                         <i className="fas fa-sign-out-alt" ></i>
                         <h3>Logout</h3>

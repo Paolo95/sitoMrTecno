@@ -1,0 +1,209 @@
+.adminPanel{
+    margin-left: auto;
+    margin-right: auto;
+    padding: 3% 2% 60vh 2%;
+    height: 100%;
+}
+
+.adminPanel .adminPanel-heading{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.adminPanel .adminPanel-heading h2{
+    margin-top: 0;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.adminPanel .row{
+    width: 100%;
+    gap: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+.adminPanel .mb-4{
+    margin-bottom: 1.5rem;
+}
+
+.adminPanel .shadow-sm{
+    box-shadow: 0 .125rem .25radminDashboardem rgba(0, 0, 0, .075);
+}
+
+.adminPanel .row .col-lg-4 .card-body{
+    padding: 1rem 1rem;
+}
+
+.adminPanel .card{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0.25rem;
+}
+
+.adminPanel .row .col-lg-4 .icontext{
+    display: inline-flex;
+    align-items: center;
+    padding: 5px;
+}
+
+.adminPanel .row .col-lg-4 .icontext .icon{
+    position: relative;
+    flex-shrink: 0;
+    margin-right: 10px;
+}
+
+.adminPanel .row .col-lg-4 .icontext .icon-sm{
+    width: 48px;
+    height: 48px;
+    line-height: 48px;
+    font-size: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-shrink: 0;
+    flex-grow: 0;
+}
+
+.adminPanel .row .col-lg-4 .icontext .rounded-circle{
+    border-radius: 50%;
+}
+
+.adminPanel .row .col-lg-4 .icontext .text h6{
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.adminPanel .row .col-lg-4 .icontext .text span{
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.adminPanel .row .col-lg-4 .icontext .sales{
+    color: #084298;
+    background-color: #cfe2ff;
+    border-color: #b6d4fe;
+}
+
+.adminPanel .row .col-lg-4 .icontext .orders{
+    color: #664d03;
+    background-color: #fff3cd;
+    border-color: #ffecb5;
+}
+
+.adminPanel .row .col-lg-4 .icontext .products{
+    color: #0f5132;
+    background-color: #d1e7dd;
+    border-color: #badbcc;
+}
+
+.adminPanel .row .col-lg-4 .icontext i{
+    font-weight: 900;
+}
+
+.adminPanel .card .card-body{
+    flex: 1 1 auto;
+    padding: 1rem 1rem;
+}
+
+.adminPanel .card .card-body .card-title{
+    margin-bottom: 0.5rem;
+}
+
+.adminPanel .card .card-body h5{
+    font-weight: 500;
+    line-height: 1.2;
+    font-size: 1.25rem;
+}
+
+.adminPanel .card .card-body .table-div{
+    overflow-x: auto;
+}
+
+.adminPanel .card .card-body .table-div table{
+    caption-side: bottom;
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    vertical-align: center;
+    border-color: #dee2e6;
+    display: table;
+    text-indent: initial;
+    border-spacing: 2px;
+}
+
+.adminPanel .card .card-body .table-div .table > tbody{
+    vertical-align: inherit;
+    border-color: inherit;
+    border-style: solid;
+    border-width: 0;
+}
+
+.adminPanel .card .card-body .table-div .table tbody tr{
+    border-bottom: 1px solid #cfdbe5;
+    
+}
+
+.adminPanel .card .card-body .table-div table tbody .dash-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.adminPanel .card .card-body .table-div table tbody .dash-btn button{
+    cursor: pointer;
+    width: 80px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: #0f3460;
+    color: whitesmoke;
+    font-weight: 600;
+    margin-bottom: 3px;
+}
+
+@media screen and (min-width: 992px) {
+    
+    .adminPanel .row .col-lg-4{
+        flex: 0 0 auto;
+        width: 33.3333333%;
+    }
+}
+
+@media screen and (max-width: 390px) and (max-height: 844px){
+    
+    .adminPanel{
+        width: calc(100vw - 3rem);
+        padding: 10% 3% 100% 3%;
+        height: 100%;
+    }
+
+    .adminPanel .row .col-lg-4{
+        flex: 0 0 auto;
+        width: 100%;
+    }
+
+    .adminPanel .row{
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .adminPanel .hide{
+        display: none;
+    }
+
+}

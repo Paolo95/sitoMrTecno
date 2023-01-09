@@ -1,8 +1,8 @@
 .orderPage{
     margin-left: auto;
     margin-right: auto;
-    padding: 30px 3%;
-    height: 100vh;
+    padding: 3% 2% 60vh 2%;
+    height: 100%;
 }
 
 .orderPage .heading{
@@ -34,7 +34,7 @@
 .orderPage .table{
     width: 100%;
     color: #212529;
-    vertical-align: top;
+    vertical-align: center;
     border-color: #dee2e6;
     overflow-x: auto;
     caption-side: bottom;
@@ -55,7 +55,7 @@
     border-style: solid;
     border-width: 0;
     display: table-row;
-    vertical-align: inherit;
+    vertical-align: center;
 }
 
 .orderPage .table thead th{
@@ -97,32 +97,33 @@
 @media screen and (max-width: 390px) and (max-height: 844px){
     
     .orderPage .order-div{
-        padding: 1rem 0.5rem 1rem 0.5rem;
+        padding: 1rem 0.3rem 1rem 0.3rem;
     }
 
-    .orderPage .order-div .table-container .table thead #id{
-        font-size: 8px;
-        font-weight: 600;
-        letter-spacing: 0.35px;
-        opacity: 1;
-        padding: 10px 2px 10px 2px;
-        vertical-align: top;
-        width: 30px;
+    .orderPage .orderPage-card .order-div .table-container .table thead #id{
+        display: none;
     }
 
-    .orderPage .order-div .table-container .table tbody td #status{
+    .orderPage .orderPage-card .order-div .table-container .table tbody #id{
+        display: none;
+    }
+
+    .orderPage .order-div .table-container .table tbody #status{
         letter-spacing: 0.35px;
         font-weight: normal;
         background-color: lightcyan;
         padding: 8px;
         text-align: center;
         word-wrap: break-word;
+        font-size: 9px;
     }
 
     .orderPage{
         display: flex;
         flex-direction: column;
         align-items: baseline;
+        padding: 10% 3% 100% 3%;
+        height: 100%;
     }
 
     .orderPage .order-div .table{
@@ -130,7 +131,7 @@
     }
 
     .orderPage .table thead th{
-        font-size: 8px;
+        font-size: 12px;
         font-weight: 600;
         letter-spacing: 0.35px;
         opacity: 1;
@@ -139,8 +140,7 @@
     }
     
     .orderPage .table tbody tr td{
-        font-size: 8px;
-        letter-spacing: 0.35px;
+        font-size: 12px;
         font-weight: normal;
         background-color: lightcyan;
         padding: 6px;
@@ -150,7 +150,7 @@
     .orderPage .table tbody tr td button{
         width: 50px;
         font-size: 8px;
-        height: 25px;
+        height: 30px;
     }
     
 }

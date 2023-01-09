@@ -22,34 +22,13 @@
     --box-shadow: 0 2rem 3rem var(--color-light);
 }
 
-.userDashboardLogo img {
-    display: block;
-    width: 100%;
-}
-
 .userDashboardLogo h2 {
     font-size: 1.4rem;
     margin-left: 15px;
     font-weight: 500;
 }
 
-.userDashboardLogo h3 {
-    font-size: 0.87rem;
-}
-
-.userDashboardLogo h4 {
-    font-size: 0.8rem;
-}
-
-.userDashboardLogo h5 {
-    font-size: 0.77rem;
-}
-
-.text-muted {
-    color: var(--color-info-dark);
-}
-
-#userDashboardContainer {
+.userDashboard #userDashboardContainer {
     display: grid;
     width: 100%;
     margin: 0;   
@@ -59,7 +38,7 @@
 }
 
 .userDashboard aside{
-    height: 100vh;
+    height: 100%;
     box-shadow: 0 0.9rem 0.25rem rgb(0 0 0 / 8%);
     background-color: white;
 }
@@ -77,11 +56,6 @@
     gap: 0.8rem;
 }
 
-.userDashboard aside .userDashboardLogo img{
-    width: 2rem;
-    height: 2rem;
-}
-
 .userDashboard aside .close{
    display: none;
 }
@@ -92,7 +66,7 @@
    background: white;
    display: flex;
    flex-direction: column;
-   height: 80vh;
+   height: 80%;
    position: relative;
    top: 3rem;
 }
@@ -118,8 +92,7 @@
 }
 
 .userDashboard aside .userSidebar a:last-child{
-    position: absolute;
-    bottom: 12rem;
+    margin-top: 50px;
     width: 100%;
 }
 
@@ -160,20 +133,20 @@
     }
 
     .userDashboard .container aside {
-        width: 4rem;
+        width: 3rem;
     }
 
-    #userDashboardContainer {
+    .userDashboard #userDashboardContainer {
         display: grid;
         width: 100%;
         margin: 0 0;    
-        grid-template-columns: 4rem auto;
+        grid-template-columns: 3rem auto;
     }
 
     .userDashboard aside .userSidebar a{
         display: flex;
         color: #0f3460;
-        margin-left: 1.5rem;
+        margin-left: 1rem;
         gap: 1rem;
         align-items: center;
         position: relative;
@@ -181,9 +154,13 @@
         transition: all 300ms ease;
     }
 
+    .userDashboard aside .userSidebar a i{
+        font-size: 20px
+    }
+
     .userDashboard aside .userSidebar a.active i{
         color: #1aa3ff;
-        margin-left: calc(1rem - 10px);
+        margin-left: -5px;
     }
 
     .userDashboard aside{
@@ -191,7 +168,7 @@
     }
 
     .userDashboard aside .userSidebar{
-        height: 70vh;
+        height: 70%;
      }
     
 }
