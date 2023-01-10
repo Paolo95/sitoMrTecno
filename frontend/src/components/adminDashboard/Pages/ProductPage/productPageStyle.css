@@ -1,0 +1,233 @@
+.productPage{
+    margin-left: auto;
+    margin-right: auto;
+    padding: 3% 2% 60vh 2%;
+    height: 100%;
+}
+
+.productPage .mb-4{
+    margin-bottom: 1.5rem;
+}
+
+.productPage .shadow-sm{
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
+}
+
+.productPage .productPage-heading{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.productPage .productPage-heading h2{
+    font-weight: 500;
+}
+
+.productPage .productPage-heading .createBtn-div button{
+    cursor: pointer;
+    width: 120px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: #0f3460;
+    color: aliceblue;
+    font-weight: 600;
+}
+
+.productPage .card{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0.25rem;
+}
+
+.productPage .card .card-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    margin-bottom: 0;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
+.productPage .card .card-header .search-div{
+    width: 33%;
+}
+
+.productPage .card .card-header .search-div .form-control{
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    appearance: none;
+    border-radius: 0.25rem;
+}
+
+.productPage .card .card-header .search-div .form-control:focus{
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
+}
+
+.productPage .card .card-header .select-div{
+    display: flex;
+}
+
+.productPage .card .card-header .select-div select:last-child{
+    margin-left: 5px;
+}
+
+.productPage .card .card-header .select-div select{
+    display: block;
+    width: 100%;
+    padding: 0.375rem 2.25rem 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+}
+
+.productPage .card .card-body .productPage-content .grid1 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+}
+
+.productPage .card-product-grid .info-wrap{
+    padding: 0 2%;
+}
+
+.productPage .card-product-grid .info-wrap .price{
+    font-weight: 600;
+    padding: 0 2%;
+}
+
+.productPage .card-product-grid .info-wrap .row{
+    width: 100%;
+    display: flex;
+}
+
+.productPage .row .btn{
+    display: flex;
+    width: 100%;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    font-size: .875rem;
+    border-radius: 0.2rem;
+    margin-top: 4%;
+    margin-bottom: 4%;
+}
+
+.productPage .row .btn i{
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.productPage .row .btn-outline-success{
+    color: #198754;
+    border-color: #198754;
+}
+
+.productPage .row .btn-outline-success:hover{
+    background-color: #198754;
+    transition: 0.3s ease-in-out;
+    color: aliceblue;
+}
+
+.productPage .row .btn-outline-danger{
+    color: #dc3545;
+    border-color: #dc3545;
+}
+
+.productPage .row .btn-outline-danger:hover{
+    background-color: #dc3545;
+    transition: 0.3s ease-in-out;
+    color: aliceblue;
+}
+
+.productPage .pb-3{
+    padding-bottom: 1rem;
+}
+
+.productPage .p-2{
+    padding: 0.5rem;
+}
+
+.productPage .card .card-product-grid .title {
+    color: #6c757d;
+    display: block;
+    text-decoration: none;
+    margin: 0 2%;
+}
+
+.productPage .card .card-body .productPage-moreBtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.productPage .card .card-body .productPage-moreBtn button{
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: #0f3460;
+    color: aliceblue;
+    font-weight: 600;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 390px) and (max-height: 844px){
+    
+    .productPage .card .card-body .productPage-content .grid1 {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 10px;
+    }
+
+    .productPage .card .card-header .select-div{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .productPage .card .card-header .select-div select:last-child{
+        margin-left: 0;
+    }
+
+    .productPage .card .card-header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 1rem 1rem;
+    }
+
+    .productPage .card .card-header .search-div{
+        width: 100%;
+    }
+    .productPage .card .card-header .select-div select{
+        font-size: 0.9rem;
+    }
+
+    .productPage .productPage-heading .createBtn-div button {
+        margin-top: 5px;
+    }
+}
