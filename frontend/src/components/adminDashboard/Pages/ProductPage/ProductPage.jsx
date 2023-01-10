@@ -166,10 +166,12 @@ const ProductPage = () => {
                                                     <span>€{parseFloat(value.price).toFixed(2)}</span>
                                                 </div>
                                                 <div className="row">
-                                                    <NavLink className={'btn btn-outline-success p-2 pb-3'}>
+                                                    <NavLink className={'btn btn-outline-success p-2 pb-3'}
+                                                             to={`/adminDashboard/products/edit/${value.id}`}>
                                                         <i className="fas fa-pen"></i>
                                                     </NavLink>
-                                                    <NavLink className={'btn btn-outline-danger p-2 pb-3'}>
+                                                    <NavLink className={'btn btn-outline-danger p-2 pb-3'}
+                                                             to={`/adminDashboard/products/delete/${value.id}`}>
                                                         <i className="fas fa-trash-alt"></i>
                                                     </NavLink>
                                                 </div>
