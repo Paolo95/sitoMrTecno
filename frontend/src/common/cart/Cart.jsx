@@ -4,7 +4,15 @@ import { Link } from 'react-router-dom';
 
 const Cart = ({ cartItem, addToCart, decreaseQty, deleteCartProduct }) => {
 
-  const totalPrice = cartItem.reduce((price, item) => price + item.qty * item.price, 20);
+  let shipping_cost = 9.99;
+
+  cartItem.forEach(element => {
+    if(element.category === 'PC' || element.category === 'Notebook') {
+      shipping_cost = 19.99;
+    }
+  });  
+
+  const totalPrice = cartItem.reduce((price, item) => price + item.qty * item.price, shipping_cost);
 
   return (
     <>  
@@ -51,14 +59,14 @@ const Cart = ({ cartItem, addToCart, decreaseQty, deleteCartProduct }) => {
             <h2>Riassunto ordine</h2>
             <div className="shipping d_flex">
               <h4>Spedizione : </h4>            
-              <h3>€{totalPrice === 20 ? 0 : 20}.00</h3>
+              <h3>€{cartItem.length === 0 ? 0 : shipping_cost}</h3>
             </div>   
             <div className="d_flex">
               <h4>Prezzo totale : </h4>            
-              <h3>€{totalPrice === 20 ? 0 : parseFloat(totalPrice).toFixed(2)}</h3>
+              <h3>€{cartItem.length === 0 ? 0 : parseFloat(totalPrice).toFixed(2)}</h3>
             </div> 
             {
-              totalPrice === 20 ? null : (  
+              cartItem.length === 0 ? null : (  
               <>                
                 <Link to='/checkout'>
                   <button className='btn-checkout'>Procedi al pagamento</button>      

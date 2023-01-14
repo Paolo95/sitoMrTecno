@@ -12,10 +12,18 @@ const Checkout = ({ cleanCart, cartItem }) => {
     const navigate = useNavigate();
     const location = useLocation();
     const goBack = () => navigate(-1);
-    const totalPrice = cartItem.reduce((price, item) => price + item.qty * item.price, 20);
     const ORDER_URL = '/api/order/newOrder';
     const PRODUCT_URL = '/api/product/checkAvailability';
     const [availability, setAvailability] = React.useState('false');
+
+    let shipping_cost = 9.99;
+
+    cartItem.forEach(element => {
+        if(element.category === 'PC' || element.category === 'Notebook') {
+        shipping_cost = 19.99;
+        }
+    });  
+    const totalPrice = cartItem.reduce((price, item) => price + item.qty * item.price, shipping_cost);
 
     const { auth } = useAuth();
 
@@ -85,7 +93,7 @@ const Checkout = ({ cleanCart, cartItem }) => {
         <section className='checkout'>
             <div className="container">
                 {
-                    totalPrice === 20 || availability === 'false' ? 
+                    cartItem.lenght === 0 || availability === 'false' ? 
                   
                     <div className="notAvailable-div">                
                         <section>
@@ -96,7 +104,7 @@ const Checkout = ({ cleanCart, cartItem }) => {
                             </div>   
                             
                             <p className='notAvailable-p'>
-                                Uno dei prodotti non è più disponibile!<br/>  
+                                Uno dei prodotti non è più disponibile o il carrello è vuoto!<br/>  
                                              
                                 <span className='notAvailable-login-link'>                            
                                     <button className='notAvailable-goBack-btn' onClick={goBack}>Torna indietro</button>                            
@@ -132,10 +140,10 @@ const Checkout = ({ cleanCart, cartItem }) => {
                                         breakdown: {
                                             item_total: {
                                                 currency_code: "EUR",
-                                                value: totalPrice - 20
+                                                value: totalPrice - shipping_cost
                                             },
                                             shipping: {
-                                                value: 20.00,
+                                                value: shipping_cost,
                                                 currency_code: "EUR",
                                             },
                                         },

@@ -8,7 +8,7 @@ import useAuth from '../../../../hooks/useAuth';
 
 const ProductPage = () => {
 
-    const [numProdListed, setNumProdListed] = React.useState(3);
+    const [numProdListed, setNumProdListed] = React.useState(6);
     const [categoryOptions, setCategories] = React.useState([]);
     const [orderSelected, setOrderSelected] = React.useState('Migliori');
     const [searchString, setSearchString] = React.useState('');
