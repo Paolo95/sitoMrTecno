@@ -129,7 +129,7 @@ const OrderDetails = () => {
                             <>
                                 
                                 <li className='product-item' key={index}>
-                                    {value['qty']} x {value['product.product_name']} - {parseFloat(value['product.price']).toFixed(2)} €                               </li>
+                                    {value['qty']} x {value['product.product_name']} - {parseFloat(value['priceEach']).toFixed(2)} €                               </li>
                                 
                             </>
                         )
