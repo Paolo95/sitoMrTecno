@@ -135,7 +135,8 @@ const OrderDetails = () => {
                         )
                     })
                 }
-                <li><b>Spese di spedizione: </b>20.00€</li>
+                
+                <li><b>Spese di spedizione: </b>{orderDetails[0]?.['order.shipping_cost']}€</li>
                 </ul>
 
                 
