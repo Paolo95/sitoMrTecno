@@ -24,7 +24,7 @@ const SlideCard = ({ tab }) => {
         return (
             <div className="box d_flex top" key={index}>
               <div className="left">
-                <img src={value.cover} alt="" />
+                <img src={window.location.origin + value.cover} alt="" />
               </div>
               <div className="right">
                 <h1>{value.title}</h1>

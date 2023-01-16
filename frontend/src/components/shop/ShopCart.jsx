@@ -22,7 +22,7 @@ const ShopCart = ({ addToCart, shopItems}) => {
                                 pathname: `/product/${shopItems.id}`,
                             }}>
                                 <span className="discount">{shopItems.discount}% di sconto</span>
-                                <img src={shopItems.cover} alt="" />
+                                <img src={window.location.origin + shopItems.cover} alt="" />
                                 <div className="product-like">
                                     <label>0</label> <br />
                                     <i className="far fa-heart" onClick={increment}></i>

@@ -159,7 +159,7 @@ const ProductPage = () => {
                                            .map((value, index) => {
                                     return(
                                         <div key={index} className="card card-product-grid shadow-sm">
-                                            <img src={"." + value.cover} alt="" />
+                                            <img src={window.location.origin + value.cover} alt="" />
                                             <div className="info-wrap">
                                                 <span className='title' >{value.product_name}</span>
                                                 <div className="price mb-2">

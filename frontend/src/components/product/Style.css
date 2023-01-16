@@ -7,6 +7,7 @@
 .card-wrapper img{
     width: 100%;
     display: block;
+    object-fit: contain;
 }
 
 .card-wrapper .img-display{
