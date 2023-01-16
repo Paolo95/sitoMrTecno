@@ -1,22 +1,24 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { FacebookIcon, FacebookShareButton, TelegramIcon, TelegramShareButton, WhatsappIcon, WhatsappShareButton } from 'react-share'
 import uuid from 'react-uuid'
-import Sdata from '../shop/Sdata'
-import Reviews from './reviews'
+//import Reviews from './reviews'
 import Select from 'react-select'
 
 import './Style.css'
+import axios from '../../api/axios'
 
 const Product = ({ addToCartProduct }) => {
   
-  const params = useParams(); 
-  const { shopItems } = Sdata;
-  const { reviews } = Reviews;
-  const product = shopItems.find(item => item.id === parseInt(params.id));
+  const params = useParams();
+  //const { reviews } = Reviews;
   const [numItems, setNumItems] = React.useState(1);
-  const [orderRevChoice, setRevOrderChoice] = React.useState(0);
+  const [orderRevChoice, setRevOrderChoice] = React.useState('Migliori');
   const [numRevs, setNumRevs] = React.useState(6);
+  const [product, setProduct] = useState([]);
+  const [reviews, setReviews] = useState([]);
+  const GET_PRODUCT_INFO = '/api/product/getProductShop';
+  const GET_REVIEWS = '/api/review/getProdReviews';
 
   const handleImgClick = (imgId) => {
     const imgs = document.querySelectorAll('.img-select img');
@@ -37,8 +39,9 @@ const Product = ({ addToCartProduct }) => {
   }
 
   const revOptions = [
-    { value: 0, label: 'Migliori' },
-    { value: 1, label: 'Peggiori' },
+    { value: 'Migliori', label: 'Migliori' },
+    { value: 'Peggiori', label: 'Peggiori' },
+    { value: 'Recenti', label: 'Recenti' },
   ];
 
   const styles = {
@@ -58,18 +61,96 @@ const Product = ({ addToCartProduct }) => {
     setNumRevs(numRevs + 6);
   }
 
+  useEffect(() => {
+
+    const getProduct = async () => {
+
+      try {
+       
+        const response = await axios.post(GET_PRODUCT_INFO, 
+          { 
+            prod_id: params.id,
+          },
+          {
+            
+          }
+        );  
+
+        setProduct(response.data);
+  
+      } catch (err) {
+        if (!err?.response) 
+          alert('Server non attivo!');
+        else if (err.response.status === 500 ){
+          alert(err.response?.data);
+        }
+        else if (err.response.status === 404 ){
+          alert(err.response?.data);
+        }else {
+          alert('Recupero prodotto fallito!');
+        }
+  
+      }    
+      
+    }
+    
+    getProduct();
+
+    // eslint-disable-next-line
+  }, [])
+
+  useEffect(() => {
+
+    const getReviews = async () => {
+
+      try {
+       
+        const response = await axios.post(GET_REVIEWS, 
+          { 
+            prod_id: params.id,
+            orderRevChoice: orderRevChoice,
+          },
+          {
+            
+          }
+        );  
+
+        setReviews(response.data);
+  
+      } catch (err) {
+        if (!err?.response) 
+          alert('Server non attivo!');
+        else if (err.response.status === 500 ){
+          alert(err.response?.data);
+        }
+        else if (err.response.status === 404 ){
+          alert(err.response?.data);
+        }else {
+          alert('Recupero recensione fallito!');
+        }
+  
+      }    
+      
+    }
+    
+    getReviews();
+
+    // eslint-disable-next-line
+  }, [orderRevChoice])
+
+
   return (
     <section className='single-product'>
       <div className="card-wrapper">
         <div className="card">
-        <h2 className="product-title-mobile">{product.name}</h2>
+        <h2 className="product-title-mobile">{product.product_name}</h2>
           <div className="product-imgs">
             <div className="img-display">
               <div className="img-showcase">
                 <img src={'.' + product.cover} alt="" />
-                <img src={'.' + product.photos[0]} alt="" />
-                <img src={'.' + product.photos[1]} alt="" />
-                <img src={'.' + product.photos[2]} alt="" />
+                <img src={'.' + product.photo_1} alt="" />
+                <img src={'.' + product.photo_2} alt="" />
+                <img src={'.' + product.photo_3} alt="" />
               </div>
             </div>
             <div className="img-select">
@@ -77,44 +158,64 @@ const Product = ({ addToCartProduct }) => {
                   <img data-id='1' src={'.' + product.cover} alt="" onClick={() => handleImgClick(1)}/>
               </div>
               <div className="img-item">
-                  <img data-id='2' src={'.' + product.photos[0]} alt="" onClick={() => handleImgClick(2)}/>
+                  <img data-id='2' src={'.' + product.photo_1} alt="" onClick={() => handleImgClick(2)}/>
               </div>
               <div className="img-item">
-                  <img data-id='3' src={'.' + product.photos[1]}  alt="" onClick={() => handleImgClick(3)}/>
+                  <img data-id='3' src={'.' + product.photo_2}  alt="" onClick={() => handleImgClick(3)}/>
               </div>
               <div className="img-item">
-                  <img data-id='4' src={'.' + product.photos[2]}  alt="" onClick={() => handleImgClick(4)}/>
+                  <img data-id='4' src={'.' + product.photo_3}  alt="" onClick={() => handleImgClick(4)}/>
               </div>
             </div>
           </div>
           <div className="product-content">
-            <h2 className="product-title">{product.name}</h2>
+            <h2 className="product-title">{product.product_name}</h2>
             <div className="product-rating">
               {Array.from({ length: product.stars }, () => <i key={uuid()} className="fa fa-star"></i>)}
               <span>4.7(21)</span>
             </div>
             <div className="product-price">
-              <p className="last-price"><span>€{product.price},00</span></p>
-              <p className="new-price"><span>€{product.price},00 <span className='discount-span'>({product.discount}% di sconto)</span></span></p>
+              <p className="last-price"><span>€{parseFloat((product.price + Math.round((product.discount / 100) * product.price))).toFixed(2)}</span></p>
+              <p className="new-price"><span>€{parseFloat(product.price).toFixed(2)} <span className='discount-span'>({product.discount}% di sconto)</span></span></p>
             </div>
 
             <div className="product-details">
               <h2>Descrizione prodotto:</h2>
                 <ul>
-                  <li>Colore: <span>Black</span></li>
-                  <li>Memoria: <span>128GB</span></li>
-                  <li>Disponibile: <span className='stock-availability'>in stock</span></li>
-                  <li>Categoria: <span>{product.category}</span></li>
-                  <li>Area di spedizione: <span>Italia</span></li>
+                  <li>Colore: <span>{product.color}</span></li>
+                  <li>CPU: <span>{product.CPU}</span></li>
+                  <li>RAM: <span>{product.RAM}</span></li>
+                  <li>HDD: <span>{product.HDD}</span></li>
+                  <li>Scheda Video: <span>{product.graphics_card}</span></li>
+                  <li>Descrizione: <span>{product.prod_description}</span></li>
+                  <li>Stato: 
+                    { product.qtyInStock > 0 ?
+                      <>
+                        <span className='stock-availability'> Disponibile</span>
+                      </> :
+                        <>
+                        <span className='stock-not-available'> Non disponibile</span>
+                      </> 
+                    }
+                  </li>
+                    
+                  
                 </ul>
             </div>
-
-            <div className="purchase-info">
-              <input type="number" min='0' defaultValue='1' onChange={handleNumItems}/>
-              <button type='button' className='btn' onClick={() => addToCartProduct(product, numItems)}>
-                Aggiungi al carrello <i className="fas fa-shopping-cart"></i>
-              </button>
-            </div>
+            
+            {
+              product.qtyInStock > 0 ?
+              <>
+                <div className="purchase-info">
+                  <input type="number" min='0' defaultValue='1' onChange={handleNumItems}/>
+                  <button type='button' className='btn' onClick={() => addToCartProduct(product, numItems)}>
+                    Aggiungi al carrello <i className="fas fa-shopping-cart"></i>
+                  </button>
+                </div>
+              </> : 
+                <>
+                </>
+            }          
 
             <div className="social-links">
               <p>Condividi su:</p>
@@ -151,18 +252,13 @@ const Product = ({ addToCartProduct }) => {
           
       <div className="review-box-container">
         {
-          reviews.filter(item => item.product_id === parseInt(params.id))
-                 .slice(0, numRevs)
-                 .sort(orderRevChoice === 0 ? (a,b) => b.stars-a.stars : (a,b) => a.stars-b.stars)
+          reviews.slice(0, numRevs)
                  .map((review, index) => {
           return (
             
                 <div className="review-box" key={index}>
                   <div className="review-box-top">
                     <div className="review-profile">
-                      <div className="review-profileImg">
-                        <img src={review.user_image} alt="" />
-                      </div>
                       <div className="review-user-name">
                         <strong>{review.username}</strong>
                       </div>
@@ -175,6 +271,15 @@ const Product = ({ addToCartProduct }) => {
                   <div className="client-comments">
                     <p>{review.review_text}</p>
                   </div>
+                  {
+                    review.review_reply.length !== 0 ? 
+                    <>
+                      <div className="client-comments">
+                        <p><b>Mr.Tecno:</b> {review.review_reply}</p>
+                      </div>
+                    </> : <></>
+                  }
+                  
                 </div>
           )
           })

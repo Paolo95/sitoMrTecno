@@ -1,6 +1,7 @@
 .card-wrapper{
+    height: 100%;
     max-width: 1100px;
-    margin: 0 auto;
+    margin: 20px auto 0 auto;
 }
 
 .card-wrapper img{
@@ -49,7 +50,7 @@
 }
 
 .card .product-title{
-    font-size: 3rem;
+    font-size: 35px;
     text-transform: capitalize;
     font-weight: 700;
     position: relative;
@@ -114,7 +115,7 @@
 
 .card .new-price .discount-span{
     color: #e94560;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .card .product-details h2{
@@ -130,6 +131,10 @@
 
 .card .product-details .stock-availability{
     color: green;
+}
+
+.card .product-details .stock-not-available{
+    color: #e94560;
 }
 
 .card .product-details ul{
@@ -311,7 +316,6 @@
     }
 
     .card-wrapper{
-        height: 80vh;
         display: flex;
         justify-content: center;
         align-items: center;

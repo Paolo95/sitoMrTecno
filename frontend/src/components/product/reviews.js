@@ -3,7 +3,7 @@ const Reviews = {
       {
         review_id: 1,
         user_id: 1,
-        product_id: 4,
+        product_id: 2,
         user_image: "../images/flash/flash-1.png",
         username: 'John',
         stars: 4,
@@ -12,7 +12,7 @@ const Reviews = {
       {
         review_id: 2,
         user_id: 2,
-        product_id: 4,
+        product_id: 2,
         user_image: "../images/flash/flash-2.png",
         username: 'Paul',
         stars: 3,
