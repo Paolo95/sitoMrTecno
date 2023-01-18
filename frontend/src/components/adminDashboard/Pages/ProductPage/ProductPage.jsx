@@ -17,6 +17,7 @@ const ProductPage = () => {
     const { auth } = useAuth();
     const CATEGORY_URL = '/api/product/categories';
     const FILTERED_PRODUCT_URL = 'api/product/filteredAdminItems';
+    const DEL_URL = 'api/product/delProduct';
 
     const searchHandler = (e) => {
         setSearchString(e.target.value)
@@ -103,12 +104,51 @@ const ProductPage = () => {
     
     }
 
+    const deleteProduct = async (delID) => {
+
+        try {
+        
+        const response = await axios.post(DEL_URL, 
+            { 
+                id: delID,
+            },
+            {
+                headers: {
+                    'Authorization': `Bearer ${auth?.accessToken}`
+                },
+                withCredentials: true
+            }
+            );
+
+            alert(response.data)
+            window.location.reload(true);
+    
+        } catch (err) {
+        if(!err?.response){
+            console.error('Server non attivo!');
+        }else if(err.response?.status === 500){
+            console.error(err.response?.data);
+        }else{
+            console.error('Recupero categorie fallito!');
+        }
+        }    
+    
+    }
+
     useEffect(() => {
 
         getProductList();
     
         // eslint-disable-next-line
     }, [orderSelected, categorySelected, searchString]);
+
+
+    const handleConfirm = (delID) => {
+
+        if (window.confirm("Sei sicuro di cancellare il prodotto?")) {
+            deleteProduct(delID);
+        }
+    }
 
 
   return (
@@ -159,7 +199,7 @@ const ProductPage = () => {
                                            .map((value, index) => {
                                     return(
                                         <div key={index} className="card card-product-grid shadow-sm">
-                                            <img src={window.location.origin + value.cover} alt="" />
+                                            <img src={value.cover} alt="" />
                                             <div className="info-wrap">
                                                 <span className='title' >{value.product_name}</span>
                                                 <div className="price mb-2">
@@ -170,10 +210,9 @@ const ProductPage = () => {
                                                              to={`/adminDashboard/products/edit/${value.id}`}>
                                                         <i className="fas fa-pen"></i>
                                                     </NavLink>
-                                                    <NavLink className={'btn btn-outline-danger p-2 pb-3'}
-                                                             to={`/adminDashboard/products/delete/${value.id}`}>
+                                                    <button onClick={() => handleConfirm(value.id)} className={'btn btn-outline-danger p-2 pb-3'}>
                                                         <i className="fas fa-trash-alt"></i>
-                                                    </NavLink>
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>

@@ -49,6 +49,7 @@
 .shop .product img{
     width: 100%;
     cursor: pointer;
+    height: 300px;
 }
 
 .shop .product {

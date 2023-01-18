@@ -46,6 +46,12 @@
     border-radius: 0.25rem;
 }
 
+.productPage .card img{
+    width: 100%;
+    height: 300px;
+    object-fit: contain;
+}
+
 .productPage .card .card-header{
     display: flex;
     justify-content: space-between;

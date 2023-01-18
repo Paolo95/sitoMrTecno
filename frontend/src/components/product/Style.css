@@ -6,6 +6,7 @@
 
 .card-wrapper img{
     width: 100%;
+    height: 300px;
     display: block;
     object-fit: contain;
 }
@@ -13,13 +14,14 @@
 .card-wrapper .img-display{
     overflow: hidden;
     margin: 0px auto;
-    width: 90%;
+    width: 100%;
 }
 
 .card-wrapper .img-display .img-showcase{
     display: flex;
     width: 100%;
     transition: all 0.5s ease;
+    margin: 6%;
 }
 .card-wrapper .img-display .img-showcase img{
     min-width: 100%;

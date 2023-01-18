@@ -147,24 +147,24 @@ const Product = ({ addToCartProduct }) => {
           <div className="product-imgs">
             <div className="img-display">
               <div className="img-showcase">
-                <img src={window.location.origin + product.cover} alt="" />
-                <img src={window.location.origin + product.photo_1} alt="" />
-                <img src={window.location.origin + product.photo_2} alt="" />
-                <img src={window.location.origin + product.photo_3} alt="" />
+                <img src={product.cover} alt="" />
+                <img src={product.photo_1} alt="" />
+                <img src={product.photo_2} alt="" />
+                <img src={product.photo_3} alt="" />
               </div>
             </div>
             <div className="img-select">
               <div className="img-item">
-                  <img data-id='1' src={window.location.origin + product.cover} alt="" onClick={() => handleImgClick(1)}/>
+                  <img data-id='1' src={product.cover} alt="" onClick={() => handleImgClick(1)}/>
               </div>
               <div className="img-item">
-                  <img data-id='2' src={window.location.origin + product.photo_1} alt="" onClick={() => handleImgClick(2)}/>
+                  <img data-id='2' src={product.photo_1} alt="" onClick={() => handleImgClick(2)}/>
               </div>
               <div className="img-item">
-                  <img data-id='3' src={window.location.origin + product.photo_2}  alt="" onClick={() => handleImgClick(3)}/>
+                  <img data-id='3' src={product.photo_2}  alt="" onClick={() => handleImgClick(3)}/>
               </div>
               <div className="img-item">
-                  <img data-id='4' src={window.location.origin + product.photo_3}  alt="" onClick={() => handleImgClick(4)}/>
+                  <img data-id='4' src={product.photo_3}  alt="" onClick={() => handleImgClick(4)}/>
               </div>
             </div>
           </div>
