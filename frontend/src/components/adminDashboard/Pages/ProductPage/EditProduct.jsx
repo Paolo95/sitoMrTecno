@@ -22,6 +22,7 @@ const EditProduct = () => {
     const [brandName, setBrandName] = useState('');
     const [price, setPrice] = useState(0);
     const [prodDesc, setProdDesc] = useState('');
+    const [status, setStatus] = useState('');
     const [color, setColor] = useState('');
     const [cpu, setCPU] = useState('');
     const [ram, setRAM] = useState('');
@@ -30,7 +31,8 @@ const EditProduct = () => {
     const [stars, setStars] = useState(0);
     const [discount, setDiscount] = useState(0);
     const [qtyInStock, setQtyInStock] = useState(0);
-
+    const CATEGORY_URL = 'api/product/categories';
+    const [categories, setCategories] = useState([]);
 
     const getProductData = async () => {
 
@@ -67,6 +69,8 @@ const EditProduct = () => {
                     setPrice(element.value)
                 } else if (element.key === 'prod_description'){
                     setProdDesc(element.value)
+                } else if (element.key === 'status'){
+                    setStatus(element.value)
                 } else if (element.key === 'color'){
                     setColor(element.value)
                 } else if (element.key === 'CPU'){
@@ -102,6 +106,44 @@ const EditProduct = () => {
 
     if (productInfo.length === 0) getProductData();
 
+    const getCategories = async () => {
+
+        try {
+        
+        const response = await axios.get(CATEGORY_URL, 
+            { 
+                
+            },
+            {
+                headers: { 'Content-Type': 'application/json'},
+                withCredentials: true
+            }
+            );
+
+            setCategories(response.data);
+    
+        } catch (err) {
+        if(!err?.response){
+            console.error('Server non attivo!');
+        }else if(err.response?.status === 500){
+            console.error(err.response?.data);
+        }else{
+            console.error('Recupero categorie fallito!');
+        }
+        }    
+    
+    }
+
+    if (categories.length === 0) getCategories();
+
+    const handleStatusSel = (e) => {
+        setStatus(e);
+    }
+
+    const handleCategorySel = (e) => {
+        setCategory(e);
+    }
+
     const handleSubmit = (e) => {
         
         e.preventDefault();
@@ -122,6 +164,7 @@ const EditProduct = () => {
                     brandName: brandName,
                     price: price,
                     prodDesc: prodDesc,
+                    status: status,
                     color: color,
                     cpu: cpu,
                     ram: ram,
@@ -219,7 +262,7 @@ const EditProduct = () => {
                                 productInfo.map((item, index) => {
                                     return(
                                         <div key={index} className="mb-4">
-                                            <label htmlFor="product_title" className='form-label'>{item.key}</label>
+                                            <label htmlFor="product_label" className='form-label'>{item.key}</label>
                                                 <>
                                                     {
                                                         (item.key === 'id' || item.value === '') ?
@@ -229,6 +272,17 @@ const EditProduct = () => {
                                                                    id={item.key}
                                                                    disabled={true}
                                                                    defaultValue={item.value}/>
+                                                            ):
+                                                        (item.key === 'status') ?
+                                                            (
+                                                                <select className='form-control' 
+                                                                        form="editForm" 
+                                                                        onChange={(e) => handleStatusSel(e.target.value)}
+                                                                        defaultValue={item.value}>
+                                                                    <option value={'Nuovo'}>Nuovo</option>
+                                                                    <option value={'Usato'}>Usato</option>
+                                                                    <option value={'Ricondizionato'}>Ricondizionato</option>
+                                                                </select>
                                                             ):
                                                         (item.key.includes('photo') || item.key.includes('cover') ) ? (
                                                             <>
@@ -240,6 +294,22 @@ const EditProduct = () => {
                                                                    required/>
                                                             <img className='edit-img' src={item.value} alt="" />
                                                             </>
+                                                        ) : 
+                                                        (item.key.includes('category')) ? (
+                                                            <select className='form-control' 
+                                                                    form="editForm" 
+                                                                    onChange={(e) => handleCategorySel(e.target.value)}>
+                                                                {
+                                                                        categories.map((item, index) => {
+                                                                            return(
+                                                                                <>
+                                                                                    <option key={index} value={item.value}>{item.category}</option>
+                                                                                </>                                                
+                                                                            )
+                                                                        })
+                                                                }                               
+                                                                
+                                                            </select>
                                                         ) : (item.key.includes('description')) ? (
                                                             <textarea 
                                                                 rows='7'
