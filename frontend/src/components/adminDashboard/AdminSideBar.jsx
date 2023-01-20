@@ -49,6 +49,12 @@ const AdminSideBar = () => {
                         <h3>Aggiungi prodotti</h3>
                     </NavLink>
 
+                    <NavLink to={'/adminDashboard/newCategory'}>
+                              
+                        <i className="fas fa-list"></i>
+                        <h3>Categorie</h3>
+                    </NavLink>
+
                     <NavLink to={'/adminDashboard/orders'}>
                               
                         <i className="fas fa-tags"></i>

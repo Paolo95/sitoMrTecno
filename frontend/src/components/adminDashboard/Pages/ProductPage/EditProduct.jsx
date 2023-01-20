@@ -327,7 +327,18 @@ const EditProduct = () => {
                                                                    defaultValue={parseFloat(item.value).toFixed(2)}
                                                                    min='0'
                                                                    required/>
-                                                        )
+                                                        ):
+                                                        (typeof(item.value) === 'number') && item.key === 'stars' ? (
+                                                           <input type="number"
+                                                                  className='form-control'
+                                                                  step="any" 
+                                                                  onChange={(e) => handleChange(item.key, e.target.value)}
+                                                                  id={item.key}
+                                                                  defaultValue={item.value}
+                                                                  min='0'
+                                                                  max='5'
+                                                                  required/>
+                                                       )
                                                         :
                                                          (typeof(item.value) === 'number') ? (
                                                             <input type="number"
