@@ -15,6 +15,7 @@ const EditOrder = () => {
     const [date, setDate] = useState('');
     const [shipping_code, setShippingCode] = useState('');
     const [shipping_carrier, setCarrier] = useState('');
+    const [orderStatus, setOrderStatus] = useState('');
     const [isChanged, setIsChanged] = useState(false);
 
     useEffect(() => {
@@ -40,6 +41,7 @@ const EditOrder = () => {
             setDate(res[0]['order.order_date'])
             setShippingCode(res[0]['order.shipping_code'])
             setCarrier(res[0]['shipping_carrier'])
+            setOrderStatus(res[0]['order.order_status']);
       
           } catch (err) {
             if (!err?.response) 
@@ -74,6 +76,7 @@ const EditOrder = () => {
                     editedDate: date,
                     editedShippingCode: shipping_code,
                     editedShippingCarrier: shipping_carrier,
+                    editedStatus: orderStatus,
                 },
                 {
                     headers: {
@@ -110,6 +113,11 @@ const EditOrder = () => {
         setIsChanged(true);
         setDate(e);
     }
+
+    const handleOrderStatus = (e) => {
+      setIsChanged(true);
+      setOrderStatus(e);
+  }
 
     const handleShippingChange = (e) => {
         setIsChanged(true);
@@ -163,6 +171,39 @@ const EditOrder = () => {
                                 <input className='editable' type="text"
                                        onChange={(e) => handleShippingChange(e.target.value)}
                                        defaultValue={orderDetails[0]?.['order.shipping_code']}/>
+                            </li>
+
+                            <li>
+                                <b>Stato ordine: </b>
+                                <select className='statusSelect'
+                                        onChange={(e) => handleOrderStatus(e.target.value)}>
+                                    {
+                                      orderStatus==='Ordine in lavorazione' ?
+                                      <>
+                                        <option selected value={'Ordine in lavorazione'}>In lavorazione</option>
+                                        <option value={'Ordine in spedizione'}>In spedizione</option>
+                                        <option value={'Ordine Concluso'}>Concluso</option>
+                                      </>
+                                        :
+                                        orderStatus==='Ordine in spedizione' ?
+                                        <>
+                                          <option value={'Ordine in lavorazione'}>In lavorazione</option>
+                                          <option selected value={'Ordine in spedizione'}>In spedizione</option>
+                                          <option value={'Ordine Concluso'}>Concluso</option>
+                                        </>
+                                        :
+                                        <>
+                                          <option value={'Ordine in lavorazione'}>In lavorazione</option>
+                                          <option value={'Ordine in spedizione'}>In spedizione</option>
+                                          <option selected value={'Ordine Concluso'}>Concluso</option>
+                                        </>
+                                       
+                                        
+                                      
+                                      
+                                    }
+                                  
+                                </select>
                             </li>
                             <span><b>Prodotti acquistati:</b></span>
                             {

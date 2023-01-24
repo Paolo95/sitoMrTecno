@@ -92,6 +92,7 @@ const EditProduct = () => {
             });
 
             setProductInfo(response.data);
+            console.log(response.data)
     
         } catch (err) {
         if(!err?.response){
@@ -310,7 +311,13 @@ const EditProduct = () => {
                                                                         categories.map((item, index) => {
                                                                             return(
                                                                                 <>
-                                                                                    <option key={index} value={item.value}>{item.category}</option>
+                                                                                    { 
+                                                                                        productInfo.find(el => el.key === 'category').value === item.category ? 
+                                                                                            <option selected key={index} value={item.value}>{item.category}</option>
+                                                                                            :
+                                                                                            <option key={index} value={item.value}>{item.category}</option>
+                                                                                    }
+                                                                                    
                                                                                 </>                                                
                                                                             )
                                                                         })

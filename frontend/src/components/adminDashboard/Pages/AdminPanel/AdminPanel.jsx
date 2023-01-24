@@ -77,7 +77,7 @@ const AdminPanel = () => {
                           {value['order.order_status']}
                         </td>
                         <td className='dash-btn'>
-                          <NavLink to={'/AdminDashboard/orders'}>
+                          <NavLink to={`/AdminDashboard/orders/editOrder/${value['order.id']}`}>
                             <button>Dettaglio</button>
                           </NavLink>
                         </td>
