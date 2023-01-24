@@ -130,16 +130,16 @@ const NewProductPage = () => {
     <section className='newProductPage'>
         <form id='editForm' onSubmit={handleSubmit}>
         <div className="newProductPage-heading">
-                <div className="newProductPage-backBtn-div">
-                    <NavLink to={'/adminDashboard/products'}>
-                        <button className="newProductPage-backBtn">Vai ai prodotti</button>
-                    </NavLink>
-                </div>                
-                <h2 className='newProductPage-title'>Aggiungi prodotto</h2>
-                <div className='newProductPage-pubBtn-div'>
-                    <button type='submit' form='editForm' className="newProductPage-pubBtn">Pubblica ora</button>
-                </div>
+            <div className="newProductPage-backBtn-div">
+                <NavLink to={'/adminDashboard/products'}>
+                    <button className="newProductPage-backBtn">Vai ai prodotti</button>
+                </NavLink>
+            </div>                
+            <h2 className='newProductPage-title'>Aggiungi prodotto</h2>
+            <div className='newProductPage-pubBtn-div'>
+                <button type='submit' form='editForm' className="newProductPage-pubBtn">Pubblica ora</button>
             </div>
+        </div>
             <div className="newProductPage-content">
                 <div className="newProductPage-body">
                     <div className="newProductPage-card card shadow-sm">

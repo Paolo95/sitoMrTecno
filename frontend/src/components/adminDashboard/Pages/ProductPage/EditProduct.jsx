@@ -33,6 +33,7 @@ const EditProduct = () => {
     const [qtyInStock, setQtyInStock] = useState(0);
     const CATEGORY_URL = 'api/product/categories';
     const [categories, setCategories] = useState([]);
+    const [isChanged, setIsChanged] = useState(false); 
 
     const getProductData = async () => {
 
@@ -142,6 +143,7 @@ const EditProduct = () => {
 
     const handleCategorySel = (e) => {
         setCategory(e);
+        setIsChanged(true);
     }
 
     const handleSubmit = (e) => {
@@ -201,6 +203,7 @@ const EditProduct = () => {
     }
 
     const handleChange = (keyForm, e) => {
+        setIsChanged(true);
 
        if(keyForm === 'cover'){
             setCover(e)
@@ -251,7 +254,11 @@ const EditProduct = () => {
                 </div>                
                 <h2 className='editProduct-title'>Modifica prodotto</h2>
                 <div className='editProduct-pubBtn-div'>
-                    <button type='submit' form='editForm' className="editProduct-pubBtn">Pubblica ora</button>
+                    {
+                        isChanged ? <button type='submit' form='editForm' className="editProduct-pubBtn">Pubblica ora</button>
+                                  : <button disabled type='submit' form='editForm' className="editProduct-pubBtn disabled">Pubblica ora</button>
+                    }
+                    
                 </div>
             </div>
             <div className="editProduct-content">

@@ -1,0 +1,82 @@
+.editOrder{
+    margin-left: auto;
+    margin-right: auto;
+    padding: 3% 2% 60vh 2%;
+    height: 100%;
+}
+
+.editOrder .editOrder-heading{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.editOrder .editOrder-heading h2{
+    margin-top: 0;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.editOrder .editOrder-content{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.editOrder .editOrder-content .editOrder-body{
+    flex: 0 0 auto;
+    width: 66.6666%;
+}
+
+.editOrder .editOrder-content .card{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0.25rem;
+}
+
+.editOrder .editOrder-content .card .card-body{
+    flex: 1 1 auto;
+    padding: 1rem 1rem;
+}
+
+.editOrder .editOrder-content .card .card-body li{
+    padding-bottom: 10px;
+}
+
+.editOrder .editOrder-content .card .card-body .product-item{
+    padding-left: 10px;
+}
+
+.editOrder .editOrder-content .card .card-body .mb-4{
+    margin-bottom: 1.5rem;
+}
+
+.editOrder .editOrder-heading .createBtn-div button{
+    cursor: pointer;
+    width: 120px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: #0f3460;
+    color: aliceblue;
+    font-weight: 600;
+}
+
+.editOrder .card-body input{
+    font-size: 15px;
+}
+
+.editOrder .card-body .editable{
+    border: 1px solid;
+    padding: 2px;
+}
+
+.editOrder .editOrder-heading .createBtn-div .disabled{
+    background-color: grey;
+    cursor: not-allowed;
+}

@@ -4,8 +4,8 @@ import AdminPanel from './Pages/AdminPanel/AdminPanel';
 import ProductPage from './Pages/ProductPage/ProductPage';
 import EditProduct from './Pages/ProductPage/EditProduct';
 import NewProductPage from './Pages/NewProductPage/NewProductPage';
-import CategoryPage from './Pages/CategoryPage/CategoryPage';
 import OrderPageAdmin from './Pages/OrderPage/OrderPageAdmin';
+import EditOrder from './Pages/EditOrder/EditOrder';
 
 const Navpage = () => {
   return (
@@ -23,10 +23,10 @@ const Navpage = () => {
             <Route path='/newProduct' element={<NewProductPage />}/>
         </Routes>
         <Routes>
-            <Route path='/newCategory' element={<CategoryPage/>}/>
+            <Route path='/orders' element={<OrderPageAdmin />}/>
         </Routes>
         <Routes>
-            <Route path='/orders' element={<OrderPageAdmin/>}/>
+            <Route path='/orders/editOrder/:orderID' element={<EditOrder />}/>
         </Routes>
     </section>
   )

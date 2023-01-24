@@ -28,6 +28,12 @@
     font-weight: 600;
 }
 
+.editProduct .editProduct-heading .editProduct-pubBtn-div .disabled{
+    cursor: not-allowed;
+    background-color: gray;
+  
+}
+
 .editProduct .editProduct-heading .editProduct-backBtn-div .editProduct-backBtn{
     width: 110px;
     height: 40px;

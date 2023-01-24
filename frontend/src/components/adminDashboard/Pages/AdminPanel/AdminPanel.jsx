@@ -1,8 +1,54 @@
-import React from 'react'
-import { NavLink} from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { NavLink } from 'react-router-dom';
 import './adminPanelStyle.css'
+import useAuth from '../../../../hooks/useAuth';
+import axios from '../../../../api/axios';
+import Moment from 'react-moment';
 
 const AdminPanel = () => {
+
+  const { auth } = useAuth();
+  const [orderList, setOrderList] = useState([]);
+  const GET_ORDER_LIST = 'api/order/getRecentOrders';
+
+  useEffect(() => {
+
+    const orderList = async () => {
+
+      try {
+
+        const response = await axios.post(GET_ORDER_LIST,
+          {
+
+          },
+          {
+            headers: {
+              'Authorization': `Bearer ${auth?.accessToken}`
+            },
+            withCredentials: true
+          }
+        );
+
+        setOrderList(response.data);
+        console.log(response.data)
+
+      } catch (err) {
+        if (!err?.response) {
+          console.error('Server non attivo!');
+        } else if (err.response?.status === 500) {
+          console.error(err.response?.data);
+        } else {
+          console.error('Recupero ordini fallito!');
+        }
+      }
+
+    }
+
+    orderList();
+
+  }, [orderList.length, auth.accessToken])
+
+
   return (
     <section className="adminPanel">
       <div className="adminPanel-heading">
@@ -55,28 +101,38 @@ const AdminPanel = () => {
           <div className="table-div">
             <table className="table">
               <tbody>
-                <tr>
-                  <td>
-                    <b>Utente</b>
-                  </td>
-                  <td>mail@mail.com</td>
-                  <td>356,00€</td>
-                  <td>
-                    14/10/2022
-                  </td>
-                  <td className='dash-btn'>
-                    <NavLink to={'/AdminDashboard/orders'}>
-                      <button>Dettaglio</button>
-                    </NavLink>
-                  </td>
-                </tr>
+                {
+                  orderList.map((value, index) => {
+                    return (
+                      <tr key={index}>
+                        <td>
+                          {<Moment format='DD/MM/YYYY'>{value['order.order_date']}</Moment>}
+                        </td>
+                        <td>
+                          {value['order.user.email']}
+                        </td>
+                        <td>
+                          {value['order_total']} €
+                        </td>
+                        <td>
+                          {value['order.order_status']}
+                        </td>
+                        <td className='dash-btn'>
+                          <NavLink to={'/AdminDashboard/orders'}>
+                            <button>Dettaglio</button>
+                          </NavLink>
+                        </td>
+                      </tr>
+                    )
+                  })
+                }
               </tbody>
             </table>
           </div>
         </div>
       </div>
     </section>
-    
+
   )
 }
 
