@@ -136,7 +136,9 @@ const OrderDetails = () => {
                     })
                 }
                 
-                <li><b>Spese di spedizione: </b>{orderDetails[0]?.['order.shipping_cost']}€</li>
+                <li><b>Spese di spedizione: </b>{parseFloat(orderDetails[0]?.['order.shipping_cost']).toFixed(2)}€</li>
+               
+                <li><b>Commissioni PayPal: </b>{parseFloat(orderDetails[0]?.['order.paypal_fee']).toFixed(2)}€</li>
                 </ul>
 
                 

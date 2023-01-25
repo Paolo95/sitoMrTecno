@@ -23,7 +23,11 @@ const Checkout = ({ cleanCart, cartItem }) => {
         shipping_cost = 19.99;
         }
     });  
-    const totalPrice = cartItem.reduce((price, item) => price + item.qty * item.price, shipping_cost);
+
+    const totalWithoutCommissions = cartItem.reduce((price, item) => price + item.qty * item.price, shipping_cost);
+    const netTotal = Math.round((totalWithoutCommissions - shipping_cost) * 100) / 100;
+    const payPalCommissions = Math.round(((totalWithoutCommissions * 3) / 100) * 100) / 100;
+    const totalPrice = Math.round((payPalCommissions + totalWithoutCommissions) * 100) / 100;
 
     const { auth } = useAuth();
 
@@ -60,7 +64,7 @@ const Checkout = ({ cleanCart, cartItem }) => {
 
     const newOrder = async (orderDetails) => {
 
-        const response = await axios.post(ORDER_URL, 
+        await axios.post(ORDER_URL, 
             { 
               paypalDetails: orderDetails,
               userInfo: auth?.accessToken,
@@ -73,7 +77,6 @@ const Checkout = ({ cleanCart, cartItem }) => {
                 withCredentials: true
             }
             );
-        console.log(response)
     }
 
     const getItemArray = () => {
@@ -140,12 +143,16 @@ const Checkout = ({ cleanCart, cartItem }) => {
                                         breakdown: {
                                             item_total: {
                                                 currency_code: "EUR",
-                                                value: totalPrice - shipping_cost
+                                                value: netTotal,
                                             },
                                             shipping: {
                                                 value: shipping_cost,
                                                 currency_code: "EUR",
                                             },
+                                            tax_total: {
+                                                value: payPalCommissions,
+                                                currency_code: "EUR",
+                                            }
                                         },
                                     }, "items": getItemArray(),
                                 },
