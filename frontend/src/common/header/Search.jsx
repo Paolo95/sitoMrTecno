@@ -68,12 +68,11 @@ const Search = ({ cartItem }) => {
               </Link>
             </div>
 
-            <div className="search-box f_flex">
+            <div className="search-box">
               <i className='fa fa-search'></i>
               <input type='text' 
                      placeholder='Digita il prodotto che desideri e premi Invio ...'
                      onChange={handleFilter}/>
-              <span>Tutte le categorie</span>
               {
               itemList.length !== 0 && (
                 <div className="dataResult">
@@ -87,7 +86,7 @@ const Search = ({ cartItem }) => {
                     })
                   }
                 </div>
-              )
+              ) 
             }
 
             </div>
