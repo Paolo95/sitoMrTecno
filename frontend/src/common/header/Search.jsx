@@ -35,8 +35,7 @@ const Search = ({ cartItem }) => {
         }
         );
 
-        setItemList(response.data);   
-        console.log(response.data)      
+        setItemList(response.data);    
 
     } catch (err) {
       if(!err?.response){
@@ -79,7 +78,7 @@ const Search = ({ cartItem }) => {
                   {
                     itemList.map((item, index) => {
                       return (
-                        <a href={"/product/" + item.id} className="dataitem"> 
+                        <a key={index} href={"/product/" + item.id} className="dataitem"> 
                           <p>{item.product_name}</p>
                         </a>
                       )
