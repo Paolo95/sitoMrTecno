@@ -20,31 +20,6 @@
     margin: 30px 0;
 }
 
-.homeSlide ul {
-    position: absolute;
-    bottom: 20px;
-}
-
-.homeSlide ul li{
-    border: 2px solid #b8b7b7;
-    border-radius: 50%;
-    padding: 10px;
-}
-
-.homeSlide ul li button {
-    background: transparent !important;
-    color: transparent !important;
-}
-
-.homeSlide ul li button::before{
-    font-size: 15px;
-    color: #0f3460;
-    position: absolute;
-    top: 1px;
-    left: 0.5px;
-    margin: auto;
-}
-
 .homeSlide .box {
     display: flex !important;
 }
@@ -62,9 +37,8 @@
     height: 100%;
 }
 
-.slick-dots{
-    top: 340px;
-}
+
+
 
 @media only screen and (max-width: 390px)  {
     .homeSlide h1 {
@@ -91,9 +65,5 @@
 
     .contentWidth{
         width: 100%;
-    }
-
-    .slick-dots{
-        display: none;
     }
 }
