@@ -6,16 +6,16 @@ const CategoryTab = ( { tab } ) => {
     const data = [
         {
             tab: "Permuta",
-            testo: "Clicca qui per permutare uno o più oggetti !",
+            testo: "Permuta",
             button_text: "Permuta ora!",
         },
         {
             tab: "Ricondizionati",
-            testo: "Entra nello shop ricondizionati !",
+            testo: "Ricondizionati",
         },
         {
             tab: "Nuovo",
-            testo: "Scopri tutti i prodotti nuovi !",
+            testo: "Nuovo",
         }
     ]
 

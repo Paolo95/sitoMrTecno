@@ -70,7 +70,7 @@ const Search = ({ cartItem }) => {
             <div className="search-box">
               <i className='fa fa-search'></i>
               <input type='text' 
-                     placeholder='Digita il prodotto che desideri e premi Invio ...'
+                     placeholder='Digita il prodotto che desideri...'
                      onChange={handleFilter}/>
               {
               itemList.length !== 0 && (

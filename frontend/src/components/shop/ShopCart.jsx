@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import uuid from 'react-uuid'
 
 const ShopCart = ({ addToCart, shopItems, cartItem, deleteCartProduct, decreaseQty}) => {
@@ -11,7 +11,7 @@ const ShopCart = ({ addToCart, shopItems, cartItem, deleteCartProduct, decreaseQ
         setCount(count + 1);
     }
 
-    console.log(cartItem.length)
+    const navigate = useNavigate();
     
   return (
     <> 
@@ -22,7 +22,11 @@ const ShopCart = ({ addToCart, shopItems, cartItem, deleteCartProduct, decreaseQ
                                     <>
                                         <div className="cartSummit-heading">
                                             <h1>Riepilogo carrello</h1>
-                                            <button onClick={() => {setCartSummit(false)}}><i className="fas fa-times"></i></button>
+                                            <div>
+                                                <button className='btn-cart' onClick={() => {navigate('/cart')}}><i className="fas fa-shopping-cart"></i></button>
+                                                <button onClick={() => {setCartSummit(false)}}><i className="fas fa-times"></i></button>
+                                            </div>
+                                            
                                         </div>                            
                                         <div className="cartSummit-card">
                                             <div className="cartSummit-body">
