@@ -2,7 +2,6 @@ import './App.css';
 import Header from './common/header/Header';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Pages from './pages/Pages';
-//import Data from './components/flashDeals/Data'
 import { useEffect, useState } from 'react';
 import Cart from './common/cart/Cart';
 import Shop from './components/shop/Shop';
@@ -28,9 +27,6 @@ import OrderSuccess from './components/orderSuccess/OrderSuccess';
 import UserDashboard from './components/userDashboard/UserDashboard';
 
 function App() {
-
-  //step 1: fetch data from database
-  //const { productItems } = Data;
   
   const cartFromLocalStorage = JSON.parse(localStorage.getItem('cartItem') || '[]');
   const [cartItem, setCartItem] = useState(cartFromLocalStorage);
@@ -97,7 +93,7 @@ function App() {
             </Route>
             <Route exact path="/contact" element={<Contact />} >    
             </Route>
-            <Route exact path="/nuovo" element={<Shop addToCart={addToCart}/>} >    
+            <Route exact path="/nuovo" element={<Shop addToCart={addToCart} cartItem={cartItem} decreaseQty={decreaseQty} deleteCartProduct={deleteCartProduct}/>} >    
             </Route>      
             <Route exact path="/riparazioni" element={<Repair/>} >    
             </Route>

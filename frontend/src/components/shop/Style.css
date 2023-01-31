@@ -141,6 +141,79 @@
     cursor: pointer;
 } 
 
+.cartSummit{
+    position: absolute;
+    z-index: 1000;
+    margin-left: auto;
+    margin-right: auto;
+    width: 800px;
+    height: 400px;
+    background-color: #0f3460;
+    border-radius: 5px;
+    box-shadow: 0px 1px 32px -1px rgba(24,121,176,0.75);
+    -webkit-box-shadow: 0px 1px 32px -1px rgba(24,121,176,0.75);
+    -moz-box-shadow: 0px 1px 32px -1px rgba(24,121,176,0.75);
+}
+
+.cartSummit h1{
+    font-size: 20px;
+    margin: 15px;
+    color: aliceblue;
+}
+
+.cartSummit .cartSummit-heading button{
+    margin-top: 15px;
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: #ff7575;
+}
+
+.cartSummit .cartSummit-heading button:hover{
+    cursor: pointer;
+    background-color: #75baff;
+}
+
+.cartSummit .cartSummit-heading i {
+    font-size: 20px;
+}
+
+.cartSummit .cartSummit-msg{
+    padding: 15%;
+    text-align: center;
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.cartSummit-heading{
+    display: flex;
+    margin: 0 40px 0 10px;
+    justify-content: space-between;
+}
+
+.cartSummit-card{
+    background-color: aliceblue;
+    margin: 10px;
+    border-radius: 5px;
+    height: 300px;
+    overflow-y: scroll;
+}
+
+.cartSummit-card img{
+    width: auto;
+    height: auto;
+    max-width: 200px;
+    max-height: 200px;
+}
+
+.cartSummit-body .deleteCartProduct{
+    background-color: #ff7575;
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 20px;
+}
+
 
 @media only screen and (max-width: 390px) {
     .grid1{
@@ -188,5 +261,25 @@
         visibility: visible;
     }
     
+    .cartSummit{
+        width: 90vw;
+        height: 70vh;
+    }
+
+    .cartSummit .img{
+        display: none;
+    }
+
+    .cartSummit .cart-details h4{
+        font-size: 13px;
+    }
+
+    .cartSummit .removeCart{
+        margin-right: 2px;
+    }
+
+    .cartSummit .cartControl button{
+        margin: 2px;
+    }
 
 }

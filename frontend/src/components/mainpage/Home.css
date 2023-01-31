@@ -37,9 +37,6 @@
     height: 100%;
 }
 
-
-
-
 @media only screen and (max-width: 390px)  {
     .homeSlide h1 {
         font-size: 40px;

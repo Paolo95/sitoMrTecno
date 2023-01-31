@@ -7,7 +7,7 @@ import axios from '../../api/axios'
 import "./Style.css";
 import { useEffect } from 'react';
 
-export const Shop = ({ addToCart }) => {
+export const Shop = ({ addToCart, cartItem, decreaseQty, deleteCartProduct }) => {
 
   /*Fare chiamata al db per questa sezione*/
   const CATEGORY_URL = '/api/product/categories';
@@ -381,7 +381,10 @@ export const Shop = ({ addToCart }) => {
                 defaultValue={shopOptions[0]}/>
             </div>
             <div className="product-content grid1">
-              <ShopCart addToCart={addToCart} 
+              <ShopCart addToCart={addToCart}
+                        cartItem={cartItem}
+                        decreaseQty={decreaseQty} 
+                        deleteCartProduct={deleteCartProduct}
                         shopItems={shopItems.slice(0, numProdListed)}
               />
             </div>
