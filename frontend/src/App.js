@@ -3,6 +3,7 @@ import Header from './common/header/Header';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Pages from './pages/Pages';
 import { useEffect, useState } from 'react';
+import CookieConsent from 'react-cookie-consent'
 import Cart from './common/cart/Cart';
 import Shop from './components/shop/Shop';
 import Footer from './common/footer/Footer';
@@ -142,6 +143,10 @@ function App() {
             </Route>
           </Route>                  
         </Routes>
+        <CookieConsent style={{background: '#0f3460', textAlign:'center'}}
+                       buttonText='Ho capito'>
+          Questo sito utilizza i cookie per il suo funzionamento. Non vengono memorizzati dati per uso statistico.
+        </CookieConsent>
         <Footer />
       </Router>
     </>
