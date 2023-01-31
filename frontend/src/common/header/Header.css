@@ -51,13 +51,15 @@
     font-size: 20px;
     opacity: 0.5;
     padding: 15px 20px;
-    font-size: 17px; 
+    font-size: 17px;
 }
 
 .search-box input{
     width: 90%;
     padding: 10px;
     font-weight: 600;
+    font-size: 15px;
+    opacity: 0.5;
 }
 
 .search-box input:focus::placeholder{
@@ -101,6 +103,27 @@
 .search .f_flex{
     justify-content: end;
 }
+
+.search .dataResult{
+    position: absolute;
+    background-color: #fff;
+    top: 120px;
+    left: 345px;
+    width: 49%;
+    border-radius: 0 0 5px 5px;
+}
+
+.search .dataResult p{
+    font-size: 15px;
+    font-weight: 600;
+    opacity: 0.5;
+    padding: 5px;
+}
+
+.search .dataResult p:hover{
+    background-color: lightblue;
+}
+
 
 .categories{
     background-color: #f6f9fc;

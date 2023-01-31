@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import logo from '../assets/images/logo.jpg'
+import axios from '../../api/axios'
+import { useState } from 'react'
 
 const Search = ({ cartItem }) => {
 
@@ -8,6 +10,52 @@ const Search = ({ cartItem }) => {
     const search = document.querySelector(".search");
     search.classList.toggle("active", window.scrollY > 100);
   })
+
+  const [wordSearched, setWordSearched] = useState('');
+  const [itemList, setItemList] = useState([]);
+
+  const handleFilter = (e) => {
+    
+    const searchString = e.target.value;
+    setWordSearched(searchString);
+  }
+
+  const FILTERED_ITEMS_URL = '/api/product/getProductByName';
+
+  const getFilteredItems = async () => {
+
+    try {
+
+      const response = await axios.post(FILTERED_ITEMS_URL, 
+        { 
+          prod_name: wordSearched,
+        },
+        {
+            headers: { 'Content-Type': 'application/json'},
+        }
+        );
+
+        setItemList(response.data);   
+        console.log(response.data)      
+
+    } catch (err) {
+      if(!err?.response){
+        console.error('Server non attivo!');
+      }else if(err.response?.status === 500){
+        console.error(err.response?.data);
+      }else{
+        console.error('Recupero elementi fallito!');
+      }
+    }    
+
+  }
+
+  useEffect(() => {
+
+    getFilteredItems();
+
+    // eslint-disable-next-line
+  }, [wordSearched]);
   
   return (
     
@@ -22,10 +70,27 @@ const Search = ({ cartItem }) => {
 
             <div className="search-box f_flex">
               <i className='fa fa-search'></i>
-              <input type='text' placeholder='Digita il prodotto che desideri e premi Invio ...'/>
+              <input type='text' 
+                     placeholder='Digita il prodotto che desideri e premi Invio ...'
+                     onChange={handleFilter}/>
               <span>Tutte le categorie</span>
-            </div>
+              {
+              itemList.length !== 0 && (
+                <div className="dataResult">
+                  {
+                    itemList.map((item, index) => {
+                      return (
+                        <a href={"/product/" + item.id} className="dataitem"> 
+                          <p>{item.product_name}</p>
+                        </a>
+                      )
+                    })
+                  }
+                </div>
+              )
+            }
 
+            </div>
             <div className="icon f_flex width">
               <div className='user'>
                 <Link to='/login'>
