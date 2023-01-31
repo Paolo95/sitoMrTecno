@@ -30,10 +30,10 @@ const Navbar = () => {
                 <Link to='/permuta'>permuta</Link>
               </li>
               <li>
-                <Link to='/ricondizionati'>ricondizionati</Link>
+                <Link to='/shop/ricondizionati'>ricondizionati</Link>
               </li>              
               <li>
-                <Link to='/nuovo'>nuovo</Link>
+                <Link to='/shop/nuovo'>nuovo</Link>
               </li>
               <li>
                 <Link to='/riparazioni'>riparazioni</Link>

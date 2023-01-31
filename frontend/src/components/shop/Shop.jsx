@@ -6,10 +6,11 @@ import Select from 'react-select';
 import axios from '../../api/axios'
 import "./Style.css";
 import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 export const Shop = ({ addToCart, cartItem, decreaseQty, deleteCartProduct }) => {
 
-  /*Fare chiamata al db per questa sezione*/
+  const params = useParams();
   const CATEGORY_URL = '/api/product/categories';
   const BRANDS_URL = '/api/product/brands';
   const FILTERED_ITEMS_URL = '/api/product/filteredItems';
@@ -17,6 +18,7 @@ export const Shop = ({ addToCart, cartItem, decreaseQty, deleteCartProduct }) =>
   const [uniqueCategories, setCategories] = React.useState([]);
   const [uniqueBrands, setBrands] = React.useState([]);
   const [shopItems, setShopItems] = React.useState([]);
+  const [statusParams, setStatusParams] = React.useState('');
 
   const [min, setMin] = React.useState(0);
   const [max, setMax] = React.useState(1000);
@@ -217,33 +219,67 @@ export const Shop = ({ addToCart, cartItem, decreaseQty, deleteCartProduct }) =>
 
   const getFilteredItems = async () => {
 
-    try {
+    if (params.status === 'nuovo'){
+      try {
 
-      const response = await axios.post(FILTERED_ITEMS_URL, 
-        { 
-          categoryChecked: categoryChecked,
-          brandCheckedList: brandCheckedList,
-          min: min,
-          max: max,
-          orderChoice: orderChoice,
-        },
-        {
-            headers: { 'Content-Type': 'application/json'},
-            withCredentials: true
+        const response = await axios.post(FILTERED_ITEMS_URL, 
+          { 
+            categoryChecked: categoryChecked,
+            brandCheckedList: brandCheckedList,
+            min: min,
+            max: max,
+            orderChoice: orderChoice,
+            status: 'Nuovo',
+          },
+          {
+              headers: { 'Content-Type': 'application/json'},
+              withCredentials: true
+          }
+          );
+  
+          setShopItems(response.data);           
+  
+      } catch (err) {
+        if(!err?.response){
+          console.error('Server non attivo!');
+        }else if(err.response?.status === 500){
+          console.error(err.response?.data);
+        }else{
+          console.error('Recupero elementi fallito!');
         }
-        );
+      }    
+    } else if (params.status === 'ricondizionati'){
+      try {
 
-        setShopItems(response.data);           
+        const response = await axios.post(FILTERED_ITEMS_URL, 
+          { 
+            categoryChecked: categoryChecked,
+            brandCheckedList: brandCheckedList,
+            min: min,
+            max: max,
+            orderChoice: orderChoice,
+            status: 'Ricondizionato',
+          },
+          {
+              headers: { 'Content-Type': 'application/json'},
+              withCredentials: true
+          }
+          );
+  
+          setShopItems(response.data);           
+  
+      } catch (err) {
+        if(!err?.response){
+          console.error('Server non attivo!');
+        }else if(err.response?.status === 500){
+          console.error(err.response?.data);
+        }else{
+          console.error('Recupero elementi fallito!');
+        }
+      } 
+    }
 
-    } catch (err) {
-      if(!err?.response){
-        console.error('Server non attivo!');
-      }else if(err.response?.status === 500){
-        console.error(err.response?.data);
-      }else{
-        console.error('Recupero elementi fallito!');
-      }
-    }    
+    
 
   }
 
@@ -252,7 +288,7 @@ export const Shop = ({ addToCart, cartItem, decreaseQty, deleteCartProduct }) =>
     getFilteredItems();
 
     // eslint-disable-next-line
-  }, [categoryChecked, brandCheckedList, min, max, orderChoice]);
+  }, [categoryChecked, brandCheckedList, min, max, orderChoice, params.status]);
 
   return (
     <>

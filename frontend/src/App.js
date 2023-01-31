@@ -94,8 +94,8 @@ function App() {
             </Route>
             <Route exact path="/contact" element={<Contact />} >    
             </Route>
-            <Route exact path="/nuovo" element={<Shop addToCart={addToCart} cartItem={cartItem} decreaseQty={decreaseQty} deleteCartProduct={deleteCartProduct}/>} >    
-            </Route>      
+            <Route exact path="/shop/:status" element={<Shop addToCart={addToCart} cartItem={cartItem} decreaseQty={decreaseQty} deleteCartProduct={deleteCartProduct}/>} >    
+            </Route>     
             <Route exact path="/riparazioni" element={<Repair/>} >    
             </Route>
             <Route exact path="/inostriprodotti" element={<OurProducts/>} >    
