@@ -94,6 +94,15 @@
     margin-top: 10px;
 }
 
+.contactForm .inputBox.submit-div{
+    position: relative;
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
 .contactForm textarea{
     height: 200px;
 }
@@ -139,11 +148,48 @@
     cursor: pointer;
     padding: 10px;
     font-size: 18px;
+    border-radius: 5px;
+} 
+
+.contactForm .inputBox input.disabled[type="submit"]{
+    width: 100px;
+    background: #666;
+    color: #fff;
+    border: none;
+    cursor: not-allowed;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 5px;
 }    
 
-@media (max-width: 991px){
+.contact .messageSent{
+    text-align: center;
+    color: green;
+    font-weight: 500;
+    display: none;
+}
+  
+.contact .errorMsg{
+    text-align: center;
+    color: lightcoral;
+    font-weight: 500;
+    display: block;
+}
+
+.contact .show{
+    display: block;
+}
+
+@media (max-width: 600px){
     .contact{
         padding: 50px;
+    }
+    .contactForm{
+        padding: 0;
+    }
+
+    .contactForm h2{
+        margin-bottom: 20px;
     }
 
     #contact-container{
@@ -158,13 +204,11 @@
     .contactForm{
         width: 100%;
     }
-}
 
-@media (max-width: 390px){
     .contactForm .recaptchaContainer{
         transform: translateX(-60px);
         transform-origin: 0 0;
-        
+        margin: 10px 40px 0 40px;
     }
 
     .contactForm .inputBox{

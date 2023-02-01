@@ -1,19 +1,43 @@
 import './style.css'
 import ReCAPTCHA from 'react-google-recaptcha';
 import React from 'react';
+import emailjs from '@emailjs/browser';
+import { useRef } from 'react';
+import { useState } from 'react';
 
 const Contact = () => {
 
-  const recaptchaKey = '6Lf9XxUjAAAAACzG1N449v0G7xXiGacOD5F8GB9j';
-  const recaptchaRef = React.createRef();
+  const validPassword = new RegExp(/^[a-z0-9][-a-z0-9._]+@([-a-z0-9]+\.)+[a-z]{2,5}$/);
+  const recaptchaKey = '6LeocEUkAAAAANwgFKtVeJye8LhXaYXjsoJEQcBt';
+  const [isRECAPTCHA, setRECAPTCHA] = useState(false);
+  const [hasError, setHasError] = useState(false);
+  const [isSent, setIsSent] = useState(false);
+  const [email, setEmail] = useState('');
+  const form = useRef();
 
-  const onSubmit = () => {
-    const recaptchaValue = recaptchaRef.current.getValue();
-    this.props.onSubmit(recaptchaValue);
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+        if(validPassword.test(email)){
+    
+            emailjs.sendForm('service_8gvx77g', 'template_j713d87', form.current, 'AnyobiWOF9X3MbiYr')
+            .then(() => {
+                setIsSent(true);
+                setHasError(false);
+            }, (error) => {
+                alert('Messaggio non inviato, errore nel server: ' + error)
+            });
+
+            e.target.reset();
+        }else{
+            setHasError(true);
+            setIsSent(false);
+            e.target.reset();
+        }
   }
 
-  function onChange(value) {
-    console.log("Captcha value:", value);
+  function onChange() {
+    setRECAPTCHA(true);
   }
 
   return (
@@ -54,30 +78,49 @@ const Contact = () => {
           </a>
         </div>
         <div className="contactForm">
-          <form onSubmit={onSubmit}>
+          <form ref={form} onSubmit={sendEmail}>
             <h2>Manda il messaggio</h2>
             <div className="inputBox">
-              <input type="text" name='' required='required'/>
+              <input type="text" 
+                     name='name' 
+                     required/>
               <span>Cognome e Nome</span>
             </div>
             <div className="inputBox">
-              <input type="text" name='' required='required'/>
+              <input type="text" 
+                     name='email'
+                     onChange={(e) => setEmail(e.target.value)}
+                     required/>
               <span>E-mail</span>
             </div>
             <div className="inputBox">
-              <textarea type="text" name='' required='required'/>
+              <textarea type="text" 
+                        name='message'
+                        required/>
               <span>Scrivi il messaggio...</span>
             </div>
             <div className="recaptchaContainer">
               <ReCAPTCHA 
-                ref={recaptchaRef}
                 sitekey={recaptchaKey}
                 onChange={onChange}
               />
             </div>            
-            <div className="inputBox">
-              <input type="submit" name='' value="Invia"/>
-            </div>           
+            <div className="inputBox submit-div">
+              {
+                  isRECAPTCHA ? <input type="submit" className='btnSubmit' value="Invia"/>
+                              : <input disabled type="submit" className='btnSubmit disabled' value="Invia"/>
+              }
+              {
+                    isSent ? <div className='messageSent show'>Messaggio inviato!</div>
+                           : <div className='messageSent'>Messaggio inviato!</div>
+                }
+
+{
+                    hasError ? <div className='errorMsg show'>Mail non valida, riprova!</div>
+                           : <div className='messageSent'>Messaggio inviato!</div>
+                }      
+            </div>
+             
           </form>
         </div>
       </div>
