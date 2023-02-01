@@ -18,8 +18,6 @@ export const Shop = ({ addToCart, cartItem, decreaseQty, deleteCartProduct }) =>
   const [uniqueCategories, setCategories] = React.useState([]);
   const [uniqueBrands, setBrands] = React.useState([]);
   const [shopItems, setShopItems] = React.useState([]);
-  const [statusParams, setStatusParams] = React.useState('');
-
   const [min, setMin] = React.useState(0);
   const [max, setMax] = React.useState(1000);
 

@@ -26,6 +26,7 @@ import PassRecSuccess from './components/passRecSuccess/PassRecSuccess';
 import Checkout from './components/checkout/Checkout';
 import OrderSuccess from './components/orderSuccess/OrderSuccess';
 import UserDashboard from './components/userDashboard/UserDashboard';
+import Faq from './components/faq/Faq';
 
 function App() {
   
@@ -115,6 +116,8 @@ function App() {
             <Route exact path="/unauthorized" element={<Unauthorized />} >    
             </Route> 
             <Route exact path="/pwdUpdSuccess/:code" element={<PassRecSuccess />} >
+            </Route>
+            <Route exact path="/faq" element={<Faq />} >
             </Route>
 
           <Route element={<PersistLogin />}>     
