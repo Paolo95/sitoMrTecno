@@ -46,6 +46,10 @@
     flex-direction: column;
 }
 
+#contact-container .contactInfo a{
+   width: 50%;
+}
+
 #contact-container .contactInfo .box{
     position: relative;
     padding: 20px 0;
@@ -199,6 +203,10 @@
     #contact-container .contactInfo{
         margin-bottom: 40px;
     }
+
+    #contact-container .contactInfo a{
+        width: 100%;
+     }
 
     #contact-container .contactInfo, 
     .contactForm{
