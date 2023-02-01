@@ -51,8 +51,8 @@ const Search = ({ cartItem }) => {
 
   useEffect(() => {
 
-    getFilteredItems();
-
+    if(wordSearched.length > 0) getFilteredItems();
+    setItemList([]);  
     // eslint-disable-next-line
   }, [wordSearched]);
   

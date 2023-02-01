@@ -79,7 +79,7 @@ const Contact = () => {
         </div>
         <div className="contactForm">
           <form ref={form} onSubmit={sendEmail}>
-            <h2>Manda il messaggio</h2>
+            <h2>Mandaci un messaggio</h2>
             <div className="inputBox">
               <input type="text" 
                      name='name' 
