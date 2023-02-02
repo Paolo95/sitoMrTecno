@@ -52,6 +52,10 @@
     border-radius: 5px;
 }
 
+.faq .accordion-faq{
+    -webkit-tap-highlight-color: transparent;
+}
+
 .faq .accordion-faq .answer{
     margin: 0px 6%;
 }
