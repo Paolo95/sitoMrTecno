@@ -52,7 +52,7 @@
     border-radius: 5px;
 }
 
-.faq .accordion-faq{
+.faq .accordion-faq > div{
     -webkit-tap-highlight-color: transparent;
 }
 
