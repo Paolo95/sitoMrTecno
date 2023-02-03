@@ -243,6 +243,7 @@ export const Shop = ({ addToCart, cartItem, decreaseQty, deleteCartProduct }) =>
           );
   
           setProdLoading(false)
+          console.log(response.data)
           setShopItems(response.data);           
   
       } catch (err) {
@@ -255,6 +256,7 @@ export const Shop = ({ addToCart, cartItem, decreaseQty, deleteCartProduct }) =>
         }
       }    
     } else if (params.status === 'ricondizionati'){
+
       try {
 
         const response = await axios.post(FILTERED_ITEMS_URL, 
@@ -272,6 +274,7 @@ export const Shop = ({ addToCart, cartItem, decreaseQty, deleteCartProduct }) =>
           }
           );
   
+          setProdLoading(false)
           setShopItems(response.data);           
   
       } catch (err) {

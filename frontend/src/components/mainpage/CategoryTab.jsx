@@ -27,8 +27,8 @@ const CategoryTab = ( { tab } ) => {
                     return(
                         <div className='tab-container' key={index}>
                             <Link to={tab==='Permuta' ? '/permuta': 
-                                        (tab==='Ricondizionati' ? '/ricondizionati' :
-                                            (tab==='Nuovo' ? '/nuovo' : ''))}>  
+                                        (tab==='Ricondizionati' ? '/shop/ricondizionati' :
+                                            (tab==='Nuovo' ? '/shop/nuovo' : ''))}>  
                             <span className="dot"><i className={tab==='Permuta' ? 'far fa-handshake': 
                                                                 (tab==='Ricondizionati' ? 'fas fa-laptop-medical' :
                                                                  (tab==='Nuovo' ? 'fas fa-store' : ''))}></i></span> 
