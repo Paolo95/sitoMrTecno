@@ -3,8 +3,11 @@ import { Link } from 'react-router-dom'
 import logo from '../assets/images/logo.jpg'
 import axios from '../../api/axios'
 import { useState } from 'react'
+import ClipLoader from 'react-spinners/ClipLoader'
 
 const Search = ({ cartItem }) => {
+
+  const [loading, setLoading] = useState(false);
 
   window.addEventListener("scroll", function(){
     const search = document.querySelector(".search");
@@ -24,6 +27,8 @@ const Search = ({ cartItem }) => {
 
   const getFilteredItems = async () => {
 
+    setLoading(true);
+
     try {
 
       const response = await axios.post(FILTERED_ITEMS_URL, 
@@ -33,9 +38,11 @@ const Search = ({ cartItem }) => {
         {
             headers: { 'Content-Type': 'application/json'},
         }
-        );
+      )
 
-        setItemList(response.data);    
+      if( response.status === 200 ) setLoading(false);
+
+      setItemList(response.data);    
 
     } catch (err) {
       if(!err?.response){
@@ -73,19 +80,25 @@ const Search = ({ cartItem }) => {
                      placeholder='Digita il prodotto che desideri...'
                      onChange={handleFilter}/>
               {
-              itemList.length !== 0 && (
-                <div className="dataResult">
-                  {
-                    itemList.map((item, index) => {
-                      return (
-                        <a key={index} href={"/product/" + item.id} className="dataitem"> 
-                          <p>{item.product_name}</p>
-                        </a>
-                      )
-                    })
-                  }
-                </div>
-              ) 
+                loading ?  (
+                <ClipLoader
+                color={'red'}
+                loading={loading}
+                size={30}
+              />): (
+                  itemList.length !== 0 && (
+                    <div className="dataResult">
+                      {
+                        itemList.map((item, index) => {
+                          return (
+                            <a key={index} href={"/product/" + item.id} className="dataitem"> 
+                              <p>{item.product_name}</p>
+                            </a>
+                          )
+                        })
+                      }
+                    </div>
+                  ))
             }
 
             </div>
