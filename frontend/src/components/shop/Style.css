@@ -32,6 +32,15 @@
     font-weight: 500;
 }
 
+.shop .category button span{
+    margin: 0;
+}
+
+.shop .product-content .loader{
+    text-align: center;
+    margin-top: 10px;
+}
+
 .shop .contentWidth{
     margin-left: 30px;
 }

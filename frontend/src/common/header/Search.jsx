@@ -40,12 +40,7 @@ const Search = ({ cartItem }) => {
         }
       )
 
-      if( response.status === 200 ) setLoading(false);
-
-      console.log(response.status)
-      console.log(loading)
-      console.log(response.data)
-
+      setLoading(false);
       setItemList(response.data);    
 
     } catch (err) {
@@ -85,18 +80,25 @@ const Search = ({ cartItem }) => {
                      onChange={handleFilter}/>
               {
                 loading ?  (
-                <ClipLoader
-                color={'red'}
-                loading={loading}
-                size={30}
-              />): (
+                  <>
+                      <div className="dataResult">
+                        <ClipLoader
+                        
+                          color={'#0f3460'}
+                          loading={loading}
+                          size={30}
+                        />
+                      </div>
+                  </>
+                  
+              ): (
                   itemList.length !== 0 && (
                     <div className="dataResult">
                       {
                         itemList.map((item, index) => {
                           return (
-                            <a key={index} href={"/product/" + item?.id} className="dataitem"> 
-                              <p>{item?.product_name}</p>
+                            <a key={index} href={"/product/" + item.id} className="dataitem"> 
+                              <p>{item.product_name}</p>
                             </a>
                           )
                         })

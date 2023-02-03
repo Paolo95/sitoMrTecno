@@ -45,6 +45,10 @@
     background-color: #fff;
 }
 
+.search-box .dataResult span{
+    margin: 5px;
+}
+
 .search-box i {
     width: 5%;
     text-align: center;

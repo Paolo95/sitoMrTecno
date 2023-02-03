@@ -7,6 +7,7 @@ import axios from '../../api/axios'
 import "./Style.css";
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 export const Shop = ({ addToCart, cartItem, decreaseQty, deleteCartProduct }) => {
 
@@ -24,6 +25,10 @@ export const Shop = ({ addToCart, cartItem, decreaseQty, deleteCartProduct }) =>
   const [categoryOpen, setCategoryOpen] = React.useState(true);
   const [brandOpen, setBrandOpen] = React.useState(true);
   const [priceOpen, setPriceOpen] = React.useState(true);
+
+  const [catLoading, setCatLoading] = React.useState(true);
+  const [brandLoading, setBrandLoading] = React.useState(true);
+  const [prodLoading, setProdLoading] = React.useState(false);
 
   const [brandCheckedState, setBrandCheckedState] = React.useState(
     new Array(uniqueBrands.length).fill(false)
@@ -147,7 +152,7 @@ export const Shop = ({ addToCart, cartItem, decreaseQty, deleteCartProduct }) =>
   const getCategories = async () => {
 
     try {
-     
+
       const response = await axios.get(CATEGORY_URL, 
         { 
           
@@ -159,6 +164,7 @@ export const Shop = ({ addToCart, cartItem, decreaseQty, deleteCartProduct }) =>
         }
         );
 
+        setCatLoading(false);
         setCategories(response.data);
            
 
@@ -192,6 +198,7 @@ export const Shop = ({ addToCart, cartItem, decreaseQty, deleteCartProduct }) =>
         }
         );
 
+        setBrandLoading(false);
         setBrands(response.data);
            
 
@@ -235,6 +242,7 @@ export const Shop = ({ addToCart, cartItem, decreaseQty, deleteCartProduct }) =>
           }
           );
   
+          setProdLoading(false)
           setShopItems(response.data);           
   
       } catch (err) {
@@ -283,6 +291,7 @@ export const Shop = ({ addToCart, cartItem, decreaseQty, deleteCartProduct }) =>
 
   useEffect(() => {
 
+    setProdLoading(true);
     getFilteredItems();
 
     // eslint-disable-next-line
@@ -298,7 +307,15 @@ export const Shop = ({ addToCart, cartItem, decreaseQty, deleteCartProduct }) =>
           <div className='chead'>
             <div className='tab'>
             
-              <button onClick={categoryHandleOpen}><h3>Categorie</h3>{categoryOpen ?             
+              <button onClick={categoryHandleOpen}><h3>Categorie</h3>
+              {
+                <ClipLoader
+                color={'#0f3460'}
+                loading={catLoading}
+                size={20}
+              />
+              }
+              {categoryOpen ?             
                 <i className='fa fa-chevron-up'></i>: 
                 <i className='fa fa-chevron-down'></i>
               }</button>            
@@ -331,7 +348,15 @@ export const Shop = ({ addToCart, cartItem, decreaseQty, deleteCartProduct }) =>
             
             <div className='tab'>
             
-              <button onClick={brandHandleOpen}><h3>Brand</h3>{brandOpen ?             
+              <button onClick={brandHandleOpen}><h3>Brand</h3>
+              {
+                <ClipLoader
+                color={'#0f3460'}
+                loading={brandLoading}
+                size={20}
+              />
+              }
+              {brandOpen ?             
                 <i className='fa fa-chevron-up'></i>: 
                 <i className='fa fa-chevron-down'></i>
               }</button>            
@@ -415,12 +440,27 @@ export const Shop = ({ addToCart, cartItem, decreaseQty, deleteCartProduct }) =>
                 defaultValue={shopOptions[0]}/>
             </div>
             <div className="product-content grid1">
-              <ShopCart addToCart={addToCart}
-                        cartItem={cartItem}
-                        decreaseQty={decreaseQty} 
-                        deleteCartProduct={deleteCartProduct}
-                        shopItems={shopItems.slice(0, numProdListed)}
-              />
+              {
+                prodLoading ? (
+                  <div className="loader">
+                    <ClipLoader
+                      color={'#0f3460'}
+                      loading={prodLoading}
+                      size={50}
+                    />
+                  </div>
+                   
+                ) :(
+                  <ShopCart addToCart={addToCart}
+                            cartItem={cartItem}
+                            decreaseQty={decreaseQty} 
+                            deleteCartProduct={deleteCartProduct}
+                            shopItems={shopItems.slice(0, numProdListed)}
+                  />
+                )
+                  
+              }
+              
             </div>
             <div className="container f_flex">
               <button 
