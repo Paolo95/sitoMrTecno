@@ -6,7 +6,6 @@ const ShopCart = ({ addToCart, shopItems, cartItem, deleteCartProduct, decreaseQ
 
     const [count, setCount] = useState(0);
     const [cartSummit, setCartSummit] = useState(false);
-    const [prodLoading, setProdLoading] = useState(false);
 
     const increment = () => {
         setCount(count + 1);
