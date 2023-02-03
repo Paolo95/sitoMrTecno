@@ -95,8 +95,8 @@ const Search = ({ cartItem }) => {
                       {
                         itemList.map((item, index) => {
                           return (
-                            <a key={index} href={"/product/" + item.id} className="dataitem"> 
-                              <p>{item.product_name}</p>
+                            <a key={index} href={"/product/" + item?.id} className="dataitem"> 
+                              <p>{item?.product_name}</p>
                             </a>
                           )
                         })
