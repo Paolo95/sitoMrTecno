@@ -40,9 +40,11 @@ const Search = ({ cartItem }) => {
         }
       )
 
+      if( response.status === 200 ) setLoading(false);
+
       console.log(response.status)
       console.log(loading)
-      if( response.status === 200 ) setLoading(false);
+      console.log(response.data)
 
       setItemList(response.data);    
 
