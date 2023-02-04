@@ -4,6 +4,7 @@ import axios from '../../../../api/axios';
 import useAuth from '../../../../hooks/useAuth';
 import Moment from 'react-moment';
 import './orderDetailsStyle.css';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 const OrderDetails = () => {
 
@@ -11,12 +12,15 @@ const OrderDetails = () => {
   const { auth } = useAuth();
   const ORDER_DETAILS_URL = `/api/order/orderDetails/${params.orderId}`; 
   const [orderDetails, setOrderDetails] = useState([]);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const goBack = () => navigate(-1);
 
   useEffect(() => {
 
     const getOrders = async () => {
+
+      setLoading(true);
 
       try {
        
@@ -32,6 +36,7 @@ const OrderDetails = () => {
           }
         );  
 
+        setLoading(false);
         setOrderDetails(response.data);
   
       } catch (err) {
@@ -60,12 +65,22 @@ const OrderDetails = () => {
         <div className="orderDetails-heading">
             <button className='goBack' onClick={goBack}>Torna indietro</button>
         </div>
-        <div className='orderDetails-card'>         
-            <div className="orderDetails-heading">
-                <h1 className="heading">{`Ordine n. ${params.orderId}`}</h1>
-            </div>                   
-                
-            <div className="orderDetails-track">
+        {
+            loading ? 
+            <div style={{ display: 'flex', justifyContent: 'center', margin: '30px' }}>
+                <ClipLoader
+                color={'#0f3460'}
+                loading={loading}
+                size={50}
+                />
+            </div>
+            :
+            <div className='orderDetails-card'>      
+                <div className="orderDetails-heading">
+                    <h1 className="heading">{`Ordine n. ${params.orderId}`}</h1>
+                </div>                   
+                    
+                <div className="orderDetails-track">
                 <ul id='progress' className='text-center'>
                     {
                         orderDetails[0]?.['order.order_status'] === 'Ordine in lavorazione' ? 
@@ -145,6 +160,9 @@ const OrderDetails = () => {
                 
             </div>
         </div>
+
+        }   
+        
     </section>
   )
 

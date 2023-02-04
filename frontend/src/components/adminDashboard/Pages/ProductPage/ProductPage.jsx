@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import axios from '../../../../api/axios';
 import { useEffect } from 'react';
 import useAuth from '../../../../hooks/useAuth';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 
 const ProductPage = () => {
@@ -14,6 +15,7 @@ const ProductPage = () => {
     const [searchString, setSearchString] = React.useState('');
     const [categorySelected, setCategorySelected] = React.useState('Smartphone');
     const [productList, setProductList] = React.useState([]);
+    const [prodLoading, setProdLoading] = React.useState(false);
     const { auth } = useAuth();
     const CATEGORY_URL = '/api/product/categories';
     const FILTERED_PRODUCT_URL = 'api/product/filteredAdminItems';
@@ -74,6 +76,8 @@ const ProductPage = () => {
 
     const getProductList = async () => {
 
+        setProdLoading(true);
+
         try {
         
         const response = await axios.post(FILTERED_PRODUCT_URL, 
@@ -90,6 +94,7 @@ const ProductPage = () => {
             }
             );
 
+            setProdLoading(false);
             setProductList(response.data);
     
         } catch (err) {
@@ -191,47 +196,61 @@ const ProductPage = () => {
                 </div>
             </div>
             <div className="card-body">
-                <div className="productPage-content">
-                    <div className="product-content grid1">
-                        
-                            {
-                                productList.slice(0, numProdListed)
-                                           .map((value, index) => {
-                                    return(
-                                        <div key={index} className="card card-product-grid shadow-sm">
-                                            <img src={value.cover} alt="" />
-                                            <div className="info-wrap">
-                                                <span className='title' >{value.product_name}</span>
-                                                <div className="price mb-2">
-                                                    <span>€{parseFloat(value.price).toFixed(2)}</span>
+                {
+                    prodLoading ? 
+                        <div style={{ display: 'flex', justifyContent: 'center', margin: '30px' }}>
+                            <ClipLoader
+                            color={'#0f3460'}
+                            loading={prodLoading}
+                            size={50}
+                            />
+                        </div>
+                        : 
+                        <>
+                            <div className="productPage-content">
+                                <div className="product-content grid1">
+                                
+                                    {
+                                        productList.slice(0, numProdListed)
+                                                .map((value, index) => {
+                                            return(
+                                                <div key={index} className="card card-product-grid shadow-sm">
+                                                    <img src={value.cover} alt="" />
+                                                    <div className="info-wrap">
+                                                        <span className='title' >{value.product_name}</span>
+                                                        <div className="price mb-2">
+                                                            <span>€{parseFloat(value.price).toFixed(2)}</span>
+                                                        </div>
+                                                        <div className="row">
+                                                            <NavLink className={'btn btn-outline-success p-2 pb-3'}
+                                                                    to={`/adminDashboard/products/edit/${value.id}`}>
+                                                                <i className="fas fa-pen"></i>
+                                                            </NavLink>
+                                                            <button onClick={() => handleConfirm(value.id)} className={'btn btn-outline-danger p-2 pb-3'}>
+                                                                <i className="fas fa-trash-alt"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div className="row">
-                                                    <NavLink className={'btn btn-outline-success p-2 pb-3'}
-                                                             to={`/adminDashboard/products/edit/${value.id}`}>
-                                                        <i className="fas fa-pen"></i>
-                                                    </NavLink>
-                                                    <button onClick={() => handleConfirm(value.id)} className={'btn btn-outline-danger p-2 pb-3'}>
-                                                        <i className="fas fa-trash-alt"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    )
-                                })
-                            }
-                        
+                                            )
+                                        })
+                                    }
+                                
+                                </div>
+                            </div>
+                    <div className="productPage-moreBtn">
+                        <button 
+                        id='btn-moreProd'
+                        className='btn-moreProd'
+                        onClick={handleMoreProdListed}
+                        style={{
+                            display: numProdListed <= productList.slice(0, numProdListed).length ? 'inline' : 'none'
+                        }}
+                        >Mostra altro</button>
                     </div>
-                </div>
-                <div className="productPage-moreBtn">
-                <button 
-                      id='btn-moreProd'
-                      className='btn-moreProd'
-                      onClick={handleMoreProdListed}
-                      style={{
-                        display: numProdListed <= productList.slice(0, numProdListed).length ? 'inline' : 'none'
-                      }}
-                      >Mostra altro</button>
-                </div>
+                        </>
+                }
+                
             </div>
         </div>
     </section>

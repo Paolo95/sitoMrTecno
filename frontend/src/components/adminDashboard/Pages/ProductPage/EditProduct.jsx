@@ -5,6 +5,7 @@ import axios from '../../../../api/axios';
 import { useParams } from 'react-router-dom'
 import useAuth from '../../../../hooks/useAuth';
 import { useState } from 'react';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 const EditProduct = () => {
 
@@ -12,6 +13,8 @@ const EditProduct = () => {
     const PRODUCT_INFO_URL = `/api/product/getProduct`;
     const EDIT_URL = `/api/product/editProduct`;
     const { auth } = useAuth();
+    const [loading, setLoading] = useState(true);
+    const [changeDone, setChangeDone] = useState(false);
     const [productInfo, setProductInfo] = useState([]);
     const [cover, setCover] = useState('');
     const [productName, setProductName] = useState('');
@@ -91,8 +94,8 @@ const EditProduct = () => {
                 } 
             });
 
+            setLoading(false);
             setProductInfo(response.data);
-            console.log(response.data)
     
         } catch (err) {
         if(!err?.response){
@@ -153,6 +156,8 @@ const EditProduct = () => {
 
         const editProductForm = async () => {
 
+            setChangeDone(true);
+
             try {
             
             const response = await axios.post(EDIT_URL, 
@@ -185,7 +190,9 @@ const EditProduct = () => {
                 }
                 );
         
-            alert(response.data)
+            setChangeDone(false);
+            alert(response.data);
+            window.location.reload(true)
 
             } catch (err) {
             if(!err?.response){
@@ -256,7 +263,14 @@ const EditProduct = () => {
                 <h2 className='editProduct-title'>Modifica prodotto</h2>
                 <div className='editProduct-pubBtn-div'>
                     {
-                        isChanged ? <button type='submit' form='editForm' className="editProduct-pubBtn">Pubblica ora</button>
+                        isChanged ? <button type='submit' form='editForm' className="editProduct-pubBtn">
+                            Pubblica ora
+                                    <ClipLoader
+                                        color={'#0f3460'}
+                                        loading={changeDone}
+                                        size={12}
+                                    />
+                            </button>
                                   : <button disabled type='submit' form='editForm' className="editProduct-pubBtn disabled">Pubblica ora</button>
                     }
                     
@@ -267,117 +281,127 @@ const EditProduct = () => {
                     <div className="editProduct-card card shadow-sm">
                         <div className="card-body">
                             {
-                                productInfo.map((item, index) => {
-                                    return(
-                                        <div key={index} className="mb-4">
-                                            <label htmlFor="product_label" className='form-label'>{item.key}</label>
-                                                <>
-                                                    {
-                                                        (item.key === 'id' || item.value === '') ?
-                                                            (
-                                                                <input type="text"
-                                                                   className='form-control disabledInput' 
-                                                                   id={item.key}
-                                                                   disabled={true}
-                                                                   defaultValue={item.value}/>
-                                                            ):
-                                                        (item.key === 'status') ?
-                                                            (
-                                                                <select className='form-control' 
-                                                                        form="editForm" 
-                                                                        onChange={(e) => handleStatusSel(e.target.value)}
-                                                                        defaultValue={item.value}>
-                                                                    <option value={'Nuovo'}>Nuovo</option>
-                                                                    <option value={'Usato'}>Usato</option>
-                                                                    <option value={'Ricondizionato'}>Ricondizionato</option>
-                                                                </select>
-                                                            ):
-                                                        (item.key.includes('photo') || item.key.includes('cover') ) ? (
-                                                            <>
-                                                            <input type="text"
-                                                                   className='form-control' 
-                                                                   id={item.key}
-                                                                   defaultValue={item.value}
-                                                                   onChange={(e) => handleChange(item.key, e.target.value)}
-                                                                   required/>
-                                                            <img className='edit-img' src={item.value} alt="" />
-                                                            </>
-                                                        ) : 
-                                                        (item.key.includes('category')) ? (
-                                                            <select className='form-control' 
-                                                                    form="editForm" 
-                                                                    onChange={(e) => handleCategorySel(e.target.value)}>
-                                                                {
-                                                                        categories.map((item, index) => {
-                                                                            return(
-                                                                                <>
-                                                                                    { 
-                                                                                        productInfo.find(el => el.key === 'category').value === item.category ? 
-                                                                                            <option selected key={index} value={item.value}>{item.category}</option>
-                                                                                            :
-                                                                                            <option key={index} value={item.value}>{item.category}</option>
-                                                                                    }
-                                                                                    
-                                                                                </>                                                
-                                                                            )
-                                                                        })
-                                                                }                               
-                                                                
-                                                            </select>
-                                                        ) : (item.key.includes('description')) ? (
-                                                            <textarea 
-                                                                rows='7'
-                                                                className='form-control' 
-                                                                onChange={(e) => handleChange(item.key, e.target.value)}
-                                                                id={item.key}
-                                                                defaultValue={item.value}/>
-                                                        ):
-                                                         (typeof(item.value) === 'number') && item.key === 'price' ? (
-                                                            <input type="number"
-                                                                   className='form-control'
-                                                                   step="any" 
-                                                                   onChange={(e) => handleChange(item.key, e.target.value)}
-                                                                   id={item.key}
-                                                                   defaultValue={parseFloat(item.value).toFixed(2)}
-                                                                   min='0'
-                                                                   required/>
-                                                        ):
-                                                        (typeof(item.value) === 'number') && item.key === 'stars' ? (
-                                                           <input type="number"
-                                                                  className='form-control'
-                                                                  step="any" 
-                                                                  onChange={(e) => handleChange(item.key, e.target.value)}
-                                                                  id={item.key}
-                                                                  defaultValue={item.value}
-                                                                  min='0'
-                                                                  max='5'
-                                                                  required/>
-                                                       )
-                                                        :
-                                                         (typeof(item.value) === 'number') ? (
-                                                            <input type="number"
-                                                                   className='form-control' 
-                                                                   id={item.key}
-                                                                   onChange={(e) => handleChange(item.key, e.target.value)}
-                                                                   defaultValue={item.value}
-                                                                   min='0'
-                                                                   required/>
-                                                        )
-                                                        :
-                                                            (
-                                                            <input type="text"
-                                                                   className='form-control' 
-                                                                   id={item.key}
-                                                                   onChange={(e) => handleChange(item.key, e.target.value)}
-                                                                   defaultValue={item.value}/>
-                                                        )
-                                                    }
-                                                </>
-                                        </div>
-                                    )
+                                loading ? 
+                                    <div style={{ display: 'flex', justifyContent: 'center', margin: '30px' }}>
+                                        <ClipLoader
+                                        color={'#0f3460'}
+                                        loading={loading}
+                                        size={50}
+                                        />
+                                    </div> :
+                                        productInfo.map((item, index) => {
+                                            return(
+                                                <div key={index} className="mb-4">
+                                                    <label htmlFor="product_label" className='form-label'>{item.key}</label>
+                                                        <>
+                                                            {
+                                                                (item.key === 'id' || item.value === '') ?
+                                                                    (
+                                                                        <input type="text"
+                                                                           className='form-control disabledInput' 
+                                                                           id={item.key}
+                                                                           disabled={true}
+                                                                           defaultValue={item.value}/>
+                                                                    ):
+                                                                (item.key === 'status') ?
+                                                                    (
+                                                                        <select className='form-control' 
+                                                                                form="editForm" 
+                                                                                onChange={(e) => handleStatusSel(e.target.value)}
+                                                                                defaultValue={item.value}>
+                                                                            <option value={'Nuovo'}>Nuovo</option>
+                                                                            <option value={'Usato'}>Usato</option>
+                                                                            <option value={'Ricondizionato'}>Ricondizionato</option>
+                                                                        </select>
+                                                                    ):
+                                                                (item.key.includes('photo') || item.key.includes('cover') ) ? (
+                                                                    <>
+                                                                    <input type="text"
+                                                                           className='form-control' 
+                                                                           id={item.key}
+                                                                           defaultValue={item.value}
+                                                                           onChange={(e) => handleChange(item.key, e.target.value)}
+                                                                           required/>
+                                                                    <img className='edit-img' src={item.value} alt="" />
+                                                                    </>
+                                                                ) : 
+                                                                (item.key.includes('category')) ? (
+                                                                    <select className='form-control' 
+                                                                            form="editForm" 
+                                                                            onChange={(e) => handleCategorySel(e.target.value)}>
+                                                                        {
+                                                                                categories.map((item, index) => {
+                                                                                    return(
+                                                                                        <>
+                                                                                            { 
+                                                                                                productInfo.find(el => el.key === 'category').value === item.category ? 
+                                                                                                    <option selected key={index} value={item.value}>{item.category}</option>
+                                                                                                    :
+                                                                                                    <option key={index} value={item.value}>{item.category}</option>
+                                                                                            }
+                                                                                            
+                                                                                        </>                                                
+                                                                                    )
+                                                                                })
+                                                                        }                               
+                                                                        
+                                                                    </select>
+                                                                ) : (item.key.includes('description')) ? (
+                                                                    <textarea 
+                                                                        rows='7'
+                                                                        className='form-control' 
+                                                                        onChange={(e) => handleChange(item.key, e.target.value)}
+                                                                        id={item.key}
+                                                                        defaultValue={item.value}/>
+                                                                ):
+                                                                 (typeof(item.value) === 'number') && item.key === 'price' ? (
+                                                                    <input type="number"
+                                                                           className='form-control'
+                                                                           step="any" 
+                                                                           onChange={(e) => handleChange(item.key, e.target.value)}
+                                                                           id={item.key}
+                                                                           defaultValue={parseFloat(item.value).toFixed(2)}
+                                                                           min='0'
+                                                                           required/>
+                                                                ):
+                                                                (typeof(item.value) === 'number') && item.key === 'stars' ? (
+                                                                   <input type="number"
+                                                                          className='form-control'
+                                                                          step="any" 
+                                                                          onChange={(e) => handleChange(item.key, e.target.value)}
+                                                                          id={item.key}
+                                                                          defaultValue={item.value}
+                                                                          min='0'
+                                                                          max='5'
+                                                                          required/>
+                                                               )
+                                                                :
+                                                                 (typeof(item.value) === 'number') ? (
+                                                                    <input type="number"
+                                                                           className='form-control' 
+                                                                           id={item.key}
+                                                                           onChange={(e) => handleChange(item.key, e.target.value)}
+                                                                           defaultValue={item.value}
+                                                                           min='0'
+                                                                           required/>
+                                                                )
+                                                                :
+                                                                    (
+                                                                    <input type="text"
+                                                                           className='form-control' 
+                                                                           id={item.key}
+                                                                           onChange={(e) => handleChange(item.key, e.target.value)}
+                                                                           defaultValue={item.value}/>
+                                                                )
+                                                            }
+                                                        </>
+                                                </div>
+                                            )
+                                            
+                                        })                            
                                     
-                                })                            
-                            }                     
+                            }
+                                                
                         </div>
                     </div>
                 </div>

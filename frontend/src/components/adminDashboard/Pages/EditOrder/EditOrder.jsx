@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useParams } from 'react-router-dom';
 import axios from '../../../../api/axios';
 import useAuth from '../../../../hooks/useAuth';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 const EditOrder = () => {
 
@@ -17,11 +18,14 @@ const EditOrder = () => {
     const [shipping_carrier, setCarrier] = useState('');
     const [orderStatus, setOrderStatus] = useState('');
     const [isChanged, setIsChanged] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
 
         const getOrders = async () => {
     
+          setLoading(true);
+
           try {
            
             const response = await axios.post(ORDER_DETAILS_URL, 
@@ -36,6 +40,7 @@ const EditOrder = () => {
               }
             );  
     
+            setLoading(false);
             setOrderDetails(response.data);
             const res = response.data;
             setDate(res[0]['order.order_date'])
@@ -147,84 +152,97 @@ const EditOrder = () => {
             <div className="editOrder-body">
                 <div className="editOrder-card card shadow-sm">
                     <div className="card-body">
-                        <ul>
-                            <li>
-                                <b>Data ordine: </b>
-                                <input type="date"
-                                       className='editable' 
-                                       onChange={(e) => handleDateChange(e.target.value)}
-                                       defaultValue={orderDetails[0]?.['order.order_date']}/>
-                            </li>
-                            <li>
-                                <b>Totale ordine: </b>
-                                <span>{orderDetails[0]?.['order_total']} €</span>
-                            </li>
-                            <li>
-                                <b>Corriere: </b>
-                                <input className='editable' 
-                                       type="text" 
-                                       onChange={(e) => handleCarrierChange(e.target.value)}
-                                       defaultValue={orderDetails[0]?.['order.shipping_carrier']}/>
-                            </li>
-                            <li>
-                                <b>Codice spedizione: </b>
-                                <input className='editable' type="text"
-                                       onChange={(e) => handleShippingChange(e.target.value)}
-                                       defaultValue={orderDetails[0]?.['order.shipping_code']}/>
-                            </li>
+                      {
+                        loading ? 
+                        
+                          <div style={{ display: 'flex', justifyContent: 'center', margin: '30px' }}>
+                            <ClipLoader
+                            color={'#0f3460'}
+                            loading={loading}
+                            size={50}
+                            />
+                          </div> :
+                          <ul>
+                              <li>
+                                  <b>Data ordine: </b>
+                                  <input type="date"
+                                        className='editable' 
+                                        onChange={(e) => handleDateChange(e.target.value)}
+                                        defaultValue={orderDetails[0]?.['order.order_date']}/>
+                              </li>
+                              <li>
+                                  <b>Totale ordine: </b>
+                                  <span>{orderDetails[0]?.['order_total']} €</span>
+                              </li>
+                              <li>
+                                  <b>Corriere: </b>
+                                  <input className='editable' 
+                                        type="text" 
+                                        onChange={(e) => handleCarrierChange(e.target.value)}
+                                        defaultValue={orderDetails[0]?.['order.shipping_carrier']}/>
+                              </li>
+                              <li>
+                                  <b>Codice spedizione: </b>
+                                  <input className='editable' type="text"
+                                        onChange={(e) => handleShippingChange(e.target.value)}
+                                        defaultValue={orderDetails[0]?.['order.shipping_code']}/>
+                              </li>
 
-                            <li>
-                                <b>Stato ordine: </b>
-                                <select className='statusSelect'
-                                        onChange={(e) => handleOrderStatus(e.target.value)}>
-                                    {
-                                      orderStatus==='Ordine in lavorazione' ?
-                                      <>
-                                        <option selected value={'Ordine in lavorazione'}>In lavorazione</option>
-                                        <option value={'Ordine in spedizione'}>In spedizione</option>
-                                        <option value={'Ordine Concluso'}>Concluso</option>
-                                      </>
-                                        :
-                                        orderStatus==='Ordine in spedizione' ?
+                              <li>
+                                  <b>Stato ordine: </b>
+                                  <select className='statusSelect'
+                                          onChange={(e) => handleOrderStatus(e.target.value)}>
+                                      {
+                                        orderStatus==='Ordine in lavorazione' ?
                                         <>
-                                          <option value={'Ordine in lavorazione'}>In lavorazione</option>
-                                          <option selected value={'Ordine in spedizione'}>In spedizione</option>
+                                          <option selected value={'Ordine in lavorazione'}>In lavorazione</option>
+                                          <option value={'Ordine in spedizione'}>In spedizione</option>
                                           <option value={'Ordine Concluso'}>Concluso</option>
                                         </>
-                                        :
-                                        <>
-                                          <option value={'Ordine in lavorazione'}>In lavorazione</option>
-                                          <option value={'Ordine in spedizione'}>In spedizione</option>
-                                          <option selected value={'Ordine Concluso'}>Concluso</option>
-                                        </>
-                                       
+                                          :
+                                          orderStatus==='Ordine in spedizione' ?
+                                          <>
+                                            <option value={'Ordine in lavorazione'}>In lavorazione</option>
+                                            <option selected value={'Ordine in spedizione'}>In spedizione</option>
+                                            <option value={'Ordine Concluso'}>Concluso</option>
+                                          </>
+                                          :
+                                          <>
+                                            <option value={'Ordine in lavorazione'}>In lavorazione</option>
+                                            <option value={'Ordine in spedizione'}>In spedizione</option>
+                                            <option selected value={'Ordine Concluso'}>Concluso</option>
+                                          </>
                                         
-                                      
-                                      
-                                    }
-                                  
-                                </select>
-                            </li>
-                            <span><b>Prodotti acquistati:</b></span>
-                            {
-                            orderDetails.map((value, index) => {
-                                return(
-                                    <>
+                                          
                                         
-                                        <li className='product-item' key={index}>                                            
-                                            {value['qty']} x {value['product.product_name']} - {parseFloat(value['priceEach']).toFixed(2)} €
-                                        </li>
-                               
                                         
-                                    </>
-                                )
-                            })
-                            }
-                        
-                            <li><b>Spese di spedizione: </b>{parseFloat(orderDetails[0]?.['order.shipping_cost']).toFixed(2)}€</li>
+                                      }
+                                    
+                                  </select>
+                              </li>
+                              <span><b>Prodotti acquistati:</b></span>
+                              {
+                              orderDetails.map((value, index) => {
+                                  return(
+                                      <>
+                                          
+                                          <li className='product-item' key={index}>                                            
+                                              {value['qty']} x {value['product.product_name']} - {parseFloat(value['priceEach']).toFixed(2)} €
+                                          </li>
+                                
+                                          
+                                      </>
+                                  )
+                              })
+                              }
+                          
+                              <li><b>Spese di spedizione: </b>{parseFloat(orderDetails[0]?.['order.shipping_cost']).toFixed(2)}€</li>
 
-                            <li><b>Commissioni PayPal: </b>{parseFloat(orderDetails[0]?.['order.paypal_fee']).toFixed(2)}€</li>
-                        </ul>
+                              <li><b>Commissioni PayPal: </b>{parseFloat(orderDetails[0]?.['order.paypal_fee']).toFixed(2)}€</li>
+                          </ul>
+                        
+                      }
+                        
                     </div>
                 </div>
                             
