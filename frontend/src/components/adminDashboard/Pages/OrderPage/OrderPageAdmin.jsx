@@ -5,6 +5,7 @@ import axios from '../../../../api/axios';
 import { useState } from 'react';
 import Moment from 'react-moment';
 import { NavLink } from 'react-router-dom';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 const OrderPageAdmin = () => {
 
@@ -12,6 +13,7 @@ const OrderPageAdmin = () => {
   const { auth } = useAuth();
   const [orderList, setOrderList] = useState([]);
   const [statusSelected, setStatus] = useState('Ordine in lavorazione');
+  const [loading, setLoading] = useState(false);
 
   const handleStatusSel = (e) => {
     setStatus(e);
@@ -20,6 +22,8 @@ const OrderPageAdmin = () => {
   useEffect(() => {
 
     const newProductForm = async () => {
+
+      setLoading(true);
 
       try {
       
@@ -35,6 +39,7 @@ const OrderPageAdmin = () => {
             }
             );
 
+        setLoading(false);
         setOrderList(response.data);
 
         } catch (err) {
@@ -72,44 +77,59 @@ const OrderPageAdmin = () => {
         </div>
         <div className="card-body">
           <div className="table-div">
-          <h5 className="card-title">Ultimi ordini</h5>
-            <table className="table">
-              <thead>
-                <tr>
-                  <th scope='col'>ID</th>
-                  <th scope='col'>Data</th>
-                  <th scope='col'>E-mail</th>
-                  <th scope='col'>Status</th>
-                  <th scope='col'>Importo</th>
-                  <th scope='col'>Azioni</th>
-                </tr>
-              </thead>
-              <tbody>
-                {
-                  orderList.map((value,index) => {
-                    return(
-                      <>
-                        <tr id={index}>
-                          <td>{value['order.id']}</td>
-                          <td>{<Moment format='DD/MM/YYYY'>{value['order.order_date']}</Moment>}</td>
-                          <td>{value['order.user.email']}</td>
-                          <td>{value['order.order_status']}</td>
-                          <td>{value['order_total']} €</td>
-                          <td>
-                            {
-                              <NavLink to={`/adminDashboard/orders/editOrder/${value['order.id']}`}>
-                                  <button>Dettaglio</button>
-                              </NavLink>
-                            }
-                            
-                          </td>
-                        </tr>
-                      </>
-                    )
-                  })
-                }
-              </tbody>
-            </table>
+            <h5 className="card-title">Ultimi ordini</h5>
+            {
+              loading ? 
+                <div style={{ display: 'flex', justifyContent: 'center', margin: '30px' }}>
+                  <ClipLoader
+                  color={'#0f3460'}
+                  loading={loading}
+                  size={50}
+                  />
+              </div> :
+                  <table className="table">
+                  <thead>
+                    <tr>
+                      <th scope='col'>ID</th>
+                      <th scope='col'>Data</th>
+                      <th scope='col'>E-mail</th>
+                      <th scope='col'>Status</th>
+                      <th scope='col'>Importo</th>
+                      <th scope='col'>Azioni</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {
+                      orderList.map((value,index) => {
+                        return(
+                          <>
+                            <tr id={index}>
+                              <td>{value['order.id']}</td>
+                              <td>{<Moment format='DD/MM/YYYY'>{value['order.order_date']}</Moment>}</td>
+                              <td>{value['order.user.email']}</td>
+                              <td>{value['order.order_status']}</td>
+                              <td>{value['order_total']} €</td>
+                              <td>
+                                {
+                                  <NavLink to={`/adminDashboard/orders/editOrder/${value['order.id']}`}>
+                                      <button>Dettaglio</button>
+                                  </NavLink>
+                                }
+                                
+                              </td>
+                            </tr>
+                          </>
+                        )
+                      })
+                    }
+                  </tbody>
+                </table>
+
+
+            }
+            
+            
+            
           </div>
                         
         

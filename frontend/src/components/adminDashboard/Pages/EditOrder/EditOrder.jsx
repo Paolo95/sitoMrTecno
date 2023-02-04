@@ -19,6 +19,7 @@ const EditOrder = () => {
     const [orderStatus, setOrderStatus] = useState('');
     const [isChanged, setIsChanged] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [editDone, setEditDone] = useState(false);
 
     useEffect(() => {
 
@@ -73,6 +74,8 @@ const EditOrder = () => {
 
         const editOrder = async () => {
     
+          setEditDone(true);
+
             try {
              
               const response = await axios.post(EDIT_ORDER_URL, 
@@ -91,6 +94,7 @@ const EditOrder = () => {
                 }
               );  
       
+              setEditDone(false);
               alert(response.data);
         
             } catch (err) {
@@ -138,10 +142,20 @@ const EditOrder = () => {
 
     <section className='editOrder'>
         <div className="editOrder-heading">
-            <h2 className='editOrder-title'>Modifica ordine</h2>
+            <h2 className='editOrder-title'>
+              Modifica ordine
+              
+              </h2>
             <div className="createBtn-div">
                 {
-                    isChanged ? <button className='btn btn-create' onClick={handleEdit}>Modifica ordine</button>
+                    isChanged ? <button className='btn btn-create' onClick={handleEdit}>
+                                Modifica ordine
+                                <ClipLoader
+                                      color={'white'}
+                                      loading={editDone}
+                                      size={10}
+                                      />
+                                </button>
                               : <button disabled className='btn btn-create disabled' onClick={handleEdit}>Modifica ordine</button>
                 }
                 

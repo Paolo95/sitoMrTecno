@@ -3,6 +3,8 @@ import './newProductPageStyle.css'
 import useAuth from '../../../../hooks/useAuth';
 import { NavLink, useNavigate } from 'react-router-dom';
 import axios from '../../../../api/axios';
+import ClipLoader from 'react-spinners/ClipLoader';
+
 
 const NewProductPage = () => {
 
@@ -30,12 +32,15 @@ const NewProductPage = () => {
     const NEW_PROD_URL = 'api/product/newProduct';
     const [categories, setCategories] = useState([]);
     const goBack = () => navigate('/adminDashboard/products');
+    const [loading, setLoading] = useState(false);
 
      const handleSubmit = (e) => {
         
         e.preventDefault();
 
         const newProductForm = async () => {
+
+            setLoading(true);
 
             try {
             
@@ -68,6 +73,7 @@ const NewProductPage = () => {
                 }
                 );
         
+            setLoading(false);
             alert(response.data);
             goBack();
 
@@ -137,7 +143,15 @@ const NewProductPage = () => {
             </div>                
             <h2 className='newProductPage-title'>Aggiungi prodotto</h2>
             <div className='newProductPage-pubBtn-div'>
-                <button type='submit' form='editForm' className="newProductPage-pubBtn">Pubblica ora</button>
+                <button type='submit' form='editForm' className="newProductPage-pubBtn">
+                    
+                    Pubblica ora
+                    <ClipLoader
+                            color={'#0f3460'}
+                            loading={loading}
+                            size={10}
+                            />
+                    </button>
             </div>
         </div>
             <div className="newProductPage-content">
