@@ -27,6 +27,8 @@ import Checkout from './components/checkout/Checkout';
 import OrderSuccess from './components/orderSuccess/OrderSuccess';
 import UserDashboard from './components/userDashboard/UserDashboard';
 import Faq from './components/faq/Faq';
+import Barter from './components/barter/Barter';
+import Services from './components/services/Services';
 
 function App() {
   
@@ -118,6 +120,10 @@ function App() {
             <Route exact path="/pwdUpdSuccess/:code" element={<PassRecSuccess />} >
             </Route>
             <Route exact path="/faq" element={<Faq />} >
+            </Route>
+            <Route exact path="/permuta" element={<Barter />} >
+            </Route>
+            <Route exact path="/servizi" element={<Services />} >
             </Route>
 
           <Route element={<PersistLogin />}>     

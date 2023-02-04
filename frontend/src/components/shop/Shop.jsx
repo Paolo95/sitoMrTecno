@@ -426,12 +426,16 @@ export const Shop = ({ addToCart, cartItem, decreaseQty, deleteCartProduct }) =>
         </div>
     </>
           <div className="contentWidth">
+            {
+              params.status === 'nuovo' ? <h1>Nuovo</h1> :
+              params.status === 'ricondizionati' ? <h1>Ricondizionati</h1> : null
+            }
+           
             <div className="heading d_flex">
               <div className="heading-left row f_flex">
                 <button className='toggle' onClick={() => setCatMobileMenu(!catMobileMenu)}>
                     <h3>Filtri<i className='fa fa-chevron-down'></i></h3>
                 </button>
-                
               </div>
 
               <Select 
