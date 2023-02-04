@@ -13,26 +13,22 @@ const Footer = () => {
                     <div className="box">
                         <h2>Chi siamo</h2>
                         <ul>
-                            <li>Il nostro punto vendita</li>
-                            <li>Termini e condizioni</li>
-                            <li>Privacy Policy</li>
+                            <li><a href="/storia">Storia</a></li>
                         </ul>
                     </div>
                     <div className="box">
                         <h2>Assitenza clienti</h2>
                         <ul>
-                            <li>Help Center</li>
-                            <li>Come acquistare</li>
-                            <li>Traccia il tuo ordine</li>
-                            <li>Lavora con noi</li>
+                            <li><a href="/faq">FAQ's</a></li>
+                            <li><a href="/privacy">Privacy Policy</a></li>
                         </ul>
                     </div>
                     <div className="box">
                         <h2>Contattaci</h2>
                         <ul>
                             <li>Viale Roma 104 - Nereto(TE)</li>
-                            <li>Email: info@mrtecno.it</li>
-                            <li>Telefono: 338 7576322</li>
+                            <li className='mail'>Email: <a href="mailto:info@mrtecno.it">info@mrtecno.it</a></li>
+                            <li className='telephone'>Telefono: <a href="tel:3387576322">338 7576322</a></li>
                         </ul>
                     </div>
                 </div>

@@ -16,6 +16,16 @@ footer p{
     margin-bottom: 20px;
 }
 
+footer a{
+    transition: 0.5s;
+    color: #fff;
+}
+
+footer a:hover{
+    color:#e9e716;
+    font-weight: 400;
+}
+
 footer h2{
     margin-bottom: 20px;
 }
@@ -37,8 +47,39 @@ footer .madeby{
 footer .madeby a{
     color:darkgrey;
     cursor: pointer;
+    transition: 0.5s;
+}
+
+footer .madeby a:hover{
+    color:#e9e716;
+    opacity: 0.9;
+    font-weight: 400;
 }
 
 footer .rights{
     text-align: center;
+}
+
+footer .mail a{
+    color: #fff;
+    opacity: 0.6;
+    font-weight: 400;
+    transition: 0.5s;
+}
+
+footer .mail a:hover{
+    color:#e9e716;
+    opacity: 1;
+}
+
+footer .telephone a{
+    color: #fff;
+    opacity: 0.6;
+    font-weight: 400;
+    transition: 0.5s;
+}
+
+footer .telephone a:hover{
+    color:#e9e716;
+    opacity: 1;
 }

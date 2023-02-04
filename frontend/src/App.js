@@ -148,7 +148,7 @@ function App() {
         </Routes>
         <CookieConsent style={{background: '#0f3460', textAlign:'center'}}
                        buttonText='Ho capito'>
-          Questo sito utilizza i cookie per il suo funzionamento. Non vengono memorizzati dati per uso statistico.
+          Questo sito utilizza i cookie per il suo funzionamento. Non vengono memorizzati dati per uso statistico.<br/><a href='/privacy' style={{fontSize: "10px", color:'yellow'}}>Privacy Policy</a>
         </CookieConsent>
         <Footer />
       </Router>
