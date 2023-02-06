@@ -3,7 +3,6 @@ import Header from './common/header/Header';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Pages from './pages/Pages';
 import { useEffect, useState } from 'react';
-import CookieConsent from 'react-cookie-consent'
 import Cart from './common/cart/Cart';
 import Shop from './components/shop/Shop';
 import Footer from './common/footer/Footer';
@@ -29,6 +28,7 @@ import UserDashboard from './components/userDashboard/UserDashboard';
 import Faq from './components/faq/Faq';
 import Barter from './components/barter/Barter';
 import Services from './components/services/Services';
+import CookieBot from 'react-cookiebot';
 
 function App() {
   
@@ -85,6 +85,8 @@ function App() {
     setCartItem(cartItem.filter((item) => item.id !== product.id));
   
   }
+
+  const domainGroupId = '6dbd17e8-ea97-4b46-8073-1d421afda11a';
 
   return (
     <>
@@ -152,10 +154,7 @@ function App() {
             </Route>
           </Route>                  
         </Routes>
-        <CookieConsent style={{background: '#0f3460', textAlign:'center'}}
-                       buttonText='Ho capito'>
-          Questo sito utilizza i cookie per il suo funzionamento. Non vengono memorizzati dati per uso statistico.<br/><a href='/privacy' style={{fontSize: "10px", color:'yellow'}}>Privacy Policy</a>
-        </CookieConsent>
+        <CookieBot domainGroupId={domainGroupId}/>
         <Footer />
       </Router>
     </>
