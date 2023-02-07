@@ -34,6 +34,10 @@
     padding: 5px;
 }
 
+.barter .form-step-active h2{
+    margin-bottom: 15px;
+}
+
 .barter .form-step{
     display: none;
 }

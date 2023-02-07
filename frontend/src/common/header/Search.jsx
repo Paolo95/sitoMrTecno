@@ -11,7 +11,6 @@ const Search = ({ cartItem }) => {
   const [loading, setLoading] = useState(false);
   const { auth } = useAuth();
  
-  console.log(auth?.role)
   window.addEventListener("scroll", function(){
     const search = document.querySelector(".search");
     search.classList.toggle("active", window.scrollY > 100);

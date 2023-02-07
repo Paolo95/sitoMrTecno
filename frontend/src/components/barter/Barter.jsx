@@ -1,23 +1,141 @@
 import Select from 'react-select';
 import './barter.css'
 import ClockLoader from 'react-spinners/ClockLoader';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from '../../api/axios';
 
 
 const Barter = () => {
 
     const [formStepsNum, setFormStepsNum] = useState(1);
-    const [barterLoading, setBarterLoading] = useState(true);
+    const [loading, setLoading] = useState(true);
+    const [categoryOptions, setCategories] = useState([]);
+    const [uniqueBrands, setBrands] = useState([]);
+    const [categoryChoice, setCategoryChoice] = useState('');
+    const [statusChoice, setStatusChoice] = useState('');
+    const [brandChoice, setBrandChoice] = useState('');
+    const [shopItems, setShopItems] = useState([]);
+
+    const CATEGORY_URL = '/api/product/categories';
+    const BRANDS_URL = '/api/product/brands';
+    const PRODUCT_LIST_URL = '/api/product/getProductOptions';
+
     const navigate = useNavigate();
 
-    const shopOptions = [
-        { value: 0, label: 'Migliori' },
-        { value: 1, label: 'Crescente' },
-        { value: 2, label: 'Decrescente' },
-        { value: 3, label: 'A-Z' },
-        { value: 4, label: 'Z-A' },
-    ];
+    
+    const statusChoiceHandler = (options) => {
+  
+        setStatusChoice(options.value);
+    }
+
+    const categoryChoiceHandler = (options) => {
+  
+        setCategoryChoice(options.value);
+    }
+
+    const brandChoiceHandler = (options) => {
+  
+        setBrandChoice(options.value);
+    }
+
+    const getFilteredItems = async () => {
+
+        try {
+    
+            const response = await axios.post(PRODUCT_LIST_URL, 
+              { 
+                categoryChecked: categoryChoice,
+                brandChecked: brandChoice,
+                status: statusChoice,
+              },
+              {
+                  headers: { 'Content-Type': 'application/json'},
+                  withCredentials: true
+              }
+              );
+      
+              setLoading(false)
+              setShopItems(response.data);           
+      
+          } catch (err) {
+            if(!err?.response){
+              console.error('Server non attivo!');
+            }else if(err.response?.status === 500){
+              console.error(err.response?.data);
+            }else{
+              console.error('Recupero elementi fallito!');
+            }    
+        } 
+        
+    
+      }
+    
+      useEffect(() => {
+    
+        setLoading(true);
+        getFilteredItems();
+    
+        // eslint-disable-next-line
+      }, [categoryChoice, brandChoice, statusChoice]);
+
+    useEffect(() => {
+
+        const getCategories = async () => {
+
+            try {
+            
+            const response = await axios.get(CATEGORY_URL, 
+                { 
+                
+                },
+                {
+                    headers: { 'Content-Type': 'application/json'},
+                    withCredentials: true
+                }
+                );
+
+                setCategories(response.data);
+        
+            } catch (err) {
+            if(!err?.response){
+                console.error('Server non attivo!');
+            }else if(err.response?.status === 500){
+                console.error(err.response?.data);
+            }else{
+                console.error('Recupero categorie fallito!');
+            }
+            }    
+        
+        }
+
+    if (categoryOptions.length === 0){
+        getCategories();
+    }
+
+    // eslint-disable-next-line
+    },[])
+
+    const catOptions = categoryOptions.map((item) => ({
+        "value" : item.category,
+        "label" : item.category
+    }))
+
+    const brandOptions = uniqueBrands.map((item) => ({
+        "value" : item.brandName,
+        "label" : item.brandName
+    }))
+
+    const statusOptions = [
+        {value : 'Ricondizionato', label : 'Ricondizionato'},
+        {value : 'Nuovo', label : 'Nuovo'},
+    ]
+
+    
+    const modOptions = shopItems.map((item) => ({
+        "value" : item.product_name, label: item.product_name
+    }))
+    
 
     const styles = {
     control: (styles) => ({
@@ -29,6 +147,44 @@ const Barter = () => {
         cursor: 'pointer',
     })
     }
+
+    const getBrands = async () => {
+
+        try {
+         
+          const response = await axios.post(BRANDS_URL, 
+            { 
+              categoryChecked: categoryChoice
+            },
+            {
+                headers: { 'Content-Type': 'application/json'},
+                withCredentials: true
+            }
+            );
+    
+            setLoading(false);
+            setBrands(response.data);
+               
+    
+        } catch (err) {
+          if(!err?.response){
+            console.error('Server non attivo!');
+          }else if(err.response?.status === 500){
+            console.error(err.response?.data);
+          }else{
+            console.error('Recupero brand fallito!');
+          }
+        }    
+    
+      }
+    
+      useEffect(() => {
+    
+        getBrands();
+    
+        // eslint-disable-next-line
+      }, [categoryChoice]);
+    
 
     const updateFormSteps = (e, btnType) =>{
 
@@ -57,7 +213,7 @@ const Barter = () => {
                             <div className="txt_field">
                                 <p>Benvenuto nella sezione permuta!</p>
                                 <p>Segui i passaggi per ottenere l'oggetto che desideri ad un prezzo super conveniente!</p>
-                                <p>Se non hai ben chiaro come funziona il tutto, visita la pagina <a href="/faq"><b>FAQ's</b></a> per ulteriori informazioni!</p> 
+                                <p>Se non hai ben chiaro come funziona il tutto, visita la pagina <u><a href="/faq"><b>FAQ's</b></a></u> per ulteriori informazioni!</p> 
                                 <p><b>DISCLAMER:</b> il processo di permuta richiede una valutazione dei prodotti da permutare effettuata da un operatore. Prosegui solo se sei veramente interessato, grazie!</p>
                             </div>
                             <div className='btnForm'>
@@ -68,33 +224,50 @@ const Barter = () => {
                         </div>
 
                         <div className={formStepsNum === 2 ? "form-step-active": "form-step"}>
+                        <h2>Scegli il prodotto che desideri</h2>
                             <div className="txt_field">
-                                <h2>Scegli il prodotto che desideri</h2>
-                                <label htmlFor='username'>Categoria:</label>
+                                <label htmlFor='username'>Stato:</label>
                                 <Select 
-                                    options={shopOptions}
+                                    options={statusOptions}
+                                    onChange={statusChoiceHandler}
                                     styles={styles}
                                     isClearable={false}
                                     isSearchable={false}
-                                    defaultValue={shopOptions[0]}/>
+                                    placeholder='Seleziona lo stato...'
+                                    />
+                            </div>
+                            <div className="txt_field">
+                                
+                                <label htmlFor='username'>Categoria:</label>
+                                <Select 
+                                    options={catOptions}
+                                    onChange={categoryChoiceHandler}
+                                    styles={styles}
+                                    isClearable={false}
+                                    isSearchable={false}
+                                    placeholder='Seleziona la categoria...'
+                                    />
                             </div>
                             <div className="txt_field">
                                 <label htmlFor='username'>Brand:</label>
                                 <Select 
-                                    options={shopOptions}
+                                    options={brandOptions}
+                                    onChange={brandChoiceHandler}
                                     styles={styles}
                                     isClearable={false}
                                     isSearchable={false}
-                                    defaultValue={shopOptions[0]}/>
+                                    placeholder='Seleziona il brand...'
+                                    />
                             </div>
                             <div className="txt_field">
                                 <label htmlFor='username'>Modello:</label>
                                 <Select 
-                                    options={shopOptions}
+                                    options={modOptions}
                                     styles={styles}
                                     isClearable={false}
                                     isSearchable={false}
-                                    defaultValue={shopOptions[0]}/>
+                                    placeholder='Seleziona il modello...'
+                                    />
                             </div>
                             <div className='btnForm'>
                                 <button className={formStepsNum === 1 ? 'disabled' : ''} onClick={(e) => updateFormSteps(e, 'prev')}>Precendente</button>
@@ -134,7 +307,7 @@ const Barter = () => {
                                 
                                 <ClockLoader
                                     color={'#0f3460'}
-                                    loading={barterLoading}
+                                    loading={loading}
                                     size={60}
                                 />
                             </div>
