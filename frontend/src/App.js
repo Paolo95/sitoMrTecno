@@ -123,8 +123,6 @@ function App() {
             </Route>
             <Route exact path="/faq" element={<Faq />} >
             </Route>
-            <Route exact path="/permuta" element={<Barter />} >
-            </Route>
             <Route exact path="/servizi" element={<Services />} >
             </Route>
 
@@ -142,15 +140,13 @@ function App() {
             </Route>
             <Route element={<RequireAuth allowedRole={'customer'}/>}>
               <Route exact path="/userDashboard/*" element={<UserDashboard />} >    
-              </Route>
-            </Route>
-            <Route element={<RequireAuth allowedRole={'customer'}/>}>
+              </Route>            
               <Route exact path="/checkout" element={<Checkout cleanCart={cleanCart} cartItem={cartItem}/>} >    
               </Route>
-            </Route>
-            <Route element={<RequireAuth allowedRole={'customer'}/>}>
               <Route exact path="/orderSuccess" element={<OrderSuccess />} >    
               </Route>
+              <Route exact path="/permuta" element={<Barter />} >
+            </Route>
             </Route>
           </Route>                  
         </Routes>

@@ -3,12 +3,15 @@ import { Link } from 'react-router-dom'
 import logo from '../assets/images/logo.jpg'
 import axios from '../../api/axios'
 import { useState } from 'react'
+import useAuth from '../../hooks/useAuth';
 import ClipLoader from 'react-spinners/ClipLoader'
 
 const Search = ({ cartItem }) => {
 
   const [loading, setLoading] = useState(false);
-
+  const { auth } = useAuth();
+ 
+  console.log(auth?.role)
   window.addEventListener("scroll", function(){
     const search = document.querySelector(".search");
     search.classList.toggle("active", window.scrollY > 100);
@@ -111,15 +114,31 @@ const Search = ({ cartItem }) => {
             <div className="icon f_flex width">
               <div className='user'>
                 <Link to='/login'>
-                  <i className="fa fa-user icon-circle"></i>
+                  {
+                    auth?.role === 'customer' ? <i className="fas fa-home icon-circle"></i>                     
+                    : 
+                    auth?.role === 'admin' ? <i className="fas fa-user-shield icon-circle"></i>
+                    :
+                    <>
+                    <i className="fa fa-user icon-circle"></i>
+                    
+                    </>
+                    
+                  }
+                  
                 </Link>
+                {
+                  auth?.role === undefined ? <div className='headerBtn-div'>Accedi</div>
+                             : <div className='headerBtn-div'>Dashboard</div>
+                }
               </div>
-              
+          
               <div className="cart">
                 <Link to='/cart'>
                   <i className="fa fa-shopping-cart icon-circle"></i>
                   <span>{cartItem.length === 0 ? "0" : cartItem.length}</span>
                 </Link>
+                <div className='headerBtn-div'>Carrello</div>
               </div>
             </div>
           </div>

@@ -102,8 +102,23 @@
     color: #fff;
 }
 
+.search .user{
+    text-align: center;
+}
+
 .search .f_flex{
     justify-content: end;
+    align-items: center;
+}
+
+.search .cart{
+    margin-left: 20px;
+}
+
+.search .headerBtn-div{
+  color: aliceblue;
+  font-size: 11px;
+  text-align: center;
 }
 
 .search .dataResult{
@@ -289,6 +304,9 @@ header ul li a:hover{
         padding: 20px 0;
     }
 
+    .search .headerBtn-div{
+        display: none;
+    }
 
 
     .search .logo img {

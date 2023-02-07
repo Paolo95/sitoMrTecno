@@ -5,8 +5,12 @@
     min-height: 100%;
 }
 
+.barter p{
+    margin-bottom: 10px;
+}
+
 .barter .form{
-    width: 670px;
+    width: 1200px;
     margin: 0 auto;
     border: 1px solid #ccc;
     border-radius: 0.35rem;
@@ -19,13 +23,19 @@
 }
 
 .barter .form-step-active{
-    display: block;
+    display: block;   
+    transform-origin: top;
+    animation: animate 0.5s;
+}
+
+.barter .form-step-active textarea{
+    resize: none;
+    width: 100%;
+    padding: 5px;
 }
 
 .barter .form-step{
     display: none;
-    transform-origin: top;
-    animation: animate 0.5s;
 }
 
 @keyframes animate {
@@ -64,8 +74,8 @@
 }
 
 .barter .progressBar .progress-step{
-    width: 2.18rem;
-    height: 2.18rem;
+    width: 2.19rem;
+    height: 2.19rem;
     background-color: #dcdcdc;
     border-radius: 50%;
     display: flex;
@@ -89,4 +99,44 @@
 .barter .progressBar .progress-step-active{
     background-color: #0f3460;
     color: aliceblue;
+}
+
+.barter .btnForm{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.barter .btnForm .disabled{
+    visibility: hidden;
+}
+
+
+.barter .btnForm button{
+    background-color: #0f3460;
+    color: aliceblue;
+    font-weight: 600;
+    width: 100px;
+    height: 40px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+@media screen and (max-width: 600px) {
+    .barter .form{
+        width: 100%;
+        margin: 0 auto;
+        border: 1px solid #ccc;
+        border-radius: 0.35rem;
+        padding: 1.5rem;
+    
+    }
+
+    .barter .progressBar{
+        margin: 10px 0;
+    }
+
+    .barter .progressBar .progress-step::after{
+        display: none;
+    }
 }
