@@ -111,8 +111,13 @@
     align-items: center;
 }
 
-.barter .btnForm .disabled{
+.barter .btnForm .hidden{
     visibility: hidden;
+}
+
+.barter .btnForm .disabled{
+    background-color: lightgray;
+    cursor: not-allowed;
 }
 
 
@@ -124,6 +129,15 @@
     height: 40px;
     cursor: pointer;
     border-radius: 5px;
+}
+
+.barter .txt_field input[type=number]{
+    margin: 0 10px 0 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 12px;
+    height: 20px;
 }
 
 @media screen and (max-width: 600px) {

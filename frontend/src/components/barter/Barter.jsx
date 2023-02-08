@@ -1,6 +1,8 @@
 import Select from 'react-select';
+import AsyncSelect from 'react-select/async'
 import './barter.css'
 import ClockLoader from 'react-spinners/ClockLoader';
+import ClipLoader from 'react-spinners/ClipLoader';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from '../../api/axios';
@@ -11,32 +13,42 @@ const Barter = () => {
     const [formStepsNum, setFormStepsNum] = useState(1);
     const [loading, setLoading] = useState(true);
     const [categoryOptions, setCategories] = useState([]);
-    const [uniqueBrands, setBrands] = useState([]);
     const [categoryChoice, setCategoryChoice] = useState('');
     const [statusChoice, setStatusChoice] = useState('');
     const [brandChoice, setBrandChoice] = useState('');
-    const [shopItems, setShopItems] = useState([]);
+    const [modelChoice, setModelChoice] = useState('');
+    const [brandRecharge, setBrandRecharge] = useState(false)
+    const [modelRecharge, setModelRecharge] = useState(false);
 
     const CATEGORY_URL = '/api/product/categories';
     const BRANDS_URL = '/api/product/brands';
     const PRODUCT_LIST_URL = '/api/product/getProductOptions';
+    
 
     const navigate = useNavigate();
 
     
     const statusChoiceHandler = (options) => {
-  
+        setModelChoice('');
         setStatusChoice(options.value);
     }
 
     const categoryChoiceHandler = (options) => {
   
+        setModelChoice('');
+        setBrandChoice('');
         setCategoryChoice(options.value);
     }
 
     const brandChoiceHandler = (options) => {
   
+        setModelChoice('');
         setBrandChoice(options.value);
+    }
+
+    const modelChoiceHandler = (options) => {
+  
+        setModelChoice(options.value);
     }
 
     const getFilteredItems = async () => {
@@ -44,19 +56,22 @@ const Barter = () => {
         try {
     
             const response = await axios.post(PRODUCT_LIST_URL, 
-              { 
-                categoryChecked: categoryChoice,
-                brandChecked: brandChoice,
-                status: statusChoice,
-              },
-              {
-                  headers: { 'Content-Type': 'application/json'},
-                  withCredentials: true
-              }
-              );
+                { 
+                    categoryChecked: categoryChoice,
+                    brandChecked: brandChoice,
+                    status: statusChoice,
+                },
+                {
+                    headers: { 'Content-Type': 'application/json'},
+                    withCredentials: true
+                }
+                );
       
-              setLoading(false)
-              setShopItems(response.data);           
+                setModelRecharge(false)
+                return response.data.map((item) => ({
+                    "value" : item.product_name, 
+                    "label": item.product_name + ' - ' + parseFloat(item.price).toFixed(2) + '€'
+                }))         
       
           } catch (err) {
             if(!err?.response){
@@ -73,69 +88,27 @@ const Barter = () => {
     
       useEffect(() => {
     
-        setLoading(true);
         getFilteredItems();
+        setModelRecharge(true);
     
         // eslint-disable-next-line
       }, [categoryChoice, brandChoice, statusChoice]);
 
+        
+        
     useEffect(() => {
 
-        const getCategories = async () => {
-
-            try {
-            
-            const response = await axios.get(CATEGORY_URL, 
-                { 
-                
-                },
-                {
-                    headers: { 'Content-Type': 'application/json'},
-                    withCredentials: true
-                }
-                );
-
-                setCategories(response.data);
-        
-            } catch (err) {
-            if(!err?.response){
-                console.error('Server non attivo!');
-            }else if(err.response?.status === 500){
-                console.error(err.response?.data);
-            }else{
-                console.error('Recupero categorie fallito!');
-            }
-            }    
-        
+        if (categoryOptions.length === 0){
+            getCategories();
         }
-
-    if (categoryOptions.length === 0){
-        getCategories();
-    }
 
     // eslint-disable-next-line
     },[])
-
-    const catOptions = categoryOptions.map((item) => ({
-        "value" : item.category,
-        "label" : item.category
-    }))
-
-    const brandOptions = uniqueBrands.map((item) => ({
-        "value" : item.brandName,
-        "label" : item.brandName
-    }))
 
     const statusOptions = [
         {value : 'Ricondizionato', label : 'Ricondizionato'},
         {value : 'Nuovo', label : 'Nuovo'},
     ]
-
-    
-    const modOptions = shopItems.map((item) => ({
-        "value" : item.product_name, label: item.product_name
-    }))
-    
 
     const styles = {
     control: (styles) => ({
@@ -154,16 +127,21 @@ const Barter = () => {
          
           const response = await axios.post(BRANDS_URL, 
             { 
-              categoryChecked: categoryChoice
+                categoryChecked: categoryChoice
             },
             {
                 headers: { 'Content-Type': 'application/json'},
                 withCredentials: true
             }
             );
-    
-            setLoading(false);
-            setBrands(response.data);
+
+            setBrandRecharge(false)
+            setModelRecharge(false)
+            return response.data.map((item) => ({
+                "value" : item.brandName,
+                "label" : item.brandName
+            }))
+        
                
     
         } catch (err) {
@@ -181,7 +159,8 @@ const Barter = () => {
       useEffect(() => {
     
         getBrands();
-    
+        setModelRecharge(true);
+        setBrandRecharge(true);
         // eslint-disable-next-line
       }, [categoryChoice]);
     
@@ -192,6 +171,40 @@ const Barter = () => {
         if (btnType === 'prev') setFormStepsNum( formStepsNum - 1 );
         if (btnType === 'next') setFormStepsNum( formStepsNum + 1 );
     }
+
+    const getCategories = async () => {
+
+        try {
+        
+        const response = await axios.get(CATEGORY_URL, 
+            { 
+            
+            },
+            {
+                headers: { 'Content-Type': 'application/json'},
+                withCredentials: true
+            }
+            );
+
+            setCategories(response.data);
+            return response.data.map((item) => ({
+                "value" : item.category,
+                "label" : item.category
+            }));
+    
+        } catch (err) {
+        if(!err?.response){
+            console.error('Server non attivo!');
+        }else if(err.response?.status === 500){
+            console.error(err.response?.data);
+        }else{
+            console.error('Recupero categorie fallito!');
+        }
+        }    
+    
+    }
+
+    console.log(modelChoice)
 
     return (
         <section className='barter'>
@@ -217,7 +230,9 @@ const Barter = () => {
                                 <p><b>DISCLAMER:</b> il processo di permuta richiede una valutazione dei prodotti da permutare effettuata da un operatore. Prosegui solo se sei veramente interessato, grazie!</p>
                             </div>
                             <div className='btnForm'>
-                                <button className={formStepsNum === 1 ? 'disabled' : ''} onClick={(e) => updateFormSteps(e, 'prev')}>Precendente</button>
+                                <button className={formStepsNum === 1 ? 'hidden' : ''} 
+                                        onClick={(e) => updateFormSteps(e, 'prev')}>Precendente</button>
+
                                 <button onClick={(e) => updateFormSteps(e, 'next')}>Successivo</button>
                             </div>
                            
@@ -239,39 +254,81 @@ const Barter = () => {
                             <div className="txt_field">
                                 
                                 <label htmlFor='username'>Categoria:</label>
-                                <Select 
-                                    options={catOptions}
+                                <AsyncSelect 
+                                    cacheOptions
+                                    defaultOptions
+                                    noOptionsMessage={() => 'Nessuna categoria'}
                                     onChange={categoryChoiceHandler}
                                     styles={styles}
                                     isClearable={false}
                                     isSearchable={false}
+                                    loadOptions={getCategories}
+                                    getOptionLabel={e => e.label}
+                                    getOptionValue={e => e.value}
                                     placeholder='Seleziona la categoria...'
                                     />
                             </div>
                             <div className="txt_field">
                                 <label htmlFor='username'>Brand:</label>
-                                <Select 
-                                    options={brandOptions}
-                                    onChange={brandChoiceHandler}
-                                    styles={styles}
-                                    isClearable={false}
-                                    isSearchable={false}
-                                    placeholder='Seleziona il brand...'
-                                    />
+                                {
+                                    brandRecharge ? 
+                                        <div style={{ display: 'flex', justifyContent: 'center', margin: '30px' }}>
+                                            <ClipLoader
+                                                color={'#0f3460'}
+                                                loading={brandRecharge}
+                                                size={50}
+                                            />
+                                        </div>
+                                             :
+                                             <AsyncSelect 
+                                                cacheOptions
+                                                defaultOptions
+                                                onChange={brandChoiceHandler}
+                                                styles={styles}
+                                                isClearable={false}
+                                                isSearchable={false}
+                                                loadOptions={getBrands}
+                                                getOptionLabel={e => e.label}
+                                                getOptionValue={e => e.value}
+                                                placeholder='Seleziona il brand...'
+                                                />
+                                }
+                                
                             </div>
                             <div className="txt_field">
                                 <label htmlFor='username'>Modello:</label>
-                                <Select 
-                                    options={modOptions}
-                                    styles={styles}
-                                    isClearable={false}
-                                    isSearchable={false}
-                                    placeholder='Seleziona il modello...'
-                                    />
+                                {
+                                    modelRecharge ? 
+                                    <div style={{ display: 'flex', justifyContent: 'center', margin: '30px' }}>
+                                        <ClipLoader
+                                            color={'#0f3460'}
+                                            loading={modelRecharge}
+                                            size={50}
+                                        />
+                                    </div>
+                                         :
+                                         <AsyncSelect 
+                                            cacheOptions
+                                            defaultOptions
+                                            onChange={modelChoiceHandler}
+                                            styles={styles}
+                                            isClearable={false}
+                                            isSearchable={false}
+                                            loadOptions={getFilteredItems}
+                                            getOptionLabel={e => e.label}
+                                            getOptionValue={e => e.value}
+                                            placeholder='Seleziona il modello...'
+                                            />
+                                }
+                               
                             </div>
                             <div className='btnForm'>
-                                <button className={formStepsNum === 1 ? 'disabled' : ''} onClick={(e) => updateFormSteps(e, 'prev')}>Precendente</button>
-                                <button onClick={(e) => updateFormSteps(e, 'next')}>Successivo</button>
+                                <button className={formStepsNum === 1 ? 'disabled' : ''} 
+                                        onClick={(e) => updateFormSteps(e, 'prev')}>Precendente</button>
+
+                                <button disabled={categoryChoice === '' || brandChoice === '' || statusChoice === '' || modelChoice === ''} 
+                                        className={categoryChoice === '' || brandChoice === '' || statusChoice === '' || modelChoice === '' ? 'disabled' : ''}
+                                        onClick={(e) => updateFormSteps(e, 'next')}>Successivo</button>
                             </div>    
                         </div>
                         <div className={formStepsNum === 3 ? "form-step-active": "form-step"}>
@@ -284,14 +341,16 @@ const Barter = () => {
                                     max={10}
                                     defaultValue={1}
                                     />
-                                <label htmlFor='username'>Nome Prodotto:</label>
+                                
+                            </div>
+                            <div className="txt_field">
+                            <label htmlFor='username'>Nome Prodotto:</label>
                                 <input type="text" />
                                 <textarea
                                     rows={10}
                                     placeholder='Esempio: iPhone X con pochi graffi e batteria al 70%'
                                     />
                             </div>
-
                             <div className='txt_field'>
                                 <a href="https://api.whatsapp.com/send?phone=3397619766">Manda le foto su WhatsApp Business!</a>
                             </div>
