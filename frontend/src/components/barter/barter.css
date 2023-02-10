@@ -15,11 +15,27 @@
     border: 1px solid #ccc;
     border-radius: 0.35rem;
     padding: 1.5rem;
-
 }
 
 .barter .txt_field{
     margin: 2rem 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.barter .txt_field label{
+    margin-bottom: 0.2rem;
+}
+
+.barter .txt_field .prodNameInput{
+    border: 1px solid lightgray;
+    padding: 6px;
+    height: 40px;
+    font-size: 18px;
+}
+
+.barter .txt_field .prodNameInput:focus{
+    border: 1px solid #0f3460;
 }
 
 .barter .form-step-active{
@@ -32,6 +48,8 @@
     resize: none;
     width: 100%;
     padding: 5px;
+    border: 1px solid lightgray;
+    font-size: 18px;
 }
 
 .barter .form-step-active h2{
@@ -131,14 +149,6 @@
     border-radius: 5px;
 }
 
-.barter .txt_field input[type=number]{
-    margin: 0 10px 0 10px;
-    border: 1px solid black;
-    border-radius: 5px;
-    text-align: center;
-    font-size: 12px;
-    height: 20px;
-}
 
 @media screen and (max-width: 600px) {
     .barter .form{

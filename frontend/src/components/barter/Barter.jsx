@@ -17,8 +17,13 @@ const Barter = () => {
     const [statusChoice, setStatusChoice] = useState('');
     const [brandChoice, setBrandChoice] = useState('');
     const [modelChoice, setModelChoice] = useState('');
+    const [qty, setQtyChoice] = useState(1);
+    const [prodBarterNames, setProdBarterNames] = useState({});
+    const [prodBarterDesc, setProdBarterDesc] = useState({});
     const [brandRecharge, setBrandRecharge] = useState(false)
     const [modelRecharge, setModelRecharge] = useState(false);
+    const [descriptionsFilled, setDescriptionsFilled] = useState(false)
+    const [namesFilled, setNamesFilled] = useState(false);
 
     const CATEGORY_URL = '/api/product/categories';
     const BRANDS_URL = '/api/product/brands';
@@ -26,11 +31,15 @@ const Barter = () => {
     
 
     const navigate = useNavigate();
-
-    
+  
     const statusChoiceHandler = (options) => {
         setModelChoice('');
         setStatusChoice(options.value);
+    }
+
+    const qtyChoiceHandler = (options) => {
+        
+        setQtyChoice(options.value);
     }
 
     const categoryChoiceHandler = (options) => {
@@ -50,6 +59,48 @@ const Barter = () => {
   
         setModelChoice(options.value);
     }
+
+    const handlerProdBarterName = (item, index) => {
+        
+        setProdBarterNames(prodBarterNames => ({
+            ...prodBarterNames,
+            [index] : item.target.value
+        }));
+        
+    }
+
+    const handlerProdDescription = (item, index) => {
+        
+        setProdBarterDesc(prodBarterDesc => ({
+            ...prodBarterDesc,
+            [index] :item.target.value
+        }));
+    }
+
+    useEffect(() => {
+
+        setProdBarterDesc({})
+        setProdBarterNames({})
+        
+    },[qty])
+
+    useEffect(() => {
+
+        if (!Object.values(prodBarterNames).includes('') && 
+                Object.keys(prodBarterNames).length !== 0 && 
+                    Object.keys(prodBarterNames).length === qty) setNamesFilled(true) 
+        if (Object.values(prodBarterNames).includes('') || Object.keys(prodBarterNames).length === 0 ) setNamesFilled(false) 
+        
+    },[prodBarterNames, qty])
+
+    useEffect(() => {
+        
+        if (!Object.values(prodBarterDesc).includes('') && 
+                Object.keys(prodBarterDesc).length !== 0 && 
+                    Object.keys(prodBarterDesc).length === qty) setDescriptionsFilled(true) 
+        if (Object.values(prodBarterDesc).includes('')) setDescriptionsFilled(false)   
+        
+    },[prodBarterDesc, qty])
 
     const getFilteredItems = async () => {
 
@@ -104,6 +155,19 @@ const Barter = () => {
 
     // eslint-disable-next-line
     },[])
+
+    const qtyOptions = [
+        {value : 1, label : '1'},
+        {value : 2, label : '2'},
+        {value : 3, label : '3'},
+        {value : 4, label : '4'},
+        {value : 5, label : '5'},
+        {value : 6, label : '6'},
+        {value : 7, label : '7'},
+        {value : 8, label : '8'},
+        {value : 9, label : '9'},
+        {value : 10, label : '10'},
+    ]
 
     const statusOptions = [
         {value : 'Ricondizionato', label : 'Ricondizionato'},
@@ -203,8 +267,6 @@ const Barter = () => {
         }    
     
     }
-
-    console.log(modelChoice)
 
     return (
         <section className='barter'>
@@ -332,32 +394,60 @@ const Barter = () => {
                             </div>    
                         </div>
                         <div className={formStepsNum === 3 ? "form-step-active": "form-step"}>
-                            <div className="txt_field">
-                                <h2>Descrivi i prodotti da permutare</h2>
+                            <h2>Descrivi i prodotti da permutare</h2>
+                            <div className="txt_field">                                
                                 <label htmlFor='username'>Quanti prodotti vuoi permutare?</label>
-                                <input 
-                                    type='number'
-                                    min={1}
-                                    max={10}
-                                    defaultValue={1}
-                                    />
-                                
-                            </div>
-                            <div className="txt_field">
-                            <label htmlFor='username'>Nome Prodotto:</label>
-                                <input type="text" />
-                                <textarea
-                                    rows={10}
-                                    placeholder='Esempio: iPhone X con pochi graffi e batteria al 70%'
+                                <Select 
+                                    options={qtyOptions}
+                                    onChange={qtyChoiceHandler}
+                                    styles={styles}
+                                    isClearable={false}
+                                    isSearchable={false}
+                                    defaultValue={{ label: "1", value: 1 }}
+                                    placeholder='Seleziona quanti prodotti vuoi permutare...'
                                     />
                             </div>
+                            
+                            {
+                                [...Array(qty)].map((item, i) => {
+                                    return(
+                                        <div key={i}>
+                                            <div className="txt_field">
+                                            <label htmlFor='username'>Nome Prodotto:</label>
+                                            <input type="text"
+                                                   onChange={(e) => handlerProdBarterName(e,i)} 
+                                                   placeholder='Esempio: Samsung Galaxy S2'
+                                                   className='prodNameInput'
+                                                   value={Object.values(prodBarterNames)[i] || ''}
+                                                   />
+                                            </div>
+                                            <div className="txt_field">
+                                            <label htmlFor='username'>Descrizione prodotto da permutare:</label>
+                                            <textarea
+                                                rows={10}
+                                                placeholder='Esempio: iPhone X con pochi graffi e batteria al 70%'
+                                                onChange={(e) => handlerProdDescription(e,i)}
+                                                value={Object.values(prodBarterDesc)[i] || ''}
+                                                />                            
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            }
+                            
+
+                            
                             <div className='txt_field'>
                                 <a href="https://api.whatsapp.com/send?phone=3397619766">Manda le foto su WhatsApp Business!</a>
                             </div>
                             
                             <div className='btnForm'>
                                 <button className={formStepsNum === 1 ? 'disabled' : ''} onClick={(e) => updateFormSteps(e, 'prev')}>Precendente</button>
-                                <button onClick={(e) => updateFormSteps(e,'next')}>Successivo</button>
+                                {
+                                    (namesFilled && descriptionsFilled) ? <button onClick={(e) => updateFormSteps(e,'next')}>Successivo</button>
+                                                                        : <button disabled className='disabled' onClick={(e) => updateFormSteps(e,'next')}>Successivo</button>
+                                }
+                                
                             </div>    
                         </div>
                         <div className={formStepsNum === 4 ? "form-step-active": "form-step"}>
