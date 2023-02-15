@@ -6,12 +6,12 @@ import ClipLoader from 'react-spinners/ClipLoader';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from '../../api/axios';
+import useAuth from '../../hooks/useAuth';
 
 
 const Barter = () => {
 
     const [formStepsNum, setFormStepsNum] = useState(1);
-    const [loading, setLoading] = useState(true);
     const [categoryOptions, setCategories] = useState([]);
     const [categoryChoice, setCategoryChoice] = useState('');
     const [statusChoice, setStatusChoice] = useState('');
@@ -24,11 +24,20 @@ const Barter = () => {
     const [modelRecharge, setModelRecharge] = useState(false);
     const [descriptionsFilled, setDescriptionsFilled] = useState(false)
     const [namesFilled, setNamesFilled] = useState(false);
+    const [telephoneFilled, setTelephoneFilled] = useState(false);
+    const [barterTelephone, setBarterTelephone] = useState('');
+    const [newBarterCode, setNewBarterCode] = useState(0);
+    const [barterStatus, setBarterStatus] = useState('In lavorazione');
 
     const CATEGORY_URL = '/api/product/categories';
     const BRANDS_URL = '/api/product/brands';
     const PRODUCT_LIST_URL = '/api/product/getProductOptions';
-    
+    const BARTER_STORE_URL = '/api/barter/createBarter';
+    const BARTER_STATUS_URL = '/api/barter/barterStatus';
+
+    const validTelephone = new RegExp(/^(([+])39)?((3[1-6][0-9]))(\d{7})$/);
+
+    const { auth } = useAuth();
 
     const navigate = useNavigate();
   
@@ -73,8 +82,14 @@ const Barter = () => {
         
         setProdBarterDesc(prodBarterDesc => ({
             ...prodBarterDesc,
-            [index] :item.target.value
+            [index] : item.target.value
         }));
+    }
+
+    const handlerBarterTelephone = (e) => {
+
+        setBarterTelephone(e.target.value);
+
     }
 
     useEffect(() => {
@@ -101,6 +116,16 @@ const Barter = () => {
         if (Object.values(prodBarterDesc).includes('')) setDescriptionsFilled(false)   
         
     },[prodBarterDesc, qty])
+
+    useEffect(() => {
+        
+        if (validTelephone.test(barterTelephone)){
+            setTelephoneFilled(true);
+        }else{
+            setTelephoneFilled(false);
+        }
+        //eslint-disable-next-line
+    },[barterTelephone, qty])
 
     const getFilteredItems = async () => {
 
@@ -268,6 +293,94 @@ const Barter = () => {
     
     }
 
+ 
+    const storeBarter = async () => {
+
+        let barterItem = {};
+
+        Object.values(prodBarterNames).forEach((itemName, indexName) => {
+            Object.values(prodBarterDesc).forEach((itemDesc, indexDesc) => {
+                if(indexName === indexDesc){
+                    barterItem = ({
+                        ...barterItem,
+                        [indexName] : {'name': itemName, 'description': itemDesc}
+                    })
+                }
+            })
+        })
+
+        try {
+         
+            const response = await axios.post(BARTER_STORE_URL, 
+                { 
+                    barterItem: JSON.stringify(barterItem),
+                    modelChoice: modelChoice,
+                    telephone: barterTelephone,
+                },
+                {
+                    headers: {
+                        'Authorization': `Bearer ${auth?.accessToken}`
+                    },
+                    withCredentials: true
+                }
+                );
+
+            setNewBarterCode(response.data.id); 
+    
+        } catch (err) {
+          if(!err?.response){
+            console.error('Server non attivo!');
+          }else if(err.response?.status === 500){
+            console.error(err.response?.data);
+          }else{
+            console.error('Memorizzazione della permuta fallita!');
+          }
+        }    
+    
+    }
+
+    const updateBarter = async (barterCode) => {
+
+        try {
+         
+            const response = await axios.post(BARTER_STATUS_URL, 
+                { 
+                    id: barterCode,
+                },
+                {
+                    headers: {
+                        'Authorization': `Bearer ${auth?.accessToken}`
+                    },
+                    withCredentials: true
+                }
+                );
+
+            setBarterStatus(response.data.status);
+    
+        } catch (err) {
+          if(!err?.response){
+            console.error('Server non attivo!');
+          }else if(err.response?.status === 500){
+            console.error(err.response?.data);
+          }else{
+            console.error('Recupero informazioni della permuta fallito!');
+          }
+        }    
+    
+    }
+
+    useEffect(()=>{
+        
+        const interval = setInterval(() => {
+
+            if(newBarterCode !== 0 && barterStatus === 'In lavorazione') updateBarter(newBarterCode);
+          }, 2000);
+        
+          return () => clearInterval(interval); 
+
+        // eslint-disable-next-line
+    },[newBarterCode, barterStatus])
+      
     return (
         <section className='barter'>
             <div className='container'>
@@ -427,6 +540,7 @@ const Barter = () => {
                                                 rows={10}
                                                 placeholder='Esempio: iPhone X con pochi graffi e batteria al 70%'
                                                 onChange={(e) => handlerProdDescription(e,i)}
+                                                maxLength={200}
                                                 value={Object.values(prodBarterDesc)[i] || ''}
                                                 />                            
                                             </div>
@@ -434,17 +548,25 @@ const Barter = () => {
                                     )
                                 })
                             }
-                            
+
+                            <div className='txt_field'>
+                                <label htmlFor='username'>Numero di telefono da cui invierai le foto:</label>
+                                <input type="text"
+                                        onChange={(e) => handlerBarterTelephone(e)} 
+                                        placeholder='Digita il tuo numero di telefono...'
+                                        className='prodNameInput'
+                                        />
+                            </div>
 
                             
                             <div className='txt_field'>
-                                <a href="https://api.whatsapp.com/send?phone=3397619766">Manda le foto su WhatsApp Business!</a>
+                                <a className='whatsAppBtn' href="https://api.whatsapp.com/send?phone=3397619766">Manda le foto su WhatsApp Business!</a>
                             </div>
                             
                             <div className='btnForm'>
                                 <button className={formStepsNum === 1 ? 'disabled' : ''} onClick={(e) => updateFormSteps(e, 'prev')}>Precendente</button>
                                 {
-                                    (namesFilled && descriptionsFilled) ? <button onClick={(e) => updateFormSteps(e,'next')}>Successivo</button>
+                                    (namesFilled && descriptionsFilled && telephoneFilled) ? <button onClick={(e) => {storeBarter();  updateFormSteps(e,'next')}}>Successivo</button>
                                                                         : <button disabled className='disabled' onClick={(e) => updateFormSteps(e,'next')}>Successivo</button>
                                 }
                                 
@@ -452,20 +574,40 @@ const Barter = () => {
                         </div>
                         <div className={formStepsNum === 4 ? "form-step-active": "form-step"}>
                             <div className="txt_field">
-                                <h2>Valutazione degli oggetti in corso...</h2>
-                                
-                                <ClockLoader
-                                    color={'#0f3460'}
-                                    loading={loading}
-                                    size={60}
-                                />
-                            </div>
+                                <h2>Valutazione degli oggetti</h2>
+                                {
+                                    (barterStatus === 'In lavorazione') ? <>
+                                                        <p>Stiamo valutando la tua proposta di permuta. <br/> Puoi rimanere su questa pagina o controllare lo stato
+                                                            della richiesta nella tua area personale. 
+                                                        </p>
+                                                
+                                                        <div style={{ display: 'flex', justifyContent: 'center', margin: '30px' }}>
+                                                            <ClockLoader
+                                                                color={'#0f3460'}
+                                                                loading={barterStatus === 'In lavorazione'}
+                                                                size={60}
+                                                            />
+                                                        </div>
+                                                      </>
+                                                      :
+                                                      <>
+                                                      <div className='barterAccepted'>
+                                                        <p>
+                                                            La tua proposta di permuta è stata approvata!
+                                                        </p>
 
-                            
+                                                        <i className="far fa-check-circle"></i>
+                                                      </div>
+                                                      
+                                                      
+                                                      </>
+                                }
+                                    
+                            </div>  
                             <div className='btnForm'>
-                                <button className={formStepsNum === 1 ? 'disabled' : ''} onClick={(e) => updateFormSteps(e, 'prev')}>Precendente</button>
-                                <button onClick={(e) => updateFormSteps(e,'next')}>Successivo</button>
-                            </div>    
+                                <button className={formStepsNum === 4 ? 'hidden' : ''} onClick={(e) => updateFormSteps(e, 'prev')}>Precendente</button>
+                                <button className={barterStatus === 'In lavorazione' ? 'hidden' : ''} onClick={(e) => updateFormSteps(e,'next')}>Successivo</button>
+                            </div> 
                         </div>
                         <div className={formStepsNum === 5 ? "form-step-active": "form-step"}>
                             <div className="txt_field">
