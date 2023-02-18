@@ -28,12 +28,15 @@ const Barter = () => {
     const [barterTelephone, setBarterTelephone] = useState('');
     const [newBarterCode, setNewBarterCode] = useState(0);
     const [barterStatus, setBarterStatus] = useState('In lavorazione');
+    const [barterRecap, setBarterRecap] = useState('');
+    const [barterTotal, setBarterTotal] = useState(0);
 
     const CATEGORY_URL = '/api/product/categories';
     const BRANDS_URL = '/api/product/brands';
     const PRODUCT_LIST_URL = '/api/product/getProductOptions';
     const BARTER_STORE_URL = '/api/barter/createBarter';
     const BARTER_STATUS_URL = '/api/barter/barterStatus';
+    const BARTER_TOTAL_URL = '/api/barter/barterTotal';
 
     const validTelephone = new RegExp(/^(([+])39)?((3[1-6][0-9]))(\d{7})$/);
 
@@ -309,6 +312,8 @@ const Barter = () => {
             })
         })
 
+        setBarterRecap(JSON.stringify(barterItem));
+
         try {
          
             const response = await axios.post(BARTER_STORE_URL, 
@@ -369,18 +374,55 @@ const Barter = () => {
     
     }
 
+    const barterValutation = async (barterCode) => {
+        
+        try {
+         
+            const response = await axios.post(BARTER_TOTAL_URL, 
+                { 
+                    id: barterCode,
+                },
+                {
+                    headers: {
+                        'Authorization': `Bearer ${auth?.accessToken}`
+                    },
+                    withCredentials: true
+                }
+                );
+
+            setBarterTotal(response.data.total);
+    
+        } catch (err) {
+          if(!err?.response){
+            console.error('Server non attivo!');
+          }else if(err.response?.status === 500){
+            console.error(err.response?.data);
+          }else{
+            console.error('Recupero totale della permuta fallito!');
+          }
+        }    
+    
+    }
+
     useEffect(()=>{
         
         const interval = setInterval(() => {
 
-            if(newBarterCode !== 0 && barterStatus === 'In lavorazione') updateBarter(newBarterCode);
-          }, 2000);
+        if(newBarterCode !== 0 && barterStatus === 'In lavorazione') updateBarter(newBarterCode);
+          }, 60000);
         
           return () => clearInterval(interval); 
 
         // eslint-disable-next-line
     },[newBarterCode, barterStatus])
-      
+
+    useEffect(() => {
+        
+        if (newBarterCode !== 0 || barterStatus !== 'In lavorazione') barterValutation(newBarterCode);
+        
+        // eslint-disable-next-line
+    },[newBarterCode, barterStatus])
+
     return (
         <section className='barter'>
             <div className='container'>
@@ -412,7 +454,6 @@ const Barter = () => {
                             </div>
                            
                         </div>
-
                         <div className={formStepsNum === 2 ? "form-step-active": "form-step"}>
                         <h2>Scegli il prodotto che desideri</h2>
                             <div className="txt_field">
@@ -611,15 +652,25 @@ const Barter = () => {
                         </div>
                         <div className={formStepsNum === 5 ? "form-step-active": "form-step"}>
                             <div className="txt_field">
-                                <h2>Conferma permuta</h2>
-                                
-                                <p>Riepilogo permuta...</p>
+                                <h2>Riepilogo permuta</h2>
+                                <div className="barter-grid">
+                                    <div className="barter-recap">
+                                        <h3>Prodotto desiderato:</h3>
+                                        <span>{modelChoice}</span>
+                                    </div>
+                                    <div className="barter-recap">
+                                        <h3>Stato:</h3>
+                                        <span>{statusChoice}</span>
+                                    </div>
+                                    <div className="barter-recap">
+                                        <h3>Prezzo finale del prodotto desiderato:</h3>
+                                        <span className='final-price'>{parseFloat(barterTotal).toFixed(2)}€</span>
+                                    </div>
+                                </div>
                             </div>
-
-                            
                             <div className='btnForm'>
                                 <button className={formStepsNum === 1 ? 'disabled' : ''} onClick={(e) => updateFormSteps(e, 'prev')}>Precendente</button>
-                                <button onClick={(e) => updateFormSteps(e,'next')}>Successivo</button>
+                                <button onClick={(e) => updateFormSteps(e,'next')}>Conferma</button>
                             </div>    
                         </div>
                         <div className={formStepsNum === 6 ? "form-step-active": "form-step"}>

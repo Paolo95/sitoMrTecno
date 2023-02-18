@@ -23,6 +23,34 @@
     flex-direction: column;
 }
 
+.barter .txt_field .barter-grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 30px;
+}
+
+.barter .txt_field .barter-recap{
+    display: flex;
+    justify-content: space-between;
+}
+
+.barter .txt_field .barter-recap .final-price{
+    color: #25D366;
+    font-weight: 600;
+    
+}
+
+.barter .txt_field .barter-items{
+    display: flex;
+    flex-direction: column;
+}
+
+.barter .txt_field .barter-items .barter-items-divs{
+    display: flex;
+    justify-content: space-between;
+    gap: 4px;
+}
+
 .barter .txt_field label{
     margin-bottom: 0.2rem;
 }
