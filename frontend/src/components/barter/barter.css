@@ -34,6 +34,16 @@
     justify-content: space-between;
 }
 
+.barter .txt_field .barter-recap-userProducts{
+    display: flex;
+    flex-direction: column;
+}
+
+.barter .txt_field .barter-recap-ol li{
+    margin-left: 30px;
+    list-style: decimal;
+}
+
 .barter .txt_field .barter-recap .final-price{
     color: #25D366;
     font-weight: 600;

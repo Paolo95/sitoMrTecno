@@ -662,6 +662,20 @@ const Barter = () => {
                                         <h3>Stato:</h3>
                                         <span>{statusChoice}</span>
                                     </div>
+                                    <div className="barter-recap-userProducts">
+                                        <h3>Prodotti permutati:</h3>
+                                        <ol className='barter-recap-ol'>                                      
+                                        {
+                                            barterRecap.length > 1 ? 
+                                                Object.values(JSON.parse(barterRecap)).map((item) => {
+                                                    return(
+                                                        <li>{item.name}</li>
+                                                    )
+                                                })
+                                            : null
+                                        }
+                                        </ol>
+                                    </div>
                                     <div className="barter-recap">
                                         <h3>Prezzo finale del prodotto desiderato:</h3>
                                         <span className='final-price'>{parseFloat(barterTotal).toFixed(2)}€</span>
