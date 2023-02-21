@@ -5,6 +5,7 @@ import axios from '../../api/axios'
 import useAuth from "../../hooks/useAuth";
 import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import Cookies from 'universal-cookie';
 
 
 const Checkout = ({ cleanCart, cartItem }) => {
@@ -15,6 +16,8 @@ const Checkout = ({ cleanCart, cartItem }) => {
     const ORDER_URL = '/api/order/newOrder';
     const PRODUCT_URL = '/api/product/checkAvailability';
     const [availability, setAvailability] = React.useState('false');
+    
+    const cookies = new Cookies();
 
     let shipping_cost = 9.99;
 
@@ -37,7 +40,7 @@ const Checkout = ({ cleanCart, cartItem }) => {
 
             const response = await axios.post(PRODUCT_URL, 
                 { 
-                cart: JSON.parse(localStorage.getItem('cartItem') || '[]'),
+                    cart: JSON.parse(cookies.get('cartItem') || '[]'),
                 
                 },
                 {
@@ -163,7 +166,7 @@ const Checkout = ({ cleanCart, cartItem }) => {
                     onApprove={(data, actions) => {
                         return actions.order.capture().then(function (details) {
                             newOrder(details);
-                            localStorage.removeItem('cartItem');
+                            cookies.remove('cartItem');
                             cleanCart();
                             navigate('/orderSuccess', { replace: true });
                         })
@@ -173,7 +176,7 @@ const Checkout = ({ cleanCart, cartItem }) => {
 
                         const response = await axios.post(PRODUCT_URL, 
                             { 
-                                cart: JSON.parse(localStorage.getItem('cartItem') || '[]'),
+                                cart: JSON.parse(cookies.get('cartItem') || '[]')
                             
                             },
                             {
