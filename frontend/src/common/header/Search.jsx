@@ -25,7 +25,7 @@ const Search = ({ cartItem }) => {
     setWordSearched(searchString);
   }
 
-  const FILTERED_ITEMS_URL = '/api/product/getProductByName';
+  const FILTERED_ITEMS_URL = '/api/product/getProductListByName';
 
   const getFilteredItems = async () => {
 

@@ -41,6 +41,7 @@ const Barter = () => {
     const BARTER_STORE_URL = '/api/barter/createBarter';
     const BARTER_STATUS_URL = '/api/barter/barterStatus';
     const BARTER_TOTAL_URL = '/api/barter/barterTotal';
+    const BARTER_INFO_URL = '/api/barter/barterInfo'
 
     const validTelephone = new RegExp(/^(([+])39)?((3[1-6][0-9]))(\d{7})$/);
 
@@ -136,35 +137,38 @@ const Barter = () => {
 
     const getFilteredItems = async () => {
 
-        try {
+        if (!cookies.get('barterCode')){
+            try {
     
-            const response = await axios.post(PRODUCT_LIST_URL, 
-                { 
-                    categoryChecked: categoryChoice,
-                    brandChecked: brandChoice,
-                    status: statusChoice,
-                },
-                {
-                    headers: { 'Content-Type': 'application/json'},
-                    withCredentials: true
-                }
-                );
-      
-                setModelRecharge(false)
-                return response.data.map((item) => ({
-                    "value" : item.product_name, 
-                    "label": item.product_name + ' - ' + parseFloat(item.price).toFixed(2) + '€'
-                }))         
-      
-          } catch (err) {
-            if(!err?.response){
-              console.error('Server non attivo!');
-            }else if(err.response?.status === 500){
-              console.error(err.response?.data);
-            }else{
-              console.error('Recupero elementi fallito!');
-            }    
-        } 
+                const response = await axios.post(PRODUCT_LIST_URL, 
+                    { 
+                        categoryChecked: categoryChoice,
+                        brandChecked: brandChoice,
+                        status: statusChoice,
+                    },
+                    {
+                        headers: { 'Content-Type': 'application/json'},
+                        withCredentials: true
+                    }
+                    );
+          
+                    setModelRecharge(false)
+                    return response.data.map((item) => ({
+                        "value" : item.product_name, 
+                        "label": item.product_name + ' - ' + parseFloat(item.price).toFixed(2) + '€'
+                    }))         
+          
+              } catch (err) {
+                if(!err?.response){
+                  console.error('Server non attivo!');
+                }else if(err.response?.status === 500){
+                  console.error(err.response?.data);
+                }else{
+                  console.error('Recupero elementi fallito!');
+                }    
+            } 
+        }
+        
         
     
       }
@@ -173,7 +177,7 @@ const Barter = () => {
     
         getFilteredItems();
         setModelRecharge(true);
-    
+
         // eslint-disable-next-line
       }, [categoryChoice, brandChoice, statusChoice]);
 
@@ -189,7 +193,7 @@ const Barter = () => {
             setNewBarterCode(cookies.get('barterCode') || 0)
             if (cookies.get('barterCode') > 0) {
                 setFormStepsNum(4);
-                updateBarter(cookies.get('barterCode'));
+                barterInfo(cookies.get('barterCode'));
             }
         }
         
@@ -228,45 +232,49 @@ const Barter = () => {
 
     const getBrands = async () => {
 
-        try {
+        if(!cookies.get('barterCode')){
+            try {
          
-          const response = await axios.post(BRANDS_URL, 
-            { 
-                categoryChecked: categoryChoice
-            },
-            {
-                headers: { 'Content-Type': 'application/json'},
-                withCredentials: true
-            }
-            );
-
-            setBrandRecharge(false)
-            setModelRecharge(false)
-            return response.data.map((item) => ({
-                "value" : item.brandName,
-                "label" : item.brandName
-            }))
+                const response = await axios.post(BRANDS_URL, 
+                  { 
+                      categoryChecked: categoryChoice
+                  },
+                  {
+                      headers: { 'Content-Type': 'application/json'},
+                      withCredentials: true
+                  }
+                  );
+      
+                  setBrandRecharge(false)
+                  setModelRecharge(false)
+                  return response.data.map((item) => ({
+                      "value" : item.brandName,
+                      "label" : item.brandName
+                  }))
+              
+                     
+          
+              } catch (err) {
+                if(!err?.response){
+                  console.error('Server non attivo!');
+                }else if(err.response?.status === 500){
+                  console.error(err.response?.data);
+                }else{
+                  console.error('Recupero brand fallito!');
+                }
+              }    
+        }
         
-               
-    
-        } catch (err) {
-          if(!err?.response){
-            console.error('Server non attivo!');
-          }else if(err.response?.status === 500){
-            console.error(err.response?.data);
-          }else{
-            console.error('Recupero brand fallito!');
-          }
-        }    
     
       }
     
       useEffect(() => {
-    
+
         getBrands();
         setModelRecharge(true);
         setBrandRecharge(true);
-        // eslint-disable-next-line
+
+      // eslint-disable-next-line
       }, [categoryChoice]);
     
 
@@ -279,31 +287,67 @@ const Barter = () => {
 
     const getCategories = async () => {
 
+        if(!cookies.get('barterCode')){
+            try {
+        
+                const response = await axios.get(CATEGORY_URL, 
+                    { 
+                    
+                    },
+                    {
+                        headers: { 'Content-Type': 'application/json'},
+                        withCredentials: true
+                    }
+                    );
+        
+                    setCategories(response.data);
+                    return response.data.map((item) => ({
+                        "value" : item.category,
+                        "label" : item.category
+                    }));
+            
+                } catch (err) {
+                if(!err?.response){
+                    console.error('Server non attivo!');
+                }else if(err.response?.status === 500){
+                    console.error(err.response?.data);
+                }else{
+                    console.error('Recupero categorie fallito!');
+                }
+                }    
+        }
+        
+    
+    }
+
+    const barterInfo = async (barterCode) => {
+
         try {
         
-        const response = await axios.get(CATEGORY_URL, 
+        const response = await axios.post(BARTER_INFO_URL, 
             { 
-            
+                id: barterCode
             },
             {
-                headers: { 'Content-Type': 'application/json'},
+                headers: {
+                    'Authorization': `Bearer ${auth?.accessToken}`
+                },
                 withCredentials: true
             }
             );
 
-            setCategories(response.data);
-            return response.data.map((item) => ({
-                "value" : item.category,
-                "label" : item.category
-            }));
-    
+            setBarterStatus(response.data.status);
+            setBarterRecap(response.data.barter_items)
+            setStatusChoice(response.data['product.status'])
+            setModelChoice(response.data['product.product_name'])
+                
         } catch (err) {
         if(!err?.response){
             console.error('Server non attivo!');
         }else if(err.response?.status === 500){
             console.error(err.response?.data);
         }else{
-            console.error('Recupero categorie fallito!');
+            console.error('Recupero informazioni permuta fallito!');
         }
         }    
     
@@ -710,7 +754,6 @@ const Barter = () => {
                         <div className={formStepsNum === 6 ? "form-step-active": "form-step"}>
                             <div className="txt_field">
                                 <h2>Pagamento</h2>
-                                
                                 
                                
                             </div>
