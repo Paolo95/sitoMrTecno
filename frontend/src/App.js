@@ -103,6 +103,7 @@ function App() {
       <Router>
         <Header cartItem={cartItem}/>      
         <Routes>
+          <Route element={<PersistLogin />}> 
             <Route exact path="/" element={<Pages />} >    
             </Route>    
             <Route exact path="/cart" element={<Cart cartItem={cartItem} addToCart={addToCart} decreaseQty={decreaseQty} deleteCartProduct={deleteCartProduct}/>} >    
@@ -135,15 +136,13 @@ function App() {
             </Route>
             <Route exact path="/servizi" element={<Services />} >
             </Route>
-
-          <Route element={<PersistLogin />}>     
+              
             <Route element={<LoginRequireAuth />}>
               <Route exact path="/login" element={<Login />} >    
               </Route>
-            </Route>
-          </Route>   
+            </Route>         
                    
-          <Route element={<PersistLogin />}>          
+                   
             <Route element={<RequireAuth allowedRole={'admin'}/>}>
               <Route exact path="/adminDashboard/*" element={<AdminDashboard />} >    
               </Route>
@@ -156,9 +155,9 @@ function App() {
               <Route exact path="/orderSuccess" element={<OrderSuccess />} >    
               </Route>
               <Route exact path="/permuta" element={<Barter />} >
+              </Route>
             </Route>
-            </Route>
-          </Route>                  
+          </Route>          
         </Routes>
         <CookieBot domainGroupId={domainGroupId}/>
         <Footer />

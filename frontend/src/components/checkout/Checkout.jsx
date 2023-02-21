@@ -40,7 +40,7 @@ const Checkout = ({ cleanCart, cartItem }) => {
 
             const response = await axios.post(PRODUCT_URL, 
                 { 
-                    cart: JSON.parse(cookies.get('cartItem') || '[]'),
+                    cart: JSON.parse(JSON.stringify(cookies.get('cartItem')) || '[]'),
                 
                 },
                 {
@@ -176,7 +176,7 @@ const Checkout = ({ cleanCart, cartItem }) => {
 
                         const response = await axios.post(PRODUCT_URL, 
                             { 
-                                cart: JSON.parse(cookies.get('cartItem') || '[]')
+                                cart: JSON.parse(JSON.stringify(cookies.get('cartItem')) || '[]')
                             
                             },
                             {
