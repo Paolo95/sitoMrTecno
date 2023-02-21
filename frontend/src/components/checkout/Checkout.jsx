@@ -14,7 +14,7 @@ const Checkout = ({ cleanCart, cartItem }) => {
     const location = useLocation();
     const goBack = () => navigate(-1);
     const ORDER_URL = '/api/order/newOrder';
-    const PRODUCT_URL = '/api/product/checkAvailability';
+    const PRODUCT_AVAILABILITY_URL = '/api/product/checkAvailability';
     const [availability, setAvailability] = React.useState('false');
     
     const cookies = new Cookies();
@@ -38,7 +38,7 @@ const Checkout = ({ cleanCart, cartItem }) => {
 
         const getAvailability = async () => {
 
-            const response = await axios.post(PRODUCT_URL, 
+            const response = await axios.post(PRODUCT_AVAILABILITY_URL, 
                 { 
                     cart: JSON.parse(JSON.stringify(cookies.get('cartItem')) || '[]'),
                 
@@ -174,7 +174,7 @@ const Checkout = ({ cleanCart, cartItem }) => {
 
                     onClick={async () => {
 
-                        const response = await axios.post(PRODUCT_URL, 
+                        const response = await axios.post(PRODUCT_AVAILABILITY_URL, 
                             { 
                                 cart: JSON.parse(JSON.stringify(cookies.get('cartItem')) || '[]')
                             

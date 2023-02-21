@@ -34,6 +34,10 @@ const Barter = () => {
     const [barterStatus, setBarterStatus] = useState('In lavorazione');
     const [barterRecap, setBarterRecap] = useState('');
     const [barterTotal, setBarterTotal] = useState(0);
+    const [productPrice, setProductPrice] = useState(0);
+    const [totalPrice, setTotalPrice] = useState(0);
+    const [payPalCommissions, setPayPalCommissions] = useState(0);
+    const [shipping_cost, setShippingCost] = useState(9.99);
 
     const CATEGORY_URL = '/api/product/categories';
     const BRANDS_URL = '/api/product/brands';
@@ -41,7 +45,9 @@ const Barter = () => {
     const BARTER_STORE_URL = '/api/barter/createBarter';
     const BARTER_STATUS_URL = '/api/barter/barterStatus';
     const BARTER_TOTAL_URL = '/api/barter/barterTotal';
-    const BARTER_INFO_URL = '/api/barter/barterInfo'
+    const BARTER_INFO_URL = '/api/barter/barterInfo';
+    const PRODUCT_PRICE_URL = '/api/product/productPrice';
+    const BARTER_APPROVED_URL = '/api/barter/barterAccepted'
 
     const validTelephone = new RegExp(/^(([+])39)?((3[1-6][0-9]))(\d{7})$/);
 
@@ -134,6 +140,21 @@ const Barter = () => {
         }
         //eslint-disable-next-line
     },[barterTelephone, qty])
+
+    useEffect(() => {
+        
+        if(categoryChoice === 'PC' || categoryChoice === 'Notebook') {
+            setShippingCost(19.99)
+        }
+
+        if(formStepsNum === 6){
+        
+            setPayPalCommissions(Math.round((((shipping_cost + productPrice) * 3) / 100) * 100) / 100);
+            setTotalPrice(Math.round((payPalCommissions + productPrice + shipping_cost) * 100) / 100);
+
+        } 
+
+    },[formStepsNum, productPrice, categoryChoice, totalPrice, payPalCommissions, shipping_cost])
 
     const getFilteredItems = async () => {
 
@@ -452,7 +473,7 @@ const Barter = () => {
                     withCredentials: true
                 }
                 );
-
+            
             setBarterTotal(response.data.total);
     
         } catch (err) {
@@ -465,6 +486,65 @@ const Barter = () => {
           }
         }    
     
+    }
+
+    const getProductPrice = async (productName) => {
+    
+        try {
+         
+            const response = await axios.post(PRODUCT_PRICE_URL, 
+                { 
+                    prodName: productName,
+                },
+                {
+                    headers: {
+                        'Authorization': `Bearer ${auth?.accessToken}`
+                    },
+                    withCredentials: true
+                }
+                );
+
+            setProductPrice(response.data.price);
+    
+        } catch (err) {
+          if(!err?.response){
+            console.error('Server non attivo!');
+          }else if(err.response?.status === 500){
+            console.error(err.response?.data);
+          }else{
+            console.error('Recupero prezzo del prodotto fallito!');
+          }
+        }    
+    
+    }
+
+    const setBarterApproved = async () => {
+
+        try {
+         
+            await axios.post(BARTER_APPROVED_URL, 
+                { 
+                   barterCode: newBarterCode,
+                },
+                {
+                    headers: {
+                        'Authorization': `Bearer ${auth?.accessToken}`
+                    },
+                    withCredentials: true
+                }
+            );
+
+            
+    
+        } catch (err) {
+          if(!err?.response){
+            console.error('Server non attivo!');
+          }else if(err.response?.status === 500){
+            console.error(err.response?.data);
+          }else{
+            console.error('Recupero prezzo del prodotto fallito!');
+          }
+        }    
     }
 
     useEffect(()=>{
@@ -711,7 +791,7 @@ const Barter = () => {
                             </div>  
                             <div className='btnForm'>
                                 <button className={formStepsNum === 4 ? 'hidden' : ''} onClick={(e) => updateFormSteps(e, 'prev')}>Precendente</button>
-                                <button className={barterStatus === 'In lavorazione' ? 'hidden' : ''} onClick={(e) => updateFormSteps(e,'next')}>Successivo</button>
+                                <button className={barterStatus === 'In lavorazione' ? 'hidden' : ''} onClick={(e) => {updateFormSteps(e,'next'); getProductPrice(modelChoice)}}>Successivo</button>
                             </div> 
                         </div>
                         <div className={formStepsNum === 5 ? "form-step-active": "form-step"}>
@@ -720,7 +800,17 @@ const Barter = () => {
                                 <div className="barter-grid">
                                     <div className="barter-recap">
                                         <h3>Prodotto desiderato:</h3>
-                                        <span>{modelChoice}</span>
+                                        { productPrice === 0 ?
+                                             
+                                             <ClipLoader
+                                                 color={'#0f3460'}
+                                                 loading={productPrice === 0}
+                                                 size={30}
+                                             />
+                                         :
+                                            <span>{modelChoice} - {productPrice.toFixed(2)}€</span>
+                                        }
+                                        
                                     </div>
                                     <div className="barter-recap">
                                         <h3>Stato:</h3>
@@ -753,7 +843,81 @@ const Barter = () => {
                         </div>
                         <div className={formStepsNum === 6 ? "form-step-active": "form-step"}>
                             <div className="txt_field">
-                                <h2>Pagamento</h2>
+                                {
+                                    totalPrice !== 0 ? 
+                                    
+                                    <div className="paypal-button-container">
+                                        <div className="checkout-txt">
+                                            <h1 className='checkout-span'>Scegli il metodo di pagamento</h1>
+                                        </div>    
+                                            <PayPalScriptProvider options={
+                                                {
+                                                    "client-id": "ATZNHaB7fylPEKToWL-_Cnzb2WIdfxNHMK7JFACI0K48o6vV2UukiwQ72XFU-fG7dKK3I9bi6RT1_qzy",
+                                                    currency: "EUR"
+                                                }}>
+                                            <PayPalButtons
+                                                style={{ 
+                                                    layout: "vertical",
+                                                    shape: "pill",
+                                                }}
+                                                createOrder={(data, actions) => {
+                                                    return actions.order.create({
+                                                        purchase_units: [
+                                                            {
+                                                                description: 'Ordine MrTecno',
+                                                                amount: {
+                                                                    value: totalPrice,
+                                                                    breakdown: {
+                                                                        item_total: {                                                                    
+                                                                            value: productPrice,
+                                                                            currency_code: "EUR",
+                                                                        },
+                                                                        shipping: {
+                                                                            value: shipping_cost,
+                                                                            currency_code: "EUR",
+                                                                        },
+                                                                        tax_total: {
+                                                                            value: payPalCommissions,
+                                                                            currency_code: "EUR",
+                                                                        }
+                                                                    },
+                                                                }, "items": [
+                                                                        {
+                                                                                name: modelChoice,
+                                                                                unit_amount: {
+                                                                                    currency_code: "EUR",
+                                                                                    value: productPrice
+                                                                                },
+                                                                                quantity: 1,
+                                                                        },
+                                                                ],                                                         
+                                                            },
+                                                        ],
+                                                    });
+                                                }}
+
+                                                onApprove={(data, actions) => {
+                                                    return actions.order.capture().then(function (details) {
+                                                        setBarterApproved();
+                                                        setFormStepsNum(formStepsNum + 1);
+                                                        cookies.remove('barterCode');
+                                                    })
+                                                }}
+
+                                            />
+                                        </PayPalScriptProvider>
+                                    </div>
+                                    :
+                                    <div style={{ display: 'flex', justifyContent: 'center', margin: '30px' }}>
+                                        <ClockLoader
+                                            color={'#0f3460'}
+                                            loading={totalPrice === 0}
+                                            size={60}
+                                        />
+                                    </div>
+                                    
+                                }
+                                
                                 
                                
                             </div>
@@ -762,13 +926,13 @@ const Barter = () => {
                         <div className={formStepsNum === 7 ? "form-step-active": "form-step"}>
                             <div className="txt_field">
                                 <h2>Permuta completata</h2>
-                                
+                                <p>Complimenti! Il pagamento è andato a buon fine. A breve riceverai il rimborso pattuito!</p>
                                
                             </div>
 
                             
                             <div className='btnForm'>
-                                <button className='disabled' onClick={(e) => updateFormSteps(e, 'prev')}>Precendente</button>
+                                <button className='hidden' onClick={(e) => updateFormSteps(e, 'prev')}>Precendente</button>
                                 <button onClick={() => navigate('/userDashboard/home')}>Vai alla dashboard</button>
                             </div>    
                         </div>
