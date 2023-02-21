@@ -29,14 +29,18 @@ import Faq from './components/faq/Faq';
 import Barter from './components/barter/Barter';
 import Services from './components/services/Services';
 import CookieBot from 'react-cookiebot';
+import Cookies from 'universal-cookie';
 
 function App() {
   
-  const cartFromLocalStorage = JSON.parse(localStorage.getItem('cartItem') || '[]');
+  const cookies = new Cookies();
+  
+  const cartFromLocalStorage = JSON.parse(JSON.stringify(cookies.get('cartItem')) || '[]');
   const [cartItem, setCartItem] = useState(cartFromLocalStorage);
-
+  
   const cleanCart = () => {
     setCartItem([])
+   
   }
 
   const addToCart = (product) => {
@@ -54,8 +58,14 @@ function App() {
 
   useEffect (() => {
 
-    localStorage.setItem('cartItem', JSON.stringify(cartItem));
+    const now = new Date();
+
+    cookies.set('cartItem', JSON.stringify(cartItem), {
+      expires: new Date(now.getFullYear(), now.getMonth(), now.getDate() + 7),
+      path: '/'
+    });
     
+  // eslint-disable-next-line 
   }, [cartItem]);
 
   const addToCartProduct = (product, qty) => {

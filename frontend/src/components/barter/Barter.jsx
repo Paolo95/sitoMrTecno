@@ -7,9 +7,13 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from '../../api/axios';
 import useAuth from '../../hooks/useAuth';
+import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
+import Cookies from 'universal-cookie';
 
 
 const Barter = () => {
+
+    const cookies = new Cookies();
 
     const [formStepsNum, setFormStepsNum] = useState(1);
     const [categoryOptions, setCategories] = useState([]);
@@ -181,6 +185,15 @@ const Barter = () => {
             getCategories();
         }
 
+        if(newBarterCode === 0){
+            setNewBarterCode(cookies.get('barterCode') || 0)
+            if (cookies.get('barterCode') > 0) {
+                setFormStepsNum(4);
+                updateBarter(cookies.get('barterCode'));
+            }
+        }
+        
+
     // eslint-disable-next-line
     },[])
 
@@ -300,6 +313,7 @@ const Barter = () => {
     const storeBarter = async () => {
 
         let barterItem = {};
+        const now = new Date();
 
         Object.values(prodBarterNames).forEach((itemName, indexName) => {
             Object.values(prodBarterDesc).forEach((itemDesc, indexDesc) => {
@@ -329,6 +343,11 @@ const Barter = () => {
                     withCredentials: true
                 }
                 );
+
+            cookies.set('barterCode', response.data.id, {
+                path: '/',
+                expires: new Date(now.getFullYear(), now.getMonth(), now.getDate()+7)
+            })
 
             setNewBarterCode(response.data.id); 
     
@@ -408,10 +427,11 @@ const Barter = () => {
         
         const interval = setInterval(() => {
 
-        if(newBarterCode !== 0 && barterStatus === 'In lavorazione') updateBarter(newBarterCode);
-          }, 60000);
+            if(newBarterCode !== 0 && barterStatus === 'In lavorazione') updateBarter(newBarterCode);
         
-          return () => clearInterval(interval); 
+        }, 60000);
+        
+        return () => clearInterval(interval); 
 
         // eslint-disable-next-line
     },[newBarterCode, barterStatus])
@@ -608,7 +628,7 @@ const Barter = () => {
                                 <button className={formStepsNum === 1 ? 'disabled' : ''} onClick={(e) => updateFormSteps(e, 'prev')}>Precendente</button>
                                 {
                                     (namesFilled && descriptionsFilled && telephoneFilled) ? <button onClick={(e) => {storeBarter();  updateFormSteps(e,'next')}}>Successivo</button>
-                                                                        : <button disabled className='disabled' onClick={(e) => updateFormSteps(e,'next')}>Successivo</button>
+                                                                        : <button disabled className='disabled' onClick={(e) => {updateFormSteps(e,'next'); }}>Successivo</button>
                                 }
                                 
                             </div>    
@@ -667,9 +687,9 @@ const Barter = () => {
                                         <ol className='barter-recap-ol'>                                      
                                         {
                                             barterRecap.length > 1 ? 
-                                                Object.values(JSON.parse(barterRecap)).map((item) => {
+                                                Object.values(JSON.parse(barterRecap)).map((item, index) => {
                                                     return(
-                                                        <li>{item.name}</li>
+                                                        <li key={index}>{item.name}</li>
                                                     )
                                                 })
                                             : null
@@ -691,14 +711,10 @@ const Barter = () => {
                             <div className="txt_field">
                                 <h2>Pagamento</h2>
                                 
+                                
                                
                             </div>
-
-                            
-                            <div className='btnForm'>
-                                <button className={formStepsNum === 1 ? 'disabled' : ''} onClick={(e) => updateFormSteps(e, 'prev')}>Precendente</button>
-                                <button onClick={(e) => updateFormSteps(e,'next')}>Successivo</button>
-                            </div>    
+   
                         </div>
                         <div className={formStepsNum === 7 ? "form-step-active": "form-step"}>
                             <div className="txt_field">

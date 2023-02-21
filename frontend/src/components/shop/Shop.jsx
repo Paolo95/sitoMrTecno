@@ -242,8 +242,7 @@ export const Shop = ({ addToCart, cartItem, decreaseQty, deleteCartProduct }) =>
           }
           );
   
-          setProdLoading(false)
-          console.log(response.data)
+          setProdLoading(false);
           setShopItems(response.data);           
   
       } catch (err) {
