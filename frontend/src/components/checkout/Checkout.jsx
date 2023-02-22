@@ -102,11 +102,9 @@ const Checkout = ({ cleanCart, cartItem }) => {
 
         return (
             <>            
-                {
+                {                  
                     
-                    
-                    isPending ? 
-                        
+                    isPending ?                        
                 
                             <div style={{ display: 'flex', justifyContent: 'center', margin: '30px' }}>
                                 <ClipLoader
@@ -184,8 +182,6 @@ const Checkout = ({ cleanCart, cartItem }) => {
                         
                 }
             
-            
-            
             </>
         )
     }
@@ -216,16 +212,13 @@ const Checkout = ({ cleanCart, cartItem }) => {
                         </section>         
                     </div>
                     
-                : (
+                    : (
                         <div className="paypal-button-container">
                             <div className="checkout-txt">
                                 <h1 className='checkout-span'>Scegli il metodo di pagamento</h1>
                             </div> 
                             
-                            
-                               
-                                    
-                                    <PayPalScriptProvider options={
+                                <PayPalScriptProvider options={
                                         {
                                             "client-id": "ATZNHaB7fylPEKToWL-_Cnzb2WIdfxNHMK7JFACI0K48o6vV2UukiwQ72XFU-fG7dKK3I9bi6RT1_qzy",
                                             currency: "EUR"
@@ -233,13 +226,10 @@ const Checkout = ({ cleanCart, cartItem }) => {
                                     <ButtonWrapper/>
                                 </PayPalScriptProvider>
                                     
-                            
-                                        
-            
-        </div>
+                        </div>
                     
-            )
-        }
+                    )
+                }
             
         </div>
             

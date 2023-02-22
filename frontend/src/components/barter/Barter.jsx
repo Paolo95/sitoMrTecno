@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from '../../api/axios';
 import useAuth from '../../hooks/useAuth';
-import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
+import { PayPalButtons, PayPalScriptProvider, usePayPalScriptReducer } from '@paypal/react-paypal-js';
 import Cookies from 'universal-cookie';
 
 
@@ -488,6 +488,77 @@ const Barter = () => {
     
     }
 
+    const ButtonWrapper = () => {
+        
+        const [{ isPending }] = usePayPalScriptReducer();
+
+        return(
+            <>
+                {
+                    isPending ?  
+                        <div style={{ display: 'flex', justifyContent: 'center', margin: '30px' }}>
+                                <ClipLoader
+                                color={'#0f3460'}
+                                loading={isPending}
+                                size={50}
+                                />
+                            </div>     
+                        :  
+                        <PayPalButtons
+                            style={{ 
+                                layout: "vertical",
+                                shape: "pill",
+                            }}
+                            createOrder={(data, actions) => {
+                                return actions.order.create({
+                                    purchase_units: [
+                                        {
+                                            description: 'Ordine MrTecno',
+                                            amount: {
+                                                value: totalPrice,
+                                                breakdown: {
+                                                    item_total: {                                                                    
+                                                        value: productPrice,
+                                                        currency_code: "EUR",
+                                                    },
+                                                    shipping: {
+                                                        value: shipping_cost,
+                                                        currency_code: "EUR",
+                                                    },
+                                                    tax_total: {
+                                                        value: payPalCommissions,
+                                                        currency_code: "EUR",
+                                                    }
+                                                },
+                                            }, "items": [
+                                                    {
+                                                            name: modelChoice,
+                                                            unit_amount: {
+                                                                currency_code: "EUR",
+                                                                value: productPrice
+                                                            },
+                                                            quantity: 1,
+                                                    },
+                                            ],                                                         
+                                        },
+                                    ],
+                                });
+                            }}
+
+                            onApprove={(data, actions) => {
+                                return actions.order.capture().then(function (details) {
+                                    setBarterApproved();
+                                    setFormStepsNum(formStepsNum + 1);
+                                    cookies.remove('barterCode');
+                                })
+                            }}
+
+                        />
+                }
+            </>
+        )
+    }
+
     const getProductPrice = async (productName) => {
     
         try {
@@ -855,57 +926,9 @@ const Barter = () => {
                                                     "client-id": "ATZNHaB7fylPEKToWL-_Cnzb2WIdfxNHMK7JFACI0K48o6vV2UukiwQ72XFU-fG7dKK3I9bi6RT1_qzy",
                                                     currency: "EUR"
                                                 }}>
-                                            <PayPalButtons
-                                                style={{ 
-                                                    layout: "vertical",
-                                                    shape: "pill",
-                                                }}
-                                                createOrder={(data, actions) => {
-                                                    return actions.order.create({
-                                                        purchase_units: [
-                                                            {
-                                                                description: 'Ordine MrTecno',
-                                                                amount: {
-                                                                    value: totalPrice,
-                                                                    breakdown: {
-                                                                        item_total: {                                                                    
-                                                                            value: productPrice,
-                                                                            currency_code: "EUR",
-                                                                        },
-                                                                        shipping: {
-                                                                            value: shipping_cost,
-                                                                            currency_code: "EUR",
-                                                                        },
-                                                                        tax_total: {
-                                                                            value: payPalCommissions,
-                                                                            currency_code: "EUR",
-                                                                        }
-                                                                    },
-                                                                }, "items": [
-                                                                        {
-                                                                                name: modelChoice,
-                                                                                unit_amount: {
-                                                                                    currency_code: "EUR",
-                                                                                    value: productPrice
-                                                                                },
-                                                                                quantity: 1,
-                                                                        },
-                                                                ],                                                         
-                                                            },
-                                                        ],
-                                                    });
-                                                }}
-
-                                                onApprove={(data, actions) => {
-                                                    return actions.order.capture().then(function (details) {
-                                                        setBarterApproved();
-                                                        setFormStepsNum(formStepsNum + 1);
-                                                        cookies.remove('barterCode');
-                                                    })
-                                                }}
-
-                                            />
-                                        </PayPalScriptProvider>
+                                                <ButtonWrapper/>
+                                                
+                                            </PayPalScriptProvider>
                                     </div>
                                     :
                                     <div style={{ display: 'flex', justifyContent: 'center', margin: '30px' }}>
