@@ -207,24 +207,24 @@ const EditOrder = () => {
                                   <select className='statusSelect'
                                           onChange={(e) => handleOrderStatus(e.target.value)}>
                                       {
-                                        orderStatus==='Ordine in lavorazione' ?
+                                        orderStatus==='In lavorazione' ?
                                         <>
-                                          <option selected value={'Ordine in lavorazione'}>In lavorazione</option>
-                                          <option value={'Ordine in spedizione'}>In spedizione</option>
-                                          <option value={'Ordine Concluso'}>Concluso</option>
+                                          <option selected value={'In lavorazione'}>In lavorazione</option>
+                                          <option value={'In spedizione'}>In spedizione</option>
+                                          <option value={'Concluso'}>Concluso</option>
                                         </>
                                           :
-                                          orderStatus==='Ordine in spedizione' ?
+                                          orderStatus==='In spedizione' ?
                                           <>
-                                            <option value={'Ordine in lavorazione'}>In lavorazione</option>
-                                            <option selected value={'Ordine in spedizione'}>In spedizione</option>
-                                            <option value={'Ordine Concluso'}>Concluso</option>
+                                            <option value={'In lavorazione'}>In lavorazione</option>
+                                            <option selected value={'In spedizione'}>In spedizione</option>
+                                            <option value={'Concluso'}>Concluso</option>
                                           </>
                                           :
                                           <>
-                                            <option value={'Ordine in lavorazione'}>In lavorazione</option>
-                                            <option value={'Ordine in spedizione'}>In spedizione</option>
-                                            <option selected value={'Ordine Concluso'}>Concluso</option>
+                                            <option value={'In lavorazione'}>In lavorazione</option>
+                                            <option value={'In spedizione'}>In spedizione</option>
+                                            <option selected value={'Concluso'}>Concluso</option>
                                           </>
                                         
                                           

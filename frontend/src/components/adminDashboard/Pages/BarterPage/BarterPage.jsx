@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import './orderPageAdmin.css'
+import './barterPage.css'
 import useAuth from '../../../../hooks/useAuth';
 import axios from '../../../../api/axios';
 import { useState } from 'react';
@@ -7,9 +7,9 @@ import Moment from 'react-moment';
 import { NavLink } from 'react-router-dom';
 import ClipLoader from 'react-spinners/ClipLoader';
 
-const OrderPageAdmin = () => {
+const BarterPage = () => {
 
-  const GET_ORDER_LIST = 'api/order/orderList';
+  const GET_BARTER_LIST = 'api/barter/barterList';
   const { auth } = useAuth();
   const [orderList, setOrderList] = useState([]);
   const [statusSelected, setStatus] = useState('In lavorazione');
@@ -27,7 +27,7 @@ const OrderPageAdmin = () => {
 
       try {
       
-        const response = await axios.post(GET_ORDER_LIST, 
+        const response = await axios.post(GET_BARTER_LIST, 
             { 
                 status: statusSelected,
             },
@@ -48,7 +48,7 @@ const OrderPageAdmin = () => {
         }else if(err.response?.status === 500){
             console.error(err.response?.data);
         }else{
-            console.error('Recupero ordini fallito!');
+            console.error('Recupero permute fallito!');
         }
       }
 
@@ -60,9 +60,9 @@ const OrderPageAdmin = () => {
  
 
   return (
-    <section className='orderPageAdmin'>
-      <div className="orderPageAdmin-heading">
-        <h2 className="orderPageAdmin-title">Ordini</h2>
+    <section className='barterPage'>
+      <div className="barterPage-heading">
+        <h2 className="barterPage-title">Permute</h2>
       </div>
       <div className="card mb-4 shadow-sm">
         <div className="card-header bg-white">
@@ -70,14 +70,17 @@ const OrderPageAdmin = () => {
             <select className="statusSelect"
                     onChange={(e) => handleStatusSel(e.target.value)}>
               <option value='In lavorazione'>In lavorazione</option>
-              <option value='In spedizione'>In spedizione</option>
+              <option value='Valutazione effettuata'>Valutazione effettuata</option>
+              <option value='Pagamento effettuato'>Pagamento effettuato</option>
+              <option value='Oggetti ricevuti'>Oggetti ricevuti</option>
+              <option value='Prodotto spedito'>Prodotto spedito</option>
               <option value='Concluso'>Concluso</option>
             </select>
         </div>
         </div>
         <div className="card-body">
           <div className="table-div">
-            <h5 className="card-title">Ultimi ordini</h5>
+            <h5 className="card-title">Ultime permute</h5>
             {
               loading ? 
                 <div style={{ display: 'flex', justifyContent: 'center', margin: '30px' }}>
@@ -104,18 +107,17 @@ const OrderPageAdmin = () => {
                         return(
                           <>
                             <tr id={index}>
-                              <td>{value['order.id']}</td>
-                              <td>{<Moment format='DD/MM/YYYY'>{value['order.order_date']}</Moment>}</td>
-                              <td>{value['order.user.email']}</td>
-                              <td>{value['order.order_status']}</td>
-                              <td>{value['order_total']} €</td>
+                              <td>{value['id']}</td>
+                              <td>{<Moment format='DD/MM/YYYY'>{value['barter_date']}</Moment>}</td>
+                              <td>{value['user.email']}</td>
+                              <td>{value['status']}</td>
+                              <td>{parseFloat(value['total']).toFixed(2)} €</td>
                               <td>
                                 {
-                                  <NavLink to={`/adminDashboard/orders/editOrder/${value['order.id']}`}>
+                                  <NavLink to={`/adminDashboard/barters/editBarter/${value['id']}`}>
                                       <button>Dettaglio</button>
                                   </NavLink>
                                 }
-                                
                               </td>
                             </tr>
                           </>
@@ -139,4 +141,4 @@ const OrderPageAdmin = () => {
   )
 }
 
-export default OrderPageAdmin
+export default BarterPage

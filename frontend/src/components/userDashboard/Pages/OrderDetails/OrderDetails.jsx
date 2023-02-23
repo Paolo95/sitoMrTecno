@@ -83,17 +83,17 @@ const OrderDetails = () => {
                 <div className="orderDetails-track">
                 <ul id='progress' className='text-center'>
                     {
-                        orderDetails[0]?.['order.order_status'] === 'Ordine in lavorazione' ? 
+                        orderDetails[0]?.['order.order_status'] === 'In lavorazione' ? 
                             <>
                                 <li className='active'></li>
                                 <li className='disabled'></li>
                                 <li className='disabled'></li>
-                            </> : orderDetails[0]?.['order.order_status'] === 'Ordine spedito' ?
+                            </> : orderDetails[0]?.['order.order_status'] === 'Spedito' ?
                             <>
                                 <li className='active'></li>
                                 <li className='active'></li>
                                 <li className='disabled'></li>
-                            </> : orderDetails[0]?.['order.order_status'] === 'Ordine concluso' ?
+                            </> : orderDetails[0]?.['order.order_status'] === 'Concluso' ?
                             <>
                                 <li className='active'></li>
                                 <li className='active'></li>

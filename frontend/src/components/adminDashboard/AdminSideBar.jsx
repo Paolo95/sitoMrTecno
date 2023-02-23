@@ -55,6 +55,12 @@ const AdminSideBar = () => {
                         <h3>Ordini</h3>
                     </NavLink>
 
+                    <NavLink to={'/adminDashboard/barters'}>
+                              
+                        <i className="fas fa-handshake"></i>
+                        <h3>Permute</h3>
+                    </NavLink>
+
                     <a href="/" onClick={() => signOut()}>
                         <i className="fas fa-sign-out-alt" ></i>
                         <h3>Logout</h3>
