@@ -205,47 +205,27 @@ const EditOrder = () => {
                               <li>
                                   <b>Stato ordine: </b>
                                   <select className='statusSelect'
-                                          onChange={(e) => handleOrderStatus(e.target.value)}>
-                                      {
-                                        orderStatus==='In lavorazione' ?
-                                        <>
-                                          <option selected value={'In lavorazione'}>In lavorazione</option>
+                                          onChange={(e) => handleOrderStatus(e.target.value)}
+                                          defaultValue={orderStatus === 'In lavorazione' ? 'In lavorazione' : 
+                                                        orderStatus === 'In spedizione' ? 'In spedizione' :
+                                                        orderStatus === 'Concluso' ? 'Concluso' : null}>
+                                      
+                                          <option value={'In lavorazione'}>In lavorazione</option>
                                           <option value={'In spedizione'}>In spedizione</option>
                                           <option value={'Concluso'}>Concluso</option>
-                                        </>
-                                          :
-                                          orderStatus==='In spedizione' ?
-                                          <>
-                                            <option value={'In lavorazione'}>In lavorazione</option>
-                                            <option selected value={'In spedizione'}>In spedizione</option>
-                                            <option value={'Concluso'}>Concluso</option>
-                                          </>
-                                          :
-                                          <>
-                                            <option value={'In lavorazione'}>In lavorazione</option>
-                                            <option value={'In spedizione'}>In spedizione</option>
-                                            <option selected value={'Concluso'}>Concluso</option>
-                                          </>
-                                        
-                                          
-                                        
-                                        
-                                      }
-                                    
+                                                                            
                                   </select>
                               </li>
                               <span><b>Prodotti acquistati:</b></span>
                               {
                               orderDetails.map((value, index) => {
                                   return(
-                                      <>
+                                      <div key={index}>
                                           
-                                          <li className='product-item' key={index}>                                            
+                                          <li className='product-item'>                                            
                                               {value['qty']} x {value['product.product_name']} - {parseFloat(value['priceEach']).toFixed(2)} €
-                                          </li>
-                                
-                                          
-                                      </>
+                                          </li>                                          
+                                      </div>
                                   )
                               })
                               }

@@ -1,0 +1,93 @@
+.editBarter{
+    margin-left: auto;
+    margin-right: auto;
+    padding: 3% 2% 60vh 2%;
+    height: 100%;
+}
+
+.editBarter .editBarter-heading{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.editBarter .editBarter-heading h2{
+    margin-top: 0;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.editBarter .editBarter-content{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.editBarter .editBarter-content .editBarter-body{
+    flex: 0 0 auto;
+    width: 66.6666%;
+}
+
+.editBarter .editBarter-content .card{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0.25rem;
+}
+
+.editBarter .editBarter-content .card .card-body{
+    flex: 1 1 auto;
+    padding: 1rem 1rem;
+}
+
+.editBarter .editBarter-content .card .card-body li{
+    padding-bottom: 10px;
+}
+
+.editBarter .editBarter-content .card .card-body .product-item{
+    padding-left: 10px;
+}
+
+.editBarter .editBarter-content .card .card-body .mb-4{
+    margin-bottom: 1.5rem;
+}
+
+.editBarter .editBarter-heading .createBtn-div button{
+    cursor: pointer;
+    width: 130px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: #0f3460;
+    color: aliceblue;
+    font-weight: 600;
+}
+
+.editBarter .card-body input{
+    font-size: 15px;
+}
+
+.editBarter .card-body .editable{
+    border: 1px solid;
+    padding: 2px;
+}
+
+.editBarter .card-body .number{
+    border: 1px solid;
+    padding: 2px;
+    width: 80px;
+}
+
+.editBarter .card-body .statusSelect{
+    width: 160px;
+    padding: 2px;
+}
+
+.editBarter .editBarter-heading .createBtn-div .disabled{
+    background-color: grey;
+    cursor: not-allowed;
+}

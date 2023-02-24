@@ -100,10 +100,10 @@ const OrderPageAdmin = () => {
                   </thead>
                   <tbody>
                     {
-                      orderList.map((value,index) => {
+                      orderList.map((value, index) => {
                         return(
                           <>
-                            <tr id={index}>
+                            <tr key={index}>
                               <td>{value['order.id']}</td>
                               <td>{<Moment format='DD/MM/YYYY'>{value['order.order_date']}</Moment>}</td>
                               <td>{value['order.user.email']}</td>

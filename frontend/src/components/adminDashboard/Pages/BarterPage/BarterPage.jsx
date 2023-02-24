@@ -11,7 +11,7 @@ const BarterPage = () => {
 
   const GET_BARTER_LIST = 'api/barter/barterList';
   const { auth } = useAuth();
-  const [orderList, setOrderList] = useState([]);
+  const [barterList, setBarterList] = useState([]);
   const [statusSelected, setStatus] = useState('In lavorazione');
   const [loading, setLoading] = useState(false);
 
@@ -40,7 +40,7 @@ const BarterPage = () => {
             );
 
         setLoading(false);
-        setOrderList(response.data);
+        setBarterList(response.data);
 
         } catch (err) {
         if(!err?.response){
@@ -56,8 +56,7 @@ const BarterPage = () => {
 
     newProductForm();   
 
-  },[statusSelected, orderList.length, auth.accessToken])
- 
+  },[statusSelected, barterList.length, auth.accessToken])
 
   return (
     <section className='barterPage'>
@@ -103,10 +102,10 @@ const BarterPage = () => {
                   </thead>
                   <tbody>
                     {
-                      orderList.map((value,index) => {
+                      barterList.map((value,index) => {
                         return(
                           <>
-                            <tr id={index}>
+                            <tr key={index}>
                               <td>{value['id']}</td>
                               <td>{<Moment format='DD/MM/YYYY'>{value['barter_date']}</Moment>}</td>
                               <td>{value['user.email']}</td>
