@@ -107,3 +107,16 @@
     cursor: pointer;
     font-weight: 600;
 }
+
+@media screen and (max-width: 600px) {
+    
+
+    .orderPageAdmin .card-body{
+
+        overflow-x: auto;
+    }
+
+
+
+    
+}

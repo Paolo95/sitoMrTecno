@@ -92,3 +92,12 @@
 .newProductPage .newProductPage-content .card .card-body .disabledInput{
     background-color: lightgray;
 }
+
+@media screen and (max-width: 600px) {
+    
+    .newProductPage .newProductPage-content .newProductPage-body{
+        flex: 0 0 auto;
+        width: 100%;
+    }
+
+}

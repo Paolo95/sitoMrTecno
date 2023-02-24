@@ -32,7 +32,7 @@
     display: grid;
     width: 100%;
     margin: 0;   
-    grid-template-columns: 20% 80%;
+    grid-template-columns: 20% auto;
     max-width: 100%;
     background-color: #f6f6f9;
 }
@@ -140,7 +140,7 @@
         display: grid;
         width: 100%;
         margin: 0 0;    
-        grid-template-columns: 3rem auto;
+        grid-template-columns: 3rem 88%;
     }
 
     .adminDashboard aside .adminSidebar a{
@@ -169,6 +169,6 @@
 
     .adminDashboard aside .adminSidebar{
         height: 70%;
-     }
+    }
     
 }
