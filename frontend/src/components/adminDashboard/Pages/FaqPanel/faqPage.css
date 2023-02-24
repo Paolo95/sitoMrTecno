@@ -1,0 +1,158 @@
+.faqPage{
+    margin-left: auto;
+    margin-right: auto;
+    padding: 3% 2% 60vh 2%;
+    height: 100%;
+}
+
+.faqPage .mb-4{
+    margin-bottom: 1.5rem;
+}
+
+.faqPage .shadow-sm{
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
+}
+
+.faqPage .faqPage-heading{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.faqPage .faqPage-heading h2{
+    font-weight: 500;
+}
+
+.faqPage .faqPage-heading .createBtn-div .newBtn{
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: #0f3460;
+    color: aliceblue;
+    font-weight: 600;
+}
+
+.faqPage .card{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0.25rem;
+}
+
+.faqPage .faq-question-body{
+    margin-top: 5px;
+    width: 100%;
+}
+
+.faqPage .faq-question{
+    border-bottom: 1px solid black;
+}
+
+.faqPage .faq-question textarea{
+    width: 100%;
+    font-weight: 600;
+    font-size: 16px;
+    resize: none;
+    padding: 5px;
+}
+
+.faqPage .faq-answer textarea{
+    width: 100%;
+    margin-top: 7px;
+    font-size: 16px;
+    resize: none;
+    padding: 5px;
+}
+
+.faqPage .faq-answer textarea:focus::placeholder{
+    color: transparent;
+}
+
+.faqPage .faq-question textarea:focus::placeholder{
+    color: transparent;
+}
+
+.faqPage .card-body{
+    display: flex;
+    justify-content: space-between;
+}
+
+.faqPage .single-faq{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+
+.faqPage .faq-btns{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5px;
+}
+
+.faqPage .faq-btns button{
+    cursor: pointer;
+}
+
+.faqPage .btn-upd{
+    background-color: #ffd856;
+    width: 40px;
+    height: 40px;
+    font-weight: 600;
+    border-radius: 5px;
+}
+
+.faqPage .btn-upd:hover{
+    color: #ffffff;
+}
+
+.faqPage .btn-del{
+    background-color: #dc3545;
+    width: 40px;
+    height: 40px;
+    font-weight: 600;
+    border-radius: 5px;
+}
+
+.faqPage .btn-del:hover{
+    color: #fff;
+}
+
+.faqPage .btn-plus{
+    background-color: #56dd56;
+    width: 40px;
+    height: 40px;
+    font-weight: 600;
+    border-radius: 5px;
+}
+
+.faqPage .btn-plus:hover{
+    color: #fff;
+}
+
+.faqPage .single-faq input{
+    width: 100%;
+}
+
+.faqPage .hidden{
+    display: none;
+}
+
+.faqPage .faqPage-heading .createBtn-div .disabled{
+    background-color: lightgray;
+    cursor: not-allowed;
+}
+
+@media screen and (max-width: 600px){
+    
+    
+}

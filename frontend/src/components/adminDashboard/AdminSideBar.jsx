@@ -61,6 +61,12 @@ const AdminSideBar = () => {
                         <h3>Permute</h3>
                     </NavLink>
 
+                    <NavLink to={'/adminDashboard/faqs'}>
+                              
+                        <i className="fas fa-question-circle"></i>
+                        <h3>Faq</h3>
+                    </NavLink>
+
                     <a href="/" onClick={() => signOut()}>
                         <i className="fas fa-sign-out-alt" ></i>
                         <h3>Logout</h3>
