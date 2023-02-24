@@ -136,7 +136,7 @@
     border: none;
 }
 
-@media screen and (max-width: 390px) and (max-height: 844px){
+@media screen and (max-width: 600px){
     
     .userSettings .userSettings-card .userSettings-delAccount{
         margin-top: 6%;
