@@ -20,7 +20,7 @@
     margin-bottom: 30px;
 }
 
-.faqPage .faqPage-heading h2{
+.faqPage h2{
     font-weight: 500;
 }
 
@@ -147,9 +147,15 @@
     display: none;
 }
 
-.faqPage .faqPage-heading .createBtn-div .disabled{
+.faqPage .faqPage-heading .createBtn-div .disabled,
+.faqPage .disabled{
     background-color: lightgray;
     cursor: not-allowed;
+}
+
+.faqPage .disabled:hover{
+    cursor: not-allowed;
+    color: black;
 }
 
 @media screen and (max-width: 600px){
