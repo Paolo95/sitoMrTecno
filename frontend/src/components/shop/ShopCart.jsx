@@ -95,10 +95,7 @@ const ShopCart = ({ addToCart, shopItems, cartItem, deleteCartProduct, decreaseQ
                             }}>
                                 <span className="discount">{shopItems.discount}% di sconto</span>
                                 <img src={shopItems.cover} alt="" />
-                                <div className="product-like">
-                                    <label>0</label> <br />
-                                    <i className="far fa-heart" onClick={increment}></i>
-                                </div>
+                                
                             </Link>
                         </div>
                         <div className="product-details">
