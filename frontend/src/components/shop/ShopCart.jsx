@@ -4,12 +4,7 @@ import uuid from 'react-uuid'
 
 const ShopCart = ({ addToCart, shopItems, cartItem, deleteCartProduct, decreaseQty}) => {
 
-    const [count, setCount] = useState(0);
     const [cartSummit, setCartSummit] = useState(false);
-
-    const increment = () => {
-        setCount(count + 1);
-    }
 
     const navigate = useNavigate();
     
