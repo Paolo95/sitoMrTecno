@@ -42,5 +42,20 @@ const Sdata = [
     desc: "Una volta confermato lo stato del dispositivo, otterrai il rimborso in base al valore dell'oggetto permutato",
     cover: "/images/SlideCard/permuta-6.png",
   },
+  {
+    id: 7,
+    section: "Ricondizionati",
+    title: "Smartphone a prezzi unici!",
+    desc: "Ogni smartphone ricondizionato è in condizioni pari al nuovo, certificato da MrTecno!",
+    cover: "/images/SlideCard/ricondizionati-1.jpg",
+  },
+  {
+    id: 8,
+    section: "Nuovo",
+    title: "Scopri il nostro shop online!",
+    desc: "Abbiamo centinaia di prodotti disponibili, scoprili ora!",
+    cover: "/images/SlideCard/nuovo-1.jpg",
+  }
+  
 ]
 export default Sdata

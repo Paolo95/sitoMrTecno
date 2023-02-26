@@ -19,7 +19,7 @@ const SlideCard = ({ tab }) => {
       modules={[Pagination]}
       pagination={{ clickable: true }}
       autoplay={{
-          delay: 3500,
+          delay: 5000,
           disableOnInteraction: false,
         }}
     >

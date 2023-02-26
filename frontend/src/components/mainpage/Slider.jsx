@@ -1,11 +1,19 @@
 import React from 'react'
 import SlideCard from './SlideCard'
+import { useNavigate } from 'react-router-dom';
 
 const SliderHome = ({ tab }) => {
+
+  const navigate = useNavigate();
+  const section = tab;
+
   return (
     <>
         <section className='homeSlide contentWidth'>
-            <div className="container">
+            <div className="container" onClick={() => {              
+              section === 'Permuta' ? navigate('/permuta') :
+                section === 'Ricondizionati' ? navigate('/shop/ricondizionati') :
+                  section === 'Nuovo' ? navigate('/shop/nuovo') : navigate('/')}}>
                 <SlideCard tab={tab}/>
             </div>
         </section>
