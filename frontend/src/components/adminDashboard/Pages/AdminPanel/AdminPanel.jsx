@@ -13,6 +13,8 @@ const AdminPanel = () => {
   const [loading, setLoading] = useState(false);
   const GET_ORDER_LIST = 'api/order/getRecentOrders';
 
+  console.log(auth.accessToken)
+
   useEffect(() => {
 
     const orderList = async () => {

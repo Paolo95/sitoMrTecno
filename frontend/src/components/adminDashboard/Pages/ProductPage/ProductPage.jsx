@@ -19,7 +19,7 @@ const ProductPage = () => {
     const { auth } = useAuth();
     const CATEGORY_URL = '/api/product/categories';
     const FILTERED_PRODUCT_URL = 'api/product/filteredAdminItems';
-    const DEL_URL = 'api/product/delProduct';
+    const DEL_PRODUCT_URL = 'api/product/delProduct';
 
     const searchHandler = (e) => {
         setSearchString(e.target.value)
@@ -113,7 +113,7 @@ const ProductPage = () => {
 
         try {
         
-        const response = await axios.post(DEL_URL, 
+        const response = await axios.post(DEL_PRODUCT_URL, 
             { 
                 id: delID,
             },
