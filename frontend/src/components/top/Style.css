@@ -53,8 +53,7 @@
     object-fit: contain;
 }
 
-/*---------------------iPhone 12 styling-------------------------------------*/
-@media only screen and (max-width: 390px) {
+@media only screen and (max-width: 600px) {
     
     .topCat .nametop .tright{
         display: none;

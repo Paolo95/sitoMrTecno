@@ -164,7 +164,7 @@
     text-align: center;
 }
 
-@media screen and (max-width: 428px) and (max-height: 926px){
+@media screen and (max-width: 600px){
     
     .register .register-div{
         margin: 30px auto 30px auto;
