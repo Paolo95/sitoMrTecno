@@ -39,7 +39,7 @@ const UserSideBar = () => {
 
                     <NavLink to={'/userDashboard/barters'}>
                                             
-                        <i className="fas fa-receipt"></i>                        
+                    <i className="fas fa-handshake"></i>                    
                         <h3>Permute</h3>                       
                     </NavLink>
                     
