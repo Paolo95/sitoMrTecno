@@ -15,6 +15,7 @@ const OrderDetails = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const goBack = () => navigate(-1);
+  const [formStepsNum, setFormStepsNum] = useState(1);
 
   useEffect(() => {
 
@@ -37,6 +38,14 @@ const OrderDetails = () => {
         );  
 
         setLoading(false);
+
+        if (response.data['order.order_status'] === 'In lavorazione'){
+            setFormStepsNum(1);
+        } else if (response.data[0]['order.order_status'] === 'In spedizione'){
+            setFormStepsNum(2);
+        } else if (response.data[0]['order.order_status'] === 'Concluso'){
+            setFormStepsNum(3);
+        }             
         setOrderDetails(response.data);
   
       } catch (err) {
@@ -80,48 +89,12 @@ const OrderDetails = () => {
                     <h1 className="heading">{`Ordine n. ${params.orderId}`}</h1>
                 </div>                   
                     
-                <div className="orderDetails-track">
-                <ul id='progress' className='text-center'>
-                    {
-                        orderDetails[0]?.['order.order_status'] === 'In lavorazione' ? 
-                            <>
-                                <li className='active'></li>
-                                <li className='disabled'></li>
-                                <li className='disabled'></li>
-                            </> : orderDetails[0]?.['order.order_status'] === 'Spedito' ?
-                            <>
-                                <li className='active'></li>
-                                <li className='active'></li>
-                                <li className='disabled'></li>
-                            </> : orderDetails[0]?.['order.order_status'] === 'Concluso' ?
-                            <>
-                                <li className='active'></li>
-                                <li className='active'></li>
-                                <li className='active'></li>
-                            </> : <>
-                                <li className='active'></li>
-                                <li className='disabled'></li>
-                                <li className='disabled'></li>
-                            </>
-                    }
-                    
-                </ul>
-            </div>
-
-            <div className="orderDetails-lists">
-                <div className="orderDetails-list">
-                    <i className="fas fa-file-invoice"></i>
-                    <p>Ordine <br/> In lavorazione</p>
-                </div>
-                <div className="orderDetails-list">
-                    <i className="fas fa-shipping-fast"></i>
-                    <p>Ordine <br/> Spedito</p>
-                </div>
-                <div className="orderDetails-list">
-                    <i className="fas fa-check-circle"></i>
-                    <p>Ordine <br/> Conlcuso</p>
-                </div>
-            </div>
+                <div className="progressBar">
+                    <div className="progress" id='progress' style={{width: `${((formStepsNum - 1) / (2)) * 100 }%`}}></div>
+                    <div className={formStepsNum >= 1 ? "progress-step progress-step-active" : "progress-step"} data-title='In lavorazione'></div>
+                    <div className={formStepsNum >= 2 ? "progress-step progress-step-active" : "progress-step"} data-title='Spedito'></div>
+                    <div className={formStepsNum >= 3 ? "progress-step progress-step-active" : "progress-step"} data-title='Completato'></div>
+                </div>            
 
             <div className="orderDetails-body">
                 <ul>

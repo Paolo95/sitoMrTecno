@@ -1,32 +1,37 @@
-.barterPage{
+.userBarterPage{
     margin-left: auto;
     margin-right: auto;
     padding: 3% 2% 60vh 2%;
     height: 100%;
 }
 
-.barterPage .barterPage-heading{
+.userBarterPage h5{
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+.userBarterPage .userBarterPage-heading{
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 30px;
 }
 
-.barterPage .barterPage-heading h2{
+.userBarterPage .userBarterPage-heading h2{
     margin-top: 0;
     font-weight: 500;
     line-height: 1.2;
 }
 
-.barterPage .mb-4{
+.userBarterPage .mb-4{
     margin-bottom: 1.5rem;
 }
 
-.barterPage .shadow-sm{
+.userBarterPage .shadow-sm{
     box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)
 }
 
-.barterPage .card{
+.userBarterPage .card{
     position: relative;
     display: flex;
     flex-direction: column;
@@ -39,37 +44,12 @@
     grid-gap: 0;
 }
 
-.barterPage .card-header{
-    padding: 0.5rem 1rem;
-    margin-bottom: 0;
-    border-bottom: 1px solid rgba(0,0,0,.125);
-    display: flex;
-    justify-content: flex-end;
-}
-
-.barterPage .select-div{
-    display: flex;
-}
-
-.barterPage .select-div select{
-    display: block;
-    width: 170px;
-    padding: 0.375rem 2.25rem 0.375rem 0.75rem;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #212529;
-    background-color: #fff;
-    border: 1px solid #ced4da;
-    border-radius: 0.25rem;
-}
-
-.barterPage .card-body{
+.userBarterPage .card-body{
     flex: 1 1 auto;
     padding: 1rem 1rem;
 }
 
-.barterPage .table{
+.userBarterPage .table{
     width: 100%;
     display: block;
     height: 350px;
@@ -81,24 +61,25 @@
     overflow-y: auto;
 }
 
-.barterPage .table th{
+.userBarterPage .table th{
    font-weight: 400;
    color: #adb5bd;
-   text-align: left;
-   padding: 6px 50px;
+   text-align: center;
+   padding: 6px 80px;
 }
 
-.barterPage .table td{
-    padding: 8px 50px;
- }
+.userBarterPage .table td{
+    padding: 8px 80px;
+    text-align: center;
+}
 
-.barterPage .table tbody{
+.userBarterPage .table tbody{
     border-style: solid;
     border-width: 0;
     border-top: 2px solid;
 }
 
-.barterPage .table tbody button{
+.userBarterPage .table tbody button{
     background-color: #0f3460;
     color: aliceblue;
     width: 80px;
@@ -106,4 +87,20 @@
     border-radius: 5px;
     cursor: pointer;
     font-weight: 600;
+}
+
+@media screen and (max-width: 600px) {
+    
+    .userBarterPage .table{
+        overflow-x: scroll;
+    }
+
+    .userBarterPage .table th{
+        padding: 6px 20px;
+    }
+
+    .userBarterPage .table td{
+        padding: 8px 20px;
+    }
+
 }

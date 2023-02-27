@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import './orderPageStyle.css'
+import './userBarterPage.css'
 import useAuth from '../../../../hooks/useAuth';
 import axios from '../../../../api/axios';
 import { useState } from 'react';
@@ -7,22 +7,27 @@ import Moment from 'react-moment';
 import { NavLink } from 'react-router-dom';
 import ClipLoader from 'react-spinners/ClipLoader';
 
-const OrderPage = () => {
+const UserBarterPage = () => {
 
-  const GET_ORDER_LIST = 'api/order/userOrders';
+  const GET_BARTER_LIST = 'api/barter/userBarterList';
   const { auth } = useAuth();
-  const [orderList, setOrderList] = useState([]);
+  const [barterList, setBarterList] = useState([]);
+  const [statusSelected, setStatus] = useState('In lavorazione');
   const [loading, setLoading] = useState(false);
+
+  const handleStatusSel = (e) => {
+    setStatus(e);
+  }
 
   useEffect(() => {
 
-    const getOrderList = async () => {
+    const newProductForm = async () => {
 
       setLoading(true);
 
       try {
       
-        const response = await axios.post(GET_ORDER_LIST, 
+        const response = await axios.post(GET_BARTER_LIST, 
             { 
                 
             },
@@ -35,7 +40,7 @@ const OrderPage = () => {
             );
 
         setLoading(false);
-        setOrderList(response.data);
+        setBarterList(response.data);
 
         } catch (err) {
         if(!err?.response){
@@ -43,25 +48,25 @@ const OrderPage = () => {
         }else if(err.response?.status === 500){
             console.error(err.response?.data);
         }else{
-            console.error('Recupero ordini fallito!');
+            console.error('Recupero permute fallito!');
         }
       }
 
     } 
 
-    if (orderList.length === 0) getOrderList();   
+    newProductForm();   
 
-  },[auth.accessToken])
+  },[statusSelected, barterList.length, auth.accessToken])
 
   return (
-    <section className='orderPage'>
-      <div className="orderPage-heading">
-        <h2 className="orderPage-title">Ordini</h2>
+    <section className='userBarterPage'>
+      <div className="userBarterPage-heading">
+        <h2 className="userBarterPage-title">Permute</h2>
       </div>
       <div className="card mb-4 shadow-sm">
         <div className="card-body">
           <div className="table-div">
-            <h5 className="card-title">Ultimi ordini</h5>
+            <h5 className="card-title">Ultime permute</h5>
             {
               loading ? 
                 <div style={{ display: 'flex', justifyContent: 'center', margin: '30px' }}>
@@ -83,17 +88,17 @@ const OrderPage = () => {
                   </thead>
                   <tbody>
                     {
-                      orderList.map((value,index) => {
+                      barterList.map((value,index) => {
                         return(
                           <>
                             <tr key={index}>
-                              <td>{value['order.id']}</td>
-                              <td>{<Moment format='DD/MM/YYYY'>{value['order.order_date']}</Moment>}</td>
-                              <td>{value['order.order_status']}</td>
-                              <td>{parseFloat(value['order_total']).toFixed(2)} €</td>
+                              <td>{value['id']}</td>
+                              <td>{<Moment format='DD/MM/YYYY'>{value['barter_date']}</Moment>}</td>
+                              <td>{value['status']}</td>
+                              <td>{parseFloat(value['total']).toFixed(2)} €</td>
                               <td>
                                 {
-                                  <NavLink to={`/userDashboard/home/orderDetails/${value['order.id']}`}>
+                                  <NavLink to={`/userDashboard/barters/barterDetails/${value['id']}`}>
                                       <button>Dettaglio</button>
                                   </NavLink>
                                 }
@@ -120,4 +125,4 @@ const OrderPage = () => {
   )
 }
 
-export default OrderPage
+export default UserBarterPage

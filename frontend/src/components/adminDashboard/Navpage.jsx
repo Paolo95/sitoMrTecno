@@ -6,7 +6,7 @@ import EditProduct from './Pages/ProductPage/EditProduct';
 import NewProductPage from './Pages/NewProductPage/NewProductPage';
 import OrderPageAdmin from './Pages/OrderPage/OrderPageAdmin';
 import EditOrder from './Pages/EditOrder/EditOrder';
-import BarterPage from './Pages/BarterPage/BarterPage';
+import AdminBarterPage from './Pages/AdminBarterPage/AdminBarterPage';
 import EditBarter from './Pages/EditBarter/EditBarter';
 import FaqPage from './Pages/FaqPanel/FaqPage';
 
@@ -32,7 +32,7 @@ const Navpage = () => {
             <Route path='/orders/editOrder/:orderID' element={<EditOrder />}/>
         </Routes>
         <Routes>
-            <Route path='/barters' element={<BarterPage />}/>
+            <Route path='/barters' element={<AdminBarterPage />}/>
         </Routes>
         <Routes>
             <Route path='/faqs' element={<FaqPage />}/>

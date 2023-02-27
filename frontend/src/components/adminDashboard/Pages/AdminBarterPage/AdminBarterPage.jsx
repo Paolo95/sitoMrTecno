@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import './barterPage.css'
+import './AdminBarterPage.css'
 import useAuth from '../../../../hooks/useAuth';
 import axios from '../../../../api/axios';
 import { useState } from 'react';
@@ -7,7 +7,7 @@ import Moment from 'react-moment';
 import { NavLink } from 'react-router-dom';
 import ClipLoader from 'react-spinners/ClipLoader';
 
-const BarterPage = () => {
+const AdminBarterPage = () => {
 
   const GET_BARTER_LIST = 'api/barter/barterList';
   const { auth } = useAuth();
@@ -59,9 +59,9 @@ const BarterPage = () => {
   },[statusSelected, barterList.length, auth.accessToken])
 
   return (
-    <section className='barterPage'>
-      <div className="barterPage-heading">
-        <h2 className="barterPage-title">Permute</h2>
+    <section className='adminBarterPage'>
+      <div className="adminBarterPage-heading">
+        <h2 className="adminBarterPage-title">Permute</h2>
       </div>
       <div className="card mb-4 shadow-sm">
         <div className="card-header bg-white">
@@ -140,4 +140,4 @@ const BarterPage = () => {
   )
 }
 
-export default BarterPage
+export default AdminBarterPage

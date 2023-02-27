@@ -40,92 +40,62 @@
     margin-top: 10px;
 }
 
-.orderDetailsPage .orderDetails-card .orderDetails-track{
-    margin: 0 0 5rem 8.5rem;
+.orderDetailsPage .progressBar{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    counter-reset: step;
+    margin: 2rem 4rem 4rem;
 }
 
-.orderDetailsPage .orderDetails-card .orderDetails-track #progress{
-    list-style: none;
+.orderDetailsPage .progressBar::before, .progress{
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 4px;
+    width: 100%;
+    background-color: #dcdcdc;
+    z-index: 1;
+}
+
+.orderDetailsPage .progress{
+    background-color: #0f3460;
+    width: 2%;
+    z-index: 3;
+}
+
+.orderDetailsPage .progressBar .progress-step{
+    width: 2.19rem;
+    height: 2.19rem;
+    background-color: #dcdcdc;
+    border-radius: 50%;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    gap: 1em;
-    position: relative;
+}
+
+.orderDetailsPage .progressBar .progress-step::before{
+    counter-increment: step;
+    content: counter(step);
+    z-index: 3;
+}
+
+.orderDetailsPage .progressBar .progress-step::after{
+    content: attr(data-title);
+    position: absolute;
+    top: calc(100% + 0.75rem);
+    font-size: 0.85rem;
+    color: #666;
+    width: 130px;
     text-align: center;
 }
 
-.orderDetailsPage .orderDetails-card .orderDetails-track #progress li{
-    width: 20%;
-    position: relative;
-}
-
-.orderDetailsPage .orderDetails-card .orderDetails-track ::before{
-    content: '\2713';
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    width: 50px;
-    align-items: center;
-    font-size: 2rem;
-    height: 50px;
-    background: #0f3460;
+.orderDetailsPage .progressBar .progress-step-active{
+    background-color: #0f3460;
     color: aliceblue;
-    border-radius: 50%;
-    z-index: 111;
+    z-index: 3;
 }
-
-
-.orderDetailsPage .orderDetails-card .orderDetails-track .disabled::before{
-    content: '\2713';
-    font-weight: bold;
-    background: lightgray;
-}
-
-.orderDetailsPage .orderDetails-card .orderDetails-track #progress::before{
-    content: '';
-    position: absolute;
-    top: 20px;
-    width: 40%;
-    margin-left: 35px;
-    height: 10px;
-    background: lightgray;
-    z-index: 111;
-}
-
-.orderDetailsPage .orderDetails-card .orderDetails-track #progress::after{
-    content: '';
-    position: absolute;
-    top: 20px;
-    width: 82%;
-    height: 10px;
-    background: lightgray;
-}
-
-
-.orderDetailsPage .orderDetails-card .orderDetails-lists{
-    display: flex;
-    gap: 10rem;
-    flex-wrap: wrap;
-    align-items: center;
-    margin-left: 7%;
-}
-
-.orderDetailsPage .orderDetails-card .orderDetails-lists .orderDetails-list{
-    display: flex;
-    gap: 1em;
-    flex: 1 1 50px;
-}
-
-.orderDetailsPage .orderDetails-card .orderDetails-lists .orderDetails-list p{
-    font-size: 1.1rem;
-}
-
-.orderDetailsPage .orderDetails-card .orderDetails-lists .orderDetails-list i{
-    font-size: 35px;
-    color: #0f3460;
-}
-
 .orderDetailsPage .orderDetails-card .orderDetails-body{
     margin: 25px;
     padding: 10px 25px;
@@ -146,14 +116,9 @@
 
 @media screen and (max-width: 600px){
     
-    .orderDetailsPage .orderDetails-card .orderDetails-track{
-        display: none;
+    .orderDetailsPage .progressBar{
+        margin: 2rem 3rem 4rem;
     }
-    
-    .orderDetailsPage .orderDetails-card .orderDetails-lists{
-        display: none;
-    }
-
     .orderDetailsPage .orderDetails-card{
         width: 100%;
         padding-top: 10px;

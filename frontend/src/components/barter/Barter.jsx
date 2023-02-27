@@ -956,7 +956,7 @@ const Barter = () => {
                             
                             <div className='btnForm'>
                                 <button className='hidden' onClick={(e) => updateFormSteps(e, 'prev')}>Precendente</button>
-                                <button onClick={() => navigate('/userDashboard/home')}>Vai alla dashboard</button>
+                                <button onClick={() => navigate('/userDashboard/barters')}>Vai alla dashboard</button>
                             </div>    
                         </div>
                     </form>
