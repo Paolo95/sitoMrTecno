@@ -126,8 +126,13 @@
 @media screen and (max-width: 600px){
     
     .barterDetailsPage .progressBar{
-        margin: 2rem 3rem 4rem;
+        margin: 2rem 1rem 4rem;
     }
+
+    .barterDetailsPage .barterDetails-card .progressBar .progress-step::after{
+        display: none;
+    }
+    
     .barterDetailsPage .barterDetails-card{
         width: 100%;
         padding-top: 10px;
