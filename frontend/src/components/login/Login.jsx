@@ -4,6 +4,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom'
 import axios from '../../api/axios'
 import useAuth from '../../hooks/useAuth'
 import jwt_decode from 'jwt-decode';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 const LOGIN_URL = '/api/user/auth';
 
@@ -13,6 +14,7 @@ const Login = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
+  const [loading, setLoading] = useState(false);
 
   const userRef = useRef();
   const errRef = useRef();
@@ -33,6 +35,8 @@ const Login = () => {
     e.preventDefault();
 
     try {
+
+      setLoading(true);
      
       const response = await axios.post(LOGIN_URL, 
         { 
@@ -53,6 +57,7 @@ const Login = () => {
       setAuth({user, role, accessToken});
       setUser('');
       setPwd(''); 
+      setLoading(false);
 
       if (role === 'admin'){
         const from = location.state?.from?.pathname || "/adminDashboard/home";
@@ -111,7 +116,19 @@ const Login = () => {
                     Password dimenticata?
                   </Link>
                 </div>
-                <input type="submit" value='Login'/>
+                {
+                  loading ? <div style={{ display: 'flex', justifyContent: 'center', margin: '30px' }}>
+                              <ClipLoader
+                              color={'#0f3460'}
+                              loading={loading}
+                              size={50}
+                              />
+                          </div>
+                          :
+                          <input type="submit" value='Login' />
+
+                }
+                
                 <div className="signup_link">
                   Non sei registrato?
                   <Link to='/register'>
