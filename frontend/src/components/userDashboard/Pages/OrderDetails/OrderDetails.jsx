@@ -39,7 +39,7 @@ const OrderDetails = () => {
 
         setLoading(false);
 
-        if (response.data['order.order_status'] === 'In lavorazione'){
+        if (response.data[0]['order.order_status'] === 'In lavorazione'){
             setFormStepsNum(1);
         } else if (response.data[0]['order.order_status'] === 'In spedizione'){
             setFormStepsNum(2);
@@ -110,7 +110,7 @@ const OrderDetails = () => {
                     <li>
                         <b>Codice spedizione: </b>{orderDetails[0]?.['order.shipping_code']}
                     </li>
-                <span><b>Prodotti acquistati:</b></span>
+                <li><b>Prodotti acquistati:</b></li>
                 {
                     orderDetails.map((value, index) => {
                         return(
