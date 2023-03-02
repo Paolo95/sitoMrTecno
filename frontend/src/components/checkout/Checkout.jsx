@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Style.css';
 import { PayPalScriptProvider, PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
 import axios from '../../api/axios'
@@ -17,16 +17,9 @@ const Checkout = ({ cleanCart, cartItem }) => {
     const ORDER_URL = '/api/order/newOrder';
     const PRODUCT_AVAILABILITY_URL = '/api/product/checkAvailability';
     const [availability, setAvailability] = React.useState('false');
-    
     const cookies = new Cookies();
 
-    let shipping_cost = 9.99;
-
-    cartItem.forEach(element => {
-        if(element.category === 'PC' || element.category === 'Notebook') {
-        shipping_cost = 19.99;
-        }
-    });  
+    const shipping_cost = location.state?.shipping_cost;
 
     const totalWithoutCommissions = cartItem.reduce((price, item) => price + item.qty * item.price, shipping_cost);
     const netTotal = Math.round((totalWithoutCommissions - shipping_cost) * 100) / 100;
@@ -64,7 +57,11 @@ const Checkout = ({ cleanCart, cartItem }) => {
 
     })
 
-       
+    useEffect(()=> {
+     
+        if(!typeof(shipping_cost) === 'number') navigate('/cart', { replace: true });
+
+    },[shipping_cost, cartItem, navigate])
 
     const newOrder = async (orderDetails) => {
 
@@ -72,7 +69,7 @@ const Checkout = ({ cleanCart, cartItem }) => {
             { 
               paypalDetails: orderDetails,
               userInfo: auth?.accessToken,
-              
+              pickup: location.state.pickup,
             },
             {
                 headers: {

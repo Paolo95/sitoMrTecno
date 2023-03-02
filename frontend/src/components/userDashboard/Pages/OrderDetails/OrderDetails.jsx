@@ -105,6 +105,9 @@ const OrderDetails = () => {
                         <b>Totale ordine: </b>{parseFloat(orderDetails[0]?.['order_total']).toFixed(2)} €
                     </li>
                     <li>
+                        <b>Modalità di consegna: </b>{orderDetails[0]?.['order.shipping_type']}
+                    </li>
+                    <li>
                         <b>Corriere: </b>{orderDetails[0]?.['order.shipping_carrier']}
                     </li>
                     <li>

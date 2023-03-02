@@ -1,18 +1,44 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './style.css'
 import { Link } from 'react-router-dom';
 
 const Cart = ({ cartItem, addToCart, decreaseQty, deleteCartProduct }) => {
 
-  let shipping_cost = 9.99;
+  const [shipping_cost, setShippingCost] = useState(9.99);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [pickup, setPickup] = useState(false);
 
   cartItem.forEach(element => {
     if(element.category === 'PC' || element.category === 'Notebook') {
-      shipping_cost = 19.99;
+      setShippingCost(19.99);
     }
   });  
 
-  const totalPrice = cartItem.reduce((price, item) => price + item.qty * item.price, shipping_cost);
+  useEffect(()=> {
+
+    setTotalPrice(cartItem.reduce((price, item) => price + item.qty * item.price, shipping_cost));
+  
+  },[shipping_cost, cartItem])
+
+  useEffect(()=> {
+
+    if(pickup){
+      setShippingCost(0)
+    }else{
+      cartItem.forEach(element => {
+        if(element.category === 'PC' || element.category === 'Notebook') {
+          setShippingCost(19.99);
+        }else{
+          setShippingCost(9.99)
+        }
+      });  
+    }
+
+  },[pickup, cartItem])
+  
+  const handleShippingType = () => {
+      setPickup(!pickup);
+  }
 
   return (
     <>  
@@ -57,6 +83,11 @@ const Cart = ({ cartItem, addToCart, decreaseQty, deleteCartProduct }) => {
           </div>
           <div className="cart-total product">
             <h2>Riassunto ordine</h2>
+            <div className='sendOption'>
+              <h4>Ritiro in sede:</h4>
+              <input type="checkbox"
+                     onChange={handleShippingType} />
+            </div>
             <div className="shipping d_flex">
               <h4>Spedizione : </h4>            
               <h3>€{cartItem.length === 0 ? 0 : shipping_cost}</h3>
@@ -68,7 +99,7 @@ const Cart = ({ cartItem, addToCart, decreaseQty, deleteCartProduct }) => {
             {
               cartItem.length === 0 ? null : (  
               <>                
-                <Link to='/checkout'>
+                <Link to='/checkout' state={{shipping_cost, pickup}}>
                   <button className='btn-checkout'>Procedi al pagamento</button>      
                 </Link>
               </>

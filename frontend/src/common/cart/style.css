@@ -90,6 +90,20 @@
     font-weight: 400;
 }
 
+.cart-items .product:hover{
+    cursor: default;
+}
+
+.cart-total .sendOption{
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+}
+
+.cart-total .sendOption input{
+    cursor: pointer;
+}
+
 .cart-total .shipping h3{
     color: black;
     font-size: 15px;

@@ -189,6 +189,9 @@ const EditOrder = () => {
                                   <span>{orderDetails[0]?.['order_total']} €</span>
                               </li>
                               <li>
+                                  <b>Modalità di consegna: </b>{orderDetails[0]?.['order.shipping_type']}
+                              </li>
+                              <li>
                                   <b>Corriere: </b>
                                   <input className='editable' 
                                         type="text" 
