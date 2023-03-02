@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Style.css';
 import { PayPalScriptProvider, PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
 import axios from '../../api/axios'
@@ -19,7 +19,7 @@ const Checkout = ({ cleanCart, cartItem }) => {
     const [availability, setAvailability] = React.useState('false');
     const cookies = new Cookies();
 
-    const shipping_cost = location.state?.shipping_cost;
+    let shipping_cost = location.state?.shipping_cost;
 
     const totalWithoutCommissions = cartItem.reduce((price, item) => price + item.qty * item.price, shipping_cost);
     const netTotal = Math.round((totalWithoutCommissions - shipping_cost) * 100) / 100;
@@ -58,8 +58,8 @@ const Checkout = ({ cleanCart, cartItem }) => {
     })
 
     useEffect(()=> {
-     
-        if(!typeof(shipping_cost) === 'number') navigate('/cart', { replace: true });
+
+        if(!(typeof(shipping_cost) === 'number')) navigate('/cart', { replace: true });
 
     },[shipping_cost, cartItem, navigate])
 
