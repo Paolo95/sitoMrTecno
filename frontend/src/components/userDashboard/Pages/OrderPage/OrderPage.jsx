@@ -51,7 +51,7 @@ const OrderPage = () => {
 
     if (orderList.length === 0) getOrderList();   
 
-  },[auth.accessToken])
+  },[auth.accessToken, orderList.length])
 
   return (
     <section className='orderPage'>

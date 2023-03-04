@@ -12,12 +12,7 @@ const UserBarterPage = () => {
   const GET_BARTER_LIST = 'api/barter/userBarterList';
   const { auth } = useAuth();
   const [barterList, setBarterList] = useState([]);
-  const [statusSelected, setStatus] = useState('In lavorazione');
   const [loading, setLoading] = useState(false);
-
-  const handleStatusSel = (e) => {
-    setStatus(e);
-  }
 
   useEffect(() => {
 
@@ -56,7 +51,7 @@ const UserBarterPage = () => {
 
     newProductForm();   
 
-  },[statusSelected, barterList.length, auth.accessToken])
+  },[barterList.length, auth.accessToken])
 
   return (
     <section className='userBarterPage'>

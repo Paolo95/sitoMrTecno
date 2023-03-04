@@ -111,6 +111,9 @@ const OrderDetails = () => {
                         <b>Corriere: </b>{orderDetails[0]?.['order.shipping_carrier']}
                     </li>
                     <li>
+                        <b>Modalità di pagamento: </b>{orderDetails[0]?.['order.payment_method']}
+                    </li>
+                    <li>
                         <b>Codice spedizione: </b>{orderDetails[0]?.['order.shipping_code']}
                     </li>
                 <li><b>Prodotti acquistati:</b></li>

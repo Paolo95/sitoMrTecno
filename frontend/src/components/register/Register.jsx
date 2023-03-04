@@ -109,6 +109,7 @@ const Register = () => {
         }
 
         try {
+            
             const response = await axios.post(REGISTER_URL,
                 { 
                     lastname: lastName,

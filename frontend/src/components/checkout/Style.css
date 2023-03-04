@@ -90,6 +90,110 @@
     transition: 0.5s;
 }
 
+.checkout .bank-transfer{
+    padding: 10px 0;
+}
+
+.checkout .bank-transfer h4{
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.checkout .bank-transfer button{
+    width: 100%;
+    border-radius: 5px;
+    height: 40px;
+    background-color: #0f3460;
+    color: aliceblue;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.checkout .bank-transfer button:hover{
+    box-shadow: 0px 0px 15px -9px #000000;
+}
+
+.checkout .bank-transfer-container{
+    display: flex;
+    flex-direction: column;
+    margin: 30px auto 30px auto;
+    width: 750px;
+    box-shadow: rgb(43 52 69 / 10%) 0 4px 16px;
+    height: 100%;
+    border-radius: 5px;
+    padding: 0 40px;
+}
+
+.checkout .bank-transfer-container .bank-transfer-heading{
+    padding-top: 25px;
+    border-bottom: 1px solid black;
+}
+
+.checkout .bank-transfer-container .bank-transfer-heading h1{
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.checkout .bank-transfer-container .bank-transfer-body{
+    padding-top: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.checkout .bank-transfer-container .bank-transfer-body p{
+    padding-bottom: 10px;
+}
+
+.checkout .bank-transfer-container .btnDiv{
+    margin: 60px 0 10px 0;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    gap: 10px;
+}
+
+.checkout .bank-transfer-container .btnDiv button{
+    width: 140px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: #0f3460;
+    color: aliceblue;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.checkout form{
+    margin: 40px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.checkout .txt_field{
+    display: flex;
+    justify-content: space-between;
+}
+
+.checkout .txt_field input{
+    width: 200px;
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+.checkout .txt_field select{
+    width: 200px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.checkout .txt_field option{
+    text-align: center;
+    background-color: #fff;
+}
+
 @media screen and (max-width: 600px){
     
     .notAvailable-div{
@@ -112,6 +216,37 @@
         height: 100%;
         border-radius: 5px;
         padding: 0 40px;
+    }
+
+    .checkout .bank-transfer-container{
+        display: flex;
+        flex-direction: column;
+        margin: 30px auto 30px auto;
+        width: 100%;
+        box-shadow: rgb(43 52 69 / 10%) 0 4px 16px;
+        height: 100%;
+        border-radius: 5px;
+        padding: 0 40px;
+    }
+
+    .checkout .txt_field{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .checkout .bank-transfer-container .btnDiv{
+        margin: 20px 0 10px 0;
+        display: flex;
+        justify-content: center;
+        padding: 10px 0;
+        gap: 10px;
+    }
+
+    .checkout .txt_field select{
+        width: 200px;
     }
 
 }
