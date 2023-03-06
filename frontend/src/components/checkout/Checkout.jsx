@@ -233,6 +233,7 @@ const Checkout = ({ cleanCart, cartItem }) => {
                     pickup: location.state.pickup,
                     shipping_cost: shipping_cost,
                     paypal_fee: 0,
+                    totalWithoutCommissions: totalWithoutCommissions,
                 },
                 {
                     headers: {
