@@ -223,6 +223,8 @@ const EditBarter = () => {
                                         defaultValue={barterDetails[0]?.['shipping_code']}/>
                               </li>
 
+                              <li><b>Indirizzo spedizione: </b>{barterDetails[0]?.['shipping_address']}</li>
+
                               <li>
                                   <b>Stato permuta: </b>
                                   <select className='statusSelect'

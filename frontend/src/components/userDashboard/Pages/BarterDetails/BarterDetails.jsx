@@ -123,6 +123,9 @@ const BarterDetails = () => {
                         <b>Codice spedizione: </b>{barterDetails[0]?.['shipping_code']}
                     </li>
                     <li>
+                        <b>Indirizzo spedizione: </b>{barterDetails[0]?.['shipping_address']}
+                    </li>
+                    <li>
                         <b>Prodotto acquisito: </b>{barterDetails[0]?.['product.product_name']}
                         <span className='product-price'>{barterDetails[0]?.['product.price'].toFixed(2)}€</span>
                     </li>
