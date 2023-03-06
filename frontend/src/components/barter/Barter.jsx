@@ -38,6 +38,13 @@ const Barter = () => {
     const [totalPrice, setTotalPrice] = useState(0);
     const [payPalCommissions, setPayPalCommissions] = useState(0);
     const [shipping_cost, setShippingCost] = useState(9.99);
+    const [showDisclamer, setShowDisclamer] = useState(false);
+    const [address, setAddress] = useState('');
+    const [cap, setCap] = useState('');
+    const [city, setCity] = useState('');
+    const [province, setProvince] = useState('');
+    const [hnumber, setHNumber] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const CATEGORY_URL = '/api/product/categories';
     const BRANDS_URL = '/api/product/brands';
@@ -47,7 +54,8 @@ const Barter = () => {
     const BARTER_TOTAL_URL = '/api/barter/barterTotal';
     const BARTER_INFO_URL = '/api/barter/barterInfo';
     const PRODUCT_PRICE_URL = '/api/product/productPrice';
-    const BARTER_APPROVED_URL = '/api/barter/barterAccepted'
+    const BARTER_APPROVED_URL = '/api/barter/barterAccepted';
+    const BARTER_BANK_TRANSFER_URL = '/api/barter/barterAcceptedBT';
 
     const validTelephone = new RegExp(/^(([+])39)?((3[1-6][0-9]))(\d{7})$/);
 
@@ -638,6 +646,77 @@ const Barter = () => {
         // eslint-disable-next-line
     },[newBarterCode, barterStatus])
 
+    const bankTransferDisclamer = () => {
+        
+        setShowDisclamer(true);
+    
+    }
+    
+    const newBarterBankTransfer = async () => {
+
+        setLoading(true);
+        
+        try {
+            
+            await axios.post(BARTER_BANK_TRANSFER_URL, 
+                { 
+                    barterCode: newBarterCode,
+                    shipping_address: address,
+                    cap: cap,
+                    hnumber: hnumber,
+                    city: city,
+                    shipping_cost: shipping_cost,
+                    paypal_fee: 0,
+                    product_price: productPrice,
+                },
+                {
+                    headers: {
+                        'Authorization': `Bearer ${auth?.accessToken}`
+                    },
+                    withCredentials: true
+                }
+            );
+    
+            setLoading(false);
+
+        } catch (err) {
+
+            if (!err?.response) {
+                alert(err.response.data);
+            } else if (err.response?.status === 500){
+                alert(err.response.data);
+            } else {
+                alert('Impossibile registrare la permuta!')
+            }
+        }
+
+        
+
+    }
+    
+    const handleNewBarterBankTransfer = (e) => {
+
+        e.preventDefault();
+
+        const ADDRESS_REGEX = new RegExp(/^[#.0-9a-zA-Z\s,-]+$/);
+        const CAP_REGEX = new RegExp(/\b\d{5}\b/); 
+        const HMNUMBER_REGEX = new RegExp(/^[1-9]$|^[1-9][0-9]$|^(1000)$/);
+        const CITY_REGEX = new RegExp(/^([a-zA-Z\u0080-\u024F]+(?:. |-| |'))*[a-zA-Z\u0080-\u024F]*$/);
+
+        const v1 = ADDRESS_REGEX.test(address);
+        const v2 = CAP_REGEX.test(cap);
+        const v3 = HMNUMBER_REGEX.test(hnumber);
+        const v4 = CITY_REGEX.test(city);
+
+        if(!v1 || !v2 || !v3 || !v4) {
+            alert('I dati inseriti non solo validi, riprova')
+        }else{
+            newBarterBankTransfer();
+            setFormStepsNum(formStepsNum + 1);
+            cookies.remove('barterCode');
+        }
+    }
+
     return (
         <section className='barter'>
             <div className='container'>
@@ -901,9 +980,16 @@ const Barter = () => {
                                         }
                                         </ol>
                                     </div>
-                                    <div className="barter-recap">
-                                        <h3>Prezzo finale del prodotto desiderato:</h3>
-                                        <span className='final-price'>{parseFloat(barterTotal).toFixed(2)}€</span>
+                                    <div className="barter-recap-finalPrice">
+                                        <div className='finalPrice-div'>
+                                            <h3>Prezzo finale del prodotto desiderato:</h3>
+                                            <span className='final-price'>{parseFloat(barterTotal).toFixed(2)}€</span>
+                                        </div>
+                                        <div className='finalPrice-div'>
+                                            <h4>+ Spese di spedizione: </h4>
+                                            <span className='shipping'>{parseFloat(shipping_cost).toFixed(2)}€</span>
+                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -913,23 +999,236 @@ const Barter = () => {
                             </div>    
                         </div>
                         <div className={formStepsNum === 6 ? "form-step-active": "form-step"}>
-                            <div className="txt_field">
+                            
                                 {
                                     totalPrice !== 0 ? 
+
+                                        (!showDisclamer) ? 
                                     
-                                    <div className="paypal-button-container">
-                                        <div className="checkout-txt">
-                                            <h1 className='checkout-span'>Scegli il metodo di pagamento</h1>
-                                        </div>    
-                                            <PayPalScriptProvider options={
-                                                {
-                                                    "client-id": "ATZNHaB7fylPEKToWL-_Cnzb2WIdfxNHMK7JFACI0K48o6vV2UukiwQ72XFU-fG7dKK3I9bi6RT1_qzy",
-                                                    currency: "EUR"
-                                                }}>
-                                                <ButtonWrapper/>
+                                        <div className="paypal-button-container">
+                                            <div className="checkout-txt">
+                                                <h1 className='checkout-span'>Scegli il metodo di pagamento</h1>
+                                            </div>    
+                                                <PayPalScriptProvider options={
+                                                    {
+                                                        "client-id": "ATZNHaB7fylPEKToWL-_Cnzb2WIdfxNHMK7JFACI0K48o6vV2UukiwQ72XFU-fG7dKK3I9bi6RT1_qzy",
+                                                        currency: "EUR"
+                                                    }}>
+                                                    <ButtonWrapper/>
+                                                    
+                                                </PayPalScriptProvider>
+
+                                                <div className='bank-transfer'>
+                                                    <h4>Oppure:</h4>
+                                                    <button onClick={bankTransferDisclamer}>Paga con bonifico bancario</button>
+                                                </div>
+                                        </div>
+                                        :
+                                        <div className='bank-transfer-container'>
+                                            <div className="bank-transfer-heading">
+                                                <h1>Istruzioni per il bonifico</h1>
+                                            </div>
+                                            <div className='bank-transfer-body'>
+                                                <p>
+                                                    Cliccando sul bottone in basso, prendi l'impegno di pagare il prodotto con bonifico bancario.
+                                                </p>
+
+                                                <p>
+                                                    Riceverai via mail tutte le informazioni (intestatario del bonifico, causale) per 
+                                                    effettuare il bonifico.
+                                                </p>
+
+                                                <div className="txt_field">
+                                                    
+                                                    <label htmlFor='address'>Indirizzo di spedizione:</label>
+                                                    <input type="text" 
+                                                        id='address'
+                                                        autoComplete='off' 
+                                                        onChange={(e) => setAddress(e.target.value)}
+                                                        value={address}
+                                                        required/>
+                                                    
+                                                </div>
+
+                                                <div className="txt_field">
+                                                    
+                                                    <label htmlFor='cap'>CAP:</label>
+                                                    <input type="text" 
+                                                        id='cap'
+                                                        autoComplete='off' 
+                                                        onChange={(e) => setCap(e.target.value)}
+                                                        value={cap}
+                                                        required/>
+                                                    
+                                                </div>
+
+                                                <div className="txt_field">
+                                                    
+                                                    <label htmlFor='hnumber'>N° civico:</label>
+                                                    <input type="text" 
+                                                        id='hnumber'
+                                                        autoComplete='off' 
+                                                        onChange={(e) => setHNumber(e.target.value)}
+                                                        value={hnumber}
+                                                        required/>
+                                                    
+                                                </div>
+
+                                                <div className="txt_field">
+                                                    
+                                                    <label htmlFor='cap'>Città:</label>
+                                                    <input type="text" 
+                                                        id='city'
+                                                        autoComplete='off' 
+                                                        onChange={(e) => setCity(e.target.value)}
+                                                        value={city}
+                                                        required/>
+                                                    
+                                                </div>
+
+                                                <div className="txt_field">
+                                                    
+                                                    <label htmlFor='cap'>Provincia:</label>
+                                                    <select 
+                                                        id='province'
+                                                        autoComplete='off' 
+                                                        onChange={(e) => setProvince(e.target.value)}
+                                                        value={province}
+                                                        required>
+                                                    
+                                                    <option value="">--Scegli una provincia--</option>
+                                                    <option value="AG">Agrigento</option>
+                                                    <option value="AL">Alessandria</option>
+                                                    <option value="AN">Ancona</option>
+                                                    <option value="AO">Aosta</option>
+                                                    <option value="AR">Arezzo</option>
+                                                    <option value="AP">Ascoli Piceno</option>
+                                                    <option value="AT">Asti</option>
+                                                    <option value="AV">Avellino</option>
+                                                    <option value="BA">Bari</option>
+                                                    <option value="BT">Barletta-Andria-Trani</option>
+                                                    <option value="BL">Belluno</option>
+                                                    <option value="BN">Benevento</option>
+                                                    <option value="BG">Bergamo</option>
+                                                    <option value="BI">Biella</option>
+                                                    <option value="BO">Bologna</option>
+                                                    <option value="BZ">Bolzano</option>
+                                                    <option value="BS">Brescia</option>
+                                                    <option value="BR">Brindisi</option>
+                                                    <option value="CA">Cagliari</option>
+                                                    <option value="CL">Caltanissetta</option>
+                                                    <option value="CB">Campobasso</option>
+                                                    <option value="CE">Caserta</option>
+                                                    <option value="CT">Catania</option>
+                                                    <option value="CZ">Catanzaro</option>
+                                                    <option value="CH">Chieti</option>
+                                                    <option value="CO">Como</option>
+                                                    <option value="CS">Cosenza</option>
+                                                    <option value="CR">Cremona</option>
+                                                    <option value="KR">Crotone</option>
+                                                    <option value="CN">Cuneo</option>
+                                                    <option value="EN">Enna</option>
+                                                    <option value="FM">Fermo</option>
+                                                    <option value="FE">Ferrara</option>
+                                                    <option value="FI">Firenze</option>
+                                                    <option value="FG">Foggia</option>
+                                                    <option value="FC">Forl&igrave;-Cesena</option>
+                                                    <option value="FR">Frosinone</option>
+                                                    <option value="GE">Genova</option>
+                                                    <option value="GO">Gorizia</option>
+                                                    <option value="GR">Grosseto</option>
+                                                    <option value="IM">Imperia</option>
+                                                    <option value="IS">Isernia</option>
+                                                    <option value="AQ">L'aquila</option>
+                                                    <option value="SP">La spezia</option>
+                                                    <option value="LT">Latina</option>
+                                                    <option value="LE">Lecce</option>
+                                                    <option value="LC">Lecco</option>
+                                                    <option value="LI">Livorno</option>
+                                                    <option value="LO">Lodi</option>
+                                                    <option value="LU">Lucca</option>
+                                                    <option value="MC">Macerata</option>
+                                                    <option value="MN">Mantova</option>
+                                                    <option value="MS">Massa-Carrara</option>
+                                                    <option value="MT">Matera</option>
+                                                    <option value="ME">Messina</option>
+                                                    <option value="MI">Milano</option>
+                                                    <option value="MO">Modena</option>
+                                                    <option value="MB">Monza e Brianza</option>
+                                                    <option value="NA">Napoli</option>
+                                                    <option value="NO">Novara</option>
+                                                    <option value="NU">Nuoro</option>
+                                                    <option value="OR">Oristano</option>
+                                                    <option value="PD">Padova</option>
+                                                    <option value="PA">Palermo</option>
+                                                    <option value="PR">Parma</option>
+                                                    <option value="PV">Pavia</option>
+                                                    <option value="PG">Perugia</option>
+                                                    <option value="PU">Pesaro e Urbino</option>
+                                                    <option value="PE">Pescara</option>
+                                                    <option value="PC">Piacenza</option>
+                                                    <option value="PI">Pisa</option>
+                                                    <option value="PT">Pistoia</option>
+                                                    <option value="PN">Pordenone</option>
+                                                    <option value="PZ">Potenza</option>
+                                                    <option value="PO">Prato</option>
+                                                    <option value="RG">Ragusa</option>
+                                                    <option value="RA">Ravenna</option>
+                                                    <option value="RC">Reggio Calabria</option>
+                                                    <option value="RE">Reggio Emilia</option>
+                                                    <option value="RI">Rieti</option>
+                                                    <option value="RN">Rimini</option>
+                                                    <option value="RM">Roma</option>
+                                                    <option value="RO">Rovigo</option>
+                                                    <option value="SA">Salerno</option>
+                                                    <option value="SS">Sassari</option>
+                                                    <option value="SV">Savona</option>
+                                                    <option value="SI">Siena</option>
+                                                    <option value="SR">Siracusa</option>
+                                                    <option value="SO">Sondrio</option>
+                                                    <option value="SU">Sud Sardegna</option>
+                                                    <option value="TA">Taranto</option>
+                                                    <option value="TE">Teramo</option>
+                                                    <option value="TR">Terni</option>
+                                                    <option value="TO">Torino</option>
+                                                    <option value="TP">Trapani</option>
+                                                    <option value="TN">Trento</option>
+                                                    <option value="TV">Treviso</option>
+                                                    <option value="TS">Trieste</option>
+                                                    <option value="UD">Udine</option>
+                                                    <option value="VA">Varese</option>
+                                                    <option value="VE">Venezia</option>
+                                                    <option value="VB">Verbano-Cusio-Ossola</option>
+                                                    <option value="VC">Vercelli</option>
+                                                    <option value="VR">Verona</option>
+                                                    <option value="VV">Vibo valentia</option>
+                                                    <option value="VI">Vicenza</option>
+                                                    <option value="VT">Viterbo</option>
+                                                    
+                                                    </select>
+                                                </div>    
+
+                                                    {
+                                                        loading ? 
+                                                            <div style={{ display: 'flex', justifyContent: 'center', margin: '30px' }}>
+                                                                <ClipLoader
+                                                                color={'#0f3460'}
+                                                                loading={loading}
+                                                                size={50}
+                                                                />
+                                                            </div>
+                                                            :
+                                                            <div className='btnDiv'>
+                                                                <button onClick={() => setShowDisclamer(false)}>Torna indietro</button>
+                                                                <button onClick={handleNewBarterBankTransfer}>Conferma ordine</button>    
+                                                            </div>  
+                                                    }
                                                 
-                                            </PayPalScriptProvider>
-                                    </div>
+                                            </div>   
+
+                                                                
+                    
+                                        </div>
                                     :
                                     <div style={{ display: 'flex', justifyContent: 'center', margin: '30px' }}>
                                         <ClockLoader
@@ -943,7 +1242,7 @@ const Barter = () => {
                                 
                                 
                                
-                            </div>
+                            
    
                         </div>
                         <div className={formStepsNum === 7 ? "form-step-active": "form-step"}>

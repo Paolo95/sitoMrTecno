@@ -34,6 +34,23 @@
     justify-content: space-between;
 }
 
+.barter .txt_field .barter-recap-finalPrice{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.barter .txt_field .barter-recap-finalPrice .finalPrice-div{
+    display: flex;
+    justify-content: space-between;
+}
+
+.barter .txt_field .barter-recap-finalPrice .finalPrice-div h4,
+.barter .txt_field .barter-recap-finalPrice .finalPrice-div .shipping
+{
+    font-size: 13px;
+}
+
 .barter .txt_field .barter-recap-userProducts{
     display: flex;
     flex-direction: column;
@@ -44,7 +61,7 @@
     list-style: decimal;
 }
 
-.barter .txt_field .barter-recap .final-price{
+.barter .txt_field .barter-recap-finalPrice .final-price{
     color: #25D366;
     font-weight: 600;
 }
@@ -227,6 +244,88 @@
     height: 40px;
     cursor: pointer;
     border-radius: 5px;
+}
+
+.barter .bank-transfer{
+    padding: 10px 0;
+}
+
+.barter .bank-transfer h4{
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.barter .bank-transfer button{
+    width: 100%;
+    border-radius: 5px;
+    height: 40px;
+    background-color: #0f3460;
+    color: aliceblue;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.barter .bank-transfer button:hover{
+    box-shadow: 0px 0px 15px -9px #000000;
+}
+
+.barter .bank-transfer-container{
+    margin: 30px auto 30px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.barter .bank-transfer-container .txt_field{
+    margin: 2rem auto 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.barter .bank-transfer-container .txt_field input{
+    width: 400px;
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 5px;
+    text-align: center;
+}
+
+.barter .bank-transfer-container .txt_field input{
+    width: 400px;
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+.barter .bank-transfer-container .txt_field select{
+    width: 200px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.barter .bank-transfer-container .txt_field option{
+    text-align: center;
+    background-color: #fff;
+}
+
+.barter .bank-transfer-container .btnDiv{
+    margin: 60px 0 10px 0;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    gap: 10px;
+}
+
+.barter .bank-transfer-container .btnDiv button{
+    width: 140px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: #0f3460;
+    color: aliceblue;
+    font-weight: 600;
+    cursor: pointer;
 }
 
 
