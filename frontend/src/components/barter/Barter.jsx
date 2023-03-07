@@ -555,7 +555,7 @@ const Barter = () => {
 
                             onApprove={(data, actions) => {
                                 return actions.order.capture().then(function (details) {
-                                    setBarterApproved();
+                                    setBarterApproved(details);
                                     setFormStepsNum(formStepsNum + 1);
                                     cookies.remove('barterCode');
                                 })
@@ -597,13 +597,16 @@ const Barter = () => {
     
     }
 
-    const setBarterApproved = async () => {
+    const setBarterApproved = async (order_details) => {
 
         try {
          
             await axios.post(BARTER_APPROVED_URL, 
                 { 
                    barterCode: newBarterCode,
+                   order_details: order_details,
+                   barterRecap: barterRecap,
+                   barterTotal: barterTotal,
                 },
                 {
                     headers: {
@@ -613,8 +616,7 @@ const Barter = () => {
                 }
             );
 
-            
-    
+        
         } catch (err) {
           if(!err?.response){
             console.error('Server non attivo!');
