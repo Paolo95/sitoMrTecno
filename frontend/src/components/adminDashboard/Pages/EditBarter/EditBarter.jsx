@@ -16,7 +16,6 @@ const EditBarter = () => {
     const [date, setDate] = useState('');
     const [shipping_code, setShippingCode] = useState('');
     const [shipping_carrier, setCarrier] = useState('');
-    const [notes_changed, setNotesChanged] = useState(false);
     const [notes, setNotes] = useState('');
     const [barterStatus, setBarterStatus] = useState('');
     const [total, setTotal] = useState(0);
@@ -153,7 +152,6 @@ const EditBarter = () => {
     const handleNotesChange = (e) => {
         setIsChanged(true);
         setNotes(e);
-        setNotesChanged(true);
     }
     
   return (
