@@ -71,12 +71,16 @@ const Login = () => {
     } catch (err) {
         if(!err?.response){
           setErrMsg('Server non attivo!');
+          setLoading(false);
         }else if(err.response?.status === 400){
           setErrMsg(err.response?.data);
+          setLoading(false);
         }else if(err.response?.status === 401){
           setErrMsg(err.response?.data);
+          setLoading(false);
         }else{
           setErrMsg('Login fallito!');
+          setLoading(false);
         }
         errRef.current.focus();
     }    
