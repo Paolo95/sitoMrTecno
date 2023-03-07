@@ -126,6 +126,9 @@ const BarterDetails = () => {
                         <b>Indirizzo spedizione: </b>{barterDetails[0]?.['shipping_address']}
                     </li>
                     <li>
+                        <b>Telefono per invio info prodotti: </b>{barterDetails[0]?.['barter_telephone']}
+                    </li>
+                    <li>
                         <b>Prodotto acquisito: </b>{barterDetails[0]?.['product.product_name']}
                         <span className='product-price'>{barterDetails[0]?.['product.price'].toFixed(2)}€</span>
                     </li>
@@ -143,9 +146,15 @@ const BarterDetails = () => {
                     })
                     : null
                 }    
+
+                <li><b>Prezzo finale dopo valutazione: </b>{parseFloat(barterDetails[0]?.['total']).toFixed(2)}€</li>
+
                 <li><b>Spese di spedizione: </b>{parseFloat(barterDetails[0]?.['shipping_cost']).toFixed(2)}€</li>
                
                 <li><b>Commissioni PayPal: </b>{parseFloat(barterDetails[0]?.['paypal_fee']).toFixed(2)}€</li>
+                
+                <li><b>Note: </b>{barterDetails[0]?.['notes']}</li>
+
                 </ul>
                 
             </div>

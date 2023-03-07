@@ -98,6 +98,10 @@ const OrderDetails = () => {
 
             <div className="orderDetails-body">
                 <ul>
+                  {
+                    orderDetails[0]?.['order.shipping_type'] === 'Corriere' ?
+                    <>
+                    
                     <li>
                         <b>Data ordine: </b>{<Moment format='DD/MM/YYYY'>{orderDetails[0]?.['order.order_date']}</Moment> }
                     </li>
@@ -116,6 +120,27 @@ const OrderDetails = () => {
                     <li>
                         <b>Codice spedizione: </b>{orderDetails[0]?.['order.shipping_code']}
                     </li>
+                    <li>
+                        <b>Indirizzo spedizione: </b>{orderDetails[0]?.['order.shipping_address']}
+                    </li>
+                    </>: orderDetails[0]?.['order.shipping_type'] === 'Ritiro in sede' ?
+                    <>
+                    <li>
+                        <b>Data ordine: </b>{<Moment format='DD/MM/YYYY'>{orderDetails[0]?.['order.order_date']}</Moment> }
+                    </li>
+                    <li>
+                        <b>Totale ordine: </b>{parseFloat(orderDetails[0]?.['order_total']).toFixed(2)} €
+                    </li>
+                    <li>
+                        <b>Modalità di consegna: </b>{orderDetails[0]?.['order.shipping_type']}
+                    </li>
+                    <li>
+                        <b>Modalità di pagamento: </b>{orderDetails[0]?.['order.payment_method']}
+                    </li>
+                    
+                    </> : null
+                  }
+                    
                 <li><b>Prodotti acquistati:</b></li>
                 {
                     orderDetails.map((value, index) => {
@@ -129,11 +154,23 @@ const OrderDetails = () => {
                         )
                     })
                 }
+
+                {
+                  orderDetails[0]?.['order.shipping_type'] === 'Corriere' ?
+                  <>
+                    <li><b>Spese di spedizione: </b>{parseFloat(orderDetails[0]?.['order.shipping_cost']).toFixed(2)}€</li>
                 
-                <li><b>Spese di spedizione: </b>{parseFloat(orderDetails[0]?.['order.shipping_cost']).toFixed(2)}€</li>
-               
-                <li><b>Commissioni PayPal: </b>{parseFloat(orderDetails[0]?.['order.paypal_fee']).toFixed(2)}€</li>
-                </ul>
+                    <li><b>Commissioni PayPal: </b>{parseFloat(orderDetails[0]?.['order.paypal_fee']).toFixed(2)}€</li>
+                  
+                  </>
+                  : orderDetails[0]?.['order.shipping_type'] === 'Ritiro in sede' ?
+                      <li><b>Commissioni PayPal: </b>{parseFloat(orderDetails[0]?.['order.paypal_fee']).toFixed(2)}€</li>
+                  : null
+                }
+                
+                <li><b>Note: </b>{orderDetails[0]?.['order.notes']}</li>
+                
+              </ul>
 
                 
                 

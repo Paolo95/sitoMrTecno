@@ -16,6 +16,7 @@ const EditOrder = () => {
     const [date, setDate] = useState('');
     const [shipping_code, setShippingCode] = useState('');
     const [shipping_carrier, setCarrier] = useState('');
+    const [notes, setNotes] = useState('');
     const [orderStatus, setOrderStatus] = useState('');
     const [isChanged, setIsChanged] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -46,8 +47,9 @@ const EditOrder = () => {
             const res = response.data;
             setDate(res[0]['order.order_date'])
             setShippingCode(res[0]['order.shipping_code'])
-            setCarrier(res[0]['shipping_carrier'])
+            setCarrier(res[0]['order.shipping_carrier'])
             setOrderStatus(res[0]['order.order_status']);
+            setNotes(res[0]['order.notes']);
       
           } catch (err) {
             if (!err?.response) 
@@ -85,6 +87,7 @@ const EditOrder = () => {
                     editedShippingCode: shipping_code,
                     editedShippingCarrier: shipping_carrier,
                     editedStatus: orderStatus,
+                    notes: notes,
                 },
                 {
                     headers: {
@@ -136,6 +139,10 @@ const EditOrder = () => {
     const handleCarrierChange = (e) => {
         setIsChanged(true);
         setCarrier(e);
+    }
+    const handleNotesChange = (e) => {
+        setIsChanged(true);
+        setNotes(e);
     }
 
   return (
@@ -196,6 +203,9 @@ const EditOrder = () => {
                                   <b>Modalità di consegna: </b>{orderDetails[0]?.['order.shipping_type']}
                               </li>
                               <li>
+                                  <b>Indirizzo di spedizione: </b>{orderDetails[0]?.['order.shipping_address']}
+                              </li>
+                              <li>
                                   <b>Corriere: </b>
                                   <input className='editable' 
                                         type="text" 
@@ -240,6 +250,14 @@ const EditOrder = () => {
                               <li><b>Spese di spedizione: </b>{parseFloat(orderDetails[0]?.['order.shipping_cost']).toFixed(2)}€</li>
 
                               <li><b>Commissioni PayPal: </b>{parseFloat(orderDetails[0]?.['order.paypal_fee']).toFixed(2)}€</li>
+
+                              <li className='notes'>
+                                  <b>Note: </b>
+                                  <textarea className='editable' 
+                                        rows={7}
+                                        onChange={(e) => handleNotesChange(e.target.value)}
+                                        defaultValue={orderDetails[0]?.['order.notes']}/>
+                              </li>
                           </ul>
                         
                       }

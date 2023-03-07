@@ -16,6 +16,8 @@ const EditBarter = () => {
     const [date, setDate] = useState('');
     const [shipping_code, setShippingCode] = useState('');
     const [shipping_carrier, setCarrier] = useState('');
+    const [notes_changed, setNotesChanged] = useState(false);
+    const [notes, setNotes] = useState('');
     const [barterStatus, setBarterStatus] = useState('');
     const [total, setTotal] = useState(0);
     const [isChanged, setIsChanged] = useState(false);
@@ -24,7 +26,7 @@ const EditBarter = () => {
 
     useEffect(() => {
 
-        const getOrders = async () => {
+        const getBarters = async () => {
     
           setLoading(true);
 
@@ -50,6 +52,7 @@ const EditBarter = () => {
             setCarrier(res[0]['shipping_carrier'])
             setBarterStatus(res[0]['status']);
             setTotal(res[0]['total'])
+            setNotes(res[0]['notes'])
       
           } catch (err) {
             if (!err?.response) 
@@ -67,7 +70,7 @@ const EditBarter = () => {
           
         }
         
-        getOrders();
+        getBarters();
     
         // eslint-disable-next-line
     }, []);
@@ -88,6 +91,7 @@ const EditBarter = () => {
                     editedShippingCarrier: shipping_carrier,
                     editedStatus: barterStatus,
                     editedTotal: total,
+                    editedNotes: notes,
                 },
                 {
                     headers: {
@@ -116,15 +120,7 @@ const EditBarter = () => {
             
         }
 
-          if(barterStatus === 'In lavorazione' && total !== 0){
-            alert('Errore: modifica lo stato della permuta se vuoi modificare il totale!')
-          } else if (barterStatus === 'Valutazione effettuata' && total === 0){
-            alert('Errore: modifica il totale della permuta se vuoi modificare lo stato!')
-          } else if(barterStatus === 'Prodotto spedito' && (shipping_carrier === '' || shipping_code === '') ){
-            alert('Errore: modifica il codice e il corriere della spedizione se vuoi modificare il totale!')
-          } else {
-            editBarter();
-          }         
+          editBarter();
       
           // eslint-disable-next-line
     }
@@ -152,7 +148,13 @@ const EditBarter = () => {
     const handleTotalChange = (e) => {
         setIsChanged(true);
         setTotal(e);
-  }
+    }
+
+    const handleNotesChange = (e) => {
+        setIsChanged(true);
+        setNotes(e);
+        setNotesChanged(true);
+    }
     
   return (
 
@@ -267,6 +269,14 @@ const EditBarter = () => {
                               <li><b>Spese di spedizione: </b>{parseFloat(barterDetails[0]?.['shipping_cost']).toFixed(2)}€</li>
 
                               <li><b>Commissioni PayPal: </b>{parseFloat(barterDetails[0]?.['paypal_fee']).toFixed(2)}€</li>
+
+                              <li className='notes'>
+                                  <b>Note: </b>
+                                  <textarea className='editable'
+                                        rows={7}
+                                        onChange={(e) => handleNotesChange(e.target.value)}
+                                        defaultValue={barterDetails[0]?.['notes']}/>
+                              </li>
                           </ul>
                         
                       }

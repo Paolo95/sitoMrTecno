@@ -85,3 +85,21 @@
     background-color: grey;
     cursor: not-allowed;
 }
+
+.editOrder .editOrder-content .notes{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.editOrder .editOrder-content .editOrder-body .card-body .notes .editable{
+    width: 100%;
+    resize: none;
+}
+
+@media screen and (max-width: 600px) {
+    
+    .editOrder .editOrder-content .editOrder-body {
+        width: 100%;
+    }
+}
