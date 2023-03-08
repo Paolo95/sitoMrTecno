@@ -210,12 +210,12 @@ const Register = () => {
                             Non sono ammessi numeri o caratteri speciali <br/>
                     </p>
                     <div className="txt_field">
-                        <input type="email"
+                        <input type="text"
                             required
                             id='email'
                             onChange={(e) => setEmail(e.target.value)}
                             aria-invalid={validEmail ? 'false' : 'true'}
-                            aria-describedby='pwdnote'
+                            aria-describedby='emailnote'
                             onFocus={() => setEmailFocus(true)}
                             onBlur={() => setEmailFocus(false)}/>
                         <span></span>
@@ -234,7 +234,7 @@ const Register = () => {
                         Inserisci una e-mail valida <br/>    
                     </p>
                     <div className="txt_field">
-                        <input type="email"
+                        <input type="text"
                             required
                             id='confirm_email'
                             onChange={(e) => setMatchEmail(e.target.value)}
