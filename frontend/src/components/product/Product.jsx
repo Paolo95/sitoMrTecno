@@ -2,23 +2,26 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { FacebookIcon, FacebookShareButton, TelegramIcon, TelegramShareButton, WhatsappIcon, WhatsappShareButton } from 'react-share'
 import uuid from 'react-uuid'
-//import Reviews from './reviews'
 import Select from 'react-select'
 
 import './Style.css'
 import axios from '../../api/axios'
+import ClipLoader from 'react-spinners/ClipLoader'
 
 const Product = ({ addToCartProduct }) => {
   
   const params = useParams();
-  //const { reviews } = Reviews;
   const [numItems, setNumItems] = React.useState(1);
   const [orderRevChoice, setRevOrderChoice] = React.useState('Migliori');
   const [numRevs, setNumRevs] = React.useState(6);
   const [product, setProduct] = useState([]);
+  const [reviewInfo, setReviewInfo] = useState([]);
+  const [loadingReview, setLoadingReview] = useState(false);
   const [reviews, setReviews] = useState([]);
+  const [loading, setLoading] = useState(false);
   const GET_PRODUCT_INFO = '/api/product/getProductShop';
   const GET_REVIEWS = '/api/review/getProdReviews';
+  const GET_REVIEW_INFO = '/api/review/getProdReviewStarsByID';
 
   const handleImgClick = (imgId) => {
     const imgs = document.querySelectorAll('.img-select img');
@@ -96,12 +99,50 @@ const Product = ({ addToCartProduct }) => {
     
     getProduct();
 
+    const getReviewInfo = async () => {
+      
+      setLoading(true);
+
+      try {
+       
+        const response = await axios.post(GET_REVIEW_INFO, 
+          { 
+            prod_id: params.id,
+          },
+          {
+            
+          }
+        );  
+        
+        setLoading(false);
+        setReviewInfo(response.data);
+  
+      } catch (err) {
+        if (!err?.response) 
+          alert('Server non attivo!');
+        else if (err.response.status === 500 ){
+          alert(err.response?.data);
+        }
+        else if (err.response.status === 404 ){
+          alert(err.response?.data);
+        }else {
+          alert('Recupero prodotto fallito!');
+        }
+  
+      }    
+      
+    }
+
+    getReviewInfo();
+
     // eslint-disable-next-line
   }, [])
 
   useEffect(() => {
 
     const getReviews = async () => {
+
+      setLoadingReview(true);
 
       try {
        
@@ -115,6 +156,7 @@ const Product = ({ addToCartProduct }) => {
           }
         );  
 
+        setLoadingReview(false);
         setReviews(response.data);
   
       } catch (err) {
@@ -171,8 +213,24 @@ const Product = ({ addToCartProduct }) => {
           <div className="product-content">
             <h2 className="product-title">{product.product_name}</h2>
             <div className="product-rating">
-              {Array.from({ length: product.stars }, () => <i key={uuid()} className="fa fa-star"></i>)}
-              <span>4.7(21)</span>
+              {
+                loading ? 
+                  <div style={{ display: 'flex', justifyContent: 'center', margin: '30px' }}>
+                    <ClipLoader
+                    color={'#0f3460'}
+                    loading={loading}
+                    size={20}
+                    />
+                  </div> : reviewInfo.length > 0 ?
+                  <>
+                    {Array.from({ length: Math.round(reviewInfo[0].avgStars) }, () => <i key={uuid()} className="fa fa-star"></i>)}
+                    <span>{reviewInfo[0].avgStars}({reviewInfo[0].reviewCount})</span>
+                  </>
+                  : null
+
+              }
+              
+              
             </div>
             <div className="product-price">
               <p className="last-price"><span>€{parseFloat((product.price + Math.round((product.discount / 100) * product.price))).toFixed(2)}</span></p>
@@ -252,9 +310,18 @@ const Product = ({ addToCartProduct }) => {
           
       <div className="review-box-container">
         {
+          loadingReview ? 
+            <div style={{ display: 'flex', justifyContent: 'center', margin: '30px' }}>
+              <ClipLoader
+              color={'#0f3460'}
+              loading={loadingReview}
+              size={50}
+              />
+            </div>
+          :        
           reviews.slice(0, numRevs)
                  .map((review, index) => {
-          return (
+            return (
             
                 <div className="review-box" key={index}>
                   <div className="review-box-top">

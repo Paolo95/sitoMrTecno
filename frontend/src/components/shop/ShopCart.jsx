@@ -2,10 +2,9 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import uuid from 'react-uuid'
 
-const ShopCart = ({ addToCart, shopItems, cartItem, deleteCartProduct, decreaseQty}) => {
+const ShopCart = ({ addToCart, shopItems, cartItem, deleteCartProduct, decreaseQty, prodStars}) => {
 
     const [cartSummit, setCartSummit] = useState(false);
-
     const navigate = useNavigate();
     
   return (
@@ -96,7 +95,21 @@ const ShopCart = ({ addToCart, shopItems, cartItem, deleteCartProduct, decreaseQ
                         <div className="product-details">
                             <h3>{shopItems.product_name}</h3>
                             <div className="rate">
-                                {Array.from({ length: shopItems.stars }, () => <i key={uuid()} className="fa fa-star"></i>)}
+                                {
+                                    (prodStars.findIndex(e => e.productId === shopItems.id) !== -1) ?
+                                        Array.from({ length: Math.round(prodStars[prodStars.findIndex(e => e.productId === shopItems.id)].avgStars) }, () => <i key={uuid()} className="fa fa-star"></i>)
+                                        
+                                    :
+                                    null
+                                }
+                                
+                                {
+                                    (prodStars.findIndex(e => e.productId === shopItems.id) !== -1) ?
+                                        <span className='review-count'>({prodStars[prodStars.findIndex(e => e.productId === shopItems.id)].reviewCount})</span>
+                                    
+                                    :
+                                    null
+                                }
                             </div>
                             <div className="price">
                                 <h4>{parseFloat(shopItems.price).toFixed(2)}€</h4>

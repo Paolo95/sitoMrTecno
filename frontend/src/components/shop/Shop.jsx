@@ -15,10 +15,12 @@ export const Shop = ({ addToCart, cartItem, decreaseQty, deleteCartProduct }) =>
   const CATEGORY_URL = '/api/product/categories';
   const BRANDS_URL = '/api/product/brands';
   const FILTERED_ITEMS_URL = '/api/product/filteredItems';
+  const PROD_STARS_URL = '/api/review/getProdReviewsStars';
 
   const [uniqueCategories, setCategories] = React.useState([]);
   const [uniqueBrands, setBrands] = React.useState([]);
   const [shopItems, setShopItems] = React.useState([]);
+  const [prodStars, setProdStars] = React.useState([]);
   const [min, setMin] = React.useState(0);
   const [max, setMax] = React.useState(1000);
 
@@ -29,6 +31,7 @@ export const Shop = ({ addToCart, cartItem, decreaseQty, deleteCartProduct }) =>
   const [catLoading, setCatLoading] = React.useState(true);
   const [brandLoading, setBrandLoading] = React.useState(true);
   const [prodLoading, setProdLoading] = React.useState(false);
+  const [reviewLoading, setReviewLoading] = React.useState(false);
 
   const [brandCheckedState, setBrandCheckedState] = React.useState(
     new Array(uniqueBrands.length).fill(false)
@@ -243,7 +246,8 @@ export const Shop = ({ addToCart, cartItem, decreaseQty, deleteCartProduct }) =>
           );
   
           setProdLoading(false);
-          setShopItems(response.data);           
+          setShopItems(response.data);  
+          getProdReviews();       
   
       } catch (err) {
         if(!err?.response){
@@ -274,7 +278,8 @@ export const Shop = ({ addToCart, cartItem, decreaseQty, deleteCartProduct }) =>
           );
   
           setProdLoading(false)
-          setShopItems(response.data);           
+          setShopItems(response.data);  
+          getProdReviews();          
   
       } catch (err) {
         if(!err?.response){
@@ -286,9 +291,36 @@ export const Shop = ({ addToCart, cartItem, decreaseQty, deleteCartProduct }) =>
         }
       } 
     }
+  }
 
-    
+  const getProdReviews = async () => {
 
+    setReviewLoading(true);
+
+      try {
+
+        const response = await axios.post(PROD_STARS_URL, 
+          { 
+           
+          },
+          {
+              headers: { 'Content-Type': 'application/json'},
+              withCredentials: true
+          }
+          );
+  
+          setReviewLoading(false);
+          setProdStars(response.data);           
+  
+      } catch (err) {
+        if(!err?.response){
+          console.error('Server non attivo!');
+        }else if(err.response?.status === 500){
+          console.error(err.response?.data);
+        }else{
+          console.error('Recupero rev_stars fallito!');
+        }
+      }    
   }
 
   useEffect(() => {
@@ -462,6 +494,8 @@ export const Shop = ({ addToCart, cartItem, decreaseQty, deleteCartProduct }) =>
                             decreaseQty={decreaseQty} 
                             deleteCartProduct={deleteCartProduct}
                             shopItems={shopItems.slice(0, numProdListed)}
+                            prodStars={prodStars}
+                            
                   />
                 )
                   
