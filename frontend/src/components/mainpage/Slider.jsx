@@ -11,8 +11,7 @@ const SliderHome = ({ tab }) => {
     <>
         <section className='homeSlide contentWidth'>
             <div className="container" onClick={() => {              
-              section === 'Permuta' ? navigate('/permuta') :
-                section === 'Ricondizionati' ? navigate('/shop/ricondizionati') :
+              section === 'Ricondizionati' ? navigate('/shop/ricondizionati') :
                   section === 'Nuovo' ? navigate('/shop/nuovo') : navigate('/')}}>
                 <SlideCard tab={tab}/>
             </div>

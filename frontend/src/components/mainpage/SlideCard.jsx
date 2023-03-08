@@ -2,6 +2,7 @@ import React from 'react'
 import Sdata from './Sdata'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Pagination, Autoplay } from 'swiper';
+import { useNavigate } from 'react-router-dom';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -10,6 +11,7 @@ import 'swiper/css/pagination';
 const SlideCard = ({ tab }) => {
 
   SwiperCore.use([Autoplay]);
+  const navigate = useNavigate();
   
   return (
     <>
