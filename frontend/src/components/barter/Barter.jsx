@@ -670,6 +670,9 @@ const Barter = () => {
                     shipping_cost: shipping_cost,
                     paypal_fee: 0,
                     product_price: productPrice,
+                    product_name: modelChoice,
+                    barterRecap: barterRecap,
+                    barterTotal: totalPrice,
                 },
                 {
                     headers: {
