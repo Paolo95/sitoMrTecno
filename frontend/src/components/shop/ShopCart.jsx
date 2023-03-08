@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
+import ClipLoader from 'react-spinners/ClipLoader';
 import uuid from 'react-uuid'
 
-const ShopCart = ({ addToCart, shopItems, cartItem, deleteCartProduct, decreaseQty, prodStars}) => {
+const ShopCart = ({ addToCart, shopItems, cartItem, deleteCartProduct, decreaseQty, prodStars, reviewLoading}) => {
 
     const [cartSummit, setCartSummit] = useState(false);
     const navigate = useNavigate();
@@ -94,23 +95,36 @@ const ShopCart = ({ addToCart, shopItems, cartItem, deleteCartProduct, decreaseQ
                         </div>
                         <div className="product-details">
                             <h3>{shopItems.product_name}</h3>
-                            <div className="rate">
-                                {
-                                    (prodStars.findIndex(e => e.productId === shopItems.id) !== -1) ?
-                                        Array.from({ length: Math.round(prodStars[prodStars.findIndex(e => e.productId === shopItems.id)].avgStars) }, () => <i key={uuid()} className="fa fa-star"></i>)
-                                        
-                                    :
-                                    null
-                                }
+                            {
+                                reviewLoading ?
+                                <div style={{ display: 'flex', justifyContent: 'center', margin: '30px' }}>
+                                    <ClipLoader
+                                    color={'#0f3460'}
+                                    loading={reviewLoading}
+                                    size={50}
+                                    />
+                                </div>
                                 
-                                {
-                                    (prodStars.findIndex(e => e.productId === shopItems.id) !== -1) ?
-                                        <span className='review-count'>({prodStars[prodStars.findIndex(e => e.productId === shopItems.id)].reviewCount})</span>
+                                :
+                                <div className="rate">
+                                    {
+                                        (prodStars.findIndex(e => e.productId === shopItems.id) !== -1) ?
+                                            Array.from({ length: Math.round(prodStars[prodStars.findIndex(e => e.productId === shopItems.id)].avgStars) }, () => <i key={uuid()} className="fa fa-star"></i>)
+                                            
+                                        :
+                                        null
+                                    }
                                     
-                                    :
-                                    null
-                                }
-                            </div>
+                                    {
+                                        (prodStars.findIndex(e => e.productId === shopItems.id) !== -1) ?
+                                            <span className='review-count'>({prodStars[prodStars.findIndex(e => e.productId === shopItems.id)].reviewCount})</span>
+                                        
+                                        :
+                                        null
+                                    }
+                                </div>
+                            }
+                            
                             <div className="price">
                                 <h4>{parseFloat(shopItems.price).toFixed(2)}€</h4>
                                 <button onClick={() => {addToCart(shopItems);

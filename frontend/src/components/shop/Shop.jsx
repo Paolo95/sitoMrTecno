@@ -495,6 +495,7 @@ export const Shop = ({ addToCart, cartItem, decreaseQty, deleteCartProduct }) =>
                             deleteCartProduct={deleteCartProduct}
                             shopItems={shopItems.slice(0, numProdListed)}
                             prodStars={prodStars}
+                            reviewLoading={reviewLoading}
                             
                   />
                 )
