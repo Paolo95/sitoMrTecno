@@ -1,0 +1,157 @@
+.reviewPageUser{
+    margin-left: auto;
+    margin-right: auto;
+    padding: 3% 2% 60vh 2%;
+    height: 100%;
+}
+
+.reviewPageUser .reviewPageUser-heading{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.reviewPageUser .reviewPageUser-heading h2{
+    margin-top: 0;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.reviewPageUser .mb-4{
+    margin-bottom: 1.5rem;
+}
+
+.reviewPageUser .shadow-sm{
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)
+}
+
+.reviewPageUser .card{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0.25rem;
+    grid-gap: 0;
+}
+
+.reviewPageUser .small{
+    width: 600px;
+    margin: 0 auto 0 auto;
+}
+
+.reviewPageUser .card-header{
+    padding: 0.5rem 1rem;
+    margin-bottom: 0;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+    display: flex;
+    justify-content: flex-end;
+}
+
+.reviewPageUser .select-div{
+    display: flex;
+}
+
+.reviewPageUser .select-div select{
+    display: block;
+    width: 170px;
+    padding: 0.375rem 2.25rem 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+}
+
+.reviewPageUser .card-body{
+    flex: 1 1 auto;
+    padding: 1rem 1rem;
+}
+
+.reviewPageUser .table{
+    width: 100%;
+    display: block;
+    height: 350px;
+    margin-bottom: 1rem;
+    color: #212529;
+    border-color: #dee2e6;
+    caption-side: bottom;
+    border-collapse: collapse;
+    overflow-y: auto;
+}
+
+.reviewPageUser .table th{
+   font-weight: 400;
+   color: #adb5bd;
+   text-align: left;
+   padding: 6px 78px;
+}
+
+.reviewPageUser .table td{
+    padding: 8px 78px;
+}
+
+.reviewPageUser .table .padding-ext{
+    padding: 8px 70px;
+}
+
+.reviewPageUser .table .text{
+    max-width: 350px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.reviewPageUser .table .prod_name{
+    padding: 8px 78px;
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.reviewPageUser .table tbody{
+    border-style: solid;
+    border-width: 0;
+    border-top: 2px solid;
+}
+
+.reviewPageUser .table tbody button{
+    background-color: #0f3460;
+    color: aliceblue;
+    width: 80px;
+    height: 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+@media screen and (max-width: 600px) {
+    
+
+    .reviewPageUser .card-body{
+
+        overflow-x: auto;
+    }
+
+    .reviewPageUser .small{
+        width: 100%;
+    }
+
+    .reviewPageUser .table th,
+    .reviewPageUser .table td,
+    .reviewPageUser .table .prod_name{
+        padding: 8px 20px;
+    }
+
+    .reviewPageUser .table .padding-ext{
+        padding: 8px 20px;
+    }
+
+}

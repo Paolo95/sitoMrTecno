@@ -1,0 +1,102 @@
+.newReview{
+    margin-left: auto;
+    margin-right: auto;
+    padding: 3% 2% 60vh 2%;
+    height: 100%;
+}
+
+.newReview .mb-4{
+    margin-bottom: 1.5rem;
+}
+
+.newReview .shadow-sm{
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
+}
+
+.newReview .newReview-heading{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.newReview h2{
+    font-weight: 500;
+}
+
+.newReview .card{
+    position: relative;
+    display: flex;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0.25rem;
+}
+
+.newReview .newReview-body{
+    margin: 10px;
+    width: 100%;
+}
+
+.newReview .newReview-body .newReview-text{
+    display: flex;
+    gap: 10px;
+}
+
+.newReview .newReview-body .newReview-text .confirm-div{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.newReview .newReview-body .newReview-text .confirm-div .btn{
+    background-color: #0f3460;
+    color: aliceblue;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100px;
+    height: 60px;
+}
+
+.newReview .success{
+    color: #2ec011;
+    font-weight: 600;
+    font-size: 15px;
+    text-align: center;
+}
+
+.newReview .newReview-body .newReview-text input{
+    border: 1px solid black;
+    font-size: 15px;
+    padding: 10px;
+    text-align: center;
+}
+
+.newReview .newReview-text textarea{
+    width: 100%;
+    font-weight: 600;
+    font-size: 16px;
+    resize: none;
+    padding: 5px;
+}
+
+.newReview .newReview-body textarea:focus::placeholder{
+    color: transparent;
+}
+
+.newReview .newReview-body .btn{
+    background-color: #0f3460;
+    color: aliceblue;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.newReview .newReview-body .disabled{
+    cursor: not-allowed;
+    background-color: lightgray;
+}

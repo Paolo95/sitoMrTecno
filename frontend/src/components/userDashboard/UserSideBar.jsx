@@ -42,6 +42,12 @@ const UserSideBar = () => {
                     <i className="fas fa-handshake"></i>                    
                         <h3>Permute</h3>                       
                     </NavLink>
+
+                    <NavLink to={'/userDashboard/reviews'}>
+                                            
+                    <i className="fas fa-file-signature"></i>                    
+                        <h3>Recensioni</h3>                       
+                    </NavLink>
                     
                     <NavLink to={'/userDashboard/settings'}>
                               
