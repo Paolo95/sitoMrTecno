@@ -143,6 +143,7 @@ const EditProduct = () => {
 
     const handleStatusSel = (e) => {
         setStatus(e);
+        setIsChanged(true);
     }
 
     const handleCategorySel = (e) => {
