@@ -25,6 +25,7 @@ const NewProductPage = () => {
     const [ram, setRAM] = useState('');
     const [hdd, setHDD] = useState('');
     const [graphics, setGraphics] = useState('');
+    const [stars, setStars] = useState(0);
     const [discount, setDiscount] = useState(0);
     const [qtyInStock, setQtyInStock] = useState(0);
     const CATEGORY_URL = 'api/product/categories';
@@ -60,6 +61,7 @@ const NewProductPage = () => {
                     ram: ram,
                     hdd: hdd,
                     graphics: graphics,
+                    stars: stars,
                     discount: discount,
                     qtyInStock: qtyInStock,
                 },
@@ -319,6 +321,16 @@ const NewProductPage = () => {
                                     required/> 
                                     
                             } 
+
+                            <label htmlFor="product_label" className='form-label'>stars</label> 
+                            <input type="number"
+                                className='form-control'
+                                step="any" 
+                                onChange={(e) => setStars(e.target.value)}
+                                id={'stars'}
+                                min='0'
+                                max='5'
+                                required/>  
 
                             <label htmlFor="product_label" className='form-label'>discount</label> 
                             <input type="number"
