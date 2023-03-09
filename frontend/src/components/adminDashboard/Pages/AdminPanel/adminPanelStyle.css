@@ -27,10 +27,6 @@
     box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075);
 }
 
-.adminPanel .row .col-lg-4 .card-body{
-    padding: 1rem 1rem;
-}
-
 .adminPanel .card{
     position: relative;
     display: flex;
@@ -104,25 +100,16 @@
     margin-bottom: 3px;
 }
 
-@media screen and (min-width: 992px) {
-    
-    .adminPanel .row .col-lg-4{
-        flex: 0 0 auto;
-        width: 33.3333333%;
-    }
-}
-
 @media screen and (max-width: 600px){
     
     .adminPanel{
-        width: calc(100vw - 3rem);
+        width: 100%;
         padding: 10% 3% 100% 3%;
         height: 100%;
     }
 
-    .adminPanel .row .col-lg-4{
-        flex: 0 0 auto;
-        width: 100%;
+    .adminPanel .card .card-body .table-div table{
+        overflow-y: scroll;
     }
 
     .adminPanel .row{
@@ -130,8 +117,10 @@
         gap: 0;
     }
 
-    .adminPanel .hide{
-        display: none;
+    .adminPanel .card .card-body .table-div .table tbody td{
+        padding: 0 10px 0 10px;        
     }
+
+
 
 }
