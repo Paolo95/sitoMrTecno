@@ -67,6 +67,12 @@ const AdminSideBar = () => {
                         <h3>Faq</h3>
                     </NavLink>
 
+                    <NavLink to={'/adminDashboard/reviews'}>
+                              
+                        <i className="fas fa-file-signature"></i>
+                        <h3>Recensioni</h3>
+                    </NavLink>
+
                     <a href="/" onClick={() => signOut()}>
                         <i className="fas fa-sign-out-alt" ></i>
                         <h3>Logout</h3>

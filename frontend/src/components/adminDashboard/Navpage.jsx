@@ -9,6 +9,9 @@ import EditOrder from './Pages/EditOrder/EditOrder';
 import AdminBarterPage from './Pages/AdminBarterPage/AdminBarterPage';
 import EditBarter from './Pages/EditBarter/EditBarter';
 import FaqPage from './Pages/FaqPanel/FaqPage';
+import AdminReviewPage from './Pages/AdminReviewPage/AdminReviewPage';
+import ReviewReply from './Pages/ReviewReply/ReviewReply';
+import AdminEditReview from './Pages/AdminEditReview/AdminEditReview';
 
 const Navpage = () => {
   return (
@@ -36,6 +39,15 @@ const Navpage = () => {
         </Routes>
         <Routes>
             <Route path='/faqs' element={<FaqPage />}/>
+        </Routes>
+        <Routes>
+            <Route path='/reviews' element={<AdminReviewPage />}/>
+        </Routes>
+        <Routes>
+            <Route path='/reviews/reviewReply/:reviewID' element={<ReviewReply />}/>
+        </Routes>
+        <Routes>
+            <Route path='/reviews/editReply/:reviewID' element={<AdminEditReview />}/>
         </Routes>
         <Routes>
             <Route path='/barters/editBarter/:barterID' element={<EditBarter />}/>

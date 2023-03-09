@@ -137,7 +137,10 @@ const UserReviewPage = () => {
                               <td className={ statusSelected === 'Compilata' ? 'padding-ext text' : ''} >{value['review_text']}</td>
                               <td className={ statusSelected === 'Compilata' ? 'padding-ext' : ''} >
                                 {
-                                  <NavLink to={`/userDashboard/reviews/editReview/${value['id']}`}>
+                                  <NavLink to={{
+                                           pathname:`/userDashboard/reviews/editReview/${value['id']}`,
+                                           }}
+                                           state={{ product_name: value['product_name'] }}>
                                       <button>Dettaglio</button>
                                   </NavLink>
                                 }

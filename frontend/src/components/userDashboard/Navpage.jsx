@@ -7,6 +7,7 @@ import UserBarterPage from './Pages/UserBarterPage/UserBarterPage';
 import BarterDetails from './Pages/BarterDetails/BarterDetails';
 import UserReviewPage from './Pages/UserReviewPage/UserReviewPage';
 import NewReview from './Pages/NewReview/NewReview';
+import UserEditReview from './Pages/UserEditReview/UserEditReview';
 
 const Navpage = () => {
   return (
@@ -18,6 +19,7 @@ const Navpage = () => {
             <Route path='/barters/barterDetails/:barterId' element={<BarterDetails />}/>
             <Route path='/reviews' element={<UserReviewPage />}/>
             <Route path='/reviews/newReview/:productId' element={<NewReview />}/>
+            <Route path='/reviews/editReview/:reviewId' element={<UserEditReview />}/>
             <Route path='/settings' element={<UserSettings />}/>
         </Routes>
     </section>

@@ -1,30 +1,30 @@
-.newReview{
+.adminEditReview{
     margin-left: auto;
     margin-right: auto;
     padding: 3% 2% 60vh 2%;
     height: 100%;
 }
 
-.newReview .mb-4{
+.adminEditReview .mb-4{
     margin-bottom: 1.5rem;
 }
 
-.newReview .shadow-sm{
+.adminEditReview .shadow-sm{
     box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
 }
 
-.newReview .newReview-heading{
+.adminEditReview .adminEditReview-heading{
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 30px;
 }
 
-.newReview h2{
+.adminEditReview h2{
     font-weight: 500;
 }
 
-.newReview .card{
+.adminEditReview .card{
     position: relative;
     display: flex;
     min-width: 0;
@@ -35,14 +35,14 @@
     border-radius: 0.25rem;
 }
 
-.newReview .newReview-body{
+.adminEditReview .adminEditReview-body{
     margin: 10px;
     width: 100%;
     display: flex;
     flex-direction: column;
 }
 
-.newReview .newReview-body .newReview-text{
+.adminEditReview .adminEditReview-body .adminEditReview-text{
     padding: 10px;
     width: 100%;
     display: flex;
@@ -50,7 +50,7 @@
     gap: 10px;
 }
 
-.newReview .newReview-body .newReview-text .starBtn-div{
+.adminEditReview .adminEditReview-body .adminEditReview-text .starBtn-div{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -58,7 +58,7 @@
     margin-bottom: 10px;
 }
 
-.newReview .newReview-body .newReview-text .starBtn-div button{
+.adminEditReview .adminEditReview-body .adminEditReview-text .starBtn-div button{
     width: 60px;
     height: 60px;
     border-radius: 10px;
@@ -69,18 +69,17 @@
     font-weight: 600;
 }
 
-.newReview .newReview-body .newReview-text .starBtn-div .btnSel{
+.adminEditReview .adminEditReview-body .adminEditReview-text .starBtn-div .btnSel{
     width: 60px;
     height: 60px;
     border-radius: 10px;
     font-size: 20px;
-    cursor: pointer;
     background-color: #0f3460;
     color: aliceblue;
     font-weight: 600;
 }
 
-.newReview .newReview-body .newReview-text .confirm-body{
+.adminEditReview .adminEditReview-body .adminEditReview-text .confirm-body{
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -89,7 +88,7 @@
     width: 100%;
 }
 
-.newReview .newReview-body .newReview-text .confirm-body .btn{
+.adminEditReview .adminEditReview-body .adminEditReview-text .confirm-body .btn{
     background-color: #0f3460;
     color: aliceblue;
     font-weight: 600;
@@ -99,27 +98,26 @@
     height: 60px;
 }
 
-
-.newReview .newReview-body .newReview-text .confirm-body .confirm-div{
+.adminEditReview .adminEditReview-body .adminEditReview-text .confirm-body .confirm-div{
     display: flex;
     gap: 10px;
 }
 
-.newReview .success{
+.adminEditReview .success{
     color: #2ec011;
     font-weight: 600;
     font-size: 15px;
     text-align: center;
 }
 
-.newReview .notSuccess{
+.adminEditReview .notSuccess{
     color: #df1c1c;
     font-weight: 600;
     font-size: 15px;
     text-align: center;
 }
 
-.newReview .newReview-body .newReview-text input{
+.adminEditReview .adminEditReview-body .adminEditReview-text input{
     border: 1px solid black;
     font-size: 15px;
     padding: 10px;
@@ -127,7 +125,7 @@
     border-radius: 5px;
 }
 
-.newReview .newReview-text textarea{
+.adminEditReview .adminEditReview-body .adminEditReview-text textarea{
     width: 100%;
     font-weight: 600;
     font-size: 16px;
@@ -135,11 +133,11 @@
     padding: 5px;
 }
 
-.newReview .newReview-body textarea:focus::placeholder{
+.adminEditReview .adminEditReview-body .adminEditReview-text textarea:focus::placeholder{
     color: transparent;
 }
 
-.newReview .newReview-body .newReview-text .btn{
+.adminEditReview .adminEditReview-body .adminEditReview-text .btn{
     background-color: #0f3460;
     color: aliceblue;
     font-weight: 600;
@@ -149,12 +147,12 @@
     width: 100%;
 }
 
-.newReview .newReview-body .newReview-text .disabled{
+.adminEditReview .adminEditReview-body .adminEditReview-text .disabled{
     cursor: not-allowed;
     background-color: lightgray;
 }
 
-.newReview .newReview-body .newReview-text .btn-div{
+.adminEditReview .adminEditReview-body .adminEditReview-text .btn-div{
     display: flex;
     justify-content: right;
     align-items: center;
@@ -162,17 +160,17 @@
 
 @media screen and (max-width: 600px) {
     
-    .newReview .newReview-body{
+    .adminEditReview .adminEditReview-body{
         width: 100%;
         padding: 10px;
         margin: 0;
     }
 
-    .newReview .newReview-text textarea{
+    .adminEditReview .adminEditReview-text textarea{
         height: 100px;
     }
 
-    .newReview .newReview-body .newReview-text .starBtn-div{
+    .adminEditReview .adminEditReview-body .adminEditReview-text .starBtn-div{
         display: flex;
         justify-content: center;
         align-items: center;
