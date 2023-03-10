@@ -92,6 +92,11 @@
     padding: 8px 50px;
 }
 
+.orderPageAdmin .table .id{
+    padding: 0;
+    text-align: center;
+}
+
 .orderPageAdmin .table tbody{
     border-style: solid;
     border-width: 0;
@@ -125,10 +130,6 @@
      
     .orderPageAdmin .table td{
         padding: 8px 30px;
-    }
-
-    .orderPageAdmin .table .id{
-        padding: 8px 30px 8px 32px;
     }
     
 }

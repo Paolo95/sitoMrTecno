@@ -92,6 +92,11 @@
     padding: 8px 50px;
 }
 
+.adminBarterPage .table .id{
+    padding: 0;
+    text-align: center;
+}
+
 .adminBarterPage .table tbody{
     border-style: solid;
     border-width: 0;
@@ -119,10 +124,6 @@
      
     .adminBarterPage .table td{
         padding: 8px 30px;
-    }
-
-    .adminBarterPage .table .id{
-        padding: 8px 30px 8px 32px;
     }
 
 }
