@@ -268,6 +268,8 @@ const EditBarter = () => {
 
                               <li><b>Commissioni PayPal: </b>{parseFloat(barterDetails[0]?.['paypal_fee']).toFixed(2)}€</li>
 
+                              <li><b>Numero di telefono: </b>{barterDetails[0]?.['barter_telephone']}</li>
+
                               <li className='notes'>
                                   <b>Note: </b>
                                   <textarea className='editable'
