@@ -44,7 +44,18 @@
     margin-bottom: 0;
     border-bottom: 1px solid rgba(0,0,0,.125);
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+}
+
+.adminBarterPage .card-header .numberSearch-div{
+    width: 220px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.adminBarterPage .card-header .numberSearch-div input{
+    font-size: 15px;
 }
 
 .adminBarterPage .select-div{
@@ -124,6 +135,23 @@
      
     .adminBarterPage .table td{
         padding: 8px 30px;
+    }
+
+    .adminBarterPage .card-header{
+        padding: 0.5rem 1rem;
+        margin-bottom: 0;
+        border-bottom: 1px solid rgba(0,0,0,.125);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+        gap: 10px;
+    }
+
+    .adminBarterPage .card-header .numberSearch-div,
+    .adminBarterPage .card-header .select-div .statusSelect{
+        width: 100%;
+        text-align: center;
     }
 
 }

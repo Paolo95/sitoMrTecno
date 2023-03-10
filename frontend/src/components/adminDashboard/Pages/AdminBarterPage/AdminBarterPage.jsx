@@ -12,6 +12,7 @@ const AdminBarterPage = () => {
   const GET_BARTER_LIST = 'api/barter/barterList';
   const { auth } = useAuth();
   const [barterList, setBarterList] = useState([]);
+  const [numberSearch, setNumberSearch] = useState('');
   const [statusSelected, setStatus] = useState('In lavorazione');
   const [loading, setLoading] = useState(false);
 
@@ -30,6 +31,7 @@ const AdminBarterPage = () => {
         const response = await axios.post(GET_BARTER_LIST, 
             { 
                 status: statusSelected,
+                numberSearched: numberSearch,
             },
             {
                 headers: {
@@ -56,7 +58,11 @@ const AdminBarterPage = () => {
 
     newProductForm();   
 
-  },[statusSelected, barterList.length, auth.accessToken])
+  },[statusSelected, barterList.length, auth.accessToken, numberSearch])
+
+  const handleNumberSearch = (e) => {
+    setNumberSearch(e);
+  }
 
   return (
     <section className='adminBarterPage'>
@@ -65,6 +71,11 @@ const AdminBarterPage = () => {
       </div>
       <div className="card mb-4 shadow-sm">
         <div className="card-header bg-white">
+        <div className='numberSearch-div'>
+            <input type="text"
+                   placeholder='Cerca numero di telefono...'
+                   onChange={(e) => handleNumberSearch(e.target.value)} />
+          </div>
         <div className="select-div">
             <select className="statusSelect"
                     onChange={(e) => handleStatusSel(e.target.value)}>
