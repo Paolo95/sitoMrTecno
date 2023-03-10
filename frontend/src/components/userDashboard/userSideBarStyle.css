@@ -32,7 +32,7 @@
     display: grid;
     width: 100%;
     margin: 0;   
-    grid-template-columns: 14rem auto;
+    grid-template-columns: 15% 85%;
     max-width: 100%;
     background-color: #f6f6f9;
 }
