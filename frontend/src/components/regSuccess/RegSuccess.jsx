@@ -1,8 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './Style.css'
 import { Link, useParams } from 'react-router-dom'
+import useLogout from '../../hooks/useLogout'
 
 const RegSuccess = () => {  
+
+    const logout = useLogout();
+
+    useEffect(() => {
+        const signOut = async () => {
+            await logout();
+        }
+        
+        signOut();
+    })
 
     const params = useParams(); 
 

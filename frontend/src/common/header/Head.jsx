@@ -18,8 +18,8 @@ const Head = () => {
                     <Link to='/faq'>FAQ's</Link>
                     <span className="fi fi-it"></span>
                     <label htmlFor=''> IT</label>
-                    <span className="fi fi-gb"></span>
-                    <label htmlFor=''> EN</label>
+                    <span style={{display:'none'}} className="fi fi-gb"></span>
+                    <label style={{display:'none'}} htmlFor=''> EN</label>
                 </div>
             </div>
         </section>  
