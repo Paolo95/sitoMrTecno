@@ -90,7 +90,7 @@
 
 .orderPageAdmin .table td{
     padding: 8px 50px;
- }
+}
 
 .orderPageAdmin .table tbody{
     border-style: solid;
@@ -116,7 +116,19 @@
         overflow-x: auto;
     }
 
+    .orderPageAdmin .table th{
+        font-weight: 400;
+        color: #adb5bd;
+        text-align: left;
+        padding: 10px 30px;
+     }
+     
+    .orderPageAdmin .table td{
+        padding: 8px 30px;
+    }
 
-
+    .orderPageAdmin .table .id{
+        padding: 8px 30px 8px 32px;
+    }
     
 }

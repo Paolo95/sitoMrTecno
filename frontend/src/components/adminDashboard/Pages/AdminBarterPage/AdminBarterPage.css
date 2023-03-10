@@ -85,12 +85,12 @@
    font-weight: 400;
    color: #adb5bd;
    text-align: left;
-   padding: 6px 50px;
+   padding: 10px 50px;
 }
 
 .adminBarterPage .table td{
     padding: 8px 50px;
- }
+}
 
 .adminBarterPage .table tbody{
     border-style: solid;
@@ -106,4 +106,23 @@
     border-radius: 5px;
     cursor: pointer;
     font-weight: 600;
+}
+
+@media screen and (max-width: 600px) {
+    
+    .adminBarterPage .table th{
+        font-weight: 400;
+        color: #adb5bd;
+        text-align: left;
+        padding: 10px 30px;
+     }
+     
+    .adminBarterPage .table td{
+        padding: 8px 30px;
+    }
+
+    .adminBarterPage .table .id{
+        padding: 8px 30px 8px 32px;
+    }
+
 }

@@ -104,7 +104,7 @@ const OrderPageAdmin = () => {
                         return(
                           <>
                             <tr key={index}>
-                              <td>{value['order.id']}</td>
+                              <td className='id'>{value['order.id']}</td>
                               <td>{<Moment format='DD/MM/YYYY'>{value['order.order_date']}</Moment>}</td>
                               <td>{value['order.user.email']}</td>
                               <td>{value['order.order_status']}</td>

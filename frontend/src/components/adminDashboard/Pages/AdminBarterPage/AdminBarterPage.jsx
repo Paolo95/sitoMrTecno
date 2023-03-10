@@ -94,6 +94,7 @@ const AdminBarterPage = () => {
                     <tr>
                       <th scope='col'>ID</th>
                       <th scope='col'>Data</th>
+                      <th scope='col'>Telefono</th>
                       <th scope='col'>E-mail</th>
                       <th scope='col'>Status</th>
                       <th scope='col'>Importo</th>
@@ -106,8 +107,9 @@ const AdminBarterPage = () => {
                         return(
                           <>
                             <tr key={index}>
-                              <td>{value['id']}</td>
+                              <td className='id'>{value['id']}</td>
                               <td>{<Moment format='DD/MM/YYYY'>{value['barter_date']}</Moment>}</td>
+                              <td>{value['barter_telephone']}</td>
                               <td>{value['user.email']}</td>
                               <td>{value['status']}</td>
                               <td>{parseFloat(value['total']).toFixed(2)} €</td>
