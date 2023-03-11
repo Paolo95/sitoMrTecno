@@ -240,12 +240,12 @@ const Product = ({ addToCartProduct }) => {
             <div className="product-details">
               <h2>Descrizione prodotto:</h2>
                 <ul>
-                  <li>Colore: <span>{product.color}</span></li>
-                  <li>CPU: <span>{product.CPU}</span></li>
-                  <li>RAM: <span>{product.RAM}</span></li>
-                  <li>HDD: <span>{product.HDD}</span></li>
-                  <li>Scheda Video: <span>{product.graphics_card}</span></li>
-                  <li>Descrizione: <span>{product.prod_description}</span></li>
+                  { product.color !=='' ? <li>Colore: <span>{product.color}</span></li> : null }
+                  { product.CPU !=='' ? <li>CPU: <span>{product.CPU}</span></li> : null} 
+                  { product.RAM !=='' ? <li>RAM: <span>{product.RAM}</span></li> : null }
+                  { product.HDD !=='' ? <li>HDD: <span>{product.HDD}</span></li> : null }
+                  { product.graphics_card !== '' ? <li>Scheda Video: <span>{product.graphics_card}</span></li> : null }
+                  { product.prod_description !== '' ? <li>Descrizione: <div className='prodDesc-div'>{product.prod_description}</div></li> : null }
                   <li>Stato: 
                     { product.qtyInStock > 0 ?
                       <>
