@@ -890,17 +890,12 @@ const Barter = () => {
                             }
 
                             <div className='txt_field'>
-                                <label htmlFor='username'>Numero di telefono da cui invierai le foto:</label>
+                                <label htmlFor='username'>Numero di telefono da cui invierai le foto su WhatsApp:</label>
                                 <input type="text"
                                         onChange={(e) => handlerBarterTelephone(e)} 
                                         placeholder='Digita il tuo numero di telefono...'
                                         className='prodNameInput'
                                         />
-                            </div>
-
-                            
-                            <div className='txt_field'>
-                                <a className='whatsAppBtn' href="https://api.whatsapp.com/send?phone=3397619766">Manda le foto su WhatsApp Business!</a>
                             </div>
                             
                             <div className='btnForm'>
@@ -914,11 +909,11 @@ const Barter = () => {
                         </div>
                         <div className={formStepsNum === 4 ? "form-step-active": "form-step"}>
                             <div className="txt_field">
-                                <h2>Valutazione degli oggetti</h2>
+                                <h2>Valutazione degli oggetti...</h2>
                                 {
                                     (barterStatus === 'In lavorazione') ? <>
-                                                        <p>Stiamo valutando la tua proposta di permuta. <br/> Puoi rimanere su questa pagina o controllare lo stato
-                                                            della richiesta nella tua area personale. 
+                                                        <p> Non appena riceveremo le foto su WhatsApp, confermeremo la proposta di permuta. <br/> 
+                                                            Appena la proposta sarà confermata, ti avanzeremo alla fase successiva.
                                                         </p>
                                                 
                                                         <div style={{ display: 'flex', justifyContent: 'center', margin: '30px' }}>
