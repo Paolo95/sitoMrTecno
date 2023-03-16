@@ -21,8 +21,8 @@ const Wrapper = () => {
         },
         {
           cover: <i className='fas fa-headset'></i>,
-          title: "Supporto 24/7 ",
-          decs: "Assitenza tecnica disponibile 24/7",
+          title: "Supporto clienti",
+          decs: "Assitenza tecnica disponibile dal lun al ven 09:00 - 20:00",
         },
       ]
 
