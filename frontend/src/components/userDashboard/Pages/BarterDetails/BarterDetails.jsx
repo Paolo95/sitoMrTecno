@@ -12,7 +12,7 @@ const BarterDetails = () => {
     const { auth } = useAuth();
     const params = useParams();
     const goBack = () => navigate(-1);
-    const BARTER_DETAILS_URL = `/api/barter/barterDetailsWithProduct/${params.barterId}`;
+    const BARTER_DETAILS_URL = `/api/barter/barterDetails/${params.barterId}`;
     const [loading, setLoading] = useState(false);   
     const [formStepsNum, setFormStepsNum] = useState(1);
     const [barterDetails, setBarterDetails] = useState([]);
@@ -37,20 +37,19 @@ const BarterDetails = () => {
               }
             );  
     
-            console.log(response.data)
             setLoading(false);
 
-            if (response.data[0]['status'] === 'In lavorazione'){
+            if (response.data[0]['barter.status'] === 'In lavorazione'){
                 setFormStepsNum(1);
-            } else if (response.data[0]['status'] === 'Valutazione effettuata'){
+            } else if (response.data[0]['barter.status'] === 'Valutazione effettuata'){
                 setFormStepsNum(2);
-            } else if (response.data[0]['status'] === 'Pagamento effettuato'){
+            } else if (response.data[0]['barter.status'] === 'Pagamento effettuato'){
                 setFormStepsNum(3);
-            } else if (response.data[0]['status'] === 'Oggetti ricevuti'){
+            } else if (response.data[0]['barter.status'] === 'Oggetti ricevuti'){
                 setFormStepsNum(4);
-            } else if (response.data[0]['status'] === 'Prodotto spedito'){
+            } else if (response.data[0]['barter.status'] === 'Prodotto spedito'){
                 setFormStepsNum(5);
-            } else if (response.data[0]['status'] === 'Concluso'){
+            } else if (response.data[0]['barter.status'] === 'Concluso'){
                 setFormStepsNum(6);
             }   
 
@@ -111,32 +110,43 @@ const BarterDetails = () => {
             <div className="barterDetails-body">
                 <ul>
                     <li>
-                        <b>Data permuta: </b>{<Moment format='DD/MM/YYYY'>{barterDetails[0]?.['barter_date']}</Moment> }
+                        <b>Data permuta: </b>{<Moment format='DD/MM/YYYY'>{barterDetails[0]?.['barter.barter_date']}</Moment> }
                     </li>
                     <li>
-                        <b>Totale permuta: </b>{parseFloat(barterDetails[0]?.['total']).toFixed(2)} €
+                        <b>Totale permuta: </b>{parseFloat(barterDetails[0]?.['barter_total']).toFixed(2)} €
                     </li>
                     <li>
-                        <b>Corriere: </b>{barterDetails[0]?.['shipping_carrier']}
+                        <b>Corriere: </b>{barterDetails[0]?.['barter.shipping_carrier']}
                     </li>
                     <li>
-                        <b>Codice spedizione: </b>{barterDetails[0]?.['shipping_code']}
+                        <b>Codice spedizione: </b>{barterDetails[0]?.['barter.shipping_code']}
                     </li>
                     <li>
-                        <b>Indirizzo spedizione: </b>{barterDetails[0]?.['shipping_address']}
+                        <b>Indirizzo spedizione: </b>{barterDetails[0]?.['barter.shipping_address']}
                     </li>
                     <li>
-                        <b>Telefono per invio info prodotti: </b>{barterDetails[0]?.['barter_telephone']}
+                        <b>Telefono per invio info prodotti: </b>{barterDetails[0]?.['barter.barter_telephone']}
                     </li>
                     <li>
-                        <b>Prodotto acquisito: </b>{barterDetails[0]?.['product.product_name']}
-                        <span className='product-price'>{barterDetails[0]?.['product.price'].toFixed(2)}€</span>
+                        <b>Prodotti acquisiti: </b>
+                        {
+                            barterDetails.map((item, index) => {
+                                return(
+                                    <li>
+                                        <span className='product-price'>{item['qty'] + 'x ' +  item['product.product_name'] + ' - ' + item['product.price'].toFixed(2)} €</span>
+                                    </li>
+                                    
+                                )
+                            })
+                            
+
+                        }
                     </li>
-           
+
                 <li><b>Prodotti permutati:</b></li>
                 {
-                    barterDetails[0]?.['barter_items'] !== undefined ?
-                    Object.values(JSON.parse(barterDetails[0]?.['barter_items'])).map((item, index) => {
+                    barterDetails[0]?.['barter.barter_items'] !== undefined ?
+                    Object.values(JSON.parse(barterDetails[0]?.['barter.barter_items'])).map((item, index) => {
                         return(
                             <div className='barter-items-li' key={index}>
                                 <li>Nome: {item.name}</li>
@@ -147,13 +157,13 @@ const BarterDetails = () => {
                     : null
                 }    
 
-                <li><b>Prezzo finale dopo valutazione: </b>{parseFloat(barterDetails[0]?.['total']).toFixed(2)}€</li>
+                <li><b>Valutazione della permuta: </b>{parseFloat(barterDetails[0]?.['barter.barter_evaluation']).toFixed(2)}€</li>
 
-                <li><b>Spese di spedizione: </b>{parseFloat(barterDetails[0]?.['shipping_cost']).toFixed(2)}€</li>
+                <li><b>Spese di spedizione: </b>{parseFloat(barterDetails[0]?.['barter.shipping_cost']).toFixed(2)}€</li>
                
-                <li><b>Commissioni PayPal: </b>{parseFloat(barterDetails[0]?.['paypal_fee']).toFixed(2)}€</li>
+                <li><b>Commissioni PayPal: </b>{parseFloat(barterDetails[0]?.['barter.paypal_fee']).toFixed(2)}€</li>
                 
-                <li><b>Note: </b>{barterDetails[0]?.['notes']}</li>
+                <li><b>Note: </b>{barterDetails[0]?.['barter.notes']}</li>
 
                 </ul>
                 

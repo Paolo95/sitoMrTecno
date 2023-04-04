@@ -16,7 +16,7 @@ const UserBarterPage = () => {
 
   useEffect(() => {
 
-    const newProductForm = async () => {
+    const getLatestBarter = async () => {
 
       setLoading(true);
 
@@ -49,7 +49,7 @@ const UserBarterPage = () => {
 
     } 
 
-    newProductForm();   
+    getLatestBarter();   
 
   },[barterList.length, auth.accessToken])
 
@@ -87,13 +87,13 @@ const UserBarterPage = () => {
                         return(
                           <>
                             <tr key={index}>
-                              <td>{value['id']}</td>
-                              <td>{<Moment format='DD/MM/YYYY'>{value['barter_date']}</Moment>}</td>
-                              <td>{value['status']}</td>
-                              <td>{parseFloat(value['total']).toFixed(2)} €</td>
+                              <td>{value['barter.id']}</td>
+                              <td>{<Moment format='DD/MM/YYYY'>{value['barter.barter_date']}</Moment>}</td>
+                              <td>{value['barter.status']}</td>
+                              <td>{parseFloat(value['barter_total']).toFixed(2)} €</td>
                               <td>
                                 {
-                                  <NavLink to={`/userDashboard/barters/barterDetails/${value['id']}`}>
+                                  <NavLink to={`/userDashboard/barters/barterDetails/${value['barter.id']}`}>
                                       <button>Dettaglio</button>
                                   </NavLink>
                                 }

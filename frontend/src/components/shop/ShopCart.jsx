@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import ClipLoader from 'react-spinners/ClipLoader';
 import uuid from 'react-uuid'
 
@@ -7,6 +7,7 @@ const ShopCart = ({ addToCart, shopItems, cartItem, deleteCartProduct, decreaseQ
 
     const [cartSummit, setCartSummit] = useState(false);
     const navigate = useNavigate();
+    const location = useLocation();
     
   return (
     <> 
@@ -18,7 +19,11 @@ const ShopCart = ({ addToCart, shopItems, cartItem, deleteCartProduct, decreaseQ
                                         <div className="cartSummit-heading">
                                             <h1>Riepilogo carrello</h1>
                                             <div>
-                                                <button className='btn-cart' onClick={() => {navigate('/cart')}}><i className="fas fa-shopping-cart"></i></button>
+                                                {
+                                                    location.pathname === '/permuta' ? null :
+                                                    <button className='btn-cart' onClick={() => {navigate('/cart')}}><i className="fas fa-shopping-cart"></i></button>
+                                                }
+                                                
                                                 <button onClick={() => {setCartSummit(false)}}><i className="fas fa-times"></i></button>
                                             </div>
                                             

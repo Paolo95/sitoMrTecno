@@ -1,5 +1,4 @@
 import Select from 'react-select';
-import AsyncSelect from 'react-select/async'
 import './barter.css'
 import ClockLoader from 'react-spinners/ClockLoader';
 import ClipLoader from 'react-spinners/ClipLoader';
@@ -9,23 +8,20 @@ import axios from '../../api/axios';
 import useAuth from '../../hooks/useAuth';
 import { PayPalButtons, PayPalScriptProvider, usePayPalScriptReducer } from '@paypal/react-paypal-js';
 import Cookies from 'universal-cookie';
+import Shop from '../shop/Shop';
 
 
-const Barter = () => {
+const Barter = ({ addToCart, cartItem, decreaseQty, deleteCartProduct, cleanCart }) => {
 
     const cookies = new Cookies();
 
     const [formStepsNum, setFormStepsNum] = useState(1);
     const [categoryOptions, setCategories] = useState([]);
-    const [categoryChoice, setCategoryChoice] = useState('');
     const [statusChoice, setStatusChoice] = useState('');
-    const [brandChoice, setBrandChoice] = useState('');
     const [modelChoice, setModelChoice] = useState('');
     const [qty, setQtyChoice] = useState(1);
     const [prodBarterNames, setProdBarterNames] = useState({});
     const [prodBarterDesc, setProdBarterDesc] = useState({});
-    const [brandRecharge, setBrandRecharge] = useState(false)
-    const [modelRecharge, setModelRecharge] = useState(false);
     const [descriptionsFilled, setDescriptionsFilled] = useState(false)
     const [namesFilled, setNamesFilled] = useState(false);
     const [telephoneFilled, setTelephoneFilled] = useState(false);
@@ -33,8 +29,8 @@ const Barter = () => {
     const [newBarterCode, setNewBarterCode] = useState(0);
     const [barterStatus, setBarterStatus] = useState('In lavorazione');
     const [barterRecap, setBarterRecap] = useState('');
-    const [barterTotal, setBarterTotal] = useState(0);
-    const [productPrice, setProductPrice] = useState(0);
+    const [barterEvaluation, setBarterEvaluation] = useState(0);
+    const [barterInfo, setBarterInfo] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
     const [payPalCommissions, setPayPalCommissions] = useState(0);
     const [shipping_cost, setShippingCost] = useState(9.99);
@@ -45,15 +41,15 @@ const Barter = () => {
     const [province, setProvince] = useState('');
     const [hnumber, setHNumber] = useState('');
     const [loading, setLoading] = useState(false);
+    const [netTotal, setNetTotal] = useState(0);
+    const [isRefused, setIsRefused] = useState(false);
+    const [totalWithoutCommissions, setTotalWithoutCommissions] = useState(0);
 
     const CATEGORY_URL = '/api/product/categories';
-    const BRANDS_URL = '/api/product/brands';
-    const PRODUCT_LIST_URL = '/api/product/getProductOptions';
     const BARTER_STORE_URL = '/api/barter/createBarter';
     const BARTER_STATUS_URL = '/api/barter/barterStatus';
     const BARTER_TOTAL_URL = '/api/barter/barterTotal';
     const BARTER_INFO_URL = '/api/barter/barterInfo';
-    const PRODUCT_PRICE_URL = '/api/product/productPrice';
     const BARTER_APPROVED_URL = '/api/barter/barterAccepted';
     const BARTER_BANK_TRANSFER_URL = '/api/barter/barterAcceptedBT';
 
@@ -71,24 +67,6 @@ const Barter = () => {
     const qtyChoiceHandler = (options) => {
         
         setQtyChoice(options.value);
-    }
-
-    const categoryChoiceHandler = (options) => {
-  
-        setModelChoice('');
-        setBrandChoice('');
-        setCategoryChoice(options.value);
-    }
-
-    const brandChoiceHandler = (options) => {
-  
-        setModelChoice('');
-        setBrandChoice(options.value);
-    }
-
-    const modelChoiceHandler = (options) => {
-  
-        setModelChoice(options.value);
     }
 
     const handlerProdBarterName = (item, index) => {
@@ -149,69 +127,29 @@ const Barter = () => {
         //eslint-disable-next-line
     },[barterTelephone, qty])
 
+
     useEffect(() => {
-        
-        if(categoryChoice === 'PC' || categoryChoice === 'Notebook') {
-            setShippingCost(19.99)
+
+        if (formStepsNum === 5){
+            
+            setNetTotal(barterInfo.reduce((price, item) => price + item.qty * item['product.price'], 0));
+            barterInfo.forEach((item, index) => {
+                if( item['product.category'] === 'PC' || item['product.category'] === 'Notebook' ){
+                    setShippingCost(19,99);
+                }
+            });
+            setTotalWithoutCommissions(barterInfo.reduce((price, item) => price + item.qty * item['product.price'], shipping_cost));
         }
 
         if(formStepsNum === 6){
-        
-            setPayPalCommissions(Math.round((((shipping_cost + productPrice) * 3) / 100) * 100) / 100);
-            setTotalPrice(Math.round((payPalCommissions + productPrice + shipping_cost) * 100) / 100);
+            
+            setPayPalCommissions(Math.round((((totalWithoutCommissions) * 3) / 100) * 100) / 100);
+            setTotalPrice(Math.round((payPalCommissions + totalWithoutCommissions) * 100) / 100);
 
         } 
 
-    },[formStepsNum, productPrice, categoryChoice, totalPrice, payPalCommissions, shipping_cost])
-
-    const getFilteredItems = async () => {
-
-        if (!cookies.get('barterCode')){
-            try {
-    
-                const response = await axios.post(PRODUCT_LIST_URL, 
-                    { 
-                        categoryChecked: categoryChoice,
-                        brandChecked: brandChoice,
-                        status: statusChoice,
-                    },
-                    {
-                        headers: { 'Content-Type': 'application/json'},
-                        withCredentials: true
-                    }
-                    );
-          
-                    setModelRecharge(false)
-                    return response.data.map((item) => ({
-                        "value" : item.product_name, 
-                        "label": item.product_name + ' - ' + parseFloat(item.price).toFixed(2) + '€'
-                    }))         
-          
-              } catch (err) {
-                if(!err?.response){
-                  console.error('Server non attivo!');
-                }else if(err.response?.status === 500){
-                  console.error(err.response?.data);
-                }else{
-                  console.error('Recupero elementi fallito!');
-                }    
-            } 
-        }
-        
-        
-    
-      }
-    
-      useEffect(() => {
-    
-        getFilteredItems();
-        setModelRecharge(true);
-
-        // eslint-disable-next-line
-      }, [categoryChoice, brandChoice, statusChoice]);
-
-        
-        
+    },[formStepsNum, totalPrice, payPalCommissions, shipping_cost, barterInfo])
+      
     useEffect(() => {
 
         if (categoryOptions.length === 0){
@@ -222,10 +160,9 @@ const Barter = () => {
             setNewBarterCode(cookies.get('barterCode') || 0)
             if (cookies.get('barterCode') > 0) {
                 setFormStepsNum(4);
-                barterInfo(cookies.get('barterCode'));
+                getBarterInfo(cookies.get('barterCode'));
             }
         }
-        
 
     // eslint-disable-next-line
     },[])
@@ -259,59 +196,17 @@ const Barter = () => {
     })
     }
 
-    const getBrands = async () => {
-
-        if(!cookies.get('barterCode')){
-            try {
-         
-                const response = await axios.post(BRANDS_URL, 
-                  { 
-                      categoryChecked: categoryChoice
-                  },
-                  {
-                      headers: { 'Content-Type': 'application/json'},
-                      withCredentials: true
-                  }
-                  );
-      
-                  setBrandRecharge(false)
-                  setModelRecharge(false)
-                  return response.data.map((item) => ({
-                      "value" : item.brandName,
-                      "label" : item.brandName
-                  }))
-              
-                     
-          
-              } catch (err) {
-                if(!err?.response){
-                  console.error('Server non attivo!');
-                }else if(err.response?.status === 500){
-                  console.error(err.response?.data);
-                }else{
-                  console.error('Recupero brand fallito!');
-                }
-              }    
-        }
-        
-    
-      }
-    
-      useEffect(() => {
-
-        getBrands();
-        setModelRecharge(true);
-        setBrandRecharge(true);
-
-      // eslint-disable-next-line
-      }, [categoryChoice]);
-    
-
     const updateFormSteps = (e, btnType) =>{
 
         e.preventDefault();
         if (btnType === 'prev') setFormStepsNum( formStepsNum - 1 );
         if (btnType === 'next') setFormStepsNum( formStepsNum + 1 );
+        if (btnType === 'refused') {
+            setFormStepsNum( 7 );
+            setIsRefused(true);
+            cookies.remove('barterCode');
+            cleanCart();
+        };
     }
 
     const getCategories = async () => {
@@ -349,7 +244,7 @@ const Barter = () => {
     
     }
 
-    const barterInfo = async (barterCode) => {
+    const getBarterInfo = async (barterCode) => {
 
         try {
         
@@ -364,11 +259,10 @@ const Barter = () => {
                 withCredentials: true
             }
             );
-
-            setBarterStatus(response.data.status);
-            setBarterRecap(response.data.barter_items)
-            setStatusChoice(response.data['product.status'])
-            setModelChoice(response.data['product.product_name'])
+    
+            setBarterInfo(response.data);
+            setBarterRecap(response.data[0]['barter.barter_items']);
+            updateBarter(barterCode);
                 
         } catch (err) {
         if(!err?.response){
@@ -406,7 +300,7 @@ const Barter = () => {
             const response = await axios.post(BARTER_STORE_URL, 
                 { 
                     barterItem: JSON.stringify(barterItem),
-                    modelChoice: modelChoice,
+                    cartItem: cartItem,
                     telephone: barterTelephone,
                 },
                 {
@@ -482,7 +376,7 @@ const Barter = () => {
                 }
                 );
             
-            setBarterTotal(response.data.total);
+            setBarterEvaluation(response.data.barter_evaluation);
     
         } catch (err) {
           if(!err?.response){
@@ -521,12 +415,12 @@ const Barter = () => {
                                 return actions.order.create({
                                     purchase_units: [
                                         {
-                                            description: 'Ordine MrTecno',
+                                            description: 'Permuta MrTecno',
                                             amount: {
                                                 value: totalPrice,
                                                 breakdown: {
                                                     item_total: {                                                                    
-                                                        value: productPrice,
+                                                        value: netTotal,
                                                         currency_code: "EUR",
                                                     },
                                                     shipping: {
@@ -538,16 +432,7 @@ const Barter = () => {
                                                         currency_code: "EUR",
                                                     }
                                                 },
-                                            }, "items": [
-                                                    {
-                                                            name: modelChoice,
-                                                            unit_amount: {
-                                                                currency_code: "EUR",
-                                                                value: productPrice
-                                                            },
-                                                            quantity: 1,
-                                                    },
-                                            ],                                                         
+                                            }, "items": getItemArray(),                                                      
                                         },
                                     ],
                                 });
@@ -558,6 +443,7 @@ const Barter = () => {
                                     setBarterApproved(details);
                                     setFormStepsNum(formStepsNum + 1);
                                     cookies.remove('barterCode');
+                                    cleanCart();
                                 })
                             }}
 
@@ -567,46 +453,31 @@ const Barter = () => {
         )
     }
 
-    const getProductPrice = async (productName) => {
-    
-        try {
-         
-            const response = await axios.post(PRODUCT_PRICE_URL, 
-                { 
-                    prodName: productName,
+    const getItemArray = () => {
+        return cartItem.map((item, index) => {
+            return {
+                name: item.product_name,
+                unit_amount: {
+                    currency_code: "EUR",
+                    value: item.price
                 },
-                {
-                    headers: {
-                        'Authorization': `Bearer ${auth?.accessToken}`
-                    },
-                    withCredentials: true
-                }
-                );
-
-            setProductPrice(response.data.price);
-    
-        } catch (err) {
-          if(!err?.response){
-            console.error('Server non attivo!');
-          }else if(err.response?.status === 500){
-            console.error(err.response?.data);
-          }else{
-            console.error('Recupero prezzo del prodotto fallito!');
-          }
-        }    
-    
+                quantity: item.qty
+            };
+        })
     }
 
-    const setBarterApproved = async (order_details) => {
+   
+
+    const setBarterApproved = async (paypalDetails) => {
 
         try {
          
             await axios.post(BARTER_APPROVED_URL, 
                 { 
                    barterCode: newBarterCode,
-                   order_details: order_details,
+                   paypalDetails: paypalDetails,
                    barterRecap: barterRecap,
-                   barterTotal: barterTotal,
+                   barterEvaluation: barterEvaluation,
                 },
                 {
                     headers: {
@@ -626,14 +497,17 @@ const Barter = () => {
             console.error('Recupero prezzo del prodotto fallito!');
           }
         }    
+    
     }
+
+    
 
     useEffect(()=>{
         
         const interval = setInterval(() => {
 
             if(newBarterCode !== 0 && barterStatus === 'In lavorazione') updateBarter(newBarterCode);
-        
+
         }, 60000);
         
         return () => clearInterval(interval); 
@@ -668,11 +542,10 @@ const Barter = () => {
                     hnumber: hnumber,
                     city: city,
                     shipping_cost: shipping_cost,
-                    paypal_fee: 0,
-                    product_price: productPrice,
-                    product_name: modelChoice,
                     barterRecap: barterRecap,
-                    barterTotal: totalPrice,
+                    netTotal: netTotal,
+                    barterInfo: barterInfo,
+                    barterEvaluation: barterEvaluation,
                 },
                 {
                     headers: {
@@ -719,6 +592,7 @@ const Barter = () => {
             newBarterBankTransfer();
             setFormStepsNum(formStepsNum + 1);
             cookies.remove('barterCode');
+            cleanCart();
         }
     }
 
@@ -726,7 +600,7 @@ const Barter = () => {
         <section className='barter'>
             <div className='container'>
                 <div className="barter-div">
-                    <form action='#' className='form'>
+                    <div className='form'>
                         <h1>Permuta</h1>
                         <div className="progressBar">
                             <div className="progress" id='progress' style={{width: `${((formStepsNum - 1) / (6)) * 100 }%`}}></div>
@@ -754,7 +628,8 @@ const Barter = () => {
                            
                         </div>
                         <div className={formStepsNum === 2 ? "form-step-active": "form-step"}>
-                        <h2>Scegli il prodotto che desideri</h2>
+                        <h2>Scegli i prodotti che desideri</h2>
+
                             <div className="txt_field">
                                 <label htmlFor='username'>Stato:</label>
                                 <Select 
@@ -766,83 +641,24 @@ const Barter = () => {
                                     placeholder='Seleziona lo stato...'
                                     />
                             </div>
-                            <div className="txt_field">
-                                
-                                <label htmlFor='username'>Categoria:</label>
-                                <AsyncSelect 
-                                    cacheOptions
-                                    defaultOptions
-                                    noOptionsMessage={() => 'Nessuna categoria'}
-                                    onChange={categoryChoiceHandler}
-                                    styles={styles}
-                                    isClearable={false}
-                                    isSearchable={false}
-                                    loadOptions={getCategories}
-                                    getOptionLabel={e => e.label}
-                                    getOptionValue={e => e.value}
-                                    placeholder='Seleziona la categoria...'
-                                    />
-                            </div>
-                            <div className="txt_field">
-                                <label htmlFor='username'>Brand:</label>
-                                {
-                                    brandRecharge ? 
-                                        <div style={{ display: 'flex', justifyContent: 'center', margin: '30px' }}>
-                                            <ClipLoader
-                                                color={'#0f3460'}
-                                                loading={brandRecharge}
-                                                size={50}
-                                            />
-                                        </div>
-                                             :
-                                             <AsyncSelect 
-                                                cacheOptions
-                                                defaultOptions
-                                                onChange={brandChoiceHandler}
-                                                styles={styles}
-                                                isClearable={false}
-                                                isSearchable={false}
-                                                loadOptions={getBrands}
-                                                getOptionLabel={e => e.label}
-                                                getOptionValue={e => e.value}
-                                                placeholder='Seleziona il brand...'
-                                                />
-                                }
-                                
-                            </div>
-                            <div className="txt_field">
-                                <label htmlFor='username'>Modello:</label>
-                                {
-                                    modelRecharge ? 
-                                    <div style={{ display: 'flex', justifyContent: 'center', margin: '30px' }}>
-                                        <ClipLoader
-                                            color={'#0f3460'}
-                                            loading={modelRecharge}
-                                            size={50}
-                                        />
-                                    </div>
-                                         :
-                                         <AsyncSelect 
-                                            cacheOptions
-                                            defaultOptions
-                                            onChange={modelChoiceHandler}
-                                            styles={styles}
-                                            isClearable={false}
-                                            isSearchable={false}
-                                            loadOptions={getFilteredItems}
-                                            getOptionLabel={e => e.label}
-                                            getOptionValue={e => e.value}
-                                            placeholder='Seleziona il modello...'
-                                            />
-                                }
-                               
-                            </div>
+
+                            {
+                                statusChoice !== '' ? 
+                                    <Shop addToCart={addToCart} 
+                                    cartItem={cartItem} 
+                                    decreaseQty={decreaseQty} 
+                                    deleteCartProduct={deleteCartProduct}
+                                    barterStatusSel={statusChoice} />
+                                : null
+                            }                          
+
+                            
                             <div className='btnForm'>
                                 <button className={formStepsNum === 1 ? 'disabled' : ''} 
                                         onClick={(e) => updateFormSteps(e, 'prev')}>Precendente</button>
 
-                                <button disabled={categoryChoice === '' || brandChoice === '' || statusChoice === '' || modelChoice === ''} 
-                                        className={categoryChoice === '' || brandChoice === '' || statusChoice === '' || modelChoice === '' ? 'disabled' : ''}
+                                <button disabled={cartItem.length === 0} 
+                                        className={cartItem.length === 0 ? 'disabled' : ''}
                                         onClick={(e) => updateFormSteps(e, 'next')}>Successivo</button>
                             </div>    
                         </div>
@@ -941,7 +757,7 @@ const Barter = () => {
                             </div>  
                             <div className='btnForm'>
                                 <button className={formStepsNum === 4 ? 'hidden' : ''} onClick={(e) => updateFormSteps(e, 'prev')}>Precendente</button>
-                                <button className={barterStatus === 'In lavorazione' ? 'hidden' : ''} onClick={(e) => {updateFormSteps(e,'next'); getProductPrice(modelChoice)}}>Successivo</button>
+                                <button className={barterStatus === 'In lavorazione' ? 'hidden' : ''} onClick={(e) => {updateFormSteps(e,'next'); getBarterInfo(cookies.get('barterCode'))}}>Successivo</button>
                             </div> 
                         </div>
                         <div className={formStepsNum === 5 ? "form-step-active": "form-step"}>
@@ -949,28 +765,54 @@ const Barter = () => {
                                 <h2>Riepilogo permuta</h2>
                                 <div className="barter-grid">
                                     <div className="barter-recap">
-                                        <h3>Prodotto desiderato:</h3>
-                                        { productPrice === 0 ?
-                                             
-                                             <ClipLoader
-                                                 color={'#0f3460'}
-                                                 loading={productPrice === 0}
-                                                 size={30}
-                                             />
-                                         :
-                                            <span>{modelChoice} - {productPrice.toFixed(2)}€</span>
-                                        }
+                                                                          
+                                        <h3>Prodotti desiderati:</h3>                                       
+                                            { barterInfo.length === 0 ?
+                                                
+                                                <ClipLoader
+                                                    color={'#0f3460'}
+                                                    loading={barterInfo.length === 0}
+                                                    size={30}
+                                                />
+                                            :
+                                            barterInfo.map((item, index) => {
+                                                return(
+                                                    
+                                                    <div className='barterRecap-div'>
+                                                        <span>{item['product.product_name']}</span>
+                                                        <span>{parseFloat(item['product.price']).toFixed(2)}€</span>
+                                                    </div>
                                         
+                                                )
+                                            })
+                                        
+                                            
+                                            }
+
+
+                                            <div className='finalPrice-div'>
+                                                <h3>Totale prodotti desiderati:</h3>
+                                                <span className='product-total'>{parseFloat(netTotal).toFixed(2)}€</span>
+                                            </div>
+
+                                        
+                                            <div className='finalPrice-div'>
+                                                <h4>+ Spese di spedizione: </h4>
+                                                <span className='shipping'>{parseFloat(shipping_cost).toFixed(2)}€</span>
+                                            </div>
+                                            <div className='finalPrice-div'>
+                                                <h3>Totale: </h3>
+                                                <span className='final-price'>{parseFloat(totalWithoutCommissions).toFixed(2)}€</span>
+                                            </div>
+                                        
+
                                     </div>
-                                    <div className="barter-recap">
-                                        <h3>Stato:</h3>
-                                        <span>{statusChoice}</span>
-                                    </div>
+                                    
                                     <div className="barter-recap-userProducts">
                                         <h3>Prodotti permutati:</h3>
                                         <ol className='barter-recap-ol'>                                      
                                         {
-                                            barterRecap.length > 1 ? 
+                                            barterRecap.length !== 0 ? 
                                                 Object.values(JSON.parse(barterRecap)).map((item, index) => {
                                                     return(
                                                         <li key={index}>{item.name}</li>
@@ -979,23 +821,27 @@ const Barter = () => {
                                             : null
                                         }
                                         </ol>
-                                    </div>
-                                    <div className="barter-recap-finalPrice">
+
                                         <div className='finalPrice-div'>
-                                            <h3>Prezzo finale del prodotto desiderato:</h3>
-                                            <span className='final-price'>{parseFloat(barterTotal).toFixed(2)}€</span>
+                                            <h3>Valutazione dei prodotti: </h3>
+                                            <span className='final-price'>{parseFloat(barterEvaluation).toFixed(2)}€</span>
                                         </div>
-                                        <div className='finalPrice-div'>
-                                            <h4>+ Spese di spedizione: </h4>
-                                            <span className='shipping'>{parseFloat(shipping_cost).toFixed(2)}€</span>
-                                        </div>
-                                        
+                                      
+                                        <p>*Si ricorda di consegnare al corriere i prodotti da permutare. <br/>
+                                            Il rimborso della permuta verrà effettuato entro 24 ore dal ricevimento e visione dei prodotti permutati. <br/>
+                                            Verrà accreditato l'importo sullo stesso conto della transazione. <br/>
+                                            Nel caso non conforme alle specifiche inoltrate, i prodotti verranno restituiti tramite corriere e la permuta verrà annulata. <br/>
+                                            Cliccando su "Conferma", accetti le disposizioni appena illustrate.
+
+                                        </p>
                                     </div>
+
                                 </div>
                             </div>
                             <div className='btnForm'>
                                 <button className={formStepsNum === 1 ? 'disabled' : ''} onClick={(e) => updateFormSteps(e, 'prev')}>Precendente</button>
-                                <button onClick={(e) => updateFormSteps(e,'next')}>Conferma</button>
+                                <button className='refused' onClick={(e) => {updateFormSteps(e,'refused')}}>Rifiuta</button>
+                                <button onClick={(e) => {updateFormSteps(e,'next')}}>Conferma*</button>
                             </div>    
                         </div>
                         <div className={formStepsNum === 6 ? "form-step-active": "form-step"}>
@@ -1240,25 +1086,40 @@ const Barter = () => {
                                     
                                 }
                                 
-                                
-                               
-                            
-   
+
                         </div>
                         <div className={formStepsNum === 7 ? "form-step-active": "form-step"}>
-                            <div className="txt_field">
-                                <h2>Permuta completata</h2>
-                                <p>Complimenti! Il pagamento è andato a buon fine. A breve riceverai il rimborso pattuito!</p>
-                               
-                            </div>
+                            {
+                                isRefused ? 
+                                <>
 
+                                    <div className="txt_field">
+                                    <h2>Permuta rifiutata</h2>
+                                        <p>Ci dispiace che la permuta non sia andata a buon fine, se vuoi puoi riproporci dei prodotti da permutare e noi faremo in modo di venirti incontro.</p>
+                                    
+                                    </div>
+                                    
+                                </>  
+                                :
+                                <>
+                                    <div className="txt_field">
+                                    <h2>Permuta completata</h2>
+                                        <p>Complimenti! Il pagamento è andato a buon fine. A breve riceverai il rimborso pattuito!</p>
+                                    
+                                    </div>
+
+                                    
+                                    <div className='btnForm'>
+                                        <button className='hidden' onClick={(e) => updateFormSteps(e, 'prev')}>Precendente</button>
+                                        <button onClick={() => navigate('/userDashboard/barters')}>Vai alla dashboard</button>
+                                    </div>
+                                </>
                             
-                            <div className='btnForm'>
-                                <button className='hidden' onClick={(e) => updateFormSteps(e, 'prev')}>Precendente</button>
-                                <button onClick={() => navigate('/userDashboard/barters')}>Vai alla dashboard</button>
-                            </div>    
+                            }
+                              
                         </div>
-                    </form>
+
+                    </div>
                 </div>
             </div>
         </section>

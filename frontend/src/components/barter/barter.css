@@ -32,6 +32,17 @@
 .barter .txt_field .barter-recap{
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
+    gap: 10px;
+    border: 1px solid lightgray;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.barter .txt_field .barter-recap .barterRecap-div{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 20px;
 }
 
 .barter .txt_field .barter-recap-finalPrice{
@@ -40,13 +51,19 @@
     flex-direction: column;
 }
 
-.barter .txt_field .barter-recap-finalPrice .finalPrice-div{
+.barter .txt_field .finalPrice-div{
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
-.barter .txt_field .barter-recap-finalPrice .finalPrice-div h4,
-.barter .txt_field .barter-recap-finalPrice .finalPrice-div .shipping
+.barter .txt_field .finalPrice-div .product-total{
+    font-weight: 600;
+}
+
+
+.barter .txt_field .finalPrice-div h4,
+.barter .txt_field .finalPrice-div .shipping
 {
     font-size: 13px;
 }
@@ -54,6 +71,14 @@
 .barter .txt_field .barter-recap-userProducts{
     display: flex;
     flex-direction: column;
+    gap: 10px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.barter .txt_field .barter-recap-userProducts p{
+   font-size: 13px;
 }
 
 .barter .txt_field .barter-recap-ol li{
@@ -61,7 +86,7 @@
     list-style: decimal;
 }
 
-.barter .txt_field .barter-recap-finalPrice .final-price{
+.barter .txt_field .final-price{
     color: #25D366;
     font-weight: 600;
 }
@@ -235,7 +260,6 @@
     cursor: not-allowed;
 }
 
-
 .barter .btnForm button{
     background-color: #0f3460;
     color: aliceblue;
@@ -244,6 +268,10 @@
     height: 40px;
     cursor: pointer;
     border-radius: 5px;
+}
+
+.barter .btnForm .refused{
+    background-color: #e94560;
 }
 
 .barter .bank-transfer{
@@ -417,4 +445,21 @@
         padding: 5px;
     }
 
+    .barter .btnForm{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .barter .btnForm button{
+        background-color: #0f3460;
+        color: aliceblue;
+        font-weight: 600;
+        width: 100%;
+        height: 40px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
 }

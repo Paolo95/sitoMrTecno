@@ -46,12 +46,12 @@ const EditBarter = () => {
             setLoading(false);
             setBarterDetails(response.data);
             const res = response.data;
-            setDate(res[0]['barter_date'])
-            setShippingCode(res[0]['shipping_code'])
-            setCarrier(res[0]['shipping_carrier'])
-            setBarterStatus(res[0]['status']);
-            setTotal(res[0]['total'])
-            setNotes(res[0]['notes'])
+            setDate(res[0]['barter.barter_date'])
+            setShippingCode(res[0]['barter.shipping_code'])
+            setCarrier(res[0]['barter.shipping_carrier'])
+            setBarterStatus(res[0]['barter.status']);
+            setTotal(res[0]['barter_total'])
+            setNotes(res[0]['barter.notes'])
       
           } catch (err) {
             if (!err?.response) 
@@ -101,6 +101,7 @@ const EditBarter = () => {
               );  
       
               setEditDone(false);
+              setIsChanged(false);
               alert(response.data);
         
             } catch (err) {
@@ -142,11 +143,6 @@ const EditBarter = () => {
     const handleCarrierChange = (e) => {
         setIsChanged(true);
         setCarrier(e);
-    }
-
-    const handleTotalChange = (e) => {
-        setIsChanged(true);
-        setTotal(e);
     }
 
     const handleNotesChange = (e) => {
@@ -198,32 +194,26 @@ const EditBarter = () => {
                                   <input type="date"
                                         className='editable' 
                                         onChange={(e) => handleDateChange(e.target.value)}
-                                        defaultValue={barterDetails[0]?.['barter_date']}/>
+                                        defaultValue={barterDetails[0]?.['barter.barter_date']}/>
                               </li>
                               <li>
-                                  <b>Totale permuta: </b>
-                                  <input className='number' 
-                                        type="number" 
-                                        min={0}
-                                        step={0.01}
-                                        onChange={(e) => handleTotalChange(e.target.value)}
-                                        defaultValue={barterDetails[0]?.['total']}/> €
+                                  <b>Totale permuta: </b>{barterDetails[0]?.['barter_total']} €
                               </li>
                               <li>
                                   <b>Corriere: </b>
                                   <input className='editable' 
                                         type="text" 
                                         onChange={(e) => handleCarrierChange(e.target.value)}
-                                        defaultValue={barterDetails[0]?.['shipping_carrier']}/>
+                                        defaultValue={barterDetails[0]?.['barter.shipping_carrier']}/>
                               </li>
                               <li>
                                   <b>Codice spedizione: </b>
                                   <input className='editable' type="text"
                                         onChange={(e) => handleShippingChange(e.target.value)}
-                                        defaultValue={barterDetails[0]?.['shipping_code']}/>
+                                        defaultValue={barterDetails[0]?.['barter.shipping_code']}/>
                               </li>
 
-                              <li><b>Indirizzo spedizione: </b>{barterDetails[0]?.['shipping_address']}</li>
+                              <li><b>Indirizzo spedizione: </b>{barterDetails[0]?.['barter.shipping_address']}</li>
 
                               <li>
                                   <b>Stato permuta: </b>
@@ -249,8 +239,8 @@ const EditBarter = () => {
                               
                               <ul>
                                 {
-                                  barterDetails[0]?.['barter_items'] !== undefined ?
-                                    Object.values(JSON.parse(barterDetails[0]?.['barter_items'])).map((item, index) => {
+                                  barterDetails[0]?.['barter.barter_items'] !== undefined ?
+                                    Object.values(JSON.parse(barterDetails[0]?.['barter.barter_items'])).map((item, index) => {
                                       return(
                                           <div key={index}>
                                             <li>Nome: {item.name}</li>
@@ -264,18 +254,18 @@ const EditBarter = () => {
                               </ul>
                               
                           
-                              <li><b>Spese di spedizione: </b>{parseFloat(barterDetails[0]?.['shipping_cost']).toFixed(2)}€</li>
+                              <li><b>Spese di spedizione: </b>{parseFloat(barterDetails[0]?.['barter.shipping_cost']).toFixed(2)}€</li>
 
-                              <li><b>Commissioni PayPal: </b>{parseFloat(barterDetails[0]?.['paypal_fee']).toFixed(2)}€</li>
+                              <li><b>Commissioni PayPal: </b>{parseFloat(barterDetails[0]?.['barter.paypal_fee']).toFixed(2)}€</li>
 
-                              <li><b>Numero di telefono: </b>{barterDetails[0]?.['barter_telephone']}</li>
+                              <li><b>Numero di telefono: </b>{barterDetails[0]?.['barter.barter_telephone']}</li>
 
                               <li className='notes'>
                                   <b>Note: </b>
                                   <textarea className='editable'
                                         rows={7}
                                         onChange={(e) => handleNotesChange(e.target.value)}
-                                        defaultValue={barterDetails[0]?.['notes']}/>
+                                        defaultValue={barterDetails[0]?.['barter.notes']}/>
                               </li>
                           </ul>
                         

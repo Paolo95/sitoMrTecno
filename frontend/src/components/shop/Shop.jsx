@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import ClipLoader from 'react-spinners/ClipLoader';
 
-export const Shop = ({ addToCart, cartItem, decreaseQty, deleteCartProduct }) => {
+export const Shop = ({ addToCart, cartItem, decreaseQty, deleteCartProduct, barterStatusSel }) => {
 
   const params = useParams();
   const CATEGORY_URL = '/api/product/categories';
@@ -227,7 +227,7 @@ export const Shop = ({ addToCart, cartItem, decreaseQty, deleteCartProduct }) =>
 
   const getFilteredItems = async () => {
 
-    if (params.status === 'nuovo'){
+    if (params.status === 'nuovo' || barterStatusSel === 'Nuovo'){
       try {
 
         const response = await axios.post(FILTERED_ITEMS_URL, 
@@ -258,7 +258,7 @@ export const Shop = ({ addToCart, cartItem, decreaseQty, deleteCartProduct }) =>
           console.error('Recupero elementi fallito!');
         }
       }    
-    } else if (params.status === 'ricondizionati'){
+    } else if (params.status === 'ricondizionati' || barterStatusSel === 'Ricondizionato'){
 
       try {
 
@@ -329,7 +329,7 @@ export const Shop = ({ addToCart, cartItem, decreaseQty, deleteCartProduct }) =>
     getFilteredItems();
 
     // eslint-disable-next-line
-  }, [categoryChecked, brandCheckedList, min, max, orderChoice, params.status]);
+  }, [categoryChecked, brandCheckedList, min, max, orderChoice, params.status, barterStatusSel]);
 
   return (
     <>

@@ -154,7 +154,7 @@ function App() {
               </Route>
               <Route exact path="/orderSuccess" element={<OrderSuccess />} >    
               </Route>
-              <Route exact path="/permuta" element={<Barter />} >
+              <Route exact path="/permuta" element={<Barter addToCart={addToCart} cartItem={cartItem} decreaseQty={decreaseQty} deleteCartProduct={deleteCartProduct} cleanCart={cleanCart}/>} >
               </Route>
             </Route>
           </Route>          

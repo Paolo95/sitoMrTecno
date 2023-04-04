@@ -42,6 +42,7 @@ const AdminBarterPage = () => {
             );
 
         setLoading(false);
+        console.log(response.data)
         setBarterList(response.data);
 
         } catch (err) {
@@ -118,15 +119,15 @@ const AdminBarterPage = () => {
                         return(
                           <>
                             <tr key={index}>
-                              <td className='id'>{value['id']}</td>
-                              <td>{<Moment format='DD/MM/YYYY'>{value['barter_date']}</Moment>}</td>
-                              <td>{value['barter_telephone']}</td>
-                              <td>{value['user.email']}</td>
-                              <td>{value['status']}</td>
-                              <td>{parseFloat(value['total']).toFixed(2)} €</td>
+                              <td className='id'>{value['barter.id']}</td>
+                              <td>{<Moment format='DD/MM/YYYY'>{value['barter.barter_date']}</Moment>}</td>
+                              <td>{value['barter.barter_telephone']}</td>
+                              <td>{value['barter.user.email']}</td>
+                              <td>{value['barter.status']}</td>
+                              <td>{parseFloat(value['barter_total']).toFixed(2)} €</td>
                               <td>
                                 {
-                                  <NavLink to={`/adminDashboard/barters/editBarter/${value['id']}`}>
+                                  <NavLink to={`/adminDashboard/barters/editBarter/${value['barter.id']}`}>
                                       <button>Dettaglio</button>
                                   </NavLink>
                                 }
