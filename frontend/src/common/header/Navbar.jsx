@@ -30,7 +30,7 @@ const Navbar = () => {
                 <Link to='/permuta'>permuta</Link>
               </li>
               <li>
-                <Link to='/shop/ricondizionati'>ricondizionati</Link>
+                <Link to='/shop/ricondizionati'>vergini/ricondizionati</Link>
               </li>              
               <li>
                 <Link to='/shop/nuovo'>nuovo</Link>
@@ -42,7 +42,7 @@ const Navbar = () => {
                 <Link to='/inostriprodotti'>i nostri prodotti</Link>
               </li>
               <li>
-                <Link to='/assistenza'>assistenza remota</Link>
+                <Link to='/assistenza'>assistenza&nbsp;remota</Link>
               </li>
               <li>
                 <Link to='/recupero'>recupero dati</Link>

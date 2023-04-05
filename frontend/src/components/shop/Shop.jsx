@@ -459,7 +459,7 @@ export const Shop = ({ addToCart, cartItem, decreaseQty, deleteCartProduct, bart
           <div className="contentWidth">
             {
               params.status === 'nuovo' ? <h1>Nuovo</h1> :
-              params.status === 'ricondizionati' ? <h1>Ricondizionati</h1> : null
+              params.status === 'ricondizionati' ? <h1>Vergini/Ricondizionati</h1> : null
             }
            
             <div className="heading d_flex">
