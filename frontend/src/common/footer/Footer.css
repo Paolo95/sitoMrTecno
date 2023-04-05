@@ -4,8 +4,7 @@ footer{
     color: #fff
 }
 
-footer h1{
-    margin-bottom: 30px;
+footer .brandName{
     color: #e94560;
 }
 

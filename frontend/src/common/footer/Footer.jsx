@@ -8,7 +8,11 @@ const Footer = () => {
             <div>
                 <div className="container grid2">
                     <div className="box">
-                        <h1>Mr.Tecno</h1>
+                        <h2 className='brandName'>Mr.Tecno</h2>
+                        <ul>
+                            <li><a href="/privacy_policy">Privacy Policy</a></li>
+                            <li><a href="/termini_e_condizioni">Termini e condizioni</a></li>
+                        </ul>
                     </div>
                     <div className="box">
                         <h2>Chi siamo</h2>
@@ -20,7 +24,6 @@ const Footer = () => {
                         <h2>Assitenza clienti</h2>
                         <ul>
                             <li><a href="/faq">FAQ's</a></li>
-                            <li><a href="/privacy">Privacy Policy</a></li>
                         </ul>
                     </div>
                     <div className="box">
