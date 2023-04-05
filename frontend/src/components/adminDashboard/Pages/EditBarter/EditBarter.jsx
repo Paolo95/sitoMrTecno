@@ -113,7 +113,7 @@ const EditBarter = () => {
               else if (err.response.status === 404 ){
                 alert(err.response?.data);
               }else {
-                alert('Modifica ordine fallita!');
+                alert('Modifica della permuta fallita!');
               }
         
             }    
@@ -222,16 +222,16 @@ const EditBarter = () => {
                                           defaultValue={barterStatus === 'In lavorazione' ? 'In lavorazione' : 
                                                         barterStatus === 'Valutazione effettuata' ? 'Valutazione effettuata' :
                                                         barterStatus === 'Pagamento effettuato' ? 'Pagamento effettuato' : 
-                                                        barterStatus === 'Oggetti ricevuti' ? 'Oggetti ricevuti' :
-                                                        barterStatus === 'Prodotto spedito' ? 'Prodotto spedito' : 
-                                                        barterStatus === 'Concluso' ? 'Concluso' : null}>
+                                                        barterStatus === 'Prodotto spedito' ? 'Prodotto spedito' :
+                                                        barterStatus === 'Permuta ricevuta' ? 'Permuta ricevuta' : 
+                                                        barterStatus === 'Rimborso inviato' ? 'Rimborso inviato' : null}>
                                       
                                           <option value={'In lavorazione'}>In lavorazione</option>
                                           <option value={'Valutazione effettuata'}>Valutazione effettuata</option>
                                           <option value={'Pagamento effettuato'}>Pagamento effettuato</option>
-                                          <option value={'Oggetti ricevuti'}>Oggetti ricevuti</option>
                                           <option value={'Prodotto spedito'}>Prodotto spedito</option>
-                                          <option value={'Concluso'}>Concluso</option>
+                                          <option value={'Permuta ricevuta'}>Permuta ricevuta</option>
+                                          <option value={'Rimborso inviato'}>Rimborso inviato</option>
                                                                             
                                   </select>
                               </li>

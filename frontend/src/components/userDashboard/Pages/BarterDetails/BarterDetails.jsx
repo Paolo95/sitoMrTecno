@@ -45,11 +45,11 @@ const BarterDetails = () => {
                 setFormStepsNum(2);
             } else if (response.data[0]['barter.status'] === 'Pagamento effettuato'){
                 setFormStepsNum(3);
-            } else if (response.data[0]['barter.status'] === 'Oggetti ricevuti'){
-                setFormStepsNum(4);
             } else if (response.data[0]['barter.status'] === 'Prodotto spedito'){
+                setFormStepsNum(4);
+            } else if (response.data[0]['barter.status'] === 'Permuta ricevuta'){
                 setFormStepsNum(5);
-            } else if (response.data[0]['barter.status'] === 'Concluso'){
+            } else if (response.data[0]['barter.status'] === 'Rimborso inviato'){
                 setFormStepsNum(6);
             }   
 
@@ -102,9 +102,9 @@ const BarterDetails = () => {
                     <div className={formStepsNum >= 1 ? "progress-step progress-step-active" : "progress-step"} data-title='In lavorazione'></div>
                     <div className={formStepsNum >= 2 ? "progress-step progress-step-active" : "progress-step"} data-title='Valutazione effettuata'></div>
                     <div className={formStepsNum >= 3 ? "progress-step progress-step-active" : "progress-step"} data-title='Pagamento effettuato'></div>
-                    <div className={formStepsNum >= 4 ? "progress-step progress-step-active" : "progress-step"} data-title='Oggetti ricevuti'></div>
-                    <div className={formStepsNum >= 5 ? "progress-step progress-step-active" : "progress-step"} data-title='Prodotto spedito'></div>
-                    <div className={formStepsNum >= 6 ? "progress-step progress-step-active" : "progress-step"} data-title='Concluso'></div>
+                    <div className={formStepsNum >= 4 ? "progress-step progress-step-active" : "progress-step"} data-title='Prodotto spedito'></div>
+                    <div className={formStepsNum >= 5 ? "progress-step progress-step-active" : "progress-step"} data-title='Permuta ricevuta'></div>
+                    <div className={formStepsNum >= 6 ? "progress-step progress-step-active" : "progress-step"} data-title='Rimborso inviato'></div>
                 </div>            
 
             <div className="barterDetails-body">
