@@ -38,7 +38,6 @@ const BarterDetails = () => {
             );  
     
             setLoading(false);
-            console.log(response.data)
 
             if (response.data[0]['barter.status'] === 'In lavorazione'){
                 setFormStepsNum(1);
@@ -76,8 +75,6 @@ const BarterDetails = () => {
     
         // eslint-disable-next-line
       }, []);
-
-      console.log(barterDetails)
 
 
   return (
@@ -148,7 +145,7 @@ const BarterDetails = () => {
 
                 <li><b>Prodotti permutati:</b></li>
                 {
-                    barterDetails[0]?.['barter.barter_items'] !== undefined ?
+                    barterDetails.length !== 0 ?
                     Object.values(JSON.parse(barterDetails[0]?.['barter.barter_items'])).map((item, index) => {
                         return(
                             <div className='barter-items-li' key={index}>
