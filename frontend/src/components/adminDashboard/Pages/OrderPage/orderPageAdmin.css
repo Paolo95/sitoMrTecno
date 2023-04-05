@@ -44,11 +44,22 @@
     margin-bottom: 0;
     border-bottom: 1px solid rgba(0,0,0,.125);
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
 }
 
 .orderPageAdmin .select-div{
     display: flex;
+}
+
+.orderPageAdmin .card-header .search-div{
+    width: 220px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.orderPageAdmin .card-header .search-div input{
+    font-size: 15px;
 }
 
 .orderPageAdmin .select-div select{
@@ -130,6 +141,31 @@
      
     .orderPageAdmin .table td{
         padding: 8px 30px;
+    }
+
+    .orderPageAdmin .card-header .search-div{
+        width: 100%;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        padding: 5px;
+    }
+    
+    .orderPageAdmin .card-header .search-div input{
+        font-size: 15px;
+    }
+
+    .orderPageAdmin .card-header{
+        padding: 0.5rem 1rem;
+        margin-bottom: 0;
+        border-bottom: 1px solid rgba(0,0,0,.125);
+        display: flex;
+        gap: 10px;
+        flex-direction: column;
+    }
+
+    .orderPageAdmin .card-header .search-div,
+    .orderPageAdmin .card-header .select-div .statusSelect{
+        width: 100%;
     }
     
 }

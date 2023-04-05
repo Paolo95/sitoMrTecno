@@ -13,6 +13,8 @@ const AdminBarterPage = () => {
   const { auth } = useAuth();
   const [barterList, setBarterList] = useState([]);
   const [numberSearch, setNumberSearch] = useState('');
+  const [idSearch, setIDSearch] = useState('');
+  const [emailSearch, setEmailSearch] = useState('');
   const [statusSelected, setStatus] = useState('In lavorazione');
   const [loading, setLoading] = useState(false);
 
@@ -30,8 +32,10 @@ const AdminBarterPage = () => {
       
         const response = await axios.post(GET_BARTER_LIST, 
             { 
-                status: statusSelected,
+                statusSelected: statusSelected,
                 numberSearched: numberSearch,
+                idSearched: idSearch,
+                emailSearched: emailSearch,
             },
             {
                 headers: {
@@ -42,7 +46,6 @@ const AdminBarterPage = () => {
             );
 
         setLoading(false);
-        console.log(response.data)
         setBarterList(response.data);
 
         } catch (err) {
@@ -59,10 +62,18 @@ const AdminBarterPage = () => {
 
     newProductForm();   
 
-  },[statusSelected, barterList.length, auth.accessToken, numberSearch])
+  },[statusSelected, idSearch, emailSearch, barterList.length, auth.accessToken, numberSearch])
 
   const handleNumberSearch = (e) => {
     setNumberSearch(e);
+  }
+
+  const handleIDSearch = (e) => {
+    setIDSearch(e);
+  }
+
+  const handleEmailSearch = (e) => {
+    setEmailSearch(e);
   }
 
   return (
@@ -72,11 +83,22 @@ const AdminBarterPage = () => {
       </div>
       <div className="card mb-4 shadow-sm">
         <div className="card-header bg-white">
-        <div className='numberSearch-div'>
+        <div className='search-div'>
             <input type="text"
                    placeholder='Cerca numero di telefono...'
                    onChange={(e) => handleNumberSearch(e.target.value)} />
-          </div>
+        </div>
+        <div className='search-div'>
+            <input type="number"
+                   min={1}
+                   placeholder='Cerca per ID...'
+                   onChange={(e) => handleIDSearch(e.target.value)} />
+        </div>
+        <div className='search-div'>
+            <input type="text"
+                   placeholder='Cerca per email...'
+                   onChange={(e) => handleEmailSearch(e.target.value)} />
+        </div>
         <div className="select-div">
             <select className="statusSelect"
                     onChange={(e) => handleStatusSel(e.target.value)}>

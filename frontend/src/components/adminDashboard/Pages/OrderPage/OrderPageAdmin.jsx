@@ -13,10 +13,20 @@ const OrderPageAdmin = () => {
   const { auth } = useAuth();
   const [orderList, setOrderList] = useState([]);
   const [statusSelected, setStatus] = useState('In lavorazione');
+  const [idSearched, setIDSearched] = useState('');
+  const [emailSearched, setEmailSearched] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleStatusSel = (e) => {
     setStatus(e);
+  }
+
+  const handleIDSearch = (e) => {
+    setIDSearched(e);
+  }
+
+  const handleEmailSearch = (e) => {
+    setEmailSearched(e);
   }
 
   useEffect(() => {
@@ -30,6 +40,8 @@ const OrderPageAdmin = () => {
         const response = await axios.post(GET_ORDER_LIST, 
             { 
                 status: statusSelected,
+                idSearched: idSearched,
+                emailSearched: emailSearched,
             },
             {
                 headers: {
@@ -56,7 +68,7 @@ const OrderPageAdmin = () => {
 
     newProductForm();   
 
-  },[statusSelected, orderList.length, auth.accessToken])
+  },[statusSelected, emailSearched, idSearched, orderList.length, auth.accessToken])
  
 
   return (
@@ -66,6 +78,17 @@ const OrderPageAdmin = () => {
       </div>
       <div className="card mb-4 shadow-sm">
         <div className="card-header bg-white">
+        <div className='search-div'>
+            <input type="number"
+                   min={1}
+                   placeholder='Cerca ID...'
+                   onChange={(e) => handleIDSearch(e.target.value)} />
+        </div>
+        <div className='search-div'>
+            <input type="text"
+                   placeholder='Cerca email...'
+                   onChange={(e) => handleEmailSearch(e.target.value)} />
+        </div>
         <div className="select-div">
             <select className="statusSelect"
                     onChange={(e) => handleStatusSel(e.target.value)}>
