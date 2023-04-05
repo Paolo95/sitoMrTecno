@@ -38,6 +38,7 @@ const BarterDetails = () => {
             );  
     
             setLoading(false);
+            console.log(response.data)
 
             if (response.data[0]['barter.status'] === 'In lavorazione'){
                 setFormStepsNum(1);
@@ -75,6 +76,8 @@ const BarterDetails = () => {
     
         // eslint-disable-next-line
       }, []);
+
+      console.log(barterDetails)
 
 
   return (
