@@ -356,7 +356,7 @@ const Product = ({ addToCartProduct }) => {
       <div className="btnMoreRev">
         <button onClick={handleMoreRev}
                 style={{
-                  display: numRevs <= reviews.filter(item => item.product_id === parseInt(params.id)).length ? 'inline' : 'none'
+                  display: numRevs <= reviews.filter(item => item.productId === parseInt(params.id)).length ? 'inline' : 'none'
                 }}>Mostra altre recensioni</button>
       </div>     
     </section>
