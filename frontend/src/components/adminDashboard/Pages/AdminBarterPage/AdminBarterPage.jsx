@@ -105,9 +105,9 @@ const AdminBarterPage = () => {
               <option value='In lavorazione'>In lavorazione</option>
               <option value='Valutazione effettuata'>Valutazione effettuata</option>
               <option value='Pagamento effettuato'>Pagamento effettuato</option>
-              <option value='Oggetti ricevuti'>Oggetti ricevuti</option>
               <option value='Prodotto spedito'>Prodotto spedito</option>
-              <option value='Concluso'>Concluso</option>
+              <option value='Permuta ricevuta'>Permuta ricevuta</option>
+              <option value='Rimborso inviato'>Rimborso inviato</option>
             </select>
         </div>
         </div>
