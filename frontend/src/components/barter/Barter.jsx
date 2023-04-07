@@ -18,7 +18,6 @@ const Barter = ({ addToCart, cartItem, decreaseQty, deleteCartProduct, cleanCart
     const [formStepsNum, setFormStepsNum] = useState(1);
     const [categoryOptions, setCategories] = useState([]);
     const [statusChoice, setStatusChoice] = useState('');
-    const [modelChoice, setModelChoice] = useState('');
     const [qty, setQtyChoice] = useState(1);
     const [prodBarterNames, setProdBarterNames] = useState({});
     const [prodBarterDesc, setProdBarterDesc] = useState({});
@@ -60,7 +59,6 @@ const Barter = ({ addToCart, cartItem, decreaseQty, deleteCartProduct, cleanCart
     const navigate = useNavigate();
   
     const statusChoiceHandler = (options) => {
-        setModelChoice('');
         setStatusChoice(options.value);
     }
 
@@ -148,7 +146,7 @@ const Barter = ({ addToCart, cartItem, decreaseQty, deleteCartProduct, cleanCart
 
         } 
 
-    },[formStepsNum, totalPrice, payPalCommissions, shipping_cost, barterInfo])
+    },[formStepsNum, totalPrice, payPalCommissions, shipping_cost, barterInfo, totalWithoutCommissions])
       
     useEffect(() => {
 

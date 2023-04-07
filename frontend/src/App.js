@@ -30,6 +30,7 @@ import Barter from './components/barter/Barter';
 import Services from './components/services/Services';
 import CookieBot from 'react-cookiebot';
 import Cookies from 'universal-cookie';
+import AboutUs from './components/aboutUs/AboutUs';
 
 function App() {
   
@@ -135,6 +136,8 @@ function App() {
             <Route exact path="/faq" element={<Faq />} >
             </Route>
             <Route exact path="/servizi" element={<Services />} >
+            </Route>
+            <Route exact path="/chi_siamo" element={<AboutUs />} >
             </Route>
               
             <Route element={<LoginRequireAuth />}>

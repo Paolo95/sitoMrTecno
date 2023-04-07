@@ -192,6 +192,11 @@ header ul li a{
     color:#e2e8ec;
 }
 
+header ul li a:hover{
+    color: #e9e716;
+    font-weight: 400;
+}
+
 .open{
     display: none;
 }
@@ -349,6 +354,12 @@ header ul li a{
     
     .search{
         margin-top: -2px;
+    }
+
+    header ul li a:hover{
+        color: rgba(132, 185, 255);
+        font-weight: 700;
+        font-size: 18px;
     }
 
     .cat_close{

@@ -15,9 +15,9 @@ const Footer = () => {
                         </ul>
                     </div>
                     <div className="box">
-                        <h2>Chi siamo</h2>
+                        <h2>L'azienda</h2>
                         <ul>
-                            <li><a href="/storia">Storia</a></li>
+                            <li><a href="/chi_siamo">Chi siamo</a></li>
                         </ul>
                     </div>
                     <div className="box">
