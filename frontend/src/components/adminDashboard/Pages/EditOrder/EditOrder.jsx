@@ -193,7 +193,7 @@ const EditOrder = () => {
                               </li>
                               <li>
                                   <b>Totale ordine: </b>
-                                  <span>{orderDetails[0]?.['order_total']} €</span>
+                                  <span>{parseFloat(orderDetails[0]?.['order_total']).toFixed(2)} €</span>
                               </li>
                               <li>
                                   <b>Metodo di pagamento: </b>
