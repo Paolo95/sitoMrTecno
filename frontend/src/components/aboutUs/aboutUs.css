@@ -1,3 +1,8 @@
+.aboutUs .aboutUs-container{
+    text-align: justify;
+    text-justify: inter-word;
+}
+
 .aboutUs .aboutUs-heading h1{
     margin: 20px 0;
 }
