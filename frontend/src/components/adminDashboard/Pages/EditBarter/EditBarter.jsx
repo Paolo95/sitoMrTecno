@@ -205,7 +205,11 @@ const EditBarter = () => {
                                         defaultValue={barterDetails[0]?.['barter.barter_date']}/>
                               </li>
                               <li>
-                                  <b>Totale permuta: </b>{barterDetails[0]?.['barter_total']} €
+                                  <b>Totale permuta: </b>{parseFloat(barterDetails[0]?.['barter_total']).toFixed(2)} €
+                              </li>
+
+                              <li>
+                                  <b>Metodo di pagamento: </b>{barterDetails[0]?.['barter.payment_method']}
                               </li>
 
                               <li>
