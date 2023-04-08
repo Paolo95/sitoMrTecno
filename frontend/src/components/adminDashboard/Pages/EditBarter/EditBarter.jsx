@@ -241,7 +241,8 @@ const EditBarter = () => {
                                                         barterStatus === 'Pagamento effettuato' ? 'Pagamento effettuato' : 
                                                         barterStatus === 'Prodotto spedito' ? 'Prodotto spedito' :
                                                         barterStatus === 'Permuta ricevuta' ? 'Permuta ricevuta' : 
-                                                        barterStatus === 'Rimborso inviato' ? 'Rimborso inviato' : null}>
+                                                        barterStatus === 'Rimborso inviato' ? 'Rimborso inviato' :
+                                                        barterStatus === 'Rifiutata' ? 'Rifiutata' :  null}>
                                       
                                           <option value={'In lavorazione'}>In lavorazione</option>
                                           <option value={'Valutazione effettuata'}>Valutazione effettuata</option>
@@ -249,7 +250,7 @@ const EditBarter = () => {
                                           <option value={'Prodotto spedito'}>Prodotto spedito</option>
                                           <option value={'Permuta ricevuta'}>Permuta ricevuta</option>
                                           <option value={'Rimborso inviato'}>Rimborso inviato</option>
-                                                                            
+                                          <option value={'Rifiutata'}>Permuta rifiutata</option>                                
                                   </select>
                               </li>
                               <span><b>Prodotti permutati:</b></span>

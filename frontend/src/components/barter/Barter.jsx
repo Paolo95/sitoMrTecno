@@ -49,6 +49,7 @@ const Barter = ({ addToCart, cartItem, decreaseQty, deleteCartProduct, cleanCart
     const BARTER_STATUS_URL = '/api/barter/barterStatus';
     const BARTER_TOTAL_URL = '/api/barter/barterTotal';
     const BARTER_INFO_URL = '/api/barter/barterInfo';
+    const BARTER_REFUSED_URL = '/api/barter/barterRefused';
     const BARTER_APPROVED_URL = '/api/barter/barterAccepted';
     const BARTER_BANK_TRANSFER_URL = '/api/barter/barterAcceptedBT';
 
@@ -194,16 +195,48 @@ const Barter = ({ addToCart, cartItem, decreaseQty, deleteCartProduct, cleanCart
     })
     }
 
-    const updateFormSteps = (e, btnType) =>{
+    const updateFormSteps = async (e, btnType) => {
 
         e.preventDefault();
         if (btnType === 'prev') setFormStepsNum( formStepsNum - 1 );
         if (btnType === 'next') setFormStepsNum( formStepsNum + 1 );
         if (btnType === 'refused') {
-            setFormStepsNum( 7 );
-            setIsRefused(true);
-            cookies.remove('barterCode');
-            cleanCart();
+
+            try {
+        
+                await axios.post(BARTER_REFUSED_URL, 
+                    { 
+                        barterId: cookies.get('barterCode'),
+                    
+                    },
+                    {
+                        headers: {
+                            'Authorization': `Bearer ${auth?.accessToken}`
+                        },
+                        withCredentials: true
+                    }
+                    );
+
+                    setFormStepsNum( 7 );
+                    setIsRefused(true);
+                    cookies.remove('barterCode');
+                    cleanCart();
+            
+                } catch (err) {
+                if(!err?.response){
+                    alert('Server non attivo!');
+                }else if(err.response?.status === 500){
+                    alert(err.response?.data);
+                }else if(err.response?.status === 403){
+                    cookies.remove('barterCode');
+                    alert(err.response?.data);
+                    window.location.reload(false);
+                }else{
+                    alert('Recupero categorie fallito!');
+                }
+            }    
+
+            
         };
     }
 
@@ -236,7 +269,7 @@ const Barter = ({ addToCart, cartItem, decreaseQty, deleteCartProduct, cleanCart
                 }else{
                     console.error('Recupero categorie fallito!');
                 }
-                }    
+            }    
         }
         
     
