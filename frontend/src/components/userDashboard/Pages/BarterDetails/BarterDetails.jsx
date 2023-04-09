@@ -5,9 +5,11 @@ import ClipLoader from 'react-spinners/ClipLoader';
 import Moment from 'react-moment';
 import axios from '../../../../api/axios';
 import useAuth from '../../../../hooks/useAuth';
+import Cookies from 'universal-cookie';
 
 const BarterDetails = () => {
 
+    const cookies = new Cookies();
     const navigate = useNavigate();
     const { auth } = useAuth();
     const params = useParams();
@@ -76,6 +78,14 @@ const BarterDetails = () => {
         // eslint-disable-next-line
       }, []);
 
+    const handleConfirm = () => {
+        const now = new Date();
+        cookies.set('barterCode', params.barterId , {
+            path: '/',
+            expires: new Date(now.getFullYear(), now.getMonth(), now.getDate()+7)
+        })
+        navigate('/permuta');
+    }
 
   return (
     <section className='barterDetailsPage'>
@@ -112,7 +122,30 @@ const BarterDetails = () => {
                 }                    
 
             <div className="barterDetails-body">
-                <div className='barterDetails-box'>
+
+                <div className='barterDetails-box top'>
+                    <ul>
+                        <li>
+                            <div>
+                                <b>Stato permuta: </b>{barterDetails[0]?.['barter.status']}
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                {
+                    barterDetails[0]?.['barter.status'] === 'Valutazione effettuata' ? 
+                        <div className='barterDetails-box top'>
+                            <div className='btnDiv'>
+                                <button onClick={handleConfirm}>Conferma la permuta e paga</button>
+                            </div>
+                                
+                        </div> : 
+                            null
+                }
+                
+
+                <div className='barterDetails-box top'>
                     <ul>
                         <li>
                             <div>
@@ -188,6 +221,14 @@ const BarterDetails = () => {
                                 {parseFloat(barterDetails[0]?.['barter_total']).toFixed(2)} €
                             </div> 
                         </li>
+
+                        <li>
+                            <div>
+                                <b>Valutazione della permuta: </b>
+                                {parseFloat(barterDetails[0]?.['barter.barter_evaluation']).toFixed(2)} €
+                            </div>
+                        </li>
+
                     </ul>
                 </div>
                 <div className='barterDetails-box top'>
@@ -231,12 +272,6 @@ const BarterDetails = () => {
                             <div>
                                 <b>Telefono per invio info prodotti: </b>
                                 {barterDetails[0]?.['barter.barter_telephone']}
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <b>Valutazione della permuta: </b>
-                                {parseFloat(barterDetails[0]?.['barter.barter_evaluation']).toFixed(2)} €
                             </div>
                         </li>
 

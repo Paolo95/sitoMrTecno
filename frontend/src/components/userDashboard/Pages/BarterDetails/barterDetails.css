@@ -109,10 +109,26 @@
     border-radius: 5px;
 }
 
+.barterDetailsPage .barterDetails-card .barterDetails-body .btnDiv{
+    text-align: center;
+}
+
 .barterDetailsPage .barterDetails-card .barterDetails-body .barterDetails-box{
     padding: 10px 6px;
     border: solid 2px lightgray;
     border-radius: 5px;
+}
+
+
+
+.barterDetailsPage .barterDetails-card .barterDetails-body .barterDetails-box button{
+    width: 400px;
+    height: 50px;
+    background-color: #0f3460;
+    color: aliceblue;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
 }
 
 .barterDetailsPage .barterDetails-card .barterDetails-body .top{
@@ -158,10 +174,6 @@
 @media screen and (max-width: 600px){
     
     .barterDetailsPage .progressBar{
-        margin: 2rem 1rem 4rem;
-    }
-
-    .barterDetailsPage .barterDetails-card .progressBar .progress-step::after{
         display: none;
     }
     
@@ -175,6 +187,10 @@
     .barterDetailsPage .barterDetails-card .barterDetails-body{
         margin: 0 15px 25px 15px;
         padding: 5px;
+    }
+
+    .barterDetailsPage .barterDetails-card .barterDetails-body .barterDetails-box button{
+        width: 100%;
     }
 
     .barterDetailsPage .barterDetails-card .barterDetails-body li{
