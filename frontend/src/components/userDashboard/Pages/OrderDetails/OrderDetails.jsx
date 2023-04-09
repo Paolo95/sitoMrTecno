@@ -97,83 +97,152 @@ const OrderDetails = () => {
                 </div>            
 
             <div className="orderDetails-body">
+              <div className='orderDetails-box'>
+
+              
                 <ul>
                   {
                     orderDetails[0]?.['order.shipping_type'] === 'Corriere' ?
                     <>
                     
                     <li>
-                        <b>Data ordine: </b>{<Moment format='DD/MM/YYYY'>{orderDetails[0]?.['order.order_date']}</Moment> }
+                      <div>
+                        <b>Data ordine: </b>
+                        {<Moment format='DD/MM/YYYY'>{orderDetails[0]?.['order.order_date']}</Moment> }
+                      </div>
                     </li>
                     <li>
-                        <b>Totale ordine: </b>{parseFloat(orderDetails[0]?.['order_total']).toFixed(2)} €
+                      <div>
+                        <b>Prodotti acquistati:</b>
+                      </div>
                     </li>
+                  {
+                      orderDetails.map((value, index) => {
+                          return(
+                              <>
+                                  <li className='product-item' key={index}>
+                                    <div>
+                                      {value['qty']} x {value['product.product_name']} <span>-</span> {parseFloat(value['priceEach']).toFixed(2)} €      
+                                    </div>
+                                  </li>
+                                  
+                              </>
+                          )
+                      })
+                  }
+
+                  {
+                    orderDetails[0]?.['order.shipping_type'] === 'Corriere' ?
+                    <>
+                      <li>
+                        <div>
+                          <b>Spese di spedizione: </b>
+                            {parseFloat(orderDetails[0]?.['order.shipping_cost']).toFixed(2)} € 
+                        </div>
+                      </li>
+                  
+                      <li>
+                        <div>
+                          <b>Commissioni PayPal: </b>
+                            {parseFloat(orderDetails[0]?.['order.paypal_fee']).toFixed(2)} € 
+                          </div>
+                      </li>
+                    
+                    </>
+                    : orderDetails[0]?.['order.shipping_type'] === 'Ritiro in sede' ?
+                        <li>
+                          <div>
+                            <b>Commissioni PayPal: </b>
+                              {parseFloat(orderDetails[0]?.['order.paypal_fee']).toFixed(2)} € 
+                            </div>
+                          </li>
+                    : null
+                  }
                     <li>
-                        <b>Modalità di consegna: </b>{orderDetails[0]?.['order.shipping_type']}
+                        <div>
+                          <b>Totale ordine: </b>
+                            {parseFloat(orderDetails[0]?.['order_total']).toFixed(2)} € 
+                          </div>
                     </li>
-                    <li>
-                        <b>Corriere: </b>{orderDetails[0]?.['order.shipping_carrier']}
-                    </li>
-                    <li>
-                        <b>Modalità di pagamento: </b>{orderDetails[0]?.['order.payment_method']}
-                    </li>
-                    <li>
-                        <b>Codice spedizione: </b>{orderDetails[0]?.['order.shipping_code']}
-                    </li>
-                    <li>
-                        <b>Indirizzo spedizione: </b>{orderDetails[0]?.['order.shipping_address']}
-                    </li>
+                    
                     </>: orderDetails[0]?.['order.shipping_type'] === 'Ritiro in sede' ?
                     <>
                     <li>
-                        <b>Data ordine: </b>{<Moment format='DD/MM/YYYY'>{orderDetails[0]?.['order.order_date']}</Moment> }
+                      <div>
+                        <b>Data ordine: </b>
+                          {<Moment format='DD/MM/YYYY'>{orderDetails[0]?.['order.order_date']}</Moment> }
+                      </div>
+                        
                     </li>
                     <li>
-                        <b>Totale ordine: </b>{parseFloat(orderDetails[0]?.['order_total']).toFixed(2)} €
+                        <div>
+                          <b>Totale ordine: </b>
+                          {parseFloat(orderDetails[0]?.['order_total']).toFixed(2)} €
+                        </div>
+                        
                     </li>
                     <li>
+                      <div>
                         <b>Modalità di consegna: </b>{orderDetails[0]?.['order.shipping_type']}
+                      </div>
                     </li>
-                    <li>
-                        <b>Modalità di pagamento: </b>{orderDetails[0]?.['order.payment_method']}
-                    </li>
+                    
                     
                     </> : null
                   }
+                </ul>
+              </div>
+
+              <div className='orderDetails-box top'>
+                  <ul>
+                    <li>
+                      <div>
+                        <b>Modalità di pagamento: </b>
+                        {orderDetails[0]?.['order.payment_method']}
+                      </div>
+                    </li>
+                  </ul>
+              </div>
+
+              <div className='orderDetails-box top'>
+                <ul>   
+                    <li>
+                      <div>
+                        <b>Modalità di consegna: </b>{orderDetails[0]?.['order.shipping_type']}
+                      </div>
+                    </li>
+                    <li>
+                      <div>
+                        <b>Corriere: </b>{orderDetails[0]?.['order.shipping_carrier']}
+                      </div>
+                    </li>
+                    <li>
+                      <div>
+                        <b>Codice spedizione: </b>{orderDetails[0]?.['order.shipping_code']}
+                      </div>
+                    </li>
+                    <li>
+                      <div>
+                        <b>Indirizzo spedizione: </b>{orderDetails[0]?.['order.shipping_address']}
+                      </div>
+                    </li>
+
+                </ul>
+              
+              </div>
+
+              <div className='orderDetails-box top'>
+                  <ul>
                     
-                <li><b>Prodotti acquistati:</b></li>
-                {
-                    orderDetails.map((value, index) => {
-                        return(
-                            <>
-                                
-                                <li className='product-item' key={index}>
-                                    {value['qty']} x {value['product.product_name']} - {parseFloat(value['priceEach']).toFixed(2)} €                               </li>
-                                
-                            </>
-                        )
-                    })
-                }
+                    <li>
+                      <div>
+                        <b>Note: </b>{orderDetails[0]?.['order.notes']}
+                      </div>
+                    </li>
+                    
+                  </ul>
+              </div>
 
-                {
-                  orderDetails[0]?.['order.shipping_type'] === 'Corriere' ?
-                  <>
-                    <li><b>Spese di spedizione: </b>{parseFloat(orderDetails[0]?.['order.shipping_cost']).toFixed(2)}€</li>
-                
-                    <li><b>Commissioni PayPal: </b>{parseFloat(orderDetails[0]?.['order.paypal_fee']).toFixed(2)}€</li>
-                  
-                  </>
-                  : orderDetails[0]?.['order.shipping_type'] === 'Ritiro in sede' ?
-                      <li><b>Commissioni PayPal: </b>{parseFloat(orderDetails[0]?.['order.paypal_fee']).toFixed(2)}€</li>
-                  : null
-                }
-                
-                <li><b>Note: </b>{orderDetails[0]?.['order.notes']}</li>
-                
-              </ul>
-
-                
-                
             </div>
         </div>
 
