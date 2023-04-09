@@ -107,7 +107,7 @@
 .orderDetailsPage .orderDetails-card .orderDetails-body .orderDetails-box{
    border: 2px solid lightgray;
    border-radius: 5px;
-   padding: 10px;
+   padding: 10px 6px;
 }
 
 .orderDetailsPage .orderDetails-card .orderDetails-body .top{
@@ -149,7 +149,7 @@
     }
 
     .orderDetailsPage .orderDetails-card .orderDetails-body li{
-        margin: 10px 0;
+        margin: 15px 0;
     }
 
     .orderDetailsPage .orderDetails-card .orderDetails-body li div{
@@ -159,7 +159,11 @@
 
     }
 
-    .orderDetailsPage .orderDetails-card .orderDetails-body .product-item span{
+    .orderDetailsPage .orderDetails-card .orderDetails-body .product-item .hide{
         display: none;
+    }
+
+    .orderDetailsPage .orderDetails-card .orderDetails-body .product-item{
+        margin-left: 0;
     }
 }

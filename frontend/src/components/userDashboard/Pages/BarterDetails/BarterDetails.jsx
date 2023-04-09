@@ -109,69 +109,153 @@ const BarterDetails = () => {
                             <div className={formStepsNum >= 5 ? "progress-step progress-step-active" : "progress-step"} data-title='Permuta ricevuta'></div>
                             <div className={formStepsNum >= 6 ? "progress-step progress-step-active" : "progress-step"} data-title='Rimborso inviato'></div>
                         </div> 
-                }             
-                    
-                           
+                }                    
 
             <div className="barterDetails-body">
-                <ul>
-                    <li>
-                        <b>Data permuta: </b>{<Moment format='DD/MM/YYYY'>{barterDetails[0]?.['barter.barter_date']}</Moment> }
-                    </li>
-                    <li>
-                        <b>Totale permuta: </b>{parseFloat(barterDetails[0]?.['barter_total']).toFixed(2)} €
-                    </li>
-                    <li>
-                        <b>Corriere: </b>{barterDetails[0]?.['barter.shipping_carrier']}
-                    </li>
-                    <li>
-                        <b>Codice spedizione: </b>{barterDetails[0]?.['barter.shipping_code']}
-                    </li>
-                    <li>
-                        <b>Indirizzo spedizione: </b>{barterDetails[0]?.['barter.shipping_address']}
-                    </li>
-                    <li>
-                        <b>Telefono per invio info prodotti: </b>{barterDetails[0]?.['barter.barter_telephone']}
-                    </li>
-                    <li>
-                        <b>Prodotti acquisiti: </b>
-                        {
-                            barterDetails.map((item, index) => {
-                                return(
-                                    <li>
-                                        <span className='product-price'>{item['qty'] + 'x ' +  item['product.product_name'] + ' - ' + item['product.price'].toFixed(2)} €</span>
-                                    </li>
-                                    
-                                )
-                            })
-                            
-
-                        }
-                    </li>
-
-                <li><b>Prodotti permutati:</b></li>
-                {
-                    barterDetails.length !== 0 ?
-                    Object.values(JSON.parse(barterDetails[0]?.['barter.barter_items'])).map((item, index) => {
-                        return(
-                            <div className='barter-items-li' key={index}>
-                                <li>Nome: {item.name}</li>
-                                <li>Descrizione: {item.description}</li>
+                <div className='barterDetails-box'>
+                    <ul>
+                        <li>
+                            <div>
+                                <b>Data permuta: </b>{<Moment format='DD/MM/YYYY'>{barterDetails[0]?.['barter.barter_date']}</Moment> }
                             </div>
-                        )
-                    })
-                    : null
-                }    
+                        </li>
 
-                <li><b>Valutazione della permuta: </b>{parseFloat(barterDetails[0]?.['barter.barter_evaluation']).toFixed(2)}€</li>
+                        
+                        
+                        <li>
+            
+                                {
+                                    barterDetails.length !== 0 ?
+                                    Object.values(JSON.parse(barterDetails[0]?.['barter.barter_items'])).map((item, index) => {
+                                        return(
+                                            <>
+                                            <div className='barter-flexColumn'>
+                                                 
+                                                <b>Prodotti permutati:</b>
+                                                <div className='barter-items-li' key={index}>
+                                                    <li><b>Nome:</b></li>
+                                                    <span>{item.name}</span>
+                                                    <li><b>Descrizione:</b></li>
+                                                    <span>{item.description}</span>
+                                                </div>
+                                            </div>
+                                            
+                                            </>
+                                        )
+                                    })
+                                    : null
+                                }  
 
-                <li><b>Spese di spedizione: </b>{parseFloat(barterDetails[0]?.['barter.shipping_cost']).toFixed(2)}€</li>
+                            
+                                {
+                                    barterDetails.map((item, index) => {
+                                        return(
+                                            <div className='barter-flexColumn'>
+                                                <b>Prodotti acquisiti: </b>
+                                                <li>
+                                                    <div>
+                                                        
+                                                        <span className='product-item'>{item['qty']}x {item['product.product_name']} <span>-</span> <br /></span>
+                                                        <div>{item['product.price'].toFixed(2)} €</div>   
+                                                    </div>
+                                                </li>
+                                            </div>
+                                            
+                                        )
+                                    })
+                                    
+
+                                }
+                        </li>
+
+                        <li>
+                            <div>
+                                <b>Spese di spedizione: </b>
+                                {parseFloat(barterDetails[0]?.['barter.shipping_cost']).toFixed(2)} €
+                            </div>
+                        </li>
                
-                <li><b>Commissioni PayPal: </b>{parseFloat(barterDetails[0]?.['barter.paypal_fee']).toFixed(2)}€</li>
-                
-                <li><b>Note: </b>{barterDetails[0]?.['barter.notes']}</li>
+                        <li>
+                            <div>
+                                <b>Commissioni PayPal: </b>
+                                {parseFloat(barterDetails[0]?.['barter.paypal_fee']).toFixed(2)} €
+                            </div>
+                        </li>
 
-                </ul>
+                        <li>
+                            <div>
+                                <b>Totale permuta: </b>
+                                {parseFloat(barterDetails[0]?.['barter_total']).toFixed(2)} €
+                            </div> 
+                        </li>
+                    </ul>
+                </div>
+                <div className='barterDetails-box top'>
+                    <ul>
+                        <li>
+                            <div>
+                                <b>Metodo di pagamento: </b>
+                                {barterDetails[0]?.['barter.payment_method']}
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div className='barterDetails-box top'>
+                    <ul>
+                        <li>
+                            <div>
+                                <b>Metodo di consegna: </b>
+                                {barterDetails[0]?.['barter.shipping_type']}
+                            </div>
+                        </li>
+                        
+                        <li>
+                            <div>
+                                <b>Corriere: </b>
+                                {barterDetails[0]?.['barter.shipping_carrier']}
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <b>Codice spedizione: </b>
+                                {barterDetails[0]?.['barter.shipping_code']}
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <b>Indirizzo spedizione: </b>
+                                {barterDetails[0]?.['barter.shipping_address']}
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <b>Telefono per invio info prodotti: </b>
+                                {barterDetails[0]?.['barter.barter_telephone']}
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <b>Valutazione della permuta: </b>
+                                {parseFloat(barterDetails[0]?.['barter.barter_evaluation']).toFixed(2)} €
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+                
+                <div className='barterDetails-box top'>
+                    <ul>
+                    
+                        <li>
+                            <div>
+                                <b>Note: </b>
+                                {barterDetails[0]?.['barter.notes']}
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+                
                 
             </div>
         </div>

@@ -101,30 +101,57 @@
     color: aliceblue;
     z-index: 3;
 }
+
 .barterDetailsPage .barterDetails-card .barterDetails-body{
     margin: 25px;
-    padding: 10px 25px;
-    border: solid 1px;
+    padding: 30px 25px;
+    border: solid 2px lightgray;
+    border-radius: 5px;
 }
 
-.barterDetailsPage .barterDetails-card .barterDetails-body ul{
-    margin-bottom: 40px;
+.barterDetailsPage .barterDetails-card .barterDetails-body .barterDetails-box{
+    padding: 10px 6px;
+    border: solid 2px lightgray;
+    border-radius: 5px;
+}
+
+.barterDetailsPage .barterDetails-card .barterDetails-body .top{
+    margin-top: 10px;
 }
 
 .barterDetailsPage .barterDetails-card .barterDetails-body li{
-    margin-top: 20px;
+    margin: 10px 0 10px 10px;
 }
 
-.barterDetailsPage .barterDetails-card .barterDetails-body .product-item{
-    margin-left: 15px;
+.barterDetailsPage .barterDetails-card .barterDetails-body li div{
+    display: flex;
+    gap: 5px;
 }
 
-.barterDetailsPage .barterDetails-card .barterDetails-body .product-price {
-    margin-left: 10px;
+.barterDetailsPage .barterDetails-card .barterDetails-body .barter-flexColumn{
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+}
+
+.barterDetailsPage .barterDetails-card .barterDetails-body .barter-items-li{
+    display: flex;
+    flex-direction: column;
 }
 
 .barterDetailsPage .barterDetails-card .barterDetails-body .barter-items-li li{
-    margin-top: 0;
+    margin: 0 0 10px 20px;
+}
+
+.barterDetailsPage .barterDetails-card .barterDetails-body .barter-items-li span{
+    margin: 0 0 10px 35px;
+}
+
+.barterDetailsPage .barterDetails-card .barterDetails-body li b{
+    font-weight: 600;
+}
+
+.barterDetailsPage .barterDetails-card .barterDetails-body .product-item{
     margin-left: 10px;
 }
 
@@ -146,6 +173,32 @@
     }
 
     .barterDetailsPage .barterDetails-card .barterDetails-body{
-        margin: 0 25px 25px 25px;
+        margin: 0 15px 25px 15px;
+        padding: 5px;
+    }
+
+    .barterDetailsPage .barterDetails-card .barterDetails-body li{
+        margin: 15px 0;
+    }
+
+    .barterDetailsPage .barterDetails-card .barterDetails-body li div{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+
+    }
+    .barterDetailsPage .barterDetails-card .barterDetails-body .barter-items-li li{
+        margin: 0;
+    }
+
+    .barterDetailsPage .barterDetails-card .barterDetails-body .barter-items-li span{
+        margin: 0;
+    }
+    .barterDetailsPage .barterDetails-card .barterDetails-body .product-item span{
+        display: none;
+    }
+
+    .barterDetailsPage .barterDetails-card .barterDetails-body .product-item{
+        margin-left: 0;
     }
 }
