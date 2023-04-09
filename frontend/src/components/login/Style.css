@@ -86,6 +86,7 @@
 
 .login .login-div .pass a:hover{
     text-decoration: underline;
+    text-decoration-color: #666666;
 }
 
 .login .login-div input[type="submit"]{
@@ -131,5 +132,17 @@
         width: 100%;
         box-shadow: rgb(43 52 69 / 10%) 0 4px 16px;
         height: 420px;
+    }
+
+    .login .login-div .pass a{
+        color: #666666;
+        cursor: pointer;
+        text-decoration: underline;
+    }
+
+    .login .login-div .signup_link span{
+        color: #2691d9;
+        text-decoration: underline;
+        margin-left: 5px;
     }
 }
