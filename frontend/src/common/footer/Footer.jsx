@@ -10,7 +10,7 @@ const Footer = () => {
                     <div className="box">
                         <h2 className='brandName'>Mr.Tecno</h2>
                         <ul>
-                            <li><a href="/privacy_policy">Privacy Policy</a></li>
+                            <li><a href="/privacy">Privacy Policy</a></li>
                             <li><a href="/termini_e_condizioni">Termini e condizioni</a></li>
                         </ul>
                     </div>

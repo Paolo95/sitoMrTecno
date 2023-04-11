@@ -31,6 +31,8 @@ import Services from './components/services/Services';
 import CookieBot from 'react-cookiebot';
 import Cookies from 'universal-cookie';
 import AboutUs from './components/aboutUs/AboutUs';
+import Privacy from './components/privacy/Privacy';
+import Terms from './components/terms/Terms';
 
 function App() {
   
@@ -138,6 +140,10 @@ function App() {
             <Route exact path="/servizi" element={<Services />} >
             </Route>
             <Route exact path="/chi_siamo" element={<AboutUs />} >
+            </Route>
+            <Route exact path="/privacy" element={<Privacy />} >
+            </Route>
+            <Route exact path="/termini_e_condizioni" element={<Terms />} >
             </Route>
               
             <Route element={<LoginRequireAuth />}>
