@@ -249,6 +249,34 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 20px;
+}
+
+.barter .denyDiv button{
+    background-color: #0f3460;
+    color: aliceblue;
+    width: 100px;
+    height: 40px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.barter .denyDiv{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.barter .denyDiv h2{
+    font-size: 20px;
+}
+
+.barter .denyDiv-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
 .barter .btnForm .hidden{
