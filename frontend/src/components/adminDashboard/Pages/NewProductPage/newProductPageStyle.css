@@ -100,4 +100,16 @@
         width: 100%;
     }
 
+    .newProductPage .newProductPage-heading .newProductPage-backBtn-div .newProductPage-backBtn{
+        width: 90px;
+    }
+
+    .newProductPage .newProductPage-heading .newProductPage-pubBtn-div .newProductPage-pubBtn{
+        width: 90px;
+    }
+
+    .newProductPage .newProductPage-heading h2{
+        text-align: center;
+    }
+
 }
