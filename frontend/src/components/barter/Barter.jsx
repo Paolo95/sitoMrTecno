@@ -43,6 +43,7 @@ const Barter = ({ addToCart, cartItem, decreaseQty, deleteCartProduct, cleanCart
     const [netTotal, setNetTotal] = useState(0);
     const [isRefused, setIsRefused] = useState(false);
     const [totalWithoutCommissions, setTotalWithoutCommissions] = useState(0);
+    const [denyConfirm, setDenyConfirm] = useState(false);
 
     const CATEGORY_URL = '/api/product/categories';
     const BARTER_STORE_URL = '/api/barter/createBarter';
@@ -84,6 +85,8 @@ const Barter = ({ addToCart, cartItem, decreaseQty, deleteCartProduct, cleanCart
             [index] : item.target.value
         }));
     }
+
+    console.log(denyConfirm)
 
     const handlerBarterTelephone = (e) => {
 
@@ -558,6 +561,12 @@ const Barter = ({ addToCart, cartItem, decreaseQty, deleteCartProduct, cleanCart
         setShowDisclamer(true);
     
     }
+
+    const handleDenyConfirm = (e) => {
+
+        e.preventDefault();
+        setDenyConfirm(true);
+    }
     
     const newBarterBankTransfer = async () => {
 
@@ -792,89 +801,112 @@ const Barter = ({ addToCart, cartItem, decreaseQty, deleteCartProduct, cleanCart
                             </div> 
                         </div>
                         <div className={formStepsNum === 5 ? "form-step-active": "form-step"}>
-                            <div className="txt_field">
-                                <h2>Riepilogo permuta</h2>
-                                <div className="barter-grid">
-                                    <div className="barter-recap">
-                                                                          
-                                        <h3>Prodotti desiderati:</h3>                                       
-                                            { barterInfo.length === 0 ?
-                                                
-                                                <ClipLoader
-                                                    color={'#0f3460'}
-                                                    loading={barterInfo.length === 0}
-                                                    size={30}
-                                                />
-                                            :
-                                            barterInfo.map((item, index) => {
-                                                return(
-                                                    
-                                                    <div className='barterRecap-div'>
-                                                        <span>{item['product.product_name']}</span>
-                                                        <span>{parseFloat(item['product.price']).toFixed(2)}€</span>
-                                                    </div>
-                                        
-                                                )
-                                            })
-                                        
+
+                                {
+                                    denyConfirm ? 
+                                        <div className="txt_field">
                                             
-                                            }
-
-
-                                            <div className='finalPrice-div'>
-                                                <h3>Totale prodotti desiderati:</h3>
-                                                <span className='product-total'>{parseFloat(netTotal).toFixed(2)}€</span>
+                                            <div className="denyDiv">
+                                                <h2>Sei sicuro di voler annullare la permuta?</h2>   
+                                                <div className='denyDiv-btn'>
+                                                    <button onClick={() => setDenyConfirm(false)}>Annulla</button>
+                                                    <button onClick={(e) => updateFormSteps(e,'refused')}>Conferma</button>
+                                                </div> 
+                                                
                                             </div>
+                                           
+                                        </div>    
+                                    :
+                                    <div className="txt_field">
+                                        <h2>Riepilogo permuta</h2>
+                                        <div className="barter-grid">
 
-                                        
-                                            <div className='finalPrice-div'>
-                                                <h4>+ Spese di spedizione: </h4>
-                                                <span className='shipping'>{parseFloat(shipping_cost).toFixed(2)}€</span>
-                                            </div>
-                                            <div className='finalPrice-div'>
-                                                <h3>Totale: </h3>
-                                                <span className='final-price'>{parseFloat(totalWithoutCommissions).toFixed(2)}€</span>
-                                            </div>
-                                        
-
-                                    </div>
-                                    
-                                    <div className="barter-recap-userProducts">
-                                        <h3>Prodotti permutati:</h3>
-                                        <ol className='barter-recap-ol'>                                      
-                                        {
-                                            barterRecap.length !== 0 ? 
-                                                Object.values(JSON.parse(barterRecap)).map((item, index) => {
+                                        <div className="barter-recap">
+                                                                            
+                                            <h3>Prodotti desiderati:</h3>                                       
+                                                { barterInfo.length === 0 ?
+                                                    
+                                                    <ClipLoader
+                                                        color={'#0f3460'}
+                                                        loading={barterInfo.length === 0}
+                                                        size={30}
+                                                    />
+                                                :
+                                                barterInfo.map((item, index) => {
                                                     return(
-                                                        <li key={index}>{item.name}</li>
+                                                        
+                                                        <div className='barterRecap-div'>
+                                                            <span>{item['product.product_name']}</span>
+                                                            <span>{parseFloat(item['product.price']).toFixed(2)}€</span>
+                                                        </div>
+                                            
                                                     )
                                                 })
-                                            : null
-                                        }
-                                        </ol>
+                                            
+                                                
+                                                }
 
-                                        <div className='finalPrice-div'>
-                                            <h3>Valutazione dei prodotti: </h3>
-                                            <span className='final-price'>{parseFloat(barterEvaluation).toFixed(2)}€</span>
+
+                                                <div className='finalPrice-div'>
+                                                    <h3>Totale prodotti desiderati:</h3>
+                                                    <span className='product-total'>{parseFloat(netTotal).toFixed(2)}€</span>
+                                                </div>
+
+                                            
+                                                <div className='finalPrice-div'>
+                                                    <h4>+ Spese di spedizione: </h4>
+                                                    <span className='shipping'>{parseFloat(shipping_cost).toFixed(2)}€</span>
+                                                </div>
+                                                <div className='finalPrice-div'>
+                                                    <h3>Totale: </h3>
+                                                    <span className='final-price'>{parseFloat(totalWithoutCommissions).toFixed(2)}€</span>
+                                                </div>
+                                            
+
                                         </div>
-                                      
-                                        <p>*Si ricorda di consegnare al corriere i prodotti da permutare. <br/>
-                                            Il rimborso della permuta verrà effettuato entro 24 ore dal ricevimento e visione dei prodotti permutati. <br/>
-                                            Verrà accreditato l'importo sullo stesso conto della transazione. <br/>
-                                            Nel caso non conforme alle specifiche inoltrate, i prodotti verranno restituiti tramite corriere e la permuta verrà annulata. <br/>
-                                            Cliccando su "Conferma", accetti le disposizioni appena illustrate.
 
-                                        </p>
+                                        <div className="barter-recap-userProducts">
+                                            <h3>Prodotti permutati:</h3>
+                                            <ol className='barter-recap-ol'>                                      
+                                            {
+                                                barterRecap.length !== 0 ? 
+                                                    Object.values(JSON.parse(barterRecap)).map((item, index) => {
+                                                        return(
+                                                            <li key={index}>{item.name}</li>
+                                                        )
+                                                    })
+                                                : null
+                                            }
+                                            </ol>
+
+                                            <div className='finalPrice-div'>
+                                                <h3>Valutazione dei prodotti: </h3>
+                                                <span className='final-price'>{parseFloat(barterEvaluation).toFixed(2)}€</span>
+                                            </div>
+                                        
+                                            <p>*Si ricorda di consegnare al corriere i prodotti da permutare. <br/>
+                                                Il rimborso della permuta verrà effettuato entro 24 ore dal ricevimento e visione dei prodotti permutati. <br/>
+                                                Verrà accreditato l'importo sullo stesso conto della transazione. <br/>
+                                                Nel caso non conforme alle specifiche inoltrate, i prodotti verranno restituiti tramite corriere e la permuta verrà annulata. <br/>
+                                                Cliccando su "Conferma", accetti le disposizioni appena illustrate.
+
+                                            </p>
+                                        </div>
+
                                     </div>
+                                    <div className='btnForm'>
+                                        <button className={formStepsNum === 1 ? 'disabled' : ''} onClick={(e) => updateFormSteps(e, 'prev')}>Precendente</button>
+                                        <button className='refused' onClick={(e) => handleDenyConfirm(e)}>Rifiuta</button>
+                                        <button onClick={(e) => {updateFormSteps(e,'next')}}>Conferma*</button>
+                                    </div> 
+                                    </div>
+                                }
 
-                                </div>
-                            </div>
-                            <div className='btnForm'>
-                                <button className={formStepsNum === 1 ? 'disabled' : ''} onClick={(e) => updateFormSteps(e, 'prev')}>Precendente</button>
-                                <button className='refused' onClick={(e) => {updateFormSteps(e,'refused')}}>Rifiuta</button>
-                                <button onClick={(e) => {updateFormSteps(e,'next')}}>Conferma*</button>
-                            </div>    
+                              
+                                
                         </div>
+                               
+                        
                         <div className={formStepsNum === 6 ? "form-step-active": "form-step"}>
                             
                                 {
