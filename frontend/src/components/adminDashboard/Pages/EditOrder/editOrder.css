@@ -25,7 +25,23 @@
 
 .editOrder .editOrder-content .editOrder-body{
     flex: 0 0 auto;
-    width: 66.6666%;
+    width: 100%;
+}
+
+.editOrder .editOrder-content .editOrder-body .editOrder-box{
+    border: 2px solid lightgray;
+    border-radius: 5px;
+    padding: 10px 15px;
+}
+
+.editOrder .editOrder-content .editOrder-body .editOrder-box li{
+    margin: 10px 0;
+}
+
+
+
+.editOrder .editOrder-content .editOrder-body .top{
+    margin-top: 10px;
 }
 
 .editOrder .editOrder-content .card{
@@ -43,10 +59,10 @@
 .editOrder .editOrder-content .card .card-body{
     flex: 1 1 auto;
     padding: 1rem 1rem;
-}
-
-.editOrder .editOrder-content .card .card-body li{
-    padding-bottom: 10px;
+    border: 2px solid lightgray;
+    border-radius: 5px;
+    padding: 10px 6px;
+    margin: 25px;
 }
 
 .editOrder .editOrder-content .card .card-body .product-item{
@@ -73,7 +89,8 @@
 
 .editOrder .card-body .editable{
     border: 1px solid;
-    padding: 2px;
+    padding: 5px;
+    border-radius: 5px;
 }
 
 .editOrder .card-body .statusSelect{
@@ -89,17 +106,48 @@
 .editOrder .editOrder-content .notes{
     display: flex;
     gap: 10px;
-    align-items: center;
+}
+
+.editOrder .editOrder-content .notes div{
+    width: 100%;
 }
 
 .editOrder .editOrder-content .editOrder-body .card-body .notes .editable{
     width: 100%;
     resize: none;
+    border-radius: 5px;
+    margin-top: 10px;
 }
 
 @media screen and (max-width: 600px) {
-    
-    .editOrder .editOrder-content .editOrder-body {
-        width: 100%;
+
+    .editOrder .editOrder-content .editOrder-body li div{
+        display: flex;
+        gap: 5px;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .editOrder .editOrder-content .editOrder-body li div{
+        display: flex;
+        gap: 5px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .editOrder .card-body .editable{
+        border: 1px solid;
+        padding: 5px;
+        border-radius: 5px;
+        text-align: center;
+    }
+
+    .editOrder .editOrder-content .card .card-body{
+        flex: 1 1 auto;
+        padding: 1rem 1rem;
+        border: 2px solid lightgray;
+        border-radius: 5px;
+        padding: 10px 6px;
+        margin: 20px 10px 20px 10px;
     }
 }
