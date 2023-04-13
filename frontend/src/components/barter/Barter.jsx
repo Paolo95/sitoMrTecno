@@ -183,7 +183,7 @@ const Barter = ({ addToCart, cartItem, decreaseQty, deleteCartProduct, cleanCart
     ]
 
     const statusOptions = [
-        {value : 'Ricondizionato', label : 'Ricondizionato'},
+        {value : 'Ricondizionato', label : 'Vergine/Ricondizionato'},
         {value : 'Nuovo', label : 'Nuovo'},
     ]
 
@@ -887,7 +887,7 @@ const Barter = ({ addToCart, cartItem, decreaseQty, deleteCartProduct, cleanCart
                                             <p>*Si ricorda di consegnare al corriere i prodotti da permutare. <br/>
                                                 Il rimborso della permuta verrà effettuato entro 24 ore dal ricevimento e visione dei prodotti permutati. <br/>
                                                 Verrà accreditato l'importo sullo stesso conto della transazione. <br/>
-                                                Nel caso non conforme alle specifiche inoltrate, i prodotti verranno restituiti tramite corriere e la permuta verrà annulata. <br/>
+                                                Nel caso non conforme alle specifiche inoltrate, i prodotti verranno restituiti tramite corriere e la permuta verrà annullata. <br/>
                                                 Cliccando su "Conferma", accetti le disposizioni appena illustrate.
 
                                             </p>
