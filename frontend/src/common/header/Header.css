@@ -220,7 +220,7 @@ header ul li a:hover{
         top: 0;
         z-index: 1000;
         width: 100%;
-        background-color: #fff;
+        background-color: #0f3460;
         box-shadow: -1px 11px 24px -11px rgba(0, 0, 0, 0.2);
         transition: 0.5s;
     }
