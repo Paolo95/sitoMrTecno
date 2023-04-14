@@ -256,7 +256,10 @@ const Product = ({ addToCartProduct }) => {
                       </> 
                     }
                   </li>
-                    
+                  
+                  <li>
+                    Evasione dell'ordine in 3-5gg lavorativi 
+                  </li>
                   
                 </ul>
             </div>
