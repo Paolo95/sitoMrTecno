@@ -189,7 +189,7 @@ const BarterDetails = () => {
                                                     <div>
                                                         
                                                         <span className='product-item'>{item['qty']}x {item['product.product_name']} <span>-</span> <br /></span>
-                                                        <div>{item['product.price'].toFixed(2)} €</div>   
+                                                        <div>{item['priceEach'].toFixed(2)} €</div>   
                                                     </div>
                                                 </li>
                                             </div>
