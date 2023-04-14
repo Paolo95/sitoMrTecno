@@ -25,7 +25,7 @@
 
 .editBarter .editBarter-content .editBarter-body{
     flex: 0 0 auto;
-    width: 66.6666%;
+    width: 100%;
 }
 
 .editBarter .editBarter-content .card{
@@ -42,16 +42,42 @@
 
 .editBarter .editBarter-content .card .card-body{
     flex: 1 1 auto;
-    padding: 1rem 1rem;
+    margin: 25px;
+    padding: 30px 20px;
+    border: solid 2px lightgray;
+    border-radius: 5px;
+}
+
+.editBarter .editBarter-content .card .card-body .editBarter-box{
+    border: 2px solid lightgray;
+    border-radius: 5px;
+    padding: 10px 6px;
+}
+
+.editBarter .editBarter-content .card .card-body .editBarter-box input[type=date]{
+    width: 140px;
 }
 
 .editBarter .editBarter-content .card .card-body li{
-    padding-bottom: 10px;
+    margin: 10px 0 10px 10px;
 }
 
-.editBarter .editBarter-content .card .card-body .product-item{
-    padding-left: 10px;
+.editBarter .editBarter-content .card .card-body .top{
+    margin-top: 10px;
 }
+
+
+.editBarter .editBarter-content .card .card-body li div{
+    display: flex;
+    gap: 5px;
+}
+
+.editBarter .editBarter-content .card .card-body .product-items{
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+}
+
 
 .editBarter .editBarter-content .card .card-body .mb-4{
     margin-bottom: 1.5rem;
@@ -74,6 +100,17 @@
 .editBarter .card-body .editable{
     border: 1px solid;
     padding: 2px;
+    border-radius: 5px;
+    padding: 5px;
+    width: 100px;
+}
+
+.editBarter .card-body input[type=text]{
+    border: 1px solid;
+    padding: 2px;
+    border-radius: 5px;
+    padding: 5px;
+    width: 300px;
 }
 
 .editBarter .card-body .number{
@@ -95,7 +132,8 @@
 .editBarter .editBarter-content .editBarter-body .card-body .notes{
     display: flex;
     gap: 10px;
-    align-items: center;
+    flex-direction: column;
+    margin-right: 5px;
 }
 
 .editBarter .editBarter-content .editBarter-body .card-body .notes .editable{
@@ -103,9 +141,43 @@
     resize: none;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width:600px) {
     
-    .editBarter .editBarter-content .editBarter-body {
-        width: 100%;
+    .editBarter .editBarter-content .card .card-body li div{
+        display: flex;
+        gap: 5px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
     }
+
+    .editBarter .editBarter-content .card .card-body li{
+        
+        margin: 20px 0;
+    }
+
+    .editBarter .editBarter-content .card .card-body .product-items li{
+        
+        margin: 0;
+    }
+
+    .editBarter .card-body input[type=text]{
+        border: 1px solid;
+        padding: 2px;
+        border-radius: 5px;
+        padding: 5px;
+        width: 100%;
+        text-align: center;
+    }
+       
+    .editBarter .card-body .editable{
+        border: 1px solid;
+        padding: 2px;
+        border-radius: 5px;
+        padding: 5px;
+        width: 100px;
+        text-align: center;
+    }
+
 }
