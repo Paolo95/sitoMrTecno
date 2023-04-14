@@ -22,7 +22,7 @@ export const Shop = ({ addToCart, cartItem, decreaseQty, deleteCartProduct, bart
   const [shopItems, setShopItems] = React.useState([]);
   const [prodStars, setProdStars] = React.useState([]);
   const [min, setMin] = React.useState(0);
-  const [max, setMax] = React.useState(1000);
+  const [max, setMax] = React.useState(5000);
 
   const [categoryOpen, setCategoryOpen] = React.useState(true);
   const [brandOpen, setBrandOpen] = React.useState(true);
@@ -434,8 +434,8 @@ export const Shop = ({ addToCart, cartItem, decreaseQty, deleteCartProduct, bart
                     <RangeSlider 
                       id={'rangeInput'}
                       min={0}
-                      max={1000}
-                      defaultValue={[0,1000]}
+                      max={5000}
+                      defaultValue={[0,5000]}
                       onInput={([min, max]) => {
                         setMin(min);
                         setMax(max);
