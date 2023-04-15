@@ -12,10 +12,22 @@ const AboutUs = () => {
             <div className='aboutUs-container'>
                 <h2>La nostra storia</h2>
                 <p>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat, magni reiciendis. Vitae, adipisci tenetur amet ea numquam nostrum unde beatae consectetur reiciendis, tempore eos architecto, autem fugit. Officiis sed modi inventore aliquam repellendus architecto adipisci est quia aliquid labore similique accusamus vel eaque laudantium, ratione nesciunt perferendis dolore, omnis laborum?
+                    
+                    MrTecno nasce come azienda dedicata alla riparazione e vendita di smartphone in provincia di Teramo.
+                    Negli anni, l'azienda è cresciuta dedicandosi alla vendita di prodotti informatici di ogni tipologia e marca.
                 </p>
                 <h2>Perché scegliere noi?</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis eos, explicabo ullam qui architecto quis voluptate esse unde saepe magnam libero facere ducimus porro non voluptatum? Ex numquam, earum natus repudiandae molestiae dolorem eveniet temporibus eligendi, beatae nesciunt quae harum voluptas placeat sequi aut voluptatem iste eum odio libero optio ipsa inventore, maiores odit error! Dignissimos officia repellat unde odit eligendi consequuntur excepturi maxime est! Provident beatae ipsa officia vero exercitationem amet qui voluptatem rerum repellat, suscipit voluptatum dolore corrupti, enim odit sit impedit quae, nemo illum! Ex eveniet cupiditate magnam error quia maiores, nam corporis asperiores accusantium labore placeat.
+                <p>
+                    Noi di MrTecno ci impegniamo a fornire un'esperienza di acquisto facile e senza problemi, 
+                    con una vasta gamma di prodotti al miglior prezzo e qualità per soddisfare le esigenze dei nostri clienti. 
+                    <br />
+                    <br />
+
+                    Siamo orgogliosi di essere un'azienda affidabile e competente, che offre ai propri clienti la massima
+                    assistenza pre e post vendita. Il nostro team è giovane e immerso da sempre nel mondo della tecnologia e 
+                    quindi sceglie accuratamente i prodotti da fornire ai nostri clienti.
+                    Siamo specializzati nella realizzazione di PC desktop, scelta dei componenti e riparazione e vendita di 
+                    smartphone e PC.
                 
                 </p>
             </div>
