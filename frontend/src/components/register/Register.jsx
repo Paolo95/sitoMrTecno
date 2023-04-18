@@ -334,9 +334,17 @@ const Register = () => {
                         <i className="fas fa-info-circle"></i>
                         Le password inserite devono coincidere
                     </p> 
+
+                    <p className='register-disclamer'>
+                        * Registrando il tuo profilo dichiari di aver letto e compreso i 
+                        <Link to='/termini_e_condizioni'> Termini e Condizioni</Link> e la <Link to='/privacy'>Privacy Policy</Link> di questo sito.
+                    </p>
+
                     <button disabled={!validLastName || !validName || !validEmail || !validEmailMatch
-                                            || !validUser || !validPwd || !validPwdMatch ? true : false}>Registrati</button>
+                                            || !validUser || !validPwd || !validPwdMatch ? true : false}>Registrati*</button>
+
                 </form>
+               
                 <p className='already-login'>
                     Sei già registrato?
                     <span className='login-line'>
