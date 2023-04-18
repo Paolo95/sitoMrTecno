@@ -109,7 +109,9 @@ const BarterDetails = () => {
 
                 {
                     barterDetails[0]?.['barter.status'] === 'Rifiutata' ? 
-                        <div className='barterRefusedDiv'>Permuta Rifiutata!</div>:
+                        <div className='barterRefusedDiv'>Permuta rifiutata!</div> :
+                        barterDetails[0]?.['barter.status'] === 'Annullata' ?
+                            <div className='barterRefusedDiv'>Permuta annullata!</div> :
                         <div className="progressBar">
                             <div className="progress" id='progress' style={{width: `${((formStepsNum - 1) / (5)) * 100 }%`}}></div>
                             <div className={formStepsNum >= 1 ? "progress-step progress-step-active" : "progress-step"} data-title='In lavorazione'></div>
@@ -122,16 +124,6 @@ const BarterDetails = () => {
                 }                    
 
             <div className="barterDetails-body">
-
-                <div className='barterDetails-box top'>
-                    <ul>
-                        <li>
-                            <div>
-                                <b>Stato permuta: </b>{barterDetails[0]?.['barter.status']}
-                            </div>
-                        </li>
-                    </ul>
-                </div>
 
                 {
                     barterDetails[0]?.['barter.status'] === 'Valutazione effettuata' ? 

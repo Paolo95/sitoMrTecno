@@ -162,10 +162,7 @@ const EditBarter = () => {
 
     <section className='editBarter'>
         <div className="editBarter-heading">
-            <h2 className='editBarter-title'>
-              Modifica permuta
-              
-              </h2>
+            <h2 className='editBarter-title'>{`Modifica permuta n. ${params.barterID}`}</h2>
             <div className="createBtn-div">
                 {
                     isChanged ? <button className='btn btn-create' onClick={handleEdit}>
@@ -210,7 +207,8 @@ const EditBarter = () => {
                                                         barterStatus === 'Prodotto spedito' ? 'Prodotto spedito' :
                                                         barterStatus === 'Permuta ricevuta' ? 'Permuta ricevuta' : 
                                                         barterStatus === 'Rimborso inviato' ? 'Rimborso inviato' :
-                                                        barterStatus === 'Rifiutata' ? 'Rifiutata' :  null}>
+                                                        barterStatus === 'Rifiutata' ? 'Rifiutata' :
+                                                        barterStatus === 'Annullata' ? 'Annullata' :  null}>
                                       
                                           <option value={'In lavorazione'}>In lavorazione</option>
                                           <option value={'Valutazione effettuata'}>Valutazione effettuata</option>
@@ -218,7 +216,8 @@ const EditBarter = () => {
                                           <option value={'Prodotto spedito'}>Prodotto spedito</option>
                                           <option value={'Permuta ricevuta'}>Permuta ricevuta</option>
                                           <option value={'Rimborso inviato'}>Rimborso inviato</option>
-                                          <option value={'Rifiutata'}>Permuta rifiutata</option>                                
+                                          <option value={'Rifiutata'}>Permuta rifiutata</option>
+                                          <option value={'Annullata'}>Permuta annullata</option>                                  
                                   </select>
                                 </div>
                               </li>

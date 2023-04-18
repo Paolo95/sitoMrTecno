@@ -89,12 +89,20 @@ const OrderDetails = () => {
                     <h1 className="heading">{`Ordine n. ${params.orderId}`}</h1>
                 </div>                   
                     
-                <div className="progressBar">
+                {
+                  orderDetails[0]?.['order.order_status'] === 'Annullato' ?
+                  <div className='orderDeletedDiv'>Ordine annullato!</div> :
+
+                  <div className="progressBar">
                     <div className="progress" id='progress' style={{width: `${((formStepsNum - 1) / (2)) * 100 }%`}}></div>
                     <div className={formStepsNum >= 1 ? "progress-step progress-step-active" : "progress-step"} data-title='In lavorazione'></div>
                     <div className={formStepsNum >= 2 ? "progress-step progress-step-active" : "progress-step"} data-title='Spedito'></div>
                     <div className={formStepsNum >= 3 ? "progress-step progress-step-active" : "progress-step"} data-title='Completato'></div>
-                </div>            
+                  </div>
+              
+                }
+               
+                           
 
             <div className="orderDetails-body">
               <div className='orderDetails-box'>

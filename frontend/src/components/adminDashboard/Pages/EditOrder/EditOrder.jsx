@@ -149,10 +149,7 @@ const EditOrder = () => {
 
     <section className='editOrder'>
         <div className="editOrder-heading">
-            <h2 className='editOrder-title'>
-              Modifica ordine
-              
-              </h2>
+            <h2 className='editOrder-title'>{`Modifica ordine n. ${params.orderID}`}</h2>
             <div className="createBtn-div">
                 {
                     isChanged ? <button className='btn btn-create' onClick={handleEdit}>
@@ -203,11 +200,13 @@ const EditOrder = () => {
                                             onChange={(e) => handleOrderStatus(e.target.value)}
                                             defaultValue={orderStatus === 'In lavorazione' ? 'In lavorazione' : 
                                                           orderStatus === 'In spedizione' ? 'In spedizione' :
-                                                          orderStatus === 'Concluso' ? 'Concluso' : null}>
+                                                          orderStatus === 'Concluso' ? 'Concluso' :
+                                                          orderStatus === 'Annullato' ? 'Annullato' : null}>
                                         
                                             <option value={'In lavorazione'}>In lavorazione</option>
                                             <option value={'In spedizione'}>In spedizione</option>
                                             <option value={'Concluso'}>Concluso</option>
+                                            <option value={'Annullato'}>Annullato</option>
                                                                               
                                     </select>
                                   </div>

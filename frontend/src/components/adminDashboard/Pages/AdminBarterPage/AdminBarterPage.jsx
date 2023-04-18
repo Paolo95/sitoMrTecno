@@ -109,6 +109,7 @@ const AdminBarterPage = () => {
               <option value='Permuta ricevuta'>Permuta ricevuta</option>
               <option value='Rimborso inviato'>Rimborso inviato</option>
               <option value='Rifiutata'>Permuta rifiutata</option>
+              <option value='Annullata'>Permuta annullata</option>
             </select>
         </div>
         </div>

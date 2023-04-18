@@ -5,8 +5,13 @@
 }
 
 .barterDetailsPage .barterRefusedDiv{
-    text-align: center;
-    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5px;
+    color: #0f3460;
+    font-size: 20px;
+    font-weight: 600;
 }
 
 .barterDetailsPage .barterDetails-heading{

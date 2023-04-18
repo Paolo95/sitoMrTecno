@@ -95,6 +95,7 @@ const OrderPageAdmin = () => {
               <option value='In lavorazione'>In lavorazione</option>
               <option value='In spedizione'>In spedizione</option>
               <option value='Concluso'>Concluso</option>
+              <option value='Annullato'>Annullato</option>
             </select>
         </div>
         </div>
