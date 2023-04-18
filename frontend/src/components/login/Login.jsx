@@ -78,6 +78,9 @@ const Login = () => {
         }else if(err.response?.status === 401){
           setErrMsg(err.response?.data);
           setLoading(false);
+        }else if(err.response?.status === 403){
+          setErrMsg(err.response?.data);
+          setLoading(false);
         }else{
           setErrMsg('Login fallito!');
           setLoading(false);

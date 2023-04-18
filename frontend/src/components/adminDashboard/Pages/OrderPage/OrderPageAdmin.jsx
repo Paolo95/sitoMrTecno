@@ -131,7 +131,7 @@ const OrderPageAdmin = () => {
                               <td>{<Moment format='DD/MM/YYYY'>{value['order.order_date']}</Moment>}</td>
                               <td>{value['order.user.email']}</td>
                               <td>{value['order.order_status']}</td>
-                              <td>{value['order_total']} €</td>
+                              <td>{parseFloat(value['order_total']).toFixed(2)} €</td>
                               <td>
                                 {
                                   <NavLink to={`/adminDashboard/orders/editOrder/${value['order.id']}`}>

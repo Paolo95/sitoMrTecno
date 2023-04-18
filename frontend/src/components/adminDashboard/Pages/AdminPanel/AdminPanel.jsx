@@ -123,7 +123,7 @@ const AdminPanel = () => {
                               {value['order.user.username']}
                             </td>
                             <td>
-                              <span>{value['order_total']}€</span>
+                              <span>{parseFloat(value['order_total']).toFixed(2)}€</span>
                             </td>
                             <td>
                               <span>{value['order.order_status']}</span>
