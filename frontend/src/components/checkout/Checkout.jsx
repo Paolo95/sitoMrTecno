@@ -84,7 +84,6 @@ const Checkout = ({ cleanCart, cartItem }) => {
             await axios.post(ORDER_URL, 
                 { 
                   paypalDetails: orderDetails,
-                  userInfo: auth?.accessToken,
                   pickup: location.state.pickup,
                 },
                 {
