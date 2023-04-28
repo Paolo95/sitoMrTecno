@@ -8,7 +8,7 @@ const Privacy = () => {
             <h1>INFORMATIVA E CONSENSO AL TRATTAMENTO DEI DATI</h1>
             <h2>Redatta ai sensi del D.Lgs. 30 Giugno 2003 n.196 e del nuovo Regolamento (UE) 2016/679</h2>
             <p>
-VG INFORMATICA S.r.l.s. con sede legale ed operativa in via Bene Vagienna, 21/B – 10136 Torino (TO)
+MRTECNO S.r.l.s. con sede legale ed operativa in via Roma, 104 – 64013 Nereto (TE)
 in qualità di Titolare del trattamento dei dati personali ai sensi degli articoli 4 e 28 del decreto legislativo
 30 Giugno 2003, n. 196 - Codice della privacy (di seguito “Codice”) e degli articoli 4, n. 7 e 24 del
 Regolamento UE 2016/679 del 27 aprile 2016 relativo alla protezione delle persone fisiche con riguardo
@@ -34,18 +34,18 @@ presente che durante alcuni Ns. servizi offerti, come manutenzione e riperazioni
 installazione o manutenzione di rete e simili, possiamo venire a conoscenza di alcuni Vs. dati. Tali dati
 non verranno in ogni modo trattati, archiviati, diffuse o altro. B. Comunicazione e diffusione dei dati
 personali per il perseguimento delle finalità primarie del trattamento – I dati possono esser comunicati
-a Aziende e professionisti che collaborano con VG INFORMATICA S.r.l.s. e sono riconosciuti quali
+a Aziende e professionisti che collaborano con MRTECNO S.r.l.s. e sono riconosciuti quali
 responsabili del trattamento dati personali. B.1. Obbligatorietà o facoltatività del consenso per il
 perseguimento delle finalità primarie del trattamento dei dati personali - Il Trattamento non avrà
 luogo senza il Suo consenso: in questo caso nessuna prestazione potrà essere prestata dal personale e dai
-collaboratori di VG INFORMATICA S.r.l.s. C. Tempi di conservazione dei dati e altre informazioni - I
+collaboratori di MRTECNO S.r.l.s. C. Tempi di conservazione dei dati e altre informazioni - I
 dati personali saranno conservati per i tempi strettamente necessari ad espletare le finalità primarie
 illustrate al Paragrafo A. Ai sensi dell’art. 13, comma 2, lettera (f) del Regolamento, si informa che tutti i
 dati raccolti non saranno comunque oggetto di alcun processo decisionale automatizzato, compresa la
 profilazione. D. Titolare e Responsabili del trattamento - Gli estremi identificativi del Titolare del
-trattamento sono i seguenti: VG INFORMATICA S.r.l.s. con sede legale ed operativa in via Bene
-Vagienna, 21/B – 10136 Torino (TO), l’indirizzo per l’esercizio dei diritti ex art. 7 del Codice della privacy
-info@vginformatica.com. L’elenco aggiornato dei Responsabili del trattamento è reperibile presso le sedi
+trattamento sono i seguenti: MRTECNO S.r.l.s. con sede legale ed operativa in via Roma , 104 – 64013 Nereto (TE), 
+l’indirizzo per l’esercizio dei diritti ex art. 7 del Codice della privacy
+info@mrtecno.it. L’elenco aggiornato dei Responsabili del trattamento è reperibile presso le sedi
 indicate. E. Esercizio dei diritti da parte dell’interessato - Ai sensi dell’articolo 7 del Codice della privacy
 e ai sensi degli articoli 13, comma 2, lettere (b) e (d), 15, 18, 19 e 21 del Regolamento, si informa il cliente
 che: a) egli ha il diritto di chiedere al Titolare del trattamento l'accesso ai dati personali, la rettifica o la
@@ -54,7 +54,6 @@ trattamento, oltre al diritto alla portabilità dei dati; b) egli ha il diritto 
 per la protezione dei dati personali, seguendo le procedure e le indicazioni pubblicate sul sito web
 ufficiale dell’Autorità su www.garanteprivacy.it. L’esercizio dei diritti non è soggetto ad alcun vincolo
 di forma ed è gratuito. Per utilità è riportato integralmente di seguito l’articolo 7 Del Codice della privacy,
-
 mentre gli articoli da 15 a 23 del Regolamento sono consultabili sul sopracitato sito del garante
 della privacy. Art. 7 (Diritto di accesso ai dati personali ed altri diritti) 1. L'interessato ha diritto di
 ottenere la conferma dell'esistenza o meno di dati personali che lo riguardano, anche se non ancora
