@@ -1,19 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import './pageNotFound.css'
 import { Link } from 'react-router-dom'
-import useLogout from '../../hooks/useLogout'
 
-const PageNotFound = () => {  
-
-    const logout = useLogout();
-
-    useEffect(() => {
-        const signOut = async () => {
-            await logout();
-        }
-        
-        signOut();
-    })
+const PageNotFound = () => {     
 
       return (
         <section className='pageNotFound'>
@@ -21,7 +10,7 @@ const PageNotFound = () => {
             <div className="pageNotFound-div"> 
                 <h1>Ops... Pagina non trovata</h1>
                     <div>
-                        <i class="fas fa-exclamation-circle"></i>
+                        <i className="fas fa-exclamation-circle"></i>
                     </div>
                     
                     <p className='pageNotFound-p'>
