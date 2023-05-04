@@ -33,6 +33,7 @@ import Cookies from 'universal-cookie';
 import AboutUs from './components/aboutUs/AboutUs';
 import Privacy from './components/privacy/Privacy';
 import Terms from './components/terms/Terms';
+import PageNotFound from './components/pageNotFound/PageNotFound';
 
 function App() {
   
@@ -145,6 +146,7 @@ function App() {
             </Route>
             <Route exact path="/termini_e_condizioni" element={<Terms />} >
             </Route>
+            <Route path="*" element={<PageNotFound />} />
               
             <Route element={<LoginRequireAuth />}>
               <Route exact path="/login" element={<Login />} >    

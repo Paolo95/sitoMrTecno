@@ -1,0 +1,94 @@
+.pageNotFound .pageNotFound-div{
+    display: flex;
+    flex-direction: column;
+    margin: 30px auto 30px auto;
+    width: 400px;
+    box-shadow: rgb(43 52 69 / 10%) 0 4px 16px;
+    border-radius: 5px;
+}
+
+.pageNotFound .pageNotFound-div h1{
+    text-align: center;
+    padding: 20px 0 20px 0;
+    border-bottom: 1px solid silver;
+}
+
+.pageNotFound .pageNotFound-div i{
+    color: lightcoral;
+    font-size: 100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pageNotFound .pageNotFound-div div{
+    display: flex;
+    padding: 4%;
+}
+
+.pageNotFound .pageNotFound-div button{
+    width: 100%;
+    height: 50px;
+    border: 1px solid;
+    margin-bottom: 20px;
+    background: #2691d9;
+    border-radius: 25px;
+    font-size: 18px;
+    color: #e9f4fb;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+}
+
+.pageNotFound .pageNotFound-div button:hover{
+    border-color: #2691d9;
+    transition: 0.5s;
+}
+
+.pageNotFound .pageNotFound-div button:disabled,
+.pageNotFound .pageNotFound-div button:disabled:hover,
+.pageNotFound .pageNotFound-div button[disabled]{
+  background-color: #cccccc;
+  border-color: black;
+  color: #666666;
+}
+
+.pageNotFound .pageNotFound-div .pageNotFound-p{
+    text-align: center;
+    margin: 20px;
+}
+
+.pageNotFound .pageNotFound-div .pageNotFound-menu-btn{
+    width: 60%;
+    height: 50px;
+    border: 1px solid;
+    margin-top: 20px;
+    background: #2691d9;
+    border-radius: 25px;
+    font-size: 18px;
+    color: #e9f4fb;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+}
+
+.pageNotFound .pageNotFound-div .pageNotFound-menu-btn:hover{
+    border-color: #2691d9;
+    transition: 0.5s;
+}
+
+@media screen and (max-width: 600px){
+    
+    .pageNotFound .pageNotFound-div{
+        margin: 30px auto 30px auto;
+        width: 100%;
+        box-shadow: rgb(43 52 69 / 10%) 0 4px 16px;
+        height: 100%;
+        flex-direction: column;
+    }
+
+    .pageNotFound .pageNotFound-div .pageNotFound-p{
+        text-align: center;
+        margin: 20px 10px 20px 10px;
+    }
+
+}
