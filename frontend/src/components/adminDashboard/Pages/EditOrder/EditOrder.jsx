@@ -215,7 +215,7 @@ const EditOrder = () => {
 
 
                                 <li>
-                                  <div>    
+                                  <div className='productList'>    
                                   <b>Prodotti acquistati:</b>
                                                                 
                                     {
@@ -224,8 +224,10 @@ const EditOrder = () => {
                                             <div key={index}>
                                                 
                                                 <li className='product-item'>                                            
-                                                    {value['qty']} x {value['product.product_name']} - {parseFloat(value['priceEach']).toFixed(2)} €
-                                                </li>                                          
+                                                    {value['qty']} x {value['product.product_name']}
+                                                    
+                                                </li>
+                                                <span>{parseFloat(value['priceEach']).toFixed(2)} €</span>                                          
                                             </div>
                                         )
                                     })
@@ -251,7 +253,7 @@ const EditOrder = () => {
                                 <li>
                                   <div>
                                     <b>Totale ordine: </b>
-                                    <span>{parseFloat(orderDetails[0]?.['order_total']).toFixed(2)} €</span>
+                                    <span><b>{parseFloat(orderDetails[0]?.['order_total']).toFixed(2)} €</b></span>
                                   </div>
                               </li>
                             </ul>

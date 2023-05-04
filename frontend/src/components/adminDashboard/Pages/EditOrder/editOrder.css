@@ -34,11 +34,21 @@
     padding: 10px 15px;
 }
 
+.editOrder .editOrder-content .editOrder-body .editOrder-box .productList{
+    display: flex;
+    flex-direction: column;
+}
+
 .editOrder .editOrder-content .editOrder-body .editOrder-box li{
     margin: 10px 0;
 }
 
+.editOrder .editOrder-content .editOrder-body .editOrder-box div{
+    display: flex;
+    justify-content: space-between;
 
+
+}
 
 .editOrder .editOrder-content .editOrder-body .top{
     margin-top: 10px;
@@ -110,6 +120,8 @@
 
 .editOrder .editOrder-content .notes div{
     width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .editOrder .editOrder-content .editOrder-body .card-body .notes .editable{

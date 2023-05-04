@@ -180,7 +180,7 @@ const BarterDetails = () => {
                                                 <li>
                                                     <div>
                                                         
-                                                        <span className='product-item'>{item['qty']}x {item['product.product_name']} <span>-</span> <br /></span>
+                                                        <span className='product-item'>{item['qty']}x {item['product.product_name']} <br /> </span>
                                                         <div>{item['priceEach'].toFixed(2)} €</div>   
                                                     </div>
                                                 </li>
@@ -210,14 +210,14 @@ const BarterDetails = () => {
                         <li>
                             <div>
                                 <b>Totale permuta: </b>
-                                {parseFloat(barterDetails[0]?.['barter_total']).toFixed(2)} €
+                                <b>{parseFloat(barterDetails[0]?.['barter_total']).toFixed(2)} € </b>
                             </div> 
                         </li>
 
                         <li>
                             <div>
                                 <b>Valutazione della permuta: </b>
-                                {parseFloat(barterDetails[0]?.['barter.barter_evaluation']).toFixed(2)} €
+                                <b>{parseFloat(barterDetails[0]?.['barter.barter_evaluation']).toFixed(2)} € </b>
                             </div>
                         </li>
 

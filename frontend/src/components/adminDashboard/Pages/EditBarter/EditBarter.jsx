@@ -260,16 +260,17 @@ const EditBarter = () => {
 
                             
                             <li>
-                            <div>
+                            <div className='productList'>
                             <b>Prodotti acquistati:</b>
                               {
                                   barterDetails?.map((value, index) => {
                                       return(
                                           <>
                                              
-                                            <span>{value['qty']}x {value['product.product_name']} <span className='hide'>- </span>
-                                            {parseFloat(value['priceEach']).toFixed(2)} €  </span>
-                                                
+                                            <div>
+                                              <span>{value['qty']}x {value['product.product_name']}</span>
+                                              <span>{parseFloat(value['priceEach']).toFixed(2)} €  </span>
+                                            </div>    
                                           </>
                                       )
                                   })
@@ -297,7 +298,8 @@ const EditBarter = () => {
 
                             <li>
                               <div>
-                                <b>Totale permuta: </b>{parseFloat(barterDetails[0]?.['barter_total']).toFixed(2)} €
+                                <b>Totale permuta: </b>
+                                <b>{parseFloat(barterDetails[0]?.['barter_total']).toFixed(2)} €</b>
                               </div>
                             </li>
                             

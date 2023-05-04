@@ -119,7 +119,7 @@
 }
 
 .barterDetailsPage .barterDetails-card .barterDetails-body .barterDetails-box{
-    padding: 10px 6px;
+    padding: 10px 10px;
     border: solid 2px lightgray;
     border-radius: 5px;
 }
@@ -147,6 +147,7 @@
 .barterDetailsPage .barterDetails-card .barterDetails-body li div{
     display: flex;
     gap: 5px;
+    justify-content: space-between;
 }
 
 .barterDetailsPage .barterDetails-card .barterDetails-body .barter-flexColumn{

@@ -51,7 +51,16 @@
 .editBarter .editBarter-content .card .card-body .editBarter-box{
     border: 2px solid lightgray;
     border-radius: 5px;
-    padding: 10px 6px;
+    padding: 10px 10px;
+}
+
+.editBarter .editBarter-content .card .card-body .editBarter-box .productList{
+    display: flex;
+    flex-direction: column;
+}
+
+.editBarter .editBarter-content .card .card-body .editBarter-box .productList span{
+    margin-left: 10px;
 }
 
 .editBarter .editBarter-content .card .card-body .editBarter-box input[type=date]{
@@ -70,6 +79,7 @@
 .editBarter .editBarter-content .card .card-body li div{
     display: flex;
     gap: 5px;
+    justify-content: space-between;
 }
 
 .editBarter .editBarter-content .card .card-body .product-items{
@@ -134,6 +144,11 @@
     gap: 10px;
     flex-direction: column;
     margin-right: 5px;
+}
+
+.editBarter .editBarter-content .editBarter-body .card-body .notes div{
+    display: flex;
+    flex-direction: column;
 }
 
 .editBarter .editBarter-content .editBarter-body .card-body .notes .editable{

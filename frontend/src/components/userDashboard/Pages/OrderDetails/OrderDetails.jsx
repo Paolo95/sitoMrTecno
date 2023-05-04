@@ -130,7 +130,7 @@ const OrderDetails = () => {
                               <>
                                   <li className='product-item' key={index}>
                                     <div>
-                                      <span>{value['qty']}x {value['product.product_name']} <span className='hide'>- </span> </span>
+                                      <span>{value['qty']}x {value['product.product_name']} </span>
                                       <div>{parseFloat(value['priceEach']).toFixed(2)} €</div>     
                                     </div>
                                   </li>
@@ -170,7 +170,7 @@ const OrderDetails = () => {
                     <li>
                         <div>
                           <b>Totale ordine: </b>
-                            {parseFloat(orderDetails[0]?.['order_total']).toFixed(2)} € 
+                           <b>{parseFloat(orderDetails[0]?.['order_total']).toFixed(2)} € </b>
                           </div>
                     </li>
                     
