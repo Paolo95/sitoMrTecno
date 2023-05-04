@@ -727,16 +727,17 @@ const Barter = ({ addToCart, cartItem, decreaseQty, deleteCartProduct, cleanCart
                                                    onChange={(e) => handlerProdBarterName(e,i)} 
                                                    placeholder='Esempio: Samsung Galaxy S2'
                                                    className='prodNameInput'
+                                                   maxLength={100}
                                                    value={Object.values(prodBarterNames)[i] || ''}
                                                    />
                                             </div>
-                                            <div className="txt_field">
-                                            <label htmlFor='username'>Descrizione prodotto da permutare:</label>
+                                            <div className="txt_field nobottom">
+                                            <label htmlFor='username'>Descrizione del prodotto da permutare:</label>
                                             <textarea
                                                 rows={10}
                                                 placeholder='Esempio: iPhone X con pochi graffi e batteria al 70%'
                                                 onChange={(e) => handlerProdDescription(e,i)}
-                                                maxLength={200}
+                                                maxLength={400}                                        
                                                 value={Object.values(prodBarterDesc)[i] || ''}
                                                 />                            
                                             </div>
