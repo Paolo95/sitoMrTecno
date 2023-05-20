@@ -245,7 +245,7 @@ const EditOrder = () => {
 
                                 <li>
                                   <div>
-                                    <b>Commissioni PayPal: </b>
+                                    <b>Commissioni pagamento: </b>
                                     {parseFloat(orderDetails[0]?.['order.paypal_fee']).toFixed(2)}€
                                   </div>
                                 </li>
@@ -277,25 +277,30 @@ const EditOrder = () => {
                                   <b>Modalità di consegna: </b>{orderDetails[0]?.['order.shipping_type']}
                                 </div>
                               </li>
+                              {
+                                orderDetails[0]?.['order.shipping_type'] === 'Corriere' ? 
+                                  <>                                  
+                                    <li>
+                                      <div>
+                                        <b>Corriere: </b>
+                                        <input className='editable' 
+                                              type="text" 
+                                              onChange={(e) => handleCarrierChange(e.target.value)}
+                                              defaultValue={orderDetails[0]?.['order.shipping_carrier']}/>
+                                      </div>
+                                    </li>
 
-                              <li>
-                                <div>
-                                  <b>Corriere: </b>
-                                  <input className='editable' 
-                                        type="text" 
-                                        onChange={(e) => handleCarrierChange(e.target.value)}
-                                        defaultValue={orderDetails[0]?.['order.shipping_carrier']}/>
-                                </div>
-                              </li>
-
-                              <li>
-                                <div>
-                                  <b>Codice spedizione: </b>
-                                  <input className='editable' type="text"
-                                        onChange={(e) => handleShippingChange(e.target.value)}
-                                        defaultValue={orderDetails[0]?.['order.shipping_code']}/>
-                                </div>
-                              </li>
+                                    <li>
+                                      <div>
+                                        <b>Codice spedizione: </b>
+                                        <input className='editable' type="text"
+                                              onChange={(e) => handleShippingChange(e.target.value)}
+                                              defaultValue={orderDetails[0]?.['order.shipping_code']}/>
+                                      </div>
+                                    </li>
+                                  </>: null
+                              }
+                              
 
                               <li>
                                 <div>

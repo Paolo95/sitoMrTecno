@@ -152,7 +152,7 @@ const OrderDetails = () => {
                   
                       <li>
                         <div>
-                          <b>Commissioni PayPal: </b>
+                          <b>Commissioni pagamento: </b>
                             {parseFloat(orderDetails[0]?.['order.paypal_fee']).toFixed(2)} € 
                           </div>
                       </li>
@@ -161,7 +161,7 @@ const OrderDetails = () => {
                     : orderDetails[0]?.['order.shipping_type'] === 'Ritiro in sede' ?
                         <li>
                           <div>
-                            <b>Commissioni PayPal: </b>
+                            <b>Commissioni pagamento: </b>
                               {parseFloat(orderDetails[0]?.['order.paypal_fee']).toFixed(2)} € 
                             </div>
                           </li>
@@ -214,27 +214,36 @@ const OrderDetails = () => {
               </div>
 
               <div className='orderDetails-box top'>
-                <ul>   
+                <ul>
                     <li>
                       <div>
                         <b>Modalità di consegna: </b>{orderDetails[0]?.['order.shipping_type']}
                       </div>
                     </li>
-                    <li>
-                      <div>
-                        <b>Corriere: </b>{orderDetails[0]?.['order.shipping_carrier']}
-                      </div>
-                    </li>
-                    <li>
-                      <div>
-                        <b>Codice spedizione: </b>{orderDetails[0]?.['order.shipping_code']}
-                      </div>
-                    </li>
-                    <li>
-                      <div>
-                        <b>Indirizzo spedizione: </b>{orderDetails[0]?.['order.shipping_address']}
-                      </div>
-                    </li>
+                    {
+                      orderDetails[0]?.['order.shipping_type'] === 'Corriere' ?
+                      <>
+                       <li>
+                        <div>
+                          <b>Corriere: </b>{orderDetails[0]?.['order.shipping_carrier']}
+                        </div>
+                      </li>
+                      <li>
+                        <div>
+                          <b>Codice spedizione: </b>{orderDetails[0]?.['order.shipping_code']}
+                        </div>
+                      </li>
+                      <li>
+                        <div>
+                          <b>Indirizzo spedizione: </b>{orderDetails[0]?.['order.shipping_address']}
+                        </div>
+                      </li>
+                      </> : 
+                      
+                        null
+                      
+                    }  
+                   
 
                 </ul>
               

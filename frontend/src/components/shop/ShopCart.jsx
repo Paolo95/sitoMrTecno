@@ -42,7 +42,7 @@ const ShopCart = ({ addToCart, shopItems, cartItem, deleteCartProduct, decreaseQ
                                                         <h4>Prezzo unitario: €{parseFloat(item.price).toFixed(2)} 
                                                                 <br/>Quantità: {item.qty} <br/>
                                                                 Prezzo Totale:
-                                                        <span>€{parseFloat(productQty).toFixed(2)}</span>
+                                                        <span> €{parseFloat(productQty).toFixed(2)}</span>
                                                         </h4>
                                                     </div>
                                                     <div className="cart-items-function">

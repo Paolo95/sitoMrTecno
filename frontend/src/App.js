@@ -34,6 +34,7 @@ import AboutUs from './components/aboutUs/AboutUs';
 import Privacy from './components/privacy/Privacy';
 import Terms from './components/terms/Terms';
 import PageNotFound from './components/pageNotFound/PageNotFound';
+import StripeCheckout from './components/stripeCheckout/StripeCheckout';
 
 function App() {
   
@@ -166,6 +167,8 @@ function App() {
               <Route exact path="/orderSuccess" element={<OrderSuccess />} >    
               </Route>
               <Route exact path="/permuta" element={<Barter addToCart={addToCart} cartItem={cartItem} decreaseQty={decreaseQty} deleteCartProduct={deleteCartProduct} cleanCart={cleanCart}/>} >
+              </Route>
+              <Route exact path="/stripeCheckout" element={<StripeCheckout cleanCart={cleanCart} cartItem={cartItem}/>} >
               </Route>
             </Route>
           </Route>          

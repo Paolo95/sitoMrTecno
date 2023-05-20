@@ -43,6 +43,9 @@ const Cart = ({ cartItem, addToCart, decreaseQty, deleteCartProduct }) => {
   return (
     <>  
       <section className='cart-items'>
+        <div className="container">
+          <h1>Carrello</h1>
+        </div>
         <div className="container d_flex">
           <div className="cart-details"> 
               {cartItem.length === 0 && <h1 className="no-items product">Inserisci un prodotto nel carrello!</h1>}
@@ -94,7 +97,10 @@ const Cart = ({ cartItem, addToCart, decreaseQty, deleteCartProduct }) => {
             </div>   
             <div className="d_flex">
               <h4>Prezzo totale : </h4>            
-              <h3>€{cartItem.length === 0 ? 0 : parseFloat(totalPrice).toFixed(2)}</h3>
+              <h3>€{cartItem.length === 0 ? 0 : parseFloat(totalPrice).toFixed(2)}</h3> 
+            </div> 
+            <div className="d_flex">
+              <h6>+commissioni pagamento</h6>
             </div> 
             {
               cartItem.length === 0 ? null : (  

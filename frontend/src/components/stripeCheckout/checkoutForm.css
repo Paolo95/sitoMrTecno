@@ -1,0 +1,122 @@
+.stripePayment #payment-form {
+
+    border: #F6F9FC solid 1px;
+    border-radius: var(--radius);
+    padding: 20px 20px 30px 20px;
+    margin: 20px 0;
+    box-shadow: 0 30px 50px -20px rgb(50 50 93 / 25%), 0 30px 60px -30px rgb(0 0 0 / 30%);
+    border-radius: 5px;
+    display: flex;
+    gap: 15px;
+    flex-direction: column;
+}
+
+.stripePayment .StripeElement{
+
+    margin-top: 40px;
+
+}
+
+.stripePayment .stripeGrid{
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 30px;
+
+}
+
+.stripePayment #payment-form h1{
+
+    font-weight: 600;
+    border-bottom: 1px solid black;
+    padding-bottom: 10px;
+
+}
+
+.stripePayment #payment-form h2{
+
+    font-weight: 500;
+    border-bottom: 1px solid black;
+    padding-bottom: 10px;
+}
+
+.stripePayment #payment-form button{
+
+    width: 300px;
+    height: 60px;
+    border-radius: 5px;
+    background-color: #0f3460;
+    cursor: pointer;
+    color: aliceblue;
+    font-size: 18px;
+    font-weight: 600;
+
+}
+
+.stripePayment #payment-form .stripeBtn{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px 0;
+}
+
+.stripePayment #payment-form #payment-message{
+
+    margin-bottom: 20px;
+
+}
+
+.stripePayment .txt_field{
+    display: flex;
+    justify-content: space-between;
+}
+
+.stripePayment .txt_field input{
+    width: 300px;
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 5px;
+    text-align: center;
+    height: 35px;
+    font-size: 15px;
+}
+
+.stripePayment .txt_field select{
+    width: 300px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.stripePayment .txt_field option{
+    text-align: center;
+    background-color: #fff;
+}
+
+@media screen and (max-width: 600px){
+
+    .stripePayment .stripeGrid{
+
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+    
+    }
+
+    .stripePayment .txt_field select{
+        width: 300px;
+    }
+
+    .stripePayment .txt_field{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+    }
+    .stripePayment #payment-form {
+
+        margin: 0;
+
+    }
+
+}

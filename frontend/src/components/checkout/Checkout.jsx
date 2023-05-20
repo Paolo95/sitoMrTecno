@@ -1,10 +1,10 @@
 import React from 'react';
 import './Style.css';
-import { PayPalScriptProvider, PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
+//import { PayPalScriptProvider, PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
 import axios from '../../api/axios'
 import useAuth from "../../hooks/useAuth";
 import { useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import ClipLoader from 'react-spinners/ClipLoader';
 
@@ -14,7 +14,7 @@ const Checkout = ({ cleanCart, cartItem }) => {
     const navigate = useNavigate();
     const location = useLocation();
     const goBack = () => navigate(-1);
-    const ORDER_URL = '/api/order/newOrder';
+    //const ORDER_URL = '/api/order/newOrder';
     const ORDER_BANK_TRANSFER_URL = '/api/order/newOrderBT';
     const PRODUCT_AVAILABILITY_URL = '/api/product/checkAvailability';
     const [availability, setAvailability] = React.useState('false');
@@ -28,11 +28,12 @@ const Checkout = ({ cleanCart, cartItem }) => {
     const [hnumber, setHNumber] = React.useState();
 
     let shipping_cost = location.state?.shipping_cost;
+    let pickup = location.state?.pickup;
 
     const totalWithoutCommissions = cartItem.reduce((price, item) => price + item.qty * item.price, shipping_cost);
-    const netTotal = Math.round((totalWithoutCommissions - shipping_cost) * 100) / 100;
-    const payPalCommissions = Math.round(((totalWithoutCommissions * 3) / 100) * 100) / 100;
-    const totalPrice = Math.round((payPalCommissions + totalWithoutCommissions) * 100) / 100;
+    //const netTotal = Math.round((totalWithoutCommissions - shipping_cost) * 100) / 100;
+    //const payPalCommissions = Math.round(((totalWithoutCommissions * 3) / 100) * 100) / 100;
+    //const totalPrice = Math.round((payPalCommissions + totalWithoutCommissions) * 100) / 100;
 
     const { auth } = useAuth();
 
@@ -77,6 +78,7 @@ const Checkout = ({ cleanCart, cartItem }) => {
 
     },[shipping_cost, cartItem, navigate])
 
+    /*
     const newOrder = async (orderDetails) => {
 
         try {
@@ -106,6 +108,7 @@ const Checkout = ({ cleanCart, cartItem }) => {
         
     }
 
+   
     const getItemArray = () => {
         return cartItem.map((item, index) => {
             return {
@@ -208,6 +211,7 @@ const Checkout = ({ cleanCart, cartItem }) => {
             </>
         )
     }
+    */
 
     const bankTransferDisclamer = () => {
         
@@ -316,16 +320,20 @@ const Checkout = ({ cleanCart, cartItem }) => {
                                 <h1 className='checkout-span'>Scegli il metodo di pagamento</h1>
                             </div> 
                             
-                            <PayPalScriptProvider options={
+                            {/*}<PayPalScriptProvider options={
                                     {
                                         "client-id": "ATZNHaB7fylPEKToWL-_Cnzb2WIdfxNHMK7JFACI0K48o6vV2UukiwQ72XFU-fG7dKK3I9bi6RT1_qzy",
                                         currency: "EUR"
                                     }}>
-                                <ButtonWrapper/>
+                                
                             </PayPalScriptProvider>
+                            */}
                              
                             <div className='bank-transfer'>
                                 <h4>Oppure:</h4>
+                                <Link to='/stripeCheckout' state={{totalWithoutCommissions, shipping_cost, pickup}}>
+                                    <button>Paga con carta di credito</button>
+                                </Link>
                                 <button onClick={bankTransferDisclamer}>Paga con bonifico bancario</button>
                             </div>
                         </div>
