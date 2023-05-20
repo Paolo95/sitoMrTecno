@@ -94,13 +94,13 @@ const CheckoutForm = ( {totalWithoutCommissions, commissions, cleanCart, shippin
     
       if (error) {
         setMessage(error.message);
+        setIsProcessing(false);
+      }else{
+        setIsProcessing(false);
+        cookies.remove('cartItem');
+        cleanCart();
+        navigate('/orderSuccess', { replace: true });
       }
-
-      setIsProcessing(false);
-      cookies.remove('cartItem');
-      cleanCart();
-      navigate('/orderSuccess', { replace: true });
-
     }
 
     
