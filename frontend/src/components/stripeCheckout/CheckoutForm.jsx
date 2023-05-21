@@ -7,13 +7,14 @@ import useAuth from '../../hooks/useAuth';
 import Cookies from 'universal-cookie';
 import { useNavigate } from 'react-router-dom';
 
-const CheckoutForm = ( {totalWithoutCommissions, commissions, cleanCart, shipping_cost, pickup, cartItem} ) => {
+const CheckoutForm = ( {totalWithoutCommissions, commissions, cleanCart, shipping_cost, pickup, cartItem, type, barterCode, barterEvaluation, barterRecap, formStepSetPayDone, barterInfo} ) => {
 
   const [message, setMessage] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
   const ORDER_STRIPE_URL = '/api/order/newOrderStripe';
+  const BARTER_APPROVED_URL= '/api/barter/barterAcceptedStripe';
   const { auth } = useAuth();
   const [address, setAddress] = useState('');
   const [cap, setCap] = useState('');
@@ -58,38 +59,84 @@ const CheckoutForm = ( {totalWithoutCommissions, commissions, cleanCart, shippin
 
       if( paymentIntent && paymentIntent.status === "succeeded" ){
         
-        try {
-
-          await axios.post(ORDER_STRIPE_URL, 
-              { 
-                shipping_address: address,
-                cap: cap,
-                city: city,
-                province: province,
-                hnumber: hnumber,
-                payment_fee: commissions,
-                shipping_cost: shipping_cost,
-                pickup: pickup,
-                cartItem: cartItem,
-                total: totalWithoutCommissions + commissions,
-              },
-              {
-                headers: {
-                    'Authorization': `Bearer ${auth?.accessToken}`
-                },
-                withCredentials: true
-              }
-          );
+        if(type === 'order'){
           
-        } catch (err) {
-            if (!err?.response) {
-                alert(err.response.data);
-            } else if (err.response?.status === 500){
-                alert(err.response.data);
-            } else {
-                alert('Impossibile registrare l\'ordine!')
+          try {
+
+            await axios.post(ORDER_STRIPE_URL, 
+                { 
+                  shipping_address: address,
+                  cap: cap,
+                  city: city,
+                  province: province,
+                  hnumber: hnumber,
+                  payment_fee: commissions,
+                  shipping_cost: shipping_cost,
+                  pickup: pickup,
+                  cartItem: cartItem,
+                  total: totalWithoutCommissions + commissions,
+                },
+                {
+                  headers: {
+                      'Authorization': `Bearer ${auth?.accessToken}`
+                  },
+                  withCredentials: true
+                }
+            );
+            
+          } catch (err) {
+              if (!err?.response) {
+                  alert(err.response.data);
+              } else if (err.response?.status === 500){
+                  alert(err.response.data);
+              } else {
+                  alert('Impossibile registrare l\'ordine!')
+              }
+          }
+
+        }else if(type === 'barter'){
+          
+          try {
+         
+            await axios.post(BARTER_APPROVED_URL, 
+                { 
+                   barterCode: barterCode,
+                   barterRecap: barterRecap,
+                   barterInfo: barterInfo,
+                   barterEvaluation: barterEvaluation,
+                   address: address,
+                   cap: cap,
+                   city: city,
+                   province: province,
+                   hnumber: hnumber,
+                   shipping_cost: shipping_cost,
+                   payment_fee: commissions,
+                   totalWithoutCommissions: totalWithoutCommissions,
+                },
+                {
+                    headers: {
+                        'Authorization': `Bearer ${auth?.accessToken}`
+                    },
+                    withCredentials: true
+                }
+            );
+
+            formStepSetPayDone();
+
+        
+          } catch (err) {
+            console.log(err)
+            if(!err?.response){
+              console.error('Server non attivo!');
+            }else if(err.response?.status === 500){
+              console.error(err.response?.data);
+            }else{
+              console.error('Impossibile registrare la permuta!');
             }
+          }    
         }
+
+        
       }
     
       if (error) {
@@ -99,7 +146,8 @@ const CheckoutForm = ( {totalWithoutCommissions, commissions, cleanCart, shippin
         setIsProcessing(false);
         cookies.remove('cartItem');
         cleanCart();
-        navigate('/orderSuccess', { replace: true });
+        if (type === 'order') navigate('/orderSuccess', { replace: true });
+        if (type === 'barter') cookies.remove('barterCode');
       }
     }
 

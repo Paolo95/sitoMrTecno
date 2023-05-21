@@ -304,6 +304,9 @@
 
 .barter .bank-transfer{
     padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 .barter .bank-transfer h4{

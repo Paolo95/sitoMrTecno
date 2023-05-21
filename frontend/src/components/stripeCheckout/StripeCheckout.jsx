@@ -108,7 +108,8 @@ const StripeCheckout = ({cartItem, cleanCart}) => {
                               shipping_cost={location?.state?.shipping_cost}
                               pickup={location?.state?.pickup}
                               cartItem={cartItem}
-                              cleanCart={cleanCart}/>
+                              cleanCart={cleanCart}
+                              type={'order'}/>
               </Elements>
             )}  
           </> 

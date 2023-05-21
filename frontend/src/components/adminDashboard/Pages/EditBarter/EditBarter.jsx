@@ -291,7 +291,7 @@ const EditBarter = () => {
 
                             <li>
                               <div>
-                                <b>Commissioni PayPal: </b>
+                                <b>Commissioni Pagamento: </b>
                                 {parseFloat(barterDetails[0]?.['barter.paypal_fee']).toFixed(2)} €
                               </div>
                             </li>
