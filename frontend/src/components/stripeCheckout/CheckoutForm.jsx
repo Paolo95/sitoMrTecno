@@ -159,7 +159,7 @@ const CheckoutForm = ( {totalWithoutCommissions, commissions, cleanCart, shippin
       <div className='container stripeGrid'>
         <form id="payment-form" onSubmit={handleSubmit}>
         
-          <h2>Totale ordine: {totalWithoutCommissions + commissions} €</h2>
+          <h2>Totale ordine: {parseFloat(totalWithoutCommissions + commissions).toFixed(2)} €</h2>
 
           <h2>Dati spedizione:</h2>
 
