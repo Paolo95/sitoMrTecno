@@ -62,7 +62,7 @@ const Barter = ({ addToCart, cartItem, decreaseQty, deleteCartProduct, cleanCart
     const PUBKEY_URL = '/api/stripe/config';
     const PAYMENT_INTENT_URL = '/api/stripe/createPaymentIntent';
 
-    const validTelephone = new RegExp(/^(([+])39)?((3[1-6][0-9]))(\d{7})$/);
+    const validTelephone = new RegExp(/^(([+])39)?((3[1-9][0-9]))(\d{7})$/);
 
     const { auth } = useAuth();
 
